@@ -1,0 +1,13 @@
+{
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[blade]": {
+        "editor.defaultFormatter": "onecentlin.laravel-blade"
+    },
+    "volar.format.initialIndent": {
+        
+        "html": true
+    }
+}

@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Http\Helpers\MediaHelper;
+use App\Models\About;
+use App\Models\Feature;
+use Illuminate\Http\Request;
+
+class AboutController extends Controller
+{
+   
+    public function index()
+    {
+        $about = About::first();
+        $features = Feature::get();
+        return view('admin.about.index', compact('about', 'features'));
+    }
+
+    public function update(Request $request)
+    {
+
+        $about = About::first();
+
+        if (
+            isset($request['photo'])
+        ) {
+            $status = MediaHelper::ExtensionValidation($request['photo']);
+            if (!$status) {
+                return back()->with('error', 'Please upload a valid image');
+            }
+            $about->photo = MediaHelper::handleUpdateImage($request['photo'], $about->photo);
+        }
+
+        $about->header_title = $request->header_title;
+
+        $about->title = $request->title;
+        $about->description = $request->description;
+        $about->btn_text = $request->btn_text;
+        $about->btn_url = $request->btn_url;
+        $about->save();
+        return back()->with('success', 'About has been updated');
+    }
+}
