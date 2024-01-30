@@ -2,298 +2,246 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\User;
-use App\Models\Wallet;
-use App\Models\Country;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\Generalsetting;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\Api\ApiController;
-use App\Http\Resources\UserResource;
+use Illuminate\Support\Str;
 
-class AuthController extends ApiController
+class AuthController extends Controller
 {
-
-    function refreshToken()
+    
+    public function __construct()
     {
-        return $this->sendResponse(['token' => auth()->user()->createToken('wallet')->plainTextToken], 'Token refreshed successfully.');
-    }
-    /**
-     * Register api
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function register(Request $request)
-    {
-
-
-        $validator = Validator::make($request->all(), [
-            'name'                => 'required',
-            'email'               => 'required', 'email', 'unique:users',
-            'phone'               => 'required',
-            'address'             => 'required',
-            'password'            => 'required|min:6|confirmed',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error', $validator->errors());
-        }
-
-        $data = $request->only('name', 'email', 'phone', 'address', 'password');
-
-        $data['phone']          = $request->dial_code . $request->phone;
-        $data['password']       = bcrypt($request->password);
-        $data['email_verified'] = 1;
-        $user = User::create($data);
-
-        $success['token'] =  $user->createToken('wallet')->plainTextToken;
-        $success['user']  =  $user;
-
-        return $this->sendResponse($success, 'User registered successfully.');
+        
+        $this->middleware('auth:sanctum', ['except' => ['login','token', 'register', 'logout','social_login','forgot','forgot_submit']]);
+        
+       
+       
     }
 
-    /**
-     * Login api
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function login(Request $request)
     {
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $user = Auth::user();
-            $success['token'] =  $user->createToken('wallet')->plainTextToken;
-            $success['user']  =  $user;
-            return $this->sendResponse($success, 'Login successful.');
-        } else {
-            return $this->sendError('Error.', ['Unauthorised access']);
-        }
-    }
+      try{
+        $rules = [
+            'email' => 'required',
+            'password' => 'required'
+        ];
 
-
-    public function refresh()
-    {
-        $user = auth()->user();
-        $user->tokens()->delete();
-        $success['token'] =  $user->createToken('wallet')->plainTextToken;
-        $success['user']  = $user;
-        return $this->sendResponse($success, 'Token refreshed successfully.');
-    }
-
-
-    public function logout(Request $request)
-    {
-        if (!$request->user()) {
-            return $this->sendError('Error.', ['Unauthorised access']);
-        }
-        $request->user()->currentAccessToken()->delete();
-
-        Auth::logout();
-        return $this->sendResponse(['success'], 'Logout successful.');
-    }
-
-    public function forgotPasswordSubmit(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email'
-        ]);
+        $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
-            return $this->sendError('Validation Error', $validator->errors());
+          return response()->json(['status' => false, 'data' => [], 'error' => $validator->errors()]);
         }
 
-        $exist = User::where('email', $request->email)->first();
-        if (!$exist) {
-            return $this->sendError('error', ['Sorry! Email doesn\'t exist']);
+        $credentials = request(['email', 'password']);
+       
+
+        if (!auth()->attempt($credentials)) {
+          return response()->json(['status' => false, 'data' => [], 'error' => ["message" => "Email / password didn't match."]]);
+        }
+        $token = auth()->user()->createToken('authToken')->plainTextToken;
+        //return response()->json(auth()->user());
+        if(auth()->user()->email_verified == 0)
+        {
+          auth()->logout();
+          return response()->json(['status' => false, 'data' => [], 'error' => ["message" => 'Your Email is not Verified!']]);
         }
 
-        $exist->verify_code = randNum();
-        $exist->save();
+        if(auth()->user()->is_banned == 1)
+        {
+          auth()->logout();
+          return response()->json(['status' => false, 'data' => [], 'error' => ["message" => 'Your Account Has Been Banned.']]);
+        }
 
-        @email([
-            'email'   => $exist->email,
-            'name'    => $exist->name,
-            'subject' => __('Password Reset Code'),
-            'message' => __('Password reset code is : ') . $exist->verify_code,
-        ]);
-
-        $success['email'] = $exist->email;
-        $success['verify_code'] = $exist->verify_code;
-        return $this->sendResponse($success, 'Reset code has been sent to email.');
+        return response()->json(['status' => true, 'data' => ['token' => $token, 'user' => auth()->user()], 'error' => []]);
+      }
+      catch(\Exception $e){
+        return response()->json(['status' => true, 'data' => [], 'error' => ['message' => $e->getMessage()]]);
+      }
     }
 
-    public function verifyCodeSubmit(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'code' => 'required|integer',
-            'email' => 'required|email'
-        ]);
 
+
+    public function register(Request $request)
+    {
+        $gs = Generalsetting::first();
+      try{
+        $rules = [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'username' => 'required',
+            'password' => 'required'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
-            return $this->sendError('Validation Error', $validator->errors());
+          return response()->json(['status' => false, 'data' => [], 'error' => $validator->errors()]);
         }
 
-        $user = User::where('email', $request->email)->first();
-        if (!$user) {
-            return $this->sendError('error', ['User doesn\'t exist']);
-        }
-
-        if ($user->verify_code != $request->code) {
-            return $this->sendError('error', ['Invalid verification code.']);
-        }
-        $success['code'] = $request->code;
-        $success['email'] = $request->email;
-        return $this->sendResponse($success, 'Reset code has been verified');
-    }
-
-    public function resetPasswordSubmit(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'code' => 'required|integer',
-            'password' => 'required|confirmed|min:6'
-        ]);
-
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error', $validator->errors());
-        }
-        $user = User::where('email', $request->email)->first();
-        if (!$user || !$request->code) {
-            return $this->sendError('Error', ['Invalid request']);
-        }
-        $user->password = bcrypt($request->password);
-        $user->update();
-        return $this->sendResponse(['success'], 'Password reset successful.');
-    }
-
-    public function twoStepVerify(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'code' => 'required|integer',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error', $validator->errors());
-        }
-        $user = auth()->user();
-        if ($request->code != $user->two_fa_code) {
-            return $this->sendError('Error', ['Invalid OTP']);
-        }
-        if ($user->two_fa_status == 1) {
-            $user->two_fa_status = 0;
-            $user->two_fa = 0;
-            $msg = 'Your two step authentication is de-activated';
-        } else {
-            $user->two_fa_status = 1;
-            $msg = 'Your two step authentication is activated';
-        }
-        $user->save();
-        return $this->sendResponse(['success'], $msg);
-    }
-
-
-
-    public function twoStepCodeVerify(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'code' => 'required|integer',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error', $validator->errors());
-        }
-        $user = auth()->user();
-        if ($request->code != $user->two_fa_code) {
-            return $this->sendError('Error', ['Invalid OTP']);
-        }
-
-        return $this->sendResponse(['success'], 'Valid OTP');
-    }
-
-    public function twoStepResendCode()
-    {
-        $user = auth()->user();
-        $code = randNum();
-        $user->two_fa_code = $code;
-        $user->update();
-        sendSMS($user->phone, 'Your two step authentication OTP is : ' . $code, Generalsetting::value('contact_no'));
-        return $this->sendResponse(['success' => true, 'code' => $code], 'OTP code is sent to your phone.');
-    }
-
-
-    public function twoStepsendCode(Request $request)
-    {
-        $validator = Validator::make($request->all(), ['password' => 'required|confirmed']);
-
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error', $validator->errors());
-        }
-
-        $code = randNum();
-        $user = auth()->user();
-        $user->two_fa_code = $code;
-        $user->update();
-        sendSMS($user->phone, 'Your two step authentication OTP is : ' . $code, Generalsetting::value('contact_no'));
-        return $this->sendResponse(['success' => true, 'code' => $code], 'OTP code is sent to your phone.');
-    }
-
-
-    public function verifyEmailSubmit(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'code' => 'required|integer',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error', $validator->errors());
-        }
-        $user = auth()->user();
-        if (!$user) {
-            return $this->sendError('Error', ['User doesn\'t exist']);
-        }
-
-        if ($user->verify_code != $request->code) {
-            return $this->sendError('Error', ['Invalid verification code.']);
-        }
-
-        $user->verify_code = null;
-        $user->email_verified = 1;
-        $user->save();
-
-        return $this->sendResponse(['success'], 'Email has been verified');
-    }
-
-    public function verifyEmailResendCode()
-    {
-        $code = randNum();
-        $user = auth()->user();
+      
+        $user = new User();
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $token = md5(time().$request->name.$request->email);
+        $user->verification_link = $token;
+        // only number 
+        $code = rand(100000,999999);
         $user->verify_code = $code;
-        $user->update();
+        $user->password = bcrypt($request->password);
+        $user->save();
 
-        @email([
-            'email'   => $user->email,
-            'name'    => $user->name,
-            'subject' => __('Email Verification Code'),
-            'message' => __('Email Verification Code is : ') . $user->verify_code,
-        ]);
+        if($gs->is_verify == 0)
+        {
+            $user->email_verified = 1;
+            $user->update();
+            @email([
+                'email'   => $request->email,
+                'name'    => $request->username,
+                'subject' => 'Welcome to '.$gs->title,
+                'message' => 'Dear Customer,<br> We noticed that you have registered on our website. <br> Thank you for registering with us. <br> Please login to your account and start bidding. <br> <br> <br> Regards, <br> '.$gs->title.' Team'
+              ]);
 
-        return $this->sendResponse(['success'], 'Verify code resent to your email.');
+
+              $token = auth()->login($user);
+              return response()->json(['status' => true, 'data' => ['token' => $token, 'user' => $user], 'error' => []]);
+
+
+        }else{
+           
+            $to = $request->email;
+            $subject = 'Verify your email address.';
+           
+            $msg = 'Dear '.$request->username.',<br> Please verify your email address. <br> Your verification code is' .$code .'<br> <br> <br> Regards, <br> '.$gs->title.' Team';
+
+
+            @email([
+                'email'   => $request->email,
+                'name'    => $request->username,
+                'subject' => $subject,
+                'message' => $msg,
+              ]);
+
+              return response()->json(['status' => true, 'data' => [], 'error' => ['message' => 'Please verify your email address.']]);
+
+            
+        }
+
+    
+
+      }
+      catch(\Exception $e){
+        return response()->json(['status' => true, 'data' => [], 'error' => ['message' => $e->getMessage()]]);
+      }
     }
 
 
-    public function settings()
+    public function token(Request $request)
     {
-        $main = Generalsetting::findOrFail(1);
-        $setting['logo'] = asset('assets/images/' . $main->logo);
-        $setting['title'] = $main->title;
-        $setting['is_maintenance'] = $main->is_maintenance;
-        $setting['two_fa'] = $main->two_fa;
-        return $this->sendResponse($setting, 'Setting Data');
+        
+            $gs = Generalsetting::findOrFail(1);
+            if($gs->is_verify == 1)
+            {
+                
+                $user = User::where('verify_code','=',$request->code)->first();
+                
+                if(isset($user))
+                {
+                    $user->email_verified = 1;
+                    $user->update();
+                    $token = auth()->login($user);
+                    return response()->json(['status' => true, 'data' => ['token' => $token, 'user' => new UserResource($user)], 'error' => ['message' => 'Your email is verified.']]);
+                   
+                   
+                }
+            }
+            else {
+                return response()->json(['status' => false, 'data' => [], 'error' => ['message' => 'Something went wrong.']]);
+            }
     }
 
-
-    public function userInfo()
+    public function logout()
     {
-        $success['user'] = auth()->user();
-        return $this->sendResponse($success, 'success');
+        auth()->logout();
+        return response()->json(['status' => true, 'data' => ['Logout Successfully'], 'error' => []]);
     }
+
+
+public function forgotPasswordSubmit(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'email' => 'required|email'
+    ]);
+    if($validator->fails()){
+        return $this->sendError('Validation Error', $validator->errors());       
+    }
+
+    $exist = User::where('email',$request->email)->first();
+    if(!$exist){
+        return $this->sendError('error',['Sorry! Email doesn\'t exist']);
+    }
+
+    $exist->verify_code = randNum();
+    $exist->save();
+
+    @email([
+      'email'   => $exist->email,
+      'name'    => $exist->name,
+      'subject' => __('Password Reset Code'),
+      'message' => __('Password reset code is : ').$exist->verify_code,
+    ]);
+
+    $success['email'] = $exist->email;
+    $success['verify_code'] = $exist->verify_code;
+    return $this->sendResponse($success,'Reset code has been sent to email.');
+}
+
+
+public function verifyCodeSubmit(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'code' => 'required|integer',
+        'email'=> 'required|email'
+    ]);
+
+    if($validator->fails()){
+        return response()->json(['status' => false, 'data' => [], 'error' => $validator->errors()]);    
+    }
+
+    $user = User::where('email',$request->email)->first();
+    if(!$user){
+        return response()->json(['status' => false, 'data' => [], 'error' => ['message' => 'Invalid request']]);
+    }
+
+    if($user->verify_code != $request->code){
+        return response()->json(['status' => false, 'data' => [], 'error' => ['message' => 'Invalid code']]);
+    }
+    $success['code'] = $request->code;
+    $success['email'] = $request->email;
+    return response()->json(['status' => true, 'data' => $success, 'error' => ['Reset code Verified']]);
+}
+
+public function resetPasswordSubmit(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'email'=>'required|email',
+        'code'=>'required|integer',
+        'password'=>'required|confirmed|min:6'
+    ]);
+
+    if($validator->fails()){
+         return response()->json(['status' => false, 'data' => [], 'error' => $validator->errors()]);   
+    }
+    $user = User::where('email',$request->email)->first();
+    if(!$user || !$request->code){
+      return response()->json(['status' => false, 'data' => [], 'error' => ['message' => 'Invalid request']]);
+    }
+    $user->password = bcrypt($request->password);
+    $user->update();
+    return response()->json(['status' => true, 'data' => [], 'error' => ['Password reset successfully']]);
+}
 }
