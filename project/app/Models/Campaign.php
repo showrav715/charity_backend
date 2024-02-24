@@ -9,6 +9,8 @@ class Campaign extends Model
 {
     use HasFactory;
 
+    protected $appends = ['api_photo'];
+
     public function faqs()
     {
         return $this->hasMany(CampaignFaq::class);
@@ -22,5 +24,15 @@ class Campaign extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function getApiPhotoAttribute()
+    {
+        return getPhoto($this->photo, 'campaign');
     }
 }

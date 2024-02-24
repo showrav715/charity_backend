@@ -12,7 +12,7 @@ class VolunteerController extends Controller
 
     public function index()
     {
-        $volunteers = Volunteer::orderby('id','desc')->paginate(15);
+        $volunteers = Volunteer::orderby('id', 'desc')->paginate(15);
         return view('admin.volunteer.index', compact('volunteers'));
     }
 
@@ -27,14 +27,16 @@ class VolunteerController extends Controller
         return back()->with('success', 'New Volunteer has been created');
     }
 
-    public function edit(Volunteer $volunteer)
+    public function edit($id)
     {
+        $volunteer = Volunteer::findOrFail($id);
         return view('admin.volunteer.edit', compact('volunteer'));
     }
 
     public function update(Request $request, $id)
     {
         $volunteer = Volunteer::findOrFail($id);
+
         $this->storeData($request, $volunteer, $volunteer->id);
         return back()->with('success', 'Volunteer has been updated');
     }
@@ -49,6 +51,10 @@ class VolunteerController extends Controller
 
         $data->name = $request->name;
         $data->designation = $request->designation;
+        $data->facebook = $request->facebook;
+        $data->twitter = $request->twitter;
+        $data->linkedin = $request->linkedin;
+        $data->instagram = $request->instagram;
         if (isset($request['photo'])) {
             $status = MediaHelper::ExtensionValidation($request['photo']);
             if (!$status) {

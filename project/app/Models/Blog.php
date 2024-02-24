@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Blog extends Model
 {
     use HasFactory;
+
+    protected $appends = ['api_photo'];
     protected $fillable = ['title', 'category_id', 'photo', 'slug', 'description', 'source', 'views', 'updated_at', 'status', 'meta_tag', 'meta_description', 'tags'];
 
     public function category()
@@ -18,5 +20,10 @@ class Blog extends Model
     public function comments()
     {
         return $this->hasMany(BlogComment::class)->orderby('id', 'desc');
+    }
+
+    public function getApiPhotoAttribute()
+    {
+        return getPhoto($this->photo, 'blog');
     }
 }

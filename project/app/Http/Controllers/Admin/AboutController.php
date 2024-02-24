@@ -39,6 +39,7 @@ class AboutController extends Controller
         $about->description = $request->description;
         $about->btn_text = $request->btn_text;
         $about->btn_url = $request->btn_url;
+        $about->video_id = $request->video_id;
         $about->save();
         return back()->with('success', 'About has been updated');
     }

@@ -11,8 +11,15 @@ class CampaignGallery extends Model
     // timestamp
     public $timestamps = false;
     // fillable
+    protected $appends = ['api_photo'];
+
     protected $fillable = [
         'campaign_id',
         'photo',
     ];
+
+    public function getApiPhotoAttribute()
+    {
+        return getPhoto($this->photo, 'campaign');
+    }
 }

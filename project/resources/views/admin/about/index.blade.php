@@ -48,10 +48,17 @@
                         <textarea name="description" class="form-control summernote"
                             rows="4">{{ $about->description }}</textarea>
                     </div>
+
+                    <div class="form-group">
+                        <label>@lang('Youtube Video Id')</label>
+                        <input class="form-control" type="text" name="video_id" value="{{ $about->video_id }}">
+                    </div>
+
                     <div class="form-group">
                         <label>@lang('Button Text')</label>
                         <input class="form-control" type="text" name="btn_text" value="{{ $about->btn_text }}">
                     </div>
+                   
                     <div class="form-group">
                         <label>@lang('Button Url')</label>
                         <input class="form-control" type="text" name="btn_url" value="{{ $about->btn_url }}">

@@ -1,33 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Http\Helpers\MediaHelper;
 use App\Models\Campaign;
 use App\Models\CampaignGallery;
-use App\Models\Category;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class CampaignController extends Controller
+class CampaignController extends ApiController
 {
+
+
     public function index()
     {
-        $campaigns = Campaign::get();
-        return view('admin.campaign.index', compact('campaigns'));
-    }
-
-
-    function create()
-    {
-        $categories = Category::get();
-        return view('admin.campaign.create', compact('categories'));
+        $campaigns = Campaign::with(['user', 'category', 'faqs', 'galleries'])->where('user_id', auth()->id())->get();
+        return response()->json(['status' => true, 'data' => $campaigns, 'message' => 'Campaigns fetched successfully']);
     }
 
 
     public function store(Request $request)
     {
+
         $request->validate([
             'title' => 'required|unique:campaigns,title',
             "location" => "required",
@@ -40,12 +35,12 @@ class CampaignController extends Controller
         ]);
 
         $campaign = new Campaign();
+        $campaign->user_id = auth()->id();
         $campaign->title = $request->title;
         $campaign->location = $request->location;
         $campaign->benefits = $request->benefits;
-        $campaign->end_date = $request->end_date;
+        $campaign->end_date = Carbon::parse($request->end_date)->format('Y-m-d');
         $campaign->video_link = $request->video_link;
-
         $campaign->slug = Str::slug($request->title);
         $campaign->description = $request->description;
         $campaign->category_id = $request->category_id;
@@ -75,15 +70,14 @@ class CampaignController extends Controller
                 }
             }
         }
-        return redirect()->route('admin.campaign.index')->with('success', 'Campaign created successfully');
+        return response()->json(['status' => true, 'data' => [], 'message' => 'Campaign created successfully']);
     }
 
 
     public function edit($id)
     {
         $data = Campaign::with(['galleries', 'faqs'])->findOrFail($id);
-        $categories = Category::get();
-        return view('admin.campaign.edit', compact('data', 'categories'));
+        return $this->sendResponse($data, 'Single Campaign');
     }
 
 
@@ -134,7 +128,7 @@ class CampaignController extends Controller
             }
         }
 
-        return redirect()->route('admin.campaign.index')->with('success', 'Campaign updated successfully');
+        return response()->json(['status' => true, 'data' => [], 'message' => 'Campaign updated successfully']);
     }
 
 

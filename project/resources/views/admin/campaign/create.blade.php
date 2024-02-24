@@ -43,17 +43,16 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="image">{{ __('Blog Photo') }}</label>
+                                <label for="image">{{ __('Feature Photo') }}</label>
                                 <span class="ml-3">{{ __('(Extension:jpeg,jpg,png)') }}</span>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" name="photo" id="image"
-                                        accept="image/*" required>
+                                        accept="image/*">
                                     <label class="custom-file-label" for="photo">{{ __('Choose file') }}</label>
                                 </div>
                             </div>
                         </div>
                     </div>
-
 
                     <div class="form-group">
                         <label for="title">{{ __('Campaign Title') }}</label>
@@ -62,9 +61,33 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="location">{{ __('Location') }}</label>
+                        <input type="text" class="form-control" name="location" id="location" required
+                            placeholder="{{ __('Location') }}" value="{{old('location')}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="benefits">{{ __('People Benefits') }}</label>
+                        <input type="numnber" class="form-control" name="benefits" id="benefits" required
+                            placeholder="{{ __('People Benefits') }}" value="{{old('benefits')}}">
+                    </div>
+
+                    <div class="form-group">
                         <label for="goal">{{ __('Goal Amount') }}</label>
                         <input type="number" step="any" class="form-control" name="goal" id="goal" required
                             placeholder="{{ __('Goal Amount') }}" value="{{old('goal')}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="end_date">{{ __('End Date') }}</label>
+                        <input type="date" class="form-control" name="end_date" id="end_date" required
+                            placeholder="{{ __('End Date') }}" value="{{old('end_date')}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="video_link">{{ __('Youtube Video Link') }}</label>
+                        <input type="text" step="any" class="form-control" name="video_link" id="video_link"
+                            placeholder="{{ __('Youtube Video Link') }}" value="{{old('video_link')}}">
                     </div>
 
                     <div class="form-group">
@@ -78,7 +101,6 @@
                     <h6 class="mb-4 mt-0  font-weight-bold text-primary">
                         {{ __('Campaign Gallery') }}
                     </h6>
-
 
 
                     <div class="form-group">

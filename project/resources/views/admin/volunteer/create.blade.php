@@ -40,9 +40,40 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="name">{{ __('Name') }}</label>
-                        <input type="text" class="form-control" name="name" id="name" required
-                            placeholder="{{ __('Name') }}" value="{{old('name')}}">
+                        <label for="designation">{{ __('Designation') }}</label>
+                        <input type="text" class="form-control" name="designation" id="designation" required
+                            placeholder="{{ __('Designation') }}" value="{{old('designation')}}">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="facebook">{{ __('Facebook Link') }}</label>
+                                <input type="text" class="form-control" name="facebook" id="facebook" 
+                                    placeholder="{{ __('Facebook') }}" value="{{old('facebook')}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="instragram">{{ __('Instragram Link') }}</label>
+                                <input type="text" class="form-control" name="instragram" id="instragram" 
+                                    placeholder="{{ __('Instragram') }}" value="{{old('instragram')}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="twitter">{{ __('Twitter Link') }}</label>
+                                <input type="text" class="form-control" name="twitter" id="twitter" 
+                                    placeholder="{{ __('Twitter') }}" value="{{old('twitter')}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="linkedin">{{ __('Linkedin') }}</label>
+                                <input type="text" class="form-control" name="linkedin" id="linkedin" 
+                                    placeholder="{{ __('Linkedin') }}" value="{{old('linkedin')}}">
+                            </div>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>

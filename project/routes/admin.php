@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CampaignController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\GeneralSettingController;
 use App\Http\Controllers\Admin\LoginController;
@@ -119,6 +120,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('blog/comment/delete/{comment}', [BlogController::class, 'commentDelete'])->name('blog.comment.delete');
         });
 
+        // counter section
+        Route::get('counter', [CounterController::class, 'index'])->name('counter.index');
+        Route::post('counter/store', [CounterController::class, 'store'])->name('counter.store');
+        Route::put('counter/update/{counter}', [CounterController::class, 'update'])->name('counter.update');
+        Route::delete('counter-delete', [CounterController::class, 'destroy'])->name('counter.destroy');
+
+
         Route::group(['middleware' => 'permission:Manage Volunteer'], function () {
             // manage team
             Route::get('/volunteer', [VolunteerController::class, 'index'])->name('volunteer.index');
@@ -130,7 +138,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         Route::group(['middleware' => 'permission:Frontend Settings'], function () {
-
             // HERO SECTION
 
             Route::get('/hero', [GeneralSettingController::class, 'hero'])->name('hero.index');
