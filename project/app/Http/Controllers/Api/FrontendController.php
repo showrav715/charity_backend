@@ -91,6 +91,12 @@ class FrontendController extends ApiController
     public function setting()
     {
         $hero_section = Generalsetting::first();
+        $hero_section['header_logo'] = getPhoto($hero_section->header_logo);
+        $hero_section['footer_logo'] = getPhoto($hero_section->footer_logo);
+        $hero_section['breadcumb'] = getPhoto($hero_section->breadcumb);
+        $hero_section['maintenance_photo'] = getPhoto($hero_section->maintenance_photo);
+        $hero_section['hero_photo'] = getPhoto($hero_section->hero_photo);
+        $hero_section['cta_photo'] = getPhoto($hero_section->cta_photo);
         return $this->sendResponse($hero_section, 'Setting Data');
     }
 
