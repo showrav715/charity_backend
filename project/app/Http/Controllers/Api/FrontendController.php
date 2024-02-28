@@ -8,8 +8,12 @@ use App\Models\BlogCategory;
 use App\Models\Campaign;
 use App\Models\Category;
 use App\Models\ContactPage;
+use App\Models\Counter;
+use App\Models\Currency;
+use App\Models\Feature;
 use App\Models\Generalsetting;
 use App\Models\Page;
+use App\Models\Preloaded;
 use App\Models\Volunteer;
 use Illuminate\Http\Request;
 
@@ -111,19 +115,17 @@ class FrontendController extends ApiController
 
     public function getCampaign(Request $request)
     {
-        $campaigns = Campaign::with(['category'])->paginate(2);
+        $campaigns = Campaign::with(['category', "galleries"])->paginate(2);
         return $this->sendResponse($campaigns, 'Campaign Data');
     }
 
     public function singleCampaign($slug)
     {
         $campaign = Campaign::with(['category', 'faqs', 'galleries'])->where('slug', $slug)->first();
-        $campaign->photo = asset('assets/images/' . $campaign->photo);
-        $campaign->galleries = $campaign->galleries->map(function ($gallery) {
-            $gallery->photo = asset('assets/images/' . $gallery->photo);
-            return $gallery;
-        });
-        return $this->sendResponse($campaign, 'Single Campaign');
+        $data['campaign'] = $campaign;
+        $data['preloaded'] = Preloaded::get();
+        $data['related_campaigns'] = Campaign::with('category')->where('status', 1)->where('category_id', $campaign->category_id)->where('id', '!=', $campaign->id)->orderBy('id', 'desc')->limit(6)->get();
+        return $this->sendResponse($data, 'Single Campaign');
     }
 
 
@@ -153,5 +155,26 @@ class FrontendController extends ApiController
         return $this->sendResponse($page, 'Contact Page');
     }
 
+    public function aboutPage()
+    {
+        $about =  About::first();
+        $about['photo'] = asset('assets/images/' . $about->photo);
+        $data['about'] = $about;
+        $data['features'] = Feature::orderby('id')->get();
+        $data['counters'] = Counter::orderby('id')->get();
+        return $this->sendResponse($data, 'Contact Page');
+    }
 
+
+    public function getCurrency()
+    {
+        $currency = Currency::whereStatus(1)->get();
+        return $this->sendResponse($currency, 'Currency Data');
+    }
+
+    public function singleCurrency($currency_code)
+    {
+        $currency = Currency::whereStatus(1)->whereCode($currency_code)->first();
+        return $this->sendResponse($currency, 'Single Currency Data');
+    }
 }
