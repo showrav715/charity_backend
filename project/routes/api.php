@@ -50,6 +50,8 @@ Route::prefix('user')->group(function () {
 // FRONTEND
 Route::get('home-content', [FrontendController::class, 'homeContent']);
 Route::get('setting', [FrontendController::class, 'setting']);
+Route::get('get/currency', [FrontendController::class, 'getCurrency']);
+Route::get('single/currency/{code}', [FrontendController::class, 'singleCurrency']);
 
 // Campaign Routes
 Route::get('get/category', [FrontendController::class, 'getCategory']);
@@ -61,4 +63,5 @@ Route::get('blogs', [FrontendController::class, 'getBlogs']);
 Route::get('blog/{slug}', [FrontendController::class, 'singleBlog']);
 
 Route::get('/contact/page', [FrontendController::class, 'contactPage']);
+Route::get('/about/page', [FrontendController::class, 'aboutPage']);
 Route::get('/page/{slug}', [FrontendController::class, 'page']);
