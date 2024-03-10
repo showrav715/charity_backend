@@ -9,7 +9,7 @@ class Campaign extends Model
 {
     use HasFactory;
 
-    protected $appends = ['api_photo'];
+    protected $appends = ['api_photo', 'founded'];
 
     public function faqs()
     {
@@ -34,5 +34,17 @@ class Campaign extends Model
     public function getApiPhotoAttribute()
     {
         return getPhoto($this->photo, 'campaign');
+    }
+
+    public function getFoundedAttribute()
+    {
+        $goal = $this->goal;
+        $raised = $this->raised;
+        if ($raised == 0) {
+            return 0;
+        }
+        $founded = ($raised / $goal) * 100;
+        return round($founded, 2);
+    
     }
 }

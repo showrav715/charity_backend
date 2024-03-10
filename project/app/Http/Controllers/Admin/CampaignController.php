@@ -96,6 +96,10 @@ class CampaignController extends Controller
             'category_id' => 'required',
             'photo' => 'mimes:jpeg,jpg,png',
             'goal' => 'required',
+            "location" => "required",
+            "benefits" => "required|numeric",
+            "end_date" => "required",
+
         ]);
 
         $campaign = Campaign::findOrFail($id);
@@ -104,6 +108,11 @@ class CampaignController extends Controller
         $campaign->description = $request->description;
         $campaign->category_id = $request->category_id;
         $campaign->goal = $request->goal;
+        $campaign->location = $request->location;
+        $campaign->benefits = $request->benefits;
+        $campaign->end_date = $request->end_date;
+        $campaign->video_link = $request->video_link;
+        
         if ($request->photo) {
             $campaign->photo =  MediaHelper::handleUpdateImage($request->photo, $campaign->photo);
         }

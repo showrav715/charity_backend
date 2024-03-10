@@ -16,10 +16,9 @@ Route::prefix('user')->group(function () {
     Route::post('/otp', [DashboardController::class, 'otp'])->name('user.otp.submit')->middleware('auth:api');
 
 
-    Route::middleware(['auth:sanctum'])->group(function () {
+    Route::middleware(['auth:sanctum',"email_verify"])->group(function () {
 
         Route::get('dashboard', [DashboardController::class, 'dashboard']);
-
         // Profile Routes
         Route::get('get-details',  [DashboardController::class, 'getDetails']);
         Route::post('profile-settings',  [DashboardController::class, 'profileSubmit']);
@@ -49,6 +48,8 @@ Route::prefix('user')->group(function () {
 
 // FRONTEND
 Route::get('home-content', [FrontendController::class, 'homeContent']);
+Route::post('newsletter/submit', [FrontendController::class, 'newsletterSubmit']);
+Route::post('contact/submit', [FrontendController::class, 'contactSubmit']);
 Route::get('setting', [FrontendController::class, 'setting']);
 Route::get('get/currency', [FrontendController::class, 'getCurrency']);
 Route::get('single/currency/{code}', [FrontendController::class, 'singleCurrency']);
