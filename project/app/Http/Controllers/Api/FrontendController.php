@@ -7,6 +7,7 @@ use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Campaign;
 use App\Models\Category;
+use App\Models\ContactMessage;
 use App\Models\ContactPage;
 use App\Models\Counter;
 use App\Models\Currency;
@@ -14,6 +15,7 @@ use App\Models\Feature;
 use App\Models\Generalsetting;
 use App\Models\Page;
 use App\Models\Preloaded;
+use App\Models\Subscriber;
 use App\Models\Volunteer;
 use Illuminate\Http\Request;
 
@@ -122,6 +124,20 @@ class FrontendController extends ApiController
     public function singleCampaign($slug)
     {
         $campaign = Campaign::with(['category', 'faqs', 'galleries'])->where('slug', $slug)->first();
+
+
+        if ($campaign) {
+
+            foreach ($campaign->galleries as $gallery) {
+                $gallery['original'] = getPhoto($gallery->photo);
+                $gallery['thumbnail'] = getPhoto($gallery->photo, 'campaign_gallery');
+                unset($gallery->photo);
+                unset($gallery->id);
+                unset($gallery->campaign_id);
+            }
+        }
+
+        $campaign['founded'] = dateFormat($campaign->founded);
         $data['campaign'] = $campaign;
         $data['preloaded'] = Preloaded::get();
         $data['related_campaigns'] = Campaign::with('category')->where('status', 1)->where('category_id', $campaign->category_id)->where('id', '!=', $campaign->id)->orderBy('id', 'desc')->limit(6)->get();
@@ -176,5 +192,37 @@ class FrontendController extends ApiController
     {
         $currency = Currency::whereStatus(1)->whereCode($currency_code)->first();
         return $this->sendResponse($currency, 'Single Currency Data');
+    }
+
+
+    function newsletterSubmit(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|unique:subscribers,email'
+        ]);
+
+        $newsletter = new Subscriber();
+        $newsletter->email = $request->email;
+        $newsletter->save();
+        return $this->sendResponse($newsletter, 'Newsletter Subscribed');
+    }
+
+
+    public function contactSubmit(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'subject' => 'required',
+            'message' => 'required'
+        ]);
+
+        $contact = new ContactMessage();
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->subject = $request->subject;
+        $contact->message = $request->message;
+        $contact->save();
+        return $this->sendResponse($contact, 'Message Sent');
     }
 }
