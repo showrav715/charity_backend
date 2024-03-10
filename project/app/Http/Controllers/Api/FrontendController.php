@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\About;
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Models\Brand;
 use App\Models\Campaign;
 use App\Models\Category;
 use App\Models\ContactMessage;
@@ -178,6 +179,7 @@ class FrontendController extends ApiController
         $data['about'] = $about;
         $data['features'] = Feature::orderby('id')->get();
         $data['counters'] = Counter::orderby('id')->get();
+        $data['brands'] = Brand::orderby('id')->get();
         return $this->sendResponse($data, 'Contact Page');
     }
 
