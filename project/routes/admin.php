@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CampaignController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
@@ -68,7 +69,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('campaign/status/{id}/{status}', [CampaignController::class, 'status'])->name('campaign.status');
             Route::delete('campaign-delete', [CampaignController::class, 'destroy'])->name('campaign.destroy');
             Route::get('campaign/gallery/remove/{id}', [CampaignController::class, 'galleryRemove'])->name('campaign.gallery.remove');
-        
         });
 
 
@@ -157,6 +157,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('/feature/update/{id}', [FeatureController::class, 'update'])->name('feature.update');
             Route::delete('/feature/delete', [FeatureController::class, 'destroy'])->name('feature.destroy');
 
+
+            // brand section 
+            Route::get('/brands', [BrandController::class, 'index'])->name('brand.index');
+            Route::post('/brand/store', [BrandController::class, 'store'])->name('brand.store');
+            Route::put('/brand/update/{id}', [BrandController::class, 'update'])->name('brand.update');
+            Route::delete('/brand/delete', [BrandController::class, 'destroy'])->name('brand.destroy');
 
 
 

@@ -18,4 +18,14 @@ class CampaignGallery extends Model
     ];
 
 
+    // update photo
+
+    public function getPhotoAttribute($value)
+    {
+        return getPhoto($value, 'campaign');
+    }
+
+    
+
+
 }

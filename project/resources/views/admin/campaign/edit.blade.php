@@ -130,7 +130,7 @@
                                     <span class="badge badge-danger gelllabsolute removeGalleryPermanent"
                                         data-href="{{route('admin.campaign.gallery.remove',$gallery->id)}}"> <i
                                             class="fas fa-times"></i></span>
-                                    <img src="{{getPhoto($gallery->photo)}}" alt="}" class="imagecheck-image">
+                                    <img src="{{$gallery->photo}}" alt="}" class="imagecheck-image">
                                 </figure>
                             </div>
                             @endforeach

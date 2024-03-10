@@ -84,6 +84,8 @@ class CampaignController extends ApiController
     public function update(Request $request, $id)
     {
 
+        return response()->json($request->all());
+
         $request->validate([
             'title' => 'required|unique:campaigns,title,' . $id,
             'description' => 'required',

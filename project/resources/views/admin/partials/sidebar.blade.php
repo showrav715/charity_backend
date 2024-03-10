@@ -77,8 +77,9 @@
                                 <span>@lang('Manage Pages')</span></a>
                         <ul class="dropdown-menu">
                                 <li class="{{ menu('admin.about.index') }}"><a class="nav-link"
-                                        href="{{ route('admin.counter.index') }}">@lang('About Counter')</a></li>
-                                        <li class="{{ menu('admin.counter.index') }}"><a class="nav-link"
+                                                href="{{ route('admin.counter.index') }}">@lang('About Counter')</a>
+                                </li>
+                                <li class="{{ menu('admin.counter.index') }}"><a class="nav-link"
                                                 href="{{ route('admin.about.index') }}">@lang('About Page')</a></li>
                                 <li class="{{ menu('admin.gateway') }}"><a class="nav-link"
                                                 href="{{ route('admin.page.index') }}">@lang('Other Page')</a>
@@ -142,6 +143,10 @@
                                 <li class="{{ menu('admin.home.sections') }}"><a class="nav-link"
                                                 href="{{ route('admin.home.sections') }}">@lang('Home Page Sections
                                                 ')</a>
+                                </li>
+
+                                <li class="{{ menu('admin.brand.index') }}"><a class="nav-link"
+                                                href="{{ route('admin.brand.index') }}">@lang('Brand')</a>
                                 </li>
 
                         </ul>

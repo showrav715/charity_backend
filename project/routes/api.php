@@ -16,7 +16,7 @@ Route::prefix('user')->group(function () {
     Route::post('/otp', [DashboardController::class, 'otp'])->name('user.otp.submit')->middleware('auth:api');
 
 
-    Route::middleware(['auth:sanctum',"email_verify"])->group(function () {
+    Route::middleware(['auth:sanctum', "email_verify"])->group(function () {
 
         Route::get('dashboard', [DashboardController::class, 'dashboard']);
         // Profile Routes
@@ -41,6 +41,7 @@ Route::prefix('user')->group(function () {
         Route::get('get/category', [DashboardController::class, 'getCategory']);
         Route::get('campaigns', [CampaignController::class, 'index']);
         Route::post('campaign/store', [CampaignController::class, 'store']);
+        Route::post('campaign/update/{id}', [CampaignController::class, 'update']);
         Route::get('campaign/{id}', [CampaignController::class, 'edit']);
     });
 });
