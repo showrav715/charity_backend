@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class AboutController extends Controller
 {
-   
+
     public function index()
     {
         $about = About::first();
@@ -31,6 +31,16 @@ class AboutController extends Controller
                 return back()->with('error', 'Please upload a valid image');
             }
             $about->photo = MediaHelper::handleUpdateImage($request['photo'], $about->photo);
+        }
+
+        if (
+            isset($request['backgroud_photo'])
+        ) {
+            $status = MediaHelper::ExtensionValidation($request['backgroud_photo']);
+            if (!$status) {
+                return back()->with('error', 'Please upload a valid image');
+            }
+            $about->backgroud_photo = MediaHelper::handleUpdateImage($request['backgroud_photo'], $about->backgroud_photo);
         }
 
         $about->header_title = $request->header_title;

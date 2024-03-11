@@ -13,15 +13,39 @@ class CampaignController extends ApiController
 {
 
 
-    public function index()
+    public function index(Request $request)
     {
-        $campaigns = Campaign::with(['user', 'category', 'faqs', 'galleries'])->where('user_id', auth()->id())->get();
+        $status = 0;
+        switch ($request->type) {
+            case 'all':
+                $campaigns = Campaign::with(['user', 'category', 'faqs', 'galleries'])->where('user_id', auth()->id())->latest()->paginate(3);
+                break;
+            case 'cancel':
+                $campaigns = Campaign::with(['user', 'category', 'faqs', 'galleries'])->where('user_id', auth()->id())->whereStatus(2)->latest()->paginate(3);
+                break;
+            case 'complete':
+                $campaigns = Campaign::with(['user', 'category', 'faqs', 'galleries'])->where('user_id', auth()->id())->whereStatus(1)->latest()->paginate(3);
+                break;
+            case 'pending':
+                $campaigns = Campaign::with(['user', 'category', 'faqs', 'galleries'])->where('user_id', auth()->id())->whereStatus(0)->latest()->paginate(3);
+                break;
+
+            default:
+                # code...
+                break;
+        }
+
+
+
+
+
         return response()->json(['status' => true, 'data' => $campaigns, 'message' => 'Campaigns fetched successfully']);
     }
 
 
     public function store(Request $request)
     {
+        //return response()->json(gettype($request->gallery));
 
         $request->validate([
             'title' => 'required|unique:campaigns,title',
@@ -39,7 +63,7 @@ class CampaignController extends ApiController
         $campaign->title = $request->title;
         $campaign->location = $request->location;
         $campaign->benefits = $request->benefits;
-        $campaign->end_date = Carbon::parse($request->end_date)->format('Y-m-d');
+        $campaign->end_date = Carbon::parse(now())->format('Y-m-d');
         $campaign->video_link = $request->video_link;
         $campaign->slug = Str::slug($request->title);
         $campaign->description = $request->description;
@@ -84,8 +108,6 @@ class CampaignController extends ApiController
     public function update(Request $request, $id)
     {
 
-        return response()->json($request->all());
-
         $request->validate([
             'title' => 'required|unique:campaigns,title,' . $id,
             'description' => 'required',
@@ -109,17 +131,26 @@ class CampaignController extends ApiController
         $campaign->status = $request->status == 1 ? 1 : 0;
         $campaign->update();
 
+        $new_faq_title = explode(',', $request->faq_title);
+        $new_faq_content = explode(',', $request->faq_content);
 
-        if ($request->is_faq == 'on') {
-            if ($request->faq_title && $request->faq_content)
-                $campaign->faqs()->delete();
-            foreach ($request->faq_title as $key => $question) {
+
+        if ($request->faq_title && $request->faq_content) {
+            $campaign->faqs()->delete();
+            foreach ($new_faq_title as $key => $question) {
                 $campaign->faqs()->create([
                     'title' => $question ? $question : null,
-                    'content' => $request->faq_content[$key] ? $request->faq_content[$key] : null,
+                    'content' => $new_faq_content[$key] ? $new_faq_content[$key] : null,
                 ]);
             }
+            $campaign->is_faq = $request->is_faq == 1;
+        } else {
+            $campaign->is_faq = $request->is_faq == 0;
+            $campaign->faqs()->delete();
         }
+        $campaign->update();
+
+
 
         if ($request->gallery) {
             foreach ($request->gallery as $key => $gallery) {
@@ -130,7 +161,7 @@ class CampaignController extends ApiController
             }
         }
 
-        return response()->json(['status' => true, 'data' => [], 'message' => 'Campaign updated successfully']);
+        return $this->sendResponse([], 'Campaign updated successfully');
     }
 
 
@@ -139,7 +170,7 @@ class CampaignController extends ApiController
         $gallery = CampaignGallery::findOrFail($id);
         MediaHelper::handleDeleteImage($gallery->photo);
         $gallery->delete();
-        return response()->json(['success' => 'Gallery deleted successfully']);
+        return $this->sendResponse([], 'Gallery removed successfully');
     }
 
     public function status($id, $status)
