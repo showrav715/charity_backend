@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 10, 2024 at 04:19 AM
+-- Generation Time: Mar 10, 2024 at 12:29 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -177,6 +177,17 @@ INSERT INTO `blog_comments` (`id`, `blog_id`, `name`, `email`, `comment`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `brands`
+--
+
+CREATE TABLE `brands` (
+  `id` bigint(20) NOT NULL,
+  `photo` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `campaigns`
 --
 
@@ -209,7 +220,7 @@ CREATE TABLE `campaigns` (
 INSERT INTO `campaigns` (`id`, `title`, `slug`, `category_id`, `user_id`, `photo`, `raised`, `goal`, `description`, `status`, `is_faq`, `is_feature`, `is_preloaded`, `location`, `benefits`, `end_date`, `video_link`, `created_at`, `updated_at`) VALUES
 (8, 'test', 'test', 3, NULL, '8465080681708142609.jpg', 0, 5, '<p>test</p>', 1, 1, 0, 1, 'test', 5, '2024-03-15', 'r2456246', '2024-02-16 22:03:29', '2024-03-05 23:24:54'),
 (9, 'dasfa', 'dasfa', 3, NULL, '2837413001708164872.jpg', 50, 500, '<p>asdfasdf</p>', 1, 0, 0, 0, 'London', 5, '2024-03-15', 'adfssd', '2024-02-17 04:14:32', '2024-03-05 23:23:24'),
-(10, 'New Data', 'new-data', 3, 22, '13617856811708165732.png', 0, 5, '<p>asdfasdf</p>', 0, 1, 0, 1, 'asdfad', 5, 'Sat Feb 17 2024 15:55:31 GMT+0600 (Bangladesh Standard Time)', 'adfssd', '2024-02-17 04:28:52', '2024-02-18 02:55:00'),
+(10, 'test test5 last check11111111111111', 'test-test5-last-check11111111111111', 3, 22, '13617856811708165732.png', 0, 5, '<p>asdfasdf hgjgjg jhufgjktg</p>', 0, 1, 0, 0, 'asdfad', 5, 'Sat Feb 17 2024 15:55:31 GMT+0600 (Bangladesh Standard Time)', 'adfssd', '2024-02-17 04:28:52', '2024-03-10 05:03:44'),
 (11, 'New Data again', 'new-data-again', 3, 22, '13510299461708165868.png', 0, 5, '<p>asdfasdf</p>', 0, 0, 0, 0, 'asdfad', 5, 'Sat Feb 17 2024 15:55:31 GMT+0600 (Bangladesh Standard Time)', 'adfssd', '2024-02-17 04:31:08', '2024-02-17 04:31:08'),
 (12, 'New Data again 5', 'new-data-again-5', 3, 22, '5042978721708165880.png', 0, 5, '<p><br></p>', 0, 0, 0, 0, 'asdfad', 5, 'Sat Feb 17 2024 15:55:31 GMT+0600 (Bangladesh Standard Time)', 'adfssd', '2024-02-17 04:31:21', '2024-02-17 04:31:21'),
 (13, 'DSAFASDF', 'dsafasdf', 3, 22, '4156866211708165984.png', 0, 5, '<p>SDFASDF</p>', 0, 0, 0, 0, 'TEST', 5, 'Sat Feb 17 2024 15:55:31 GMT+0600 (Bangladesh Standard Time)', 'ASDFAS', '2024-02-17 04:33:04', '2024-02-17 04:33:04'),
@@ -221,7 +232,8 @@ INSERT INTO `campaigns` (`id`, `title`, `slug`, `category_id`, `user_id`, `photo
 (19, 'asdfasdfsadfasdfasdfasfasfasff', 'asdfasdfsadfasdfasdfasfasfasff', 2, 22, '21465030701708166397.png', 0, 78, '<p>asdfasdf</p>', 0, 0, 0, 0, 'asdf', 77, 'Sat Feb 17 2024 00:00:00 GMT+0600 (Bangladesh Standard Time)', 'erertew', '2024-02-17 04:39:57', '2024-02-17 04:39:57'),
 (20, 'sadfasdf', 'sadfasdf', 3, 22, '15035961041708166486.png', 0, 5, '<p>asdfasdf</p>', 0, 0, 0, 0, 'dfasdf', 5, 'Sat Feb 17 2024 16:41:03 GMT+0600 (Bangladesh Standard Time)', 'asdfasd', '2024-02-17 04:41:26', '2024-02-17 04:41:26'),
 (21, 'dsfaf', 'dsfaf', 3, 22, '21410562541708166600.jpg', 0, 56, '<p>asdfas</p>', 0, 0, 0, 0, 'asdfas', 5, 'Sat Feb 17 2024 16:42:54 GMT+0600 (Bangladesh Standard Time)', 'asdfa', '2024-02-17 04:43:20', '2024-02-17 04:43:20'),
-(22, 'This is test for postman', 'this-is-test-for-postman', 4, 22, '17452860621708332489.jpg', 0, 1, 'Postman test description', 0, 0, 0, 0, 'dhaka', 40, '2024-12-02', 'ok', '2024-02-19 02:48:10', '2024-02-19 02:48:10');
+(22, 'This is test for postman', 'this-is-test-for-postman', 4, 22, '17452860621708332489.jpg', 0, 1, 'Postman test description', 0, 0, 0, 0, 'dhaka', 40, '2024-12-02', 'ok', '2024-02-19 02:48:10', '2024-02-19 02:48:10'),
+(23, 'taba', 'taba', 2, 22, '5213016221710068281.jpg', 0, 5, '<p>asdfasdf</p>', 0, 0, 0, 0, '5', 5, '2024-03-10', '5', '2024-03-10 04:58:02', '2024-03-10 04:58:02');
 
 -- --------------------------------------------------------
 
@@ -241,9 +253,9 @@ CREATE TABLE `campaign_faqs` (
 --
 
 INSERT INTO `campaign_faqs` (`id`, `campaign_id`, `title`, `content`) VALUES
-(36, 10, 'ttt', 'dsfasdf'),
-(37, 10, 'asdfa', 'asdfa'),
-(38, 8, 'asdfa', 'sdafasdf');
+(38, 8, 'asdfa', 'sdafasdf'),
+(84, 10, 'tt', 'tt'),
+(85, 10, 'iiiii', 'ytyty');
 
 -- --------------------------------------------------------
 
@@ -265,7 +277,8 @@ INSERT INTO `campaign_galleries` (`id`, `campaign_id`, `photo`) VALUES
 (16, 10, '11827573981708246065.jpg'),
 (17, 10, '19907181721708246065.png'),
 (18, 9, '2782947511709090877.png'),
-(19, 9, '19624118351709701513.png');
+(19, 9, '19624118351709701513.png'),
+(20, 10, '15839757651710068624.png');
 
 -- --------------------------------------------------------
 
@@ -869,7 +882,10 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`, `expires_at`) VALUES
-(167, 'App\\Models\\User', 22, 'authToken', '76b246bf20cd44fd3ecb00796daeaa4005ebbcb2ed6f8afae7749a272c018ff0', '[\"*\"]', '2024-03-06 03:43:50', '2024-03-06 03:41:24', '2024-03-06 03:43:50', NULL);
+(167, 'App\\Models\\User', 22, 'authToken', '76b246bf20cd44fd3ecb00796daeaa4005ebbcb2ed6f8afae7749a272c018ff0', '[\"*\"]', '2024-03-06 03:43:50', '2024-03-06 03:41:24', '2024-03-06 03:43:50', NULL),
+(168, 'App\\Models\\User', 22, 'authToken', 'a4a36bd834304bc6eecae7b671c155ac64957d7bbd5e722121cca5182e391041', '[\"*\"]', '2024-03-09 23:33:45', '2024-03-09 22:33:58', '2024-03-09 23:33:45', NULL),
+(169, 'App\\Models\\User', 22, 'authToken', '2de25bdb7ac04f797b3d7b5ad84995d3a22d2b60817d99c21245f2ea1a3ca380', '[\"*\"]', '2024-03-09 22:46:10', '2024-03-09 22:44:19', '2024-03-09 22:46:10', NULL),
+(170, 'App\\Models\\User', 22, 'authToken', 'b4b8f1bc2c7c2053a27a11112798a5fc4e7f3ae21de2192d65250a15b19c72e8', '[\"*\"]', '2024-03-10 05:03:51', '2024-03-09 23:47:28', '2024-03-10 05:03:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -1294,6 +1310,12 @@ ALTER TABLE `blog_comments`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `brands`
+--
+ALTER TABLE `brands`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `campaigns`
 --
 ALTER TABLE `campaigns`
@@ -1578,22 +1600,28 @@ ALTER TABLE `blog_comments`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `brands`
+--
+ALTER TABLE `brands`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `campaigns`
 --
 ALTER TABLE `campaigns`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `campaign_faqs`
 --
 ALTER TABLE `campaign_faqs`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `campaign_galleries`
 --
 ALTER TABLE `campaign_galleries`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -1719,7 +1747,7 @@ ALTER TABLE `payment_gateways`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
 
 --
 -- AUTO_INCREMENT for table `preloadeds`

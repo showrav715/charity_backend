@@ -21,7 +21,6 @@
                     @csrf
 
                     <div class="row">
-
                         <div class="col-8 offset-2 text-center">
                             <label for="">Photo</label>
                             <div class="form-group d-flex justify-content-center">
@@ -55,10 +54,20 @@
                     </div>
 
                     <div class="form-group">
+                        <label>@lang('Video Background')</label>
+                        <div class="form-group d-flex">
+                            <div id="image-preview3" class="image-preview image-preview_alt" style="background-image:url({{ getPhoto($about->backgroud_photo) }});">
+                                <label for="image-upload3" id="image-label3">@lang('Choose File')</label>
+                                <input type="file" name="backgroud_photo" id="image-upload3" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label>@lang('Button Text')</label>
                         <input class="form-control" type="text" name="btn_text" value="{{ $about->btn_text }}">
                     </div>
-                   
+
                     <div class="form-group">
                         <label>@lang('Button Url')</label>
                         <input class="form-control" type="text" name="btn_url" value="{{ $about->btn_url }}">
@@ -258,10 +267,21 @@
             no_label: false,
             success_callback: null
         });
+
         $.uploadPreview({
             input_field: "#image-upload1",
             preview_box: "#image-preview1",
             label_field: "#image-label1",
+            label_default: "{{ __('Choose File') }}",
+            label_selected: "{{ __('Update Image') }}",
+            no_label: false,
+            success_callback: null
+        });
+
+        $.uploadPreview({
+            input_field: "#image-upload3",
+            preview_box: "#image-preview3",
+            label_field: "#image-label3",
             label_default: "{{ __('Choose File') }}",
             label_selected: "{{ __('Update Image') }}",
             no_label: false,

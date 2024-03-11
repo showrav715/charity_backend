@@ -175,7 +175,8 @@ class FrontendController extends ApiController
     public function aboutPage()
     {
         $about =  About::first();
-        $about['photo'] = asset('assets/images/' . $about->photo);
+        $about['photo'] = getPhoto($about->photo);
+        $about['backgroud_photo'] = getPhoto($about->backgroud_photo);
         $data['about'] = $about;
         $data['features'] = Feature::orderby('id')->get();
         $data['counters'] = Counter::orderby('id')->get();
