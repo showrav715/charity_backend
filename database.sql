@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 10, 2024 at 12:29 PM
+-- Generation Time: Mar 13, 2024 at 10:31 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -35,15 +35,16 @@ CREATE TABLE `abouts` (
   `btn_url` text DEFAULT NULL,
   `description` text DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
-  `video_id` varchar(255) DEFAULT NULL
+  `video_id` varchar(255) DEFAULT NULL,
+  `backgroud_photo` varchar(191) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `abouts`
 --
 
-INSERT INTO `abouts` (`id`, `header_title`, `title`, `btn_text`, `btn_url`, `description`, `photo`, `video_id`) VALUES
-(1, 'About us', 'Our Professional Engineers', 'Our Team', 'https://carservice.geniusocean.xyz/', '<p style=\"text-align: justify; \">Our customer service specialists are here to assist you every step of the way, offering seamless appointment scheduling and addressing any inquiries you may have. Behind the scenes, our diagnostic experts use advanced technology to identify and resolve issues efficiently.</p><p style=\"text-align: justify; \"> Our mechanical engineers oversee complex repairs, guaranteeing that your vehicle\'s functionality is optimized. Our service advisors act as trusted consultants, guiding you through our range of services with personalized recommendations.<br></p>', '2979942021706596562.png', 'nUa-bQD7DGY');
+INSERT INTO `abouts` (`id`, `header_title`, `title`, `btn_text`, `btn_url`, `description`, `photo`, `video_id`, `backgroud_photo`) VALUES
+(1, 'About us', 'Our Professional Engineers', 'Our Team', 'https://carservice.geniusocean.xyz/', '<p style=\"text-align: justify; \">Our customer service specialists are here to assist you every step of the way, offering seamless appointment scheduling and addressing any inquiries you may have. Behind the scenes, our diagnostic experts use advanced technology to identify and resolve issues efficiently.</p><p style=\"text-align: justify; \"> Our mechanical engineers oversee complex repairs, guaranteeing that your vehicle\'s functionality is optimized. Our service advisors act as trusted consultants, guiding you through our range of services with personalized recommendations.<br></p>', '2979942021706596562.png', 'nUa-bQD7DGY', '4903271651710127708.jpg');
 
 -- --------------------------------------------------------
 
@@ -220,12 +221,12 @@ CREATE TABLE `campaigns` (
 INSERT INTO `campaigns` (`id`, `title`, `slug`, `category_id`, `user_id`, `photo`, `raised`, `goal`, `description`, `status`, `is_faq`, `is_feature`, `is_preloaded`, `location`, `benefits`, `end_date`, `video_link`, `created_at`, `updated_at`) VALUES
 (8, 'test', 'test', 3, NULL, '8465080681708142609.jpg', 0, 5, '<p>test</p>', 1, 1, 0, 1, 'test', 5, '2024-03-15', 'r2456246', '2024-02-16 22:03:29', '2024-03-05 23:24:54'),
 (9, 'dasfa', 'dasfa', 3, NULL, '2837413001708164872.jpg', 50, 500, '<p>asdfasdf</p>', 1, 0, 0, 0, 'London', 5, '2024-03-15', 'adfssd', '2024-02-17 04:14:32', '2024-03-05 23:23:24'),
-(10, 'test test5 last check11111111111111', 'test-test5-last-check11111111111111', 3, 22, '13617856811708165732.png', 0, 5, '<p>asdfasdf hgjgjg jhufgjktg</p>', 0, 1, 0, 0, 'asdfad', 5, 'Sat Feb 17 2024 15:55:31 GMT+0600 (Bangladesh Standard Time)', 'adfssd', '2024-02-17 04:28:52', '2024-03-10 05:03:44'),
+(10, 'test test5 last check', 'test-test5-last-check', 3, 22, '12978448341710133301.png', 0, 5, '<p>asdfasdf hgjgjg jhufgjktg</p>', 0, 1, 0, 0, 'asdfad', 5, 'Sat Feb 17 2024 15:55:31 GMT+0600 (Bangladesh Standard Time)', 'adfssd', '2024-02-17 04:28:52', '2024-03-10 23:01:55'),
 (11, 'New Data again', 'new-data-again', 3, 22, '13510299461708165868.png', 0, 5, '<p>asdfasdf</p>', 0, 0, 0, 0, 'asdfad', 5, 'Sat Feb 17 2024 15:55:31 GMT+0600 (Bangladesh Standard Time)', 'adfssd', '2024-02-17 04:31:08', '2024-02-17 04:31:08'),
 (12, 'New Data again 5', 'new-data-again-5', 3, 22, '5042978721708165880.png', 0, 5, '<p><br></p>', 0, 0, 0, 0, 'asdfad', 5, 'Sat Feb 17 2024 15:55:31 GMT+0600 (Bangladesh Standard Time)', 'adfssd', '2024-02-17 04:31:21', '2024-02-17 04:31:21'),
 (13, 'DSAFASDF', 'dsafasdf', 3, 22, '4156866211708165984.png', 0, 5, '<p>SDFASDF</p>', 0, 0, 0, 0, 'TEST', 5, 'Sat Feb 17 2024 15:55:31 GMT+0600 (Bangladesh Standard Time)', 'ASDFAS', '2024-02-17 04:33:04', '2024-02-17 04:33:04'),
 (14, 'SDFASD', 'sdfasd', 3, 22, '20421391321708166036.png', 0, 5, '<p>ASDFAS</p>', 1, 0, 0, 0, '5', 5, 'Sat Feb 17 2024 16:33:39 GMT+0600 (Bangladesh Standard Time)', 'ASDFA', '2024-02-17 04:33:56', '2024-02-17 04:33:56'),
-(15, 'SDFASDASDFA', 'sdfasdasdfa', 3, 22, '1537121141708166093.png', 0, 5, '<p>ASDFASDF</p>', 3, 0, 0, 0, '5', 5, 'Sat Feb 17 2024 16:33:39 GMT+0600 (Bangladesh Standard Time)', 'ASDFA', '2024-02-17 04:34:53', '2024-02-17 04:34:53'),
+(15, 'SDFASDASDFA', 'sdfasdasdfa', 3, 22, '1537121141708166093.png', 0, 5, '<p>ASDFASDF</p>', 2, 0, 0, 0, '5', 5, 'Sat Feb 17 2024 16:33:39 GMT+0600 (Bangladesh Standard Time)', 'ASDFA', '2024-02-17 04:34:53', '2024-02-17 04:34:53'),
 (16, 'ASDFASDF', 'asdfasdf', 3, 22, '7852570471708166141.png', 0, 5, '<p>ASDFASDF</p>', 0, 0, 0, 0, '5', 5, 'Sat Feb 17 2024 16:35:26 GMT+0600 (Bangladesh Standard Time)', 'DFASDF', '2024-02-17 04:35:41', '2024-02-17 04:35:41'),
 (17, 'ASDFASDFFGHDGH', 'asdfasdffghdgh', 3, 22, '5230319571708166183.jpg', 0, 5, '<p>GFSDFGS</p>', 0, 0, 0, 0, '5', 5, 'Sat Feb 17 2024 16:35:26 GMT+0600 (Bangladesh Standard Time)', 'DFASDF', '2024-02-17 04:36:23', '2024-02-17 04:36:23'),
 (18, 'ASDFASDFFGHDGH ADSFGASD', 'asdfasdffghdgh-adsfgasd', 3, 22, '14172479461708166296.jpg', 0, 5, '<p>ASDFGSDFGSD</p>', 0, 0, 0, 0, '5', 5, 'Sat Feb 17 2024 16:35:26 GMT+0600 (Bangladesh Standard Time)', 'DFASDF', '2024-02-17 04:38:16', '2024-02-17 04:38:16'),
@@ -254,8 +255,8 @@ CREATE TABLE `campaign_faqs` (
 
 INSERT INTO `campaign_faqs` (`id`, `campaign_id`, `title`, `content`) VALUES
 (38, 8, 'asdfa', 'sdafasdf'),
-(84, 10, 'tt', 'tt'),
-(85, 10, 'iiiii', 'ytyty');
+(93, 10, 'tt', 'tt'),
+(94, 10, 'a', 'a');
 
 -- --------------------------------------------------------
 
@@ -274,11 +275,11 @@ CREATE TABLE `campaign_galleries` (
 --
 
 INSERT INTO `campaign_galleries` (`id`, `campaign_id`, `photo`) VALUES
-(16, 10, '11827573981708246065.jpg'),
-(17, 10, '19907181721708246065.png'),
 (18, 9, '2782947511709090877.png'),
 (19, 9, '19624118351709701513.png'),
-(20, 10, '15839757651710068624.png');
+(20, 10, '15839757651710068624.png'),
+(21, 10, '1657717671710133168.jpg'),
+(22, 10, '7929818751710133168.jpg');
 
 -- --------------------------------------------------------
 
@@ -885,7 +886,11 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (167, 'App\\Models\\User', 22, 'authToken', '76b246bf20cd44fd3ecb00796daeaa4005ebbcb2ed6f8afae7749a272c018ff0', '[\"*\"]', '2024-03-06 03:43:50', '2024-03-06 03:41:24', '2024-03-06 03:43:50', NULL),
 (168, 'App\\Models\\User', 22, 'authToken', 'a4a36bd834304bc6eecae7b671c155ac64957d7bbd5e722121cca5182e391041', '[\"*\"]', '2024-03-09 23:33:45', '2024-03-09 22:33:58', '2024-03-09 23:33:45', NULL),
 (169, 'App\\Models\\User', 22, 'authToken', '2de25bdb7ac04f797b3d7b5ad84995d3a22d2b60817d99c21245f2ea1a3ca380', '[\"*\"]', '2024-03-09 22:46:10', '2024-03-09 22:44:19', '2024-03-09 22:46:10', NULL),
-(170, 'App\\Models\\User', 22, 'authToken', 'b4b8f1bc2c7c2053a27a11112798a5fc4e7f3ae21de2192d65250a15b19c72e8', '[\"*\"]', '2024-03-10 05:03:51', '2024-03-09 23:47:28', '2024-03-10 05:03:51', NULL);
+(170, 'App\\Models\\User', 22, 'authToken', 'b4b8f1bc2c7c2053a27a11112798a5fc4e7f3ae21de2192d65250a15b19c72e8', '[\"*\"]', '2024-03-10 05:03:51', '2024-03-09 23:47:28', '2024-03-10 05:03:51', NULL),
+(171, 'App\\Models\\User', 22, 'authToken', 'a500792e046a87ac715b31c9a19fac7c45ebfba5a56c76bac49f0340b767ddc9', '[\"*\"]', '2024-03-11 03:59:49', '2024-03-10 22:12:00', '2024-03-11 03:59:49', NULL),
+(172, 'App\\Models\\User', 22, 'authToken', 'b25eff8e9c6038ff4fcce3f955ac37b83aec7189329a47f0c667d42a486a7131', '[\"*\"]', '2024-03-13 03:26:48', '2024-03-12 21:13:29', '2024-03-13 03:26:48', NULL),
+(173, 'App\\Models\\User', 22, 'authToken', '7e8aeccf2d17a003c52a4994cc390d1dd2ef62e6c9dd9159cb8edf527149464c', '[\"*\"]', NULL, '2024-03-13 02:55:50', '2024-03-13 02:55:50', NULL),
+(174, 'App\\Models\\User', 22, 'authToken', '03f56acc7512584e313916b187bd9b0b357b7fa8c5633a0ed8e4d3faf4b4b832', '[\"*\"]', '2024-03-13 03:18:45', '2024-03-13 02:58:19', '2024-03-13 03:18:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -1151,6 +1156,31 @@ INSERT INTO `subscribers` (`id`, `email`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `support_tickets`
+--
+
+CREATE TABLE `support_tickets` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `guest_email` varchar(255) DEFAULT NULL,
+  `guest_name` varchar(255) DEFAULT NULL,
+  `ticket_num` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 = pending, 1 = replied. ',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `support_tickets`
+--
+
+INSERT INTO `support_tickets` (`id`, `user_id`, `guest_email`, `guest_name`, `ticket_num`, `subject`, `status`, `created_at`, `updated_at`) VALUES
+(7, 22, NULL, NULL, 'tk345434534', 'Hi', 0, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `teams`
 --
 
@@ -1197,6 +1227,31 @@ INSERT INTO `testimonials` (`id`, `name`, `designation`, `photo`, `message`, `ra
 (3, 'Jhon Due', 'Creative Director', '12756126191688621009.jpg', 'Car battery performance checks are essential to ensure your vehicle starts reliably and to prevent unexpected breakdowns.', 4),
 (4, 'Mr. Marlie', 'CEO GeniusTeam', '17895208911688621004.jpg', 'The purpose of the testimonial section is to build trust and credibility by showcasing positive feedback from satisfied patients.', 5),
 (6, 'Brain Due', 'Creative Director', '1600736101688621040.jpg', 'The Creative Director is a visionary leader responsible for shaping and executing the overall creative direction of a company or organization.', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ticket_messages`
+--
+
+CREATE TABLE `ticket_messages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `ticket_id` int(11) NOT NULL,
+  `ticket_num` varchar(255) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `admin_id` int(11) DEFAULT NULL,
+  `message` varchar(255) NOT NULL,
+  `file` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ticket_messages`
+--
+
+INSERT INTO `ticket_messages` (`id`, `ticket_id`, `ticket_num`, `user_id`, `admin_id`, `message`, `file`, `created_at`, `updated_at`) VALUES
+(1, 7, 'tk345434534', 22, NULL, 'dadf', NULL, '2024-03-13 09:08:31', NULL);
 
 -- --------------------------------------------------------
 
@@ -1535,6 +1590,12 @@ ALTER TABLE `subscribers`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `support_tickets`
+--
+ALTER TABLE `support_tickets`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `teams`
 --
 ALTER TABLE `teams`
@@ -1544,6 +1605,12 @@ ALTER TABLE `teams`
 -- Indexes for table `testimonials`
 --
 ALTER TABLE `testimonials`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ticket_messages`
+--
+ALTER TABLE `ticket_messages`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1615,13 +1682,13 @@ ALTER TABLE `campaigns`
 -- AUTO_INCREMENT for table `campaign_faqs`
 --
 ALTER TABLE `campaign_faqs`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT for table `campaign_galleries`
 --
 ALTER TABLE `campaign_galleries`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -1747,7 +1814,7 @@ ALTER TABLE `payment_gateways`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
 
 --
 -- AUTO_INCREMENT for table `preloadeds`
@@ -1810,6 +1877,12 @@ ALTER TABLE `subscribers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
+-- AUTO_INCREMENT for table `support_tickets`
+--
+ALTER TABLE `support_tickets`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `teams`
 --
 ALTER TABLE `teams`
@@ -1820,6 +1893,12 @@ ALTER TABLE `teams`
 --
 ALTER TABLE `testimonials`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `ticket_messages`
+--
+ALTER TABLE `ticket_messages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`

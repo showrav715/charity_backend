@@ -152,6 +152,15 @@
                         </ul>
                 </li>
 
+
+                
+                <li class="nav-item {{menu('admin.ticket.manage')}}">
+                        <a href="{{ route('admin.ticket.manage') }}" class="nav-link"><i
+                                        class="fas fa-ticket-alt"></i><span>@lang('Support Tickets')</span></a>
+                </li>
+
+
+
                 <li class="menu-header">@lang('Staff and Role')</li>
                 <li class="nav-item {{ menu('admin.role*') }}">
                         <a href="{{ route('admin.role.index') }}" class="nav-link"><i
