@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CampaignController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\FrontendController;
+use App\Http\Controllers\Api\SupportTicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,14 @@ Route::prefix('user')->group(function () {
         Route::post('campaign/update/{id}', [CampaignController::class, 'update']);
         Route::get('campaign/{id}', [CampaignController::class, 'edit']);
         Route::get('campaign/gallery/remove/{id}', [CampaignController::class, 'galleryRemove']);
+
+
+
+        //support ticket
+        Route::get('support/tickets',                        [SupportTicketController::class, 'index'])->name('merchant.tickets');
+        Route::get('support/ticket/messages/{ticket_num}',   [SupportTicketController::class, 'messages'])->name('merchant.ticket.messages');
+        Route::post('open/support/ticket',                   [SupportTicketController::class, 'openTicket'])->name('merchant.ticket.open');
+        Route::post('reply/ticket/{ticket_num}',             [SupportTicketController::class, 'replyTicket'])->name('merchant.ticket.reply');
     });
 });
 

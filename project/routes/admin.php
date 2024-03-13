@@ -23,6 +23,9 @@ use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\VolunteerController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ManageTicketController;
+
+
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
@@ -87,6 +90,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/store/payment-gateway', [PaymentGatewayController::class, 'store'])->name('gateway.store');
         Route::get('/payment-gateway/edit/{paymentgateway}', [PaymentGatewayController::class, 'edit'])->name('gateway.edit');
         Route::post('/payment-gateway/update/{gateway}', [PaymentGatewayController::class, 'update'])->name('gateway.update');
+
+
+
+        //support ticket
+        Route::get('manage/tickets', [ManageTicketController::class, 'index'])->name('ticket.manage')->middleware('permission:manage ticket');
+        Route::post('reply/ticket/{ticket_num}',   [ManageTicketController::class, 'replyTicket'])->name('ticket.reply')->middleware('permission:manage ticket')->middleware('permission:reply ticket');
 
 
 

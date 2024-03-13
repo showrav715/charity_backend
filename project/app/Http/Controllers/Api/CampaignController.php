@@ -36,9 +36,6 @@ class CampaignController extends ApiController
         }
 
 
-
-
-
         return response()->json(['status' => true, 'data' => $campaigns, 'message' => 'Campaigns fetched successfully']);
     }
 
