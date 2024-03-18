@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\Generalsetting;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
-class AuthController extends Controller
+class AuthController extends ApiController
 {
 
   public function __construct()
   {
-    $this->middleware('auth:sanctum', ['except' => ['login', 'token', 'register', 'logout', 'social_login', 'forgot', 'forgot_submit']]);
+    $this->middleware('auth:sanctum', ['except' => ['login', 'token', 'register', 'logout', 'social_login', 'forgot', 'forgotPasswordSubmit', 'resetPasswordSubmit', 'verifyEmailSubmit', 'verifyEmailResendCode']]);
   }
 
 
@@ -39,12 +36,31 @@ class AuthController extends Controller
       if (!auth()->attempt($credentials)) {
         return response()->json(['status' => false, 'data' => [], 'error' => ["message" => "Email / password didn't match."]]);
       }
+
       $token = auth()->user()->createToken('authToken')->plainTextToken;
-      //return response()->json(auth()->user());
       if (auth()->user()->email_verified == 0) {
+        $user = auth()->user();
+        $gs = Generalsetting::first();
+        $subject = 'Verify your email address.';
+        $code = rand(100000, 999999);
+        $user->verify_code = $code;
+        $user->update();
+
+
+        $msg = 'Dear ' . $request->username . ',<br> Please verify your email address. <br> Your verification code is </br>' . $code . '<br> <br> <br> Regards, <br> ' . $gs->title . ' Team';
+
+        @email([
+          'email'   => $request->email,
+          'name'    => $request->username,
+          'subject' => $subject,
+          'message' => $msg,
+        ]);
+
         auth()->logout();
-        return response()->json(['status' => false, 'data' => [], 'error' => ["message" => 'Your Email is not Verified!']]);
+
+        return response()->json(['status' => false, 'data' => ["email_verify" => false],"message" => 'Your Email is not Verified! Please verify your email address.']);
       }
+
 
       if (auth()->user()->is_banned == 1) {
         auth()->logout();
@@ -53,7 +69,7 @@ class AuthController extends Controller
 
       return response()->json(['status' => true, 'data' => ['token' => $token, 'user' => auth()->user()], 'error' => []]);
     } catch (\Exception $e) {
-      return response()->json(['status' => true, 'data' => [], 'error' => ['message' => $e->getMessage()]]);
+      return response()->json(['status' => false, 'data' => [], 'error' => ['message' => $e->getMessage()]]);
     }
   }
 
@@ -102,7 +118,7 @@ class AuthController extends Controller
         return response()->json(['status' => true, 'data' => ['token' => $token, 'user' => $user], 'error' => []]);
       } else {
 
-        $to = $request->email;
+
         $subject = 'Verify your email address.';
 
         $msg = 'Dear ' . $request->username . ',<br> Please verify your email address. <br> Your verification code is' . $code . '<br> <br> <br> Regards, <br> ' . $gs->title . ' Team';
@@ -160,7 +176,7 @@ class AuthController extends Controller
 
     $exist = User::where('email', $request->email)->first();
     if (!$exist) {
-      return $this->sendError('error', ['Sorry! Email doesn\'t exist']);
+      return $this->sendError('Sorry! Email doesn\'t exist');
     }
 
     $exist->verify_code = randNum();
@@ -174,52 +190,78 @@ class AuthController extends Controller
     ]);
 
     $success['email'] = $exist->email;
-    $success['verify_code'] = $exist->verify_code;
     return $this->sendResponse($success, 'Reset code has been sent to email.');
   }
 
 
-  public function verifyCodeSubmit(Request $request)
-  {
-    $validator = Validator::make($request->all(), [
-      'code' => 'required|integer',
-      'email' => 'required|email'
-    ]);
-
-    if ($validator->fails()) {
-      return response()->json(['status' => false, 'data' => [], 'error' => $validator->errors()]);
-    }
-
-    $user = User::where('email', $request->email)->first();
-    if (!$user) {
-      return response()->json(['status' => false, 'data' => [], 'error' => ['message' => 'Invalid request']]);
-    }
-
-    if ($user->verify_code != $request->code) {
-      return response()->json(['status' => false, 'data' => [], 'error' => ['message' => 'Invalid code']]);
-    }
-    $success['code'] = $request->code;
-    $success['email'] = $request->email;
-    return response()->json(['status' => true, 'data' => $success, 'error' => ['Reset code Verified']]);
-  }
-
   public function resetPasswordSubmit(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'email' => 'required|email',
-      'code' => 'required|integer',
-      'password' => 'required|confirmed|min:6'
+      'code' => 'required',
+      'password' => 'required|confirmed|min:4'
     ]);
 
     if ($validator->fails()) {
       return response()->json(['status' => false, 'data' => [], 'error' => $validator->errors()]);
     }
-    $user = User::where('email', $request->email)->first();
+    $user = User::where('verify_code', $request->code)->first();
     if (!$user || !$request->code) {
-      return response()->json(['status' => false, 'data' => [], 'error' => ['message' => 'Invalid request']]);
+      return $this->sendError('Invalid code', '403');
     }
     $user->password = bcrypt($request->password);
     $user->update();
-    return response()->json(['status' => true, 'data' => [], 'error' => ['Password reset successfully']]);
+    return $this->sendResponse([], 'Password reset successfully');
+  }
+
+
+
+  public function verifyEmailSubmit(Request $request)
+  {
+
+    $validator = Validator::make($request->all(), [
+      'code' => 'required|integer',
+    ]);
+
+    if ($validator->fails()) {
+      return $this->sendError($validator->errors(), '403');
+    }
+
+    $user = User::where('email', $request->email)->where("verify_code", $request->code)->first();
+
+    if (!$user) {
+      return $this->sendError('User doesn\'t exist', '403');
+    }
+
+    if ($user->verify_code != $request->code) {
+      return $this->sendError('Invalid verification code.',);
+    }
+
+    $user->verify_code = null;
+    $user->email_verified = 1;
+    $user->save();
+
+    return $this->sendResponse([], 'Email has been verified');
+  }
+
+  public function verifyEmailResendCode(Request $request)
+  {
+    $user = User::where('email', $request->email)->first();
+  
+    if (!$user) {
+      return $this->sendError('User doesn\'t exist');
+    }
+
+    $code = randNum();
+    $user->verify_code = $code;
+    $user->update();
+
+    @email([
+      'email'   => $user->email,
+      'name'    => $user->name,
+      'subject' => __('Email Verification Code'),
+      'message' => __('Email Verification Code is : ') . $user->verify_code,
+    ]);
+
+    return $this->sendResponse([], 'Verify code resent to your email.');
   }
 }

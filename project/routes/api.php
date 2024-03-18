@@ -6,13 +6,20 @@ use App\Http\Controllers\Api\CampaignController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\FrontendController;
 use App\Http\Controllers\Api\SupportTicketController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('user')->group(function () {
 
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
+    Route::post('forgot-password',                 [AuthController::class, 'forgotPasswordSubmit']);
+    Route::post('reset-password',                  [AuthController::class, 'resetPasswordSubmit']);
+    Route::post('verify-email',                    [AuthController::class, 'verifyEmailSubmit']);
+    Route::post('resend/verify-email/code',         [AuthController::class, 'verifyEmailResendCode']);
+
+
+    
+
     Route::post('token', [AuthController::class, 'token']);
     Route::post('/otp', [DashboardController::class, 'otp'])->name('user.otp.submit')->middleware('auth:api');
 

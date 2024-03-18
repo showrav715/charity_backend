@@ -29,18 +29,12 @@ class ApiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function sendError($message, $errorMessages = [], $code = 404)
+    public function sendError($message, $code = 404)
     {
     	$response = [
             'success' => false,
             'message' => $message,
         ];
-
-
-        if(!empty($errorMessages)){
-            $response['response'] = $errorMessages;
-        }
-
 
         return response()->json($response, $code);
     }

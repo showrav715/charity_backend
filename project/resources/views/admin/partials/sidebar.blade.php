@@ -106,6 +106,9 @@
                                 <li class="{{ menu('admin.gs.site.settings') }}"><a class="nav-link"
                                                 href="{{ route('admin.gs.site.settings') }}">@lang('Site Settings')</a>
                                 </li>
+                                <li class="{{ menu('admin.mail.config') }}"><a class="nav-link"
+                                                href="{{route('admin.mail.config')}}">@lang('Email Config')</a>
+                                </li>
                                 <li class="{{ menu('admin.gs.logo') }}"><a class="nav-link"
                                                 href="{{ route('admin.gs.logo') }}">@lang('Logo')</a></li>
                                 <li class="{{ menu('admin.gs.breadcumb') }}"><a class="nav-link"
@@ -118,6 +121,9 @@
                                 </li>
                         </ul>
                 </li>
+
+
+                
 
 
 

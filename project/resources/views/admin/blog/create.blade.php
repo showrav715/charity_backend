@@ -57,6 +57,11 @@
                 </div>
                 
                 <div class="form-group">
+                    <label for="sort_text">{{ __('Sort Description') }}</label>
+                    <textarea id="sort_text" class="form-control" name="sort_text" placeholder="{{ __('Sort Description') }}" required>{{old('sort_text')}}</textarea>
+                </div>
+
+                <div class="form-group">
                     <label for="description">{{ __('Description') }}</label>
                     <textarea id="area1" class="form-control summernote" name="description" placeholder="{{ __('Description') }}" required>{{old('description')}}</textarea>
                 </div>

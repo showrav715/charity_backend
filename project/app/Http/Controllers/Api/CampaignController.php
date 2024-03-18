@@ -16,6 +16,7 @@ class CampaignController extends ApiController
     public function index(Request $request)
     {
         $status = 0;
+        $campaigns = [];
         switch ($request->type) {
             case 'all':
                 $campaigns = Campaign::with(['user', 'category', 'faqs', 'galleries'])->where('user_id', auth()->id())->latest()->paginate(3);
