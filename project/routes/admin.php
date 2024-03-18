@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CampaignController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CounterController;
+use App\Http\Controllers\Admin\EmailController;
 use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\GeneralSettingController;
 use App\Http\Controllers\Admin\LoginController;
@@ -96,6 +97,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
         //support ticket
         Route::get('manage/tickets', [ManageTicketController::class, 'index'])->name('ticket.manage')->middleware('permission:manage ticket');
         Route::post('reply/ticket/{ticket_num}',   [ManageTicketController::class, 'replyTicket'])->name('ticket.reply')->middleware('permission:manage ticket')->middleware('permission:reply ticket');
+
+
+
+    //==================================== EMAIL SETTING SECTION ==============================================//
+
+        Route::get('/email-templates',      [EmailController::class,'index'])->name('mail.index');
+        Route::get('/email-templates/{id}', [EmailController::class,'edit'])->name('mail.edit');
+        Route::post('/email-templates/{id}',[EmailController::class,'update'])->name('mail.update');
+        Route::get('/email-config',         [EmailController::class,'config'])->name('mail.config');
+        Route::get('/group-email',           [EmailController::class,'groupEmail'])->name('mail.group.show');
+        Route::post('/groupemailpost',      [EmailController::class,'groupemailpost'])->name('group.submit');
+
+    //==================================== EMAIL SETTING SECTION END ==============================================//
+
+
 
 
 

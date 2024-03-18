@@ -105,40 +105,37 @@ function email($data)
 {
     $gs = Generalsetting::first();
 
-    if ($gs->email_notify) {
-        if ($gs->mail_type == 'php_mail') {
 
-            $headers  = "From: $gs->sitename <$gs->email_from> \r\n";
-            $headers .= "Reply-To: $gs->sitename <$gs->email_from> \r\n";
-            $headers .= "MIME-Version: 1.0\r\n";
-            $headers .= "Content-Type: text/html; charset=utf-8\r\n";
-            @mail($data['email'], $data['subject'], $data['message'], $headers);
-        } else {
-            $mail = new PHPMailer(true);
+    if ($gs->mail_type == 'php_mail') {
+        $headers  = "From: $gs->sitename <$gs->email_from> \r\n";
+        $headers .= "Reply-To: $gs->sitename <$gs->email_from> \r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=utf-8\r\n";
+        @mail($data['email'], $data['subject'], $data['message'], $headers);
+    } else {
+        $mail = new PHPMailer(true);
+        try {
 
-            try {
+            $mail->isSMTP();
+            $mail->Host       = $gs->smtp_host;
+            $mail->SMTPAuth   = true;
+            $mail->Username   = $gs->smtp_user;
+            $mail->Password   = $gs->smtp_pass;
 
-                $mail->isSMTP();
-                $mail->Host       = $gs->smtp_host;
-                $mail->SMTPAuth   = true;
-                $mail->Username   = $gs->smtp_user;
-                $mail->Password   = $gs->smtp_pass;
+            if ($gs->mail_encryption == 'ssl') $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            else $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 
-                if ($gs->mail_encryption == 'ssl') $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-                else $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-
-                $mail->Port       = $gs->smtp_port;
-                $mail->CharSet = 'UTF-8';
-                $mail->setFrom($gs->from_email, $gs->from_name);
-                $mail->addAddress($data['email'], $data['name']);
-                $mail->addReplyTo($gs->from_email, $gs->from_name);
-                $mail->isHTML(true);
-                $mail->Subject = $data['subject'];
-                $mail->Body    = $data['message'];
-                $mail->send();
-            } catch (Exception $e) {
-                throw new Exception($e);
-            }
+            $mail->Port       = $gs->smtp_port;
+            $mail->CharSet = 'UTF-8';
+            $mail->setFrom($gs->from_email, $gs->from_name);
+            $mail->addAddress($data['email'], $data['name']);
+            $mail->addReplyTo($gs->from_email, $gs->from_name);
+            $mail->isHTML(true);
+            $mail->Subject = $data['subject'];
+            $mail->Body    = $data['message'];
+            $mail->send();
+        } catch (Exception $e) {
+            throw new Exception($e);
         }
     }
 }

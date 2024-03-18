@@ -49,6 +49,7 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required|string|max:255|unique:blogs,title,' . $id,
             'category_id' => 'required|integer',
+            'sort_text' => 'required|string',
             'description' => 'required|string',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'required|integer',
@@ -57,6 +58,7 @@ class BlogController extends Controller
         $data->title = $request->title;
         $data->slug = Str::slug($request->title);
         $data->category_id = $request->category_id;
+        $data->sort_text = $request->sort_text;
         $data->description = $request->description;
         $data->status = $request->status;
         if (isset($request['photo'])) {

@@ -12,8 +12,11 @@ class EmailVerify
     public function handle(Request $request, Closure $next)
     {
 
+        return $next($request);
+
         if (auth()->check()) {
             $user = auth()->user();
+            // return response()->json(['status' => true, 'data' => $user->email_verified]);
             if ($user->email_verified == 0) {
                 $response = [
                     'success'    => false,

@@ -43,6 +43,31 @@ class GeneralSettingController extends Controller
         }
 
 
+        if ($request->check_smtp) {
+            $request->validate([
+                'smtp_host' => 'required',
+                'smtp_port' => 'required',
+                'smtp_user' => 'required',
+                'smtp_pass' => 'required',
+                'from_email' => 'required',
+                'from_name' => 'required',
+            ]);
+            $gs->smtp_host = $request->smtp_host;
+            $gs->smtp_port = $request->smtp_port;
+            $gs->smtp_user = $request->smtp_user;
+            $gs->smtp_pass = $request->smtp_pass;
+            $gs->from_email = $request->from_email;
+            $gs->from_name = $request->from_name;
+            $gs->mail_type = $request->mail_type;
+            $gs->mail_encryption = $request->mail_encryption;
+        }
+        if ($request->type == 'cta') {
+            $gs->cta_title = $request->cta_title;
+            $gs->cta_btn_text = $request->cta_btn_text;
+            $gs->cta_btn_url = $request->cta_btn_url;
+        }
+
+
         if ($request->hero) {
             $gs->hero_subtitle = $request->hero_subtitle;
             $gs->hero_title = $request->hero_title;

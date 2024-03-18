@@ -146,10 +146,29 @@ class FrontendController extends ApiController
     }
 
 
-    public function getBlogs()
+    public function getBlogs(Request $request)
     {
+        $uniqueTags = Blog::distinct()->pluck('tags')->filter()->flatten()->unique();
+     
+        $search = $request->search;
+        $category = $request->category ? Category::where('slug', $request->category)->first()->id : null;
+        $tag = $request->tag;
+
         $data['categories'] = BlogCategory::get();
-        $data['blogs'] = Blog::with('category')->orderBy('id', 'desc')->paginate(2);
+        $data['blogs'] = Blog::with('category')->orderBy('id', 'desc')
+            ->when($search, function ($query, $search) {
+                return $query->where('title', 'like', '%' . $search . '%')->orWhere('sort_text', 'like', '%' . $search . '%');
+            })
+            ->when($category, function ($query, $category) {
+                return $query->where('category_id', $category);
+            })
+            ->when($tag, function ($query, $tag) {
+                return $query->where('tags', 'like', '%' . $tag . '%');
+            })
+            ->paginate(2);
+
+
+        $data['recent_blogs'] = Blog::orderBy('id', 'desc')->limit(4)->get();
         return $this->sendResponse($data, 'Blog Data');
     }
 
