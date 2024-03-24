@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Helpers\MediaHelper;
 use App\Models\About;
 use App\Models\Blog;
 use App\Models\BlogCategory;
@@ -38,10 +39,10 @@ class FrontendController extends ApiController
             $data['about'] = $about;
         }
 
-        if (in_array('latest_campaign', $all) || in_array('*', $all)) {
-            $data['latest_campaign'] = Campaign::with('category')
+        if (in_array('feature_campaign', $all) || in_array('*', $all)) {
+            $data['feature_campaign'] = Campaign::with('category')
                 ->where('status', 1)
-                ->orderBy('id', 'desc')
+                ->where('is_feature', 1)
                 ->limit(9)
                 ->get()
                 ->map(function ($campaign) {
@@ -65,7 +66,6 @@ class FrontendController extends ApiController
                 ->limit(9)
                 ->get()
                 ->map(function ($campaign) {
-                    $campaign->photo = asset('assets/images/' . $campaign->photo);
                     $campaign->formatted_created_at = dateFormat($campaign->created_at->format('Y-m-d'));
                     return $campaign;
                 });
@@ -118,7 +118,27 @@ class FrontendController extends ApiController
 
     public function getCampaign(Request $request)
     {
-        $campaigns = Campaign::with(['category', "galleries"])->paginate(2);
+        $category = $request->category ? Category::where('slug', $request->category)->first()->id : null;
+        $sortby = $request->sortby;
+        $condition = $request->has('condition') ? $request->condition : null;
+        $campaigns = Campaign::with(['category', "galleries"])
+            ->where('status', 1)
+            ->when($category, function ($query, $category) {
+                return $query->where('category_id', $category);
+            })
+            ->when($sortby, function ($query, $sortby) {
+                if ($sortby == 'newest') {
+                    return $query->orderBy('id', 'desc');
+                } elseif ($sortby == 'oldest') {
+                    return $query->orderBy('id', 'asc');
+                }
+            })
+            ->when($condition, function ($query) {
+                return $query->where('is_feature', 1);
+            })
+
+            ->orderBy('id', 'desc')
+            ->paginate(12);
         return $this->sendResponse($campaigns, 'Campaign Data');
     }
 
@@ -128,10 +148,9 @@ class FrontendController extends ApiController
 
 
         if ($campaign) {
-
             foreach ($campaign->galleries as $gallery) {
-                $gallery['original'] = getPhoto($gallery->photo);
-                $gallery['thumbnail'] = getPhoto($gallery->photo, 'campaign_gallery');
+                $gallery['original'] = $gallery->photo;
+                $gallery['thumbnail'] = $gallery->photo;
                 unset($gallery->photo);
                 unset($gallery->id);
                 unset($gallery->campaign_id);
@@ -148,8 +167,7 @@ class FrontendController extends ApiController
 
     public function getBlogs(Request $request)
     {
-        $uniqueTags = Blog::distinct()->pluck('tags')->filter()->flatten()->unique();
-     
+
         $search = $request->search;
         $category = $request->category ? Category::where('slug', $request->category)->first()->id : null;
         $tag = $request->tag;
@@ -165,7 +183,7 @@ class FrontendController extends ApiController
             ->when($tag, function ($query, $tag) {
                 return $query->where('tags', 'like', '%' . $tag . '%');
             })
-            ->paginate(2);
+            ->paginate(12);
 
 
         $data['recent_blogs'] = Blog::orderBy('id', 'desc')->limit(4)->get();
@@ -246,5 +264,41 @@ class FrontendController extends ApiController
         $contact->message = $request->message;
         $contact->save();
         return $this->sendResponse($contact, 'Message Sent');
+    }
+
+
+    public function volunteerSubmit(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'designation' => 'required|string|max:255',
+            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            "cv" => "required|mimes:pdf|max:5048",
+        ]);
+
+        $data = new Volunteer();
+        $data->name = $request->name;
+        $data->designation = $request->designation;
+        $data->facebook = $request->facebook;
+        $data->twitter = $request->twitter;
+        $data->linkedin = $request->linkedin;
+        $data->instagram = $request->instagram;
+        if (isset($request['photo'])) {
+            $status = MediaHelper::ExtensionValidation($request['photo']);
+            if (!$status) {
+                return $this->sendError('file format not supported');
+            }
+            $data->photo = MediaHelper::handleMakeImage($request['photo']);
+        }
+        if (isset($request['cv'])) {
+            $status = MediaHelper::ExtensionValidation($request['cv']);
+            if (!$status) {
+                return $this->sendError('file format not supported');
+            }
+            $data->cv = MediaHelper::handleMakeFile($request['cv']);
+        }
+        $data->save();
+
+        return $this->sendResponse($data, 'Volunteer Request Submitted Successfully ');
     }
 }

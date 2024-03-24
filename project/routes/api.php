@@ -18,7 +18,7 @@ Route::prefix('user')->group(function () {
     Route::post('resend/verify-email/code',         [AuthController::class, 'verifyEmailResendCode']);
 
 
-    
+
 
     Route::post('token', [AuthController::class, 'token']);
     Route::post('/otp', [DashboardController::class, 'otp'])->name('user.otp.submit')->middleware('auth:api');
@@ -68,13 +68,14 @@ Route::prefix('user')->group(function () {
 Route::get('home-content', [FrontendController::class, 'homeContent']);
 Route::post('newsletter/submit', [FrontendController::class, 'newsletterSubmit']);
 Route::post('contact/submit', [FrontendController::class, 'contactSubmit']);
+Route::post('volunteer/submit', [FrontendController::class, 'volunteerSubmit']);
 Route::get('setting', [FrontendController::class, 'setting']);
 Route::get('get/currency', [FrontendController::class, 'getCurrency']);
 Route::get('single/currency/{code}', [FrontendController::class, 'singleCurrency']);
 
 // Campaign Routes
 Route::get('get/category', [FrontendController::class, 'getCategory']);
-Route::get('campaigns', [FrontendController::class, 'getCampaign']);
+Route::get('/campaigns', [FrontendController::class, 'getCampaign']);
 Route::get('campaign/{slug}', [FrontendController::class, 'singleCampaign']);
 
 // Blog Routes

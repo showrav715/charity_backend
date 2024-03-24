@@ -49,6 +49,7 @@ class VolunteerController extends Controller
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+        $data->status = 1;
         $data->name = $request->name;
         $data->designation = $request->designation;
         $data->facebook = $request->facebook;
