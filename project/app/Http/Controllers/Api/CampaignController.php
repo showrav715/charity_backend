@@ -15,24 +15,21 @@ class CampaignController extends ApiController
 
     public function index(Request $request)
     {
-        $status = 0;
         $campaigns = [];
         switch ($request->type) {
-            case 'all':
-                $campaigns = Campaign::with(['user', 'category', 'faqs', 'galleries'])->where('user_id', auth()->id())->latest()->paginate(3);
-                break;
+           
             case 'cancel':
-                $campaigns = Campaign::with(['user', 'category', 'faqs', 'galleries'])->where('user_id', auth()->id())->whereStatus(2)->latest()->paginate(3);
+                $campaigns = Campaign::with(['user', 'category'])->where('user_id', auth()->id())->whereStatus(2)->latest()->paginate(12);
                 break;
             case 'complete':
-                $campaigns = Campaign::with(['user', 'category', 'faqs', 'galleries'])->where('user_id', auth()->id())->whereStatus(1)->latest()->paginate(3);
+                $campaigns = Campaign::with(['user', 'category'])->where('user_id', auth()->id())->whereStatus(1)->latest()->paginate(12);
                 break;
             case 'pending':
-                $campaigns = Campaign::with(['user', 'category', 'faqs', 'galleries'])->where('user_id', auth()->id())->whereStatus(0)->latest()->paginate(3);
+                $campaigns = Campaign::with(['user', 'category'])->where('user_id', auth()->id())->whereStatus(0)->latest()->paginate(12);
                 break;
 
             default:
-                # code...
+                $campaigns = Campaign::with(['user', 'category'])->where('user_id', auth()->id())->latest()->paginate(12);
                 break;
         }
 

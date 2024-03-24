@@ -37,18 +37,8 @@
                     <input type="hidden" name="type" value="cta" id="">
                     <div class="form-group">
                         <label>@lang('Title')</label>
-                        <input class="form-control" type="text" name="cta_title" value="{{ $gs->cta_title }}">
+                        <textarea class="form-control" type="text" name="cta_title">{{ $gs->cta_title }}</textarea>
                     </div>
-                    <div class="form-group">
-                        <label>@lang('Button Text')</label>
-                        <input class="form-control" type="text" name="cta_btn_text" value="{{ $gs->cta_btn_text }}">
-                    </div>
-                    <div class="form-group">
-                        <label>@lang('Button Url')</label>
-                        <input class="form-control" type="text" name="cta_btn_url" value="{{ $gs->cta_btn_url }}">
-                    </div>
-
-
                     <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
                 </form>
             </div>

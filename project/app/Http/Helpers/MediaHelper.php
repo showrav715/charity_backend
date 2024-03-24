@@ -108,4 +108,15 @@ class MediaHelper
             return false;
         }
     }
+
+
+
+    public static function handleMakeFile($file, $resize_array = null)
+    {
+        $file_name = MediaHelper::imageNameValidation($file);
+        $location = base_path('../assets/files/');
+        $file->move($location, $file_name);
+        return $file_name;
+    }
+
 }
