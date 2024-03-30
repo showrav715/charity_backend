@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CampaignController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\FrontendController;
+use App\Http\Controllers\Api\PaymentGatewayController;
 use App\Http\Controllers\Api\SupportTicketController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,17 +32,6 @@ Route::prefix('user')->group(function () {
         Route::get('get-details',  [DashboardController::class, 'getDetails']);
         Route::post('profile-settings',  [DashboardController::class, 'profileSubmit']);
         Route::post('change-password',  [DashboardController::class, 'changePass'])->name('change.pass');
-
-        // Twofactor Routes
-        Route::get('/twoFactor', [DashboardController::class, 'twoFactor'])->name('user.twoFactor');
-        Route::post('/createTwoFactor', [DashboardController::class, 'createTwoFactor'])->name('user.createTwoFactor');
-        Route::post('/disableTwoFactor', [DashboardController::class, 'disableTwoFactor']);
-
-        // Kyc Routes
-        Route::get('/kyc-form-data',               [DashboardController::class, 'kycForm']);
-        Route::post('/kyc-form',                   [DashboardController::class, 'kycFormSubmit']);
-        Route::get('/user-kyc',                   [DashboardController::class, 'kycShow']);
-
         Route::get('logout',   [AuthController::class, 'logout'])->name('user.logout');
 
 
@@ -69,9 +59,6 @@ Route::get('home-content', [FrontendController::class, 'homeContent']);
 Route::post('newsletter/submit', [FrontendController::class, 'newsletterSubmit']);
 Route::post('contact/submit', [FrontendController::class, 'contactSubmit']);
 Route::post('volunteer/submit', [FrontendController::class, 'volunteerSubmit']);
-Route::get('setting', [FrontendController::class, 'setting']);
-Route::get('get/currency', [FrontendController::class, 'getCurrency']);
-Route::get('single/currency/{code}', [FrontendController::class, 'singleCurrency']);
 
 // Campaign Routes
 Route::get('get/category', [FrontendController::class, 'getCategory']);
@@ -82,6 +69,16 @@ Route::get('campaign/{slug}', [FrontendController::class, 'singleCampaign']);
 Route::get('blogs', [FrontendController::class, 'getBlogs']);
 Route::get('blog/{slug}', [FrontendController::class, 'singleBlog']);
 
+// Page Routes
 Route::get('/contact/page', [FrontendController::class, 'contactPage']);
 Route::get('/about/page', [FrontendController::class, 'aboutPage']);
 Route::get('/page/{slug}', [FrontendController::class, 'page']);
+
+// Setting Routes
+Route::get('setting', [FrontendController::class, 'setting']);
+Route::get('get/currency', [FrontendController::class, 'getCurrency']);
+Route::get('single/currency/{code}', [FrontendController::class, 'singleCurrency']);
+
+// Gateway Routes
+Route::get('get/gateways', [PaymentGatewayController::class, 'getGateways']);
+Route::post('/campaign/submit', [PaymentGatewayController::class, 'campaignSubmit']);
