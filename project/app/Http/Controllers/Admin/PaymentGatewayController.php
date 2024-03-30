@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\MediaHelper;
 use App\Models\PaymentGateway;
 use Illuminate\Http\Request;
 
@@ -33,7 +35,6 @@ class PaymentGatewayController extends Controller
 
         $data->save();
         return back()->with('success', 'New payment gateway added');
-
     }
 
     public function edit(PaymentGateway $paymentgateway)
@@ -72,28 +73,41 @@ class PaymentGatewayController extends Controller
             $input['currency_id'] = $request->currency_id;
             $input['status'] = $request->status;
             $input['details'] = clean($request->details);
-            
-            $data->update($input);
+
 
             if ($data->keyword == 'mollie') {
                 $paydata = $data->convertAutoData();
                 $this->setEnv('MOLLIE_KEY', $paydata['key'], $prev);
             }
-
         } else {
             $rules = ['title' => 'unique:payment_gateways,title,' . $gateway->id];
             $request->validate($rules);
-
             $input = $request->all();
-
             $input['currency_id'] = $request->currency_id;
             $input['status'] = $request->status;
-          
-            $data->update($input);
         }
 
-        return back()->with('success', 'Payment gateway updated');
+        if ($request->photo) {
+            $input['photo'] = MediaHelper::handleUpdateImage($request->photo, $data->photo);
+        }
 
+        $data->update($input);
+
+
+        return back()->with('success', 'Payment gateway updated');
+    }
+
+    function setEnv($key, $value, $prev)
+    {
+        $path = base_path('.env');
+        if (file_exists($path)) {
+            if (is_writable($path)) {
+                $value = $prev . $value;
+                file_put_contents($path, str_replace(
+                    $key . '=' . env($key), $key . '=' . $value, file_get_contents($path)
+                ));
+            }
+        }
     }
 
     public function status($id, $status)
