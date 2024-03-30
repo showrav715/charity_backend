@@ -84,7 +84,6 @@ class FrontendController extends ApiController
             $data['recent_blogs'] = Blog::orderBy('id', 'desc')->limit(2)->get()
                 ->map(function ($blog) {
                     $blog->formatted_created_at = dateFormat($blog->created_at->format('Y-m-d'));
-                    $blog->photo = asset('assets/images/' . $blog->photo);
                     return $blog;
                 });
         }
@@ -193,7 +192,6 @@ class FrontendController extends ApiController
     public function singleBlog($slug)
     {
         $blog = Blog::with('category')->where('slug', $slug)->first();
-        $blog->photo = asset('assets/images/' . $blog->photo);
         return $this->sendResponse($blog, 'Single Blog');
     }
 
