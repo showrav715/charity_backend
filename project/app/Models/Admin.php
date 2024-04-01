@@ -37,12 +37,12 @@ class Admin extends Authenticatable
 
     public function role_data()
     {
-        return $this->belongsTo(Role::class,'role','name')->withDefault();
+        return $this->belongsTo(Role::class, 'role', 'name')->withDefault();
     }
 
     public function sectionCheck($value)
     {
-        $sections = json_decode($this->role_data->section,true);
+        $sections = json_decode($this->role_data->section, true);
         if (in_array($value, $sections)) {
             return true;
         } else {
