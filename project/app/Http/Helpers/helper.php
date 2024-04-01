@@ -1,11 +1,11 @@
 <?php
 
 use App\Models\Currency;
-use Carbon\Carbon;
-use Illuminate\Support\Str;
 use App\Models\EmailTemplate;
 use App\Models\Generalsetting;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -17,8 +17,12 @@ function sysVersion()
 function getPhoto($filename)
 {
     if ($filename) {
-        if (file_exists('assets/images' . '/' . $filename)) return asset('assets/images/' . $filename);
-        else return asset('assets/images/default.png');
+        if (file_exists('assets/images' . '/' . $filename)) {
+            return asset('assets/images/' . $filename);
+        } else {
+            return asset('assets/images/default.png');
+        }
+
     } else {
         return asset('assets/images/default.png');
     }
@@ -35,8 +39,6 @@ function theme()
     return $gs->theme . '.';
 }
 
-
-
 function menu($route, $attr = 'active')
 {
     if (is_array($route)) {
@@ -49,7 +51,6 @@ function menu($route, $attr = 'active')
         return $attr;
     }
 }
-
 
 function adminStore($price)
 {
@@ -71,15 +72,22 @@ function showAdminWithoutCurrency($amount)
 
 function tagFormat($tag)
 {
-    $common_rep   = ["value", "{", "}", "[", "]", ":", "\""];
+    $common_rep = ["value", "{", "}", "[", "]", ":", "\""];
     $tag = str_replace($common_rep, '', $tag);
-    if (!empty($tag))  return $tag;
-    else  return  null;
+    if (!empty($tag)) {
+        return $tag;
+    } else {
+        return null;
+    }
+
 }
 
 function numFormat($amount, $length = 0)
 {
-    if (0 < $length) return number_format($amount + 0, $length);
+    if (0 < $length) {
+        return number_format($amount + 0, $length);
+    }
+
     return $amount + 0;
 }
 
@@ -95,19 +103,20 @@ function randNum($digits = 6)
 
 function str_rand($length = 12, $up = false)
 {
-    if ($up) return Str::random($length);
-    else return strtoupper(Str::random($length));
+    if ($up) {
+        return Str::random($length);
+    } else {
+        return strtoupper(Str::random($length));
+    }
+
 }
-
-
 
 function email($data)
 {
     $gs = Generalsetting::first();
 
-
     if ($gs->mail_type == 'php_mail') {
-        $headers  = "From: $gs->sitename <$gs->email_from> \r\n";
+        $headers = "From: $gs->sitename <$gs->email_from> \r\n";
         $headers .= "Reply-To: $gs->sitename <$gs->email_from> \r\n";
         $headers .= "MIME-Version: 1.0\r\n";
         $headers .= "Content-Type: text/html; charset=utf-8\r\n";
@@ -117,22 +126,25 @@ function email($data)
         try {
 
             $mail->isSMTP();
-            $mail->Host       = $gs->smtp_host;
-            $mail->SMTPAuth   = true;
-            $mail->Username   = $gs->smtp_user;
-            $mail->Password   = $gs->smtp_pass;
+            $mail->Host = $gs->smtp_host;
+            $mail->SMTPAuth = true;
+            $mail->Username = $gs->smtp_user;
+            $mail->Password = $gs->smtp_pass;
 
-            if ($gs->mail_encryption == 'ssl') $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            else $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            if ($gs->mail_encryption == 'ssl') {
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            } else {
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            }
 
-            $mail->Port       = $gs->smtp_port;
+            $mail->Port = $gs->smtp_port;
             $mail->CharSet = 'UTF-8';
             $mail->setFrom($gs->from_email, $gs->from_name);
             $mail->addAddress($data['email'], $data['name']);
             $mail->addReplyTo($gs->from_email, $gs->from_name);
             $mail->isHTML(true);
             $mail->Subject = $data['subject'];
-            $mail->Body    = $data['message'];
+            $mail->Body = $data['message'];
             $mail->send();
         } catch (Exception $e) {
             throw new Exception($e);
@@ -140,12 +152,11 @@ function email($data)
     }
 }
 
-
 function mailSend($key, array $data, $user)
 {
 
     $gs = GeneralSetting::first();
-    $template =  EmailTemplate::where('email_type', $key)->first();
+    $template = EmailTemplate::where('email_type', $key)->first();
 
     if ($gs->email_notify) {
         $message = str_replace('{name}', $user->name, $template->email_body);
@@ -156,7 +167,7 @@ function mailSend($key, array $data, $user)
 
         if ($gs->mail_type == 'php_mail') {
 
-            $headers  = "From: $gs->sitename <$gs->email_from> \r\n";
+            $headers = "From: $gs->sitename <$gs->email_from> \r\n";
             $headers .= "Reply-To: $gs->sitename <$gs->email_from> \r\n";
             $headers .= "MIME-Version: 1.0\r\n";
             $headers .= "Content-Type: text/html; charset=utf-8\r\n";
@@ -167,22 +178,25 @@ function mailSend($key, array $data, $user)
             try {
 
                 $mail->isSMTP();
-                $mail->Host       = $gs->smtp_host;
-                $mail->SMTPAuth   = true;
-                $mail->Username   = $gs->smtp_user;
-                $mail->Password   = $gs->smtp_pass;
+                $mail->Host = $gs->smtp_host;
+                $mail->SMTPAuth = true;
+                $mail->Username = $gs->smtp_user;
+                $mail->Password = $gs->smtp_pass;
 
-                if ($gs->mail_encryption == 'ssl') $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-                else $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                if ($gs->mail_encryption == 'ssl') {
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                } else {
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                }
 
-                $mail->Port       = $gs->smtp_port;
+                $mail->Port = $gs->smtp_port;
                 $mail->CharSet = 'UTF-8';
                 $mail->setFrom($gs->from_email, $gs->from_name);
                 $mail->addAddress($user->email, $user->name);
                 $mail->addReplyTo($gs->from_email, $gs->from_name);
                 $mail->isHTML(true);
                 $mail->Subject = $template->email_subject;
-                $mail->Body    = $message;
+                $mail->Body = $message;
                 $mail->send();
             } catch (Exception $e) {
                 // throw new Exception($e);
@@ -199,33 +213,38 @@ function mailSend($key, array $data, $user)
     }
 }
 
-
-
-
 function filter($key, $value)
 {
     $queries = request()->query();
-    if (count($queries) > 0) $delimeter = '&';
-    else  $delimeter = '?';
+    if (count($queries) > 0) {
+        $delimeter = '&';
+    } else {
+        $delimeter = '?';
+    }
 
     if (request()->has($key)) {
         $url = request()->getRequestUri();
         $pattern = "\?$key";
         $match = preg_match("/$pattern/", $url);
-        if ($match != 0) return  preg_replace('~(\?|&)' . $key . '[^&]*~', "\?$key=$value", $url);
+        if ($match != 0) {
+            return preg_replace('~(\?|&)' . $key . '[^&]*~', "\?$key=$value", $url);
+        }
+
         $filteredURL = preg_replace('~(\?|&)' . $key . '[^&]*~', '', $url);
-        return  $filteredURL . $delimeter . "$key=$value";
+        return $filteredURL . $delimeter . "$key=$value";
     }
 
-    return  request()->getRequestUri() . $delimeter . "$key=$value";
+    return request()->getRequestUri() . $delimeter . "$key=$value";
 }
-
 
 function setEnv($key, $value, $old = null)
 {
 
-    if ($old) $keVal = $old;
-    else $keVal = env($key);
+    if ($old) {
+        $keVal = $old;
+    } else {
+        $keVal = env($key);
+    }
 
     file_put_contents(app()->environmentFilePath(), str_replace(
         $key . '=' . $keVal,
@@ -254,4 +273,14 @@ function access($value)
     } else {
         return false;
     }
+}
+
+function apiCurrency($currency = null)
+{
+    if ($currency) {
+        $currency = Currency::where('id', $currency)->first();
+    } else {
+        $currency = Currency::where('is_default', 1)->first();
+    }
+    return $currency;
 }
