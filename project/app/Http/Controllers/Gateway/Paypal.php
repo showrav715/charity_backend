@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Campaign;
 use App\Models\PaymentGateway;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use Omnipay\Omnipay;
 
 class Paypal extends Controller
@@ -20,8 +19,6 @@ class Paypal extends Controller
 
         $payment_amount = $payment_data['amount'];
 
-
-
         $data = PaymentGateway::whereKeyword('paypal')->first();
         $paydata = $data->convertAutoData();
         $gateway = Omnipay::create('PayPal_Rest');
@@ -30,7 +27,7 @@ class Paypal extends Controller
         $gateway->setTestMode(true);
 
         $notify_url = route('paypal.notify');
-       
+
         try {
             $response = $gateway->purchase(array(
                 'amount' => $payment_amount,
@@ -39,9 +36,12 @@ class Paypal extends Controller
                 'cancelUrl' => $cancel_url,
             ))->send();
 
-         
+            $payid = $response->getTransactionReference();
+
+            // Save payment data to a file
+            storeStorage($payid, $payment_data);
+
             if ($response->isRedirect()) {
-                Session::put('input_data', $payment_data);
                 if ($response->getRedirectUrl()) {
                     return ['status' => 1, 'url' => $response->getRedirectUrl()];
                 }
@@ -86,6 +86,6 @@ class Paypal extends Controller
             $status = 1;
         }
 
-        return (new PaymentGatewayController)->notifyOperation(['message' => $message, 'status' => $status, 'txn_id' => $txn_id]);
+        return (new PaymentGatewayController)->notifyOperation(['message' => $message, 'status' => $status, 'txn_id' => $txn_id, 'access_id' => $request->paymentId]);
     }
 }

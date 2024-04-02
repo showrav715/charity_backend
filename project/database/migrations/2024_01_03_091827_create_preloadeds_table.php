@@ -11,6 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if(Schema::hasTable('campaign_galleries')) {
+            return;
+        }
         Schema::create('preloadeds', function (Blueprint $table) {
             $table->id();
             $table->timestamps();

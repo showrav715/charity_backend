@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Gateway;
 
-use App\Http\Controllers\PaymentApiController;
-use App\Http\Controllers\User\DepositController;
+use App\Http\Controllers\Api\PaymentGatewayController;
+use App\Models\Generalsetting;
 use App\Models\PaymentGateway;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -39,50 +39,42 @@ class Razorpay
 
         Session::put('order_payment_id', $razorpayOrder['id']);
 
-        $displayAmount = $amount = $orderData['amount'];
+        $amount = $orderData['amount'] / 100;
 
         if ($displayCurrency !== apiCurrency($payment_data['currency_id'])->code) {
             $url = "https://api.fixer.io/latest?symbols=$displayCurrency&base=INR";
             $exchange = json_decode(file_get_contents($url), true);
-
-            $displayAmount = $exchange['rates'][$displayCurrency] * $amount / 100;
         }
+
+        $gs = Generalsetting::first();
 
         $data = [
             "key" => $keyId,
             "amount" => $amount,
             "name" => "",
-            "description" => "",
+            "currency" => $displayCurrency,
+            "image" => getPhoto($gs->header_logo),
+            "mid" => $order_number,
             "prefill" => [
                 "name" => isset($payment_data->name) ? $payment_data->name : '',
                 "email" => isset($payment_data->email) ? isset($payment_data->email) : '',
                 "contact" => "",
             ],
-
-            "notes" => [
-                "address" => "",
-                "merchant_order_id" => $order_number,
-            ],
-            "theme" => [
-                "color" => "#fff",
-            ],
             "order_id" => $razorpayOrder['id'],
         ];
 
-        if ($displayCurrency !== 'INR') {
-            $data['display_currency'] = $displayCurrency;
-            $data['display_amount'] = $displayAmount;
-        }
-
-        $json = json_encode($data);
+        // Save order data to file
+        storeStorage('ORD' . $razorpayOrder['id'], $payment_data);
+     
+        $json = json_encode($data, true);
         $displayCurrency = $displayCurrency;
-        $view = 'other.razorpay-checkout';
-        $prams = ['data' => $data, 'displayCurrency' => $displayCurrency, 'json' => $json, 'notify_url' => route('razorpay.notify')];
-        return ['status' => 1, 'view' => $view, 'prams' => $prams];
+
+        return ['status' => 1, 'json' => $json, 'notify_url' => route('razorpay.notify') . '?access_id=' . $razorpayOrder['id']];
     }
 
     public function notify(Request $request)
     {
+
         // api init
         $data = PaymentGateway::whereKeyword('razorpay')->first();
         $paydata = $data->convertAutoData();
@@ -95,12 +87,12 @@ class Razorpay
         $message = '';
         $txn_id = '';
         $success = true;
-        $payment_id = Session::get('order_payment_id');
+
         $input_data = $request->all();
         if (empty($input_data['razorpay_payment_id']) === false) {
             try {
                 $attributes = array(
-                    'razorpay_order_id' => $payment_id,
+                    'razorpay_order_id' => $input_data['access_id'],
                     'razorpay_payment_id' => $input_data['razorpay_payment_id'],
                     'razorpay_signature' => $input_data['razorpay_signature'],
                 );
@@ -117,18 +109,6 @@ class Razorpay
             $message = "Payment Field";
         }
 
-        switch (Session::get('type')) {
-            case 'deposit':
-                return (new DepositController)->notifyOperation(['message' => $message, 'status' => $status, 'txn_id' => $txn_id]);
-                break;
-
-            case 'api':
-                return (new PaymentApiController)->notifyOperation(['message' => $message, 'status' => $status, 'txn_id' => $txn_id]);
-                break;
-
-            default:
-                dd('wrong');
-                break;
-        }
+        return (new PaymentGatewayController)->notifyOperation(['message' => $message, 'status' => $status, 'txn_id' => $txn_id, 'access_id' => $request['access_id']]);
     }
 }

@@ -48,12 +48,14 @@ class Stripe
         ]);
 
         if ($checkout_session->id) {
+            storeStorage($checkout_session->id, $payment_data);
             return ['status' => 1, 'url' => $checkout_session->url];
         }
     }
 
     public function notify(Request $request)
     {
+
         $status = 0;
         $message = '';
         $txn_id = '';
@@ -70,6 +72,6 @@ class Stripe
             $message = __('Payment Field Please Try again');
         }
 
-        return (new PaymentGatewayController)->notifyOperation(['message' => $message, 'status' => $status, 'txn_id' => $txn_id]);
+        return (new PaymentGatewayController)->notifyOperation(['message' => $message, 'status' => $status, 'txn_id' => $txn_id, 'access_id' => $request->session_id]);
     }
 }

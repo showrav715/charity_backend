@@ -58,6 +58,16 @@ function adminStore($price)
     return $price / $currency->value;
 }
 
+function storePrice($price, $currency = null)
+{
+    if ($currency) {
+        $currency = Currency::where('id', $currency)->first();
+    } else {
+        $currency = Currency::where('is_default', 1)->first();
+    }
+    return $price / $currency->value;
+}
+
 function showAdminAmount($amount)
 {
     $currency = Currency::whereDefault(1)->first();
@@ -283,4 +293,21 @@ function apiCurrency($currency = null)
         $currency = Currency::where('is_default', 1)->first();
     }
     return $currency;
+}
+
+function storeStorage($key, $value)
+{
+    file_put_contents(storage_path('ORD' . $key), json_encode($value));
+}
+
+function getStorage($key)
+{
+    return json_decode(file_get_contents(storage_path('ORD' . $key)));
+}
+
+function deleteStorage($key)
+{
+    if (file_exists(storage_path('ORD' . $key))) {
+        unlink(storage_path('ORD' . $key));
+    }
 }
