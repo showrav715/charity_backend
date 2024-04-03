@@ -2,48 +2,46 @@
 
 namespace App\Http\Controllers\Gateway;
 
-use App\Http\Controllers\User\DepositController;
+use App\Http\Controllers\Api\PaymentGatewayController;
 use App\Models\PaymentGateway;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class Flutterwave
 {
-    public static function initiate($request, $payment_data, $type)
+    public static function initiate($payment_data)
     {
         $data = PaymentGateway::whereKeyword('flutterwave')->first();
         $paydata = $data->convertAutoData();
         $public_key = $paydata['public_key'];
-        $secret_key = $paydata['secret_key'];
+
         $message = '';
-        $status  = 1;
+        $status = 1;
 
         $curl = curl_init();
-        $payment_amount = $payment_data['amount'];
+        // $payment_amount = $payment_data['amount'];
+        $payment_amount = 1;
 
         $PBFPubKey = $public_key; // get your public key from the dashboard.
         $redirect_url = route('flutterwave.notify');
-        $payment_plan = ""; // this is only required for recurring payments.
 
-
+        $txref = Str::random(4) . time();
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://api.ravepay.co/flwv3-pug/getpaidx/api/v2/hosted/pay",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => json_encode([
                 'amount' => $payment_amount,
-                'customer_email' => Auth::check() ? Auth::user()->email : 'example@gmail.com',
-                'currency' => getCurrencyCode(),
-                'txref' => Str::random(8),
+                'customer_email' => 'example@gmail.com',
+                'currency' => apiCurrency($payment_data['currency_id'])->code,
+                'txref' => $txref,
                 'PBFPubKey' => $PBFPubKey,
                 'redirect_url' => $redirect_url,
-                'payment_plan' => $payment_plan
+                'payment_plan' => '',
             ]),
             CURLOPT_HTTPHEADER => [
                 "content-type: application/json",
-                "cache-control: no-cache"
+                "cache-control: no-cache",
             ],
         ));
 
@@ -62,27 +60,27 @@ class Flutterwave
             $status = 0;
             $message = 'API returned error: ' . $transaction->message;
         }
-        Session::put('type', $type);
-        return ['status' => $status, 'message' => $message, 'url' => $transaction->data->link];
-    }
 
+        storeStorage($txref, $payment_data);
+        return ['status' => $status, 'message' => $message, 'url' => $transaction->data->link];
+
+    }
 
     public function notify(Request $request)
     {
-
+  
         $data = PaymentGateway::whereKeyword('flutterwave')->first();
         $paydata = $data->convertAutoData();
         $secret_key = $paydata['secret_key'];
 
-
         $message = '';
-        $status  = 0;
-        $txn_id  = '';
+        $status = 0;
+        $txn_id = '';
 
         $ref = $request->txref;
         $query = array(
             "SECKEY" => $secret_key,
-            "txref" => $ref
+            "txref" => $ref,
         );
 
         $data_string = json_encode($query);
@@ -106,14 +104,6 @@ class Flutterwave
             }
         }
 
-        switch (Session::get('type')) {
-            case 'deposit':
-                return (new DepositController)->notifyOperation(['message' => $message, 'status' => $status, 'txn_id' => $txn_id]);
-                break;
-
-            default:
-                dd('wrong');
-                break;
-        }
+        return (new PaymentGatewayController)->notifyOperation(['message' => $message, 'status' => $status, 'txn_id' => $txn_id, 'access_id' => $request->txref]);
     }
 }

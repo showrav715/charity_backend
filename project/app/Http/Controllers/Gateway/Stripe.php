@@ -13,44 +13,50 @@ class Stripe
     public static function initiate($payment_data)
     {
 
-        $campaign = Campaign::where('slug', $payment_data['campaign'])->first();
-        $cancel_url = 'http://localhost:3000/checkout/cancel?slug=' . $campaign->slug;
+        try {
+            $campaign = Campaign::where('slug', $payment_data['campaign'])->first();
+            $cancel_url = 'http://localhost:3000/checkout/cancel?slug=' . $campaign->slug;
 
-        // SERIALIZE DATA
-        $payment_amount = $payment_data['amount'];
-        $message = '';
-        $status = 0;
-        $txn_id = '';
-        $data = PaymentGateway::whereKeyword('stripe')->first();
-        $paydata = $data->convertAutoData();
+            // SERIALIZE DATA
+            $payment_amount = $payment_data['amount'];
 
-        $stripe_secret_key = $paydata['secret'];
-        \Stripe\Stripe::setApiKey($stripe_secret_key);
-        $checkout_session = \Stripe\Checkout\Session::create([
-            "mode" => "payment",
-            "success_url" => route('stripe.notify') . '?session_id={CHECKOUT_SESSION_ID}',
-            "cancel_url" => $cancel_url,
-            "locale" => "auto",
-            "customer_email" => $payment_data['email'] ? $payment_data['email'] : null,
-            "line_items" => [
-                [
-                    "quantity" => 1,
-                    "price_data" => [
-                        "currency" => apiCurrency($payment_data['currency_id'])->code,
-                        "unit_amount" => $payment_amount * 100,
-                        "product_data" => [
-                            "name" => 'Payment for deposit',
+            $data = PaymentGateway::whereKeyword('stripe')->first();
+            $paydata = $data->convertAutoData();
+
+            $stripe_secret_key = $paydata['secret'];
+            \Stripe\Stripe::setApiKey($stripe_secret_key);
+            $checkout_session = \Stripe\Checkout\Session::create([
+                "mode" => "payment",
+                "success_url" => route('stripe.notify') . '?session_id={CHECKOUT_SESSION_ID}',
+                "cancel_url" => $cancel_url,
+                "locale" => "auto",
+                "customer_email" => $payment_data['email'] ? $payment_data['email'] : null,
+                "line_items" => [
+                    [
+                        "quantity" => 1,
+                        "price_data" => [
+                            "currency" => apiCurrency($payment_data['currency_id'])->code,
+                            "unit_amount" => $payment_amount * 100,
+                            "product_data" => [
+                                "name" => 'Payment for donation',
+                            ],
                         ],
                     ],
+
                 ],
+            ]);
 
-            ],
-        ]);
+            if ($checkout_session->id) {
+                storeStorage($checkout_session->id, $payment_data);
+                return ['status' => 1, 'url' => $checkout_session->url];
+            } else {
+                return ['status' => 0, 'message' => 'Something went wrong'];
+            }
 
-        if ($checkout_session->id) {
-            storeStorage($checkout_session->id, $payment_data);
-            return ['status' => 1, 'url' => $checkout_session->url];
+        } catch (\Exception $e) {
+            return ['status' => 0, 'message' => $e->getMessage()];
         }
+
     }
 
     public function notify(Request $request)

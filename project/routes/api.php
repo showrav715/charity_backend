@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\FrontendController;
 use App\Http\Controllers\Api\PaymentGatewayController;
 use App\Http\Controllers\Api\SupportTicketController;
+use App\Http\Controllers\Gateway\Flutterwave;
 use App\Http\Controllers\Gateway\Paypal;
 use App\Http\Controllers\Gateway\Razorpay;
 use App\Http\Controllers\Gateway\Stripe;
@@ -75,9 +76,10 @@ Route::get('single/currency/{code}', [FrontendController::class, 'singleCurrency
 
 // Gateway Routes
 Route::get('get/gateways', [PaymentGatewayController::class, 'getGateways']);
-Route::post('/campaign/submit', [PaymentGatewayController::class, 'campaignSubmit'])->middleware('api-session');
+Route::post('/campaign/submit', [PaymentGatewayController::class, 'campaignSubmit']);
 
 // notify route
 Route::get('stripe/notify', [Stripe::class, 'notify'])->name('stripe.notify');
 Route::get('paypal/notify', [Paypal::class, 'notify'])->name('paypal.notify');
+Route::post('flutterwave/notify', [Flutterwave::class, 'notify'])->name('flutterwave.notify');
 

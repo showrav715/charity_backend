@@ -14,6 +14,7 @@ class PaymentGatewayController extends ApiController
     // Get all payment gateways
     public function getGateways(Request $request)
     {
+
         $gateways = PaymentGateway::where('status', 1)
             ->where("currency_id", "LIKE", "%\"$request->currency\"%")
             ->get();
@@ -22,6 +23,11 @@ class PaymentGatewayController extends ApiController
 
     public function campaignSubmit(Request $request)
     {
+
+        if ($request->amount < 1) {
+            return $this->sendError('Amount must be greater than 0');
+        }
+
         $requestData = $request->all();
         $service = str_replace('Api', '', __NAMESPACE__) . 'Gateway' . '\\' . ucwords($requestData['gateway']);
         $process = $service::initiate($requestData);
@@ -41,15 +47,17 @@ class PaymentGatewayController extends ApiController
         }
 
         try {
-            $orderData = getStorage($res['access_id']);
+            $orderData = (array) getStorage($res['access_id']);
+   
             $campaign = Campaign::whereSlug($orderData['campaign'])->first();
+
             $donation = new Donation();
             $donation->name = isset($orderData['name']) ? $orderData['name'] : null;
             $donation->email = isset($orderData['email']) ? $orderData['email'] : null;
             $donation->phone = isset($orderData['phone']) ? $orderData['phone'] : null;
             $donation->address = isset($orderData['address']) ? $orderData['address'] : null;
             $donation->owner_id = $campaign->user_id;
-            $donation->user_id = auth()->user() ? auth()->id() : null;
+            $donation->user_id = isset($orderData['user_id']) ? $orderData['user_id'] : null;
             $donation->total = storePrice($orderData['amount'] + $orderData['tips'], $orderData['currency_id']);
             $donation->tips = storePrice($orderData['tips'], $orderData['currency_id']);
             $donation->currency = json_encode(apiCurrency($orderData['currency_id']));
@@ -59,6 +67,7 @@ class PaymentGatewayController extends ApiController
             $donation->txn_id = $res['txn_id'];
             $donation->payment_status = $res['status'] == 1 ? 1 : 0;
             $donation->created_at = Carbon::now();
+
             $donation->save();
 
             deleteStorage($res['access_id']);
