@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CampaignController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\DonationController;
 use App\Http\Controllers\Api\FrontendController;
 use App\Http\Controllers\Api\PaymentGatewayController;
 use App\Http\Controllers\Api\SupportTicketController;
@@ -46,6 +47,10 @@ Route::prefix('user')->group(function () {
         Route::get('support/ticket/messages/{ticket_num}', [SupportTicketController::class, 'messages'])->name('merchant.ticket.messages');
         Route::post('open/support/ticket', [SupportTicketController::class, 'openTicket'])->name('merchant.ticket.open');
         Route::post('reply/ticket/{ticket_num}', [SupportTicketController::class, 'replyTicket'])->name('merchant.ticket.reply');
+
+
+        // Donation Routes
+        Route::get('donations', [DonationController::class, 'donations']);
     });
 });
 

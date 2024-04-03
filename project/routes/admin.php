@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CampaignController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CounterController;
+use App\Http\Controllers\Admin\DonationController;
 use App\Http\Controllers\Admin\EmailController;
 use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\GeneralSettingController;
@@ -25,8 +26,7 @@ use App\Http\Controllers\Admin\VolunteerController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ManageTicketController;
-
-
+use App\Http\Controllers\Admin\ManageUserController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
@@ -74,6 +74,29 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('campaign-delete', [CampaignController::class, 'destroy'])->name('campaign.destroy');
             Route::get('campaign/gallery/remove/{id}', [CampaignController::class, 'galleryRemove'])->name('campaign.gallery.remove');
         });
+
+
+
+
+        //==================================== USER SECTION  ==============================================//
+
+        Route::get('manage-users', [ManageUserController::class, 'index'])->name('user.index');
+        Route::get('user/create', [ManageUserController::class, 'create'])->name('user.create');
+        Route::post('user/store', [ManageUserController::class, 'store'])->name('user.store');
+        Route::get('user-details/{id}', [ManageUserController::class, 'details'])->name('user.details');
+        Route::post('user-profile/update/{id}', [ManageUserController::class, 'profileUpdate'])->name('user.profile.update');
+        Route::post('balance-modify', [ManageUserController::class, 'modifyBalance'])->name('user.balance.modify');
+        Route::get('user-login/{id}', [ManageUserController::class, 'login'])->name('user.login');
+        Route::get('user-login/info/{id}', [ManageUserController::class, 'loginInfo'])->name('user.login.info');
+
+
+
+
+
+
+
+        // Donation
+        Route::get('donation', [DonationController::class, 'index'])->name('donation.index');
 
 
         // Currency

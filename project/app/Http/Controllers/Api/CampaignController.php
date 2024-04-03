@@ -12,31 +12,45 @@ use Illuminate\Support\Str;
 class CampaignController extends ApiController
 {
 
-
     public function index(Request $request)
     {
         $campaigns = [];
+        $search = $request->search;
         switch ($request->type) {
-           
+
             case 'cancel':
-                $campaigns = Campaign::with(['user', 'category'])->where('user_id', auth()->id())->whereStatus(2)->latest()->paginate(12);
+                $campaigns = Campaign::with(['user', 'category'])
+                    ->where('user_id', auth()->id())->whereStatus(2)
+                    ->when($search, function ($query) use ($search) {
+                        return $query->where('title', 'like', '%' . $search . '%');
+                    })->latest()->paginate(12);
+
                 break;
             case 'complete':
-                $campaigns = Campaign::with(['user', 'category'])->where('user_id', auth()->id())->whereStatus(1)->latest()->paginate(12);
+                $campaigns = Campaign::with(['user', 'category'])->where('user_id', auth()->id())->whereStatus(1)
+                    ->when($search, function ($query) use ($search) {
+                        return $query->where('title', 'like', '%' . $search . '%');
+                    })->latest()->paginate(12);
+
                 break;
             case 'pending':
-                $campaigns = Campaign::with(['user', 'category'])->where('user_id', auth()->id())->whereStatus(0)->latest()->paginate(12);
-                break;
+                $campaigns = Campaign::with(['user', 'category'])->where('user_id', auth()->id())->whereStatus(0)
+                    ->when($search, function ($query) use ($search) {
+                        return $query->where('title', 'like', '%' . $search . '%');
+                    })->latest()->paginate(12);
 
+                break;
             default:
-                $campaigns = Campaign::with(['user', 'category'])->where('user_id', auth()->id())->latest()->paginate(12);
+                $campaigns = Campaign::with(['user', 'category'])->where('user_id', auth()->id())
+                    ->when($search, function ($query) use ($search) {
+                        return $query->where('title', 'like', '%' . $search . '%');
+                    })
+                    ->latest()->paginate(12);
                 break;
         }
 
-
         return response()->json(['status' => true, 'data' => $campaigns, 'message' => 'Campaigns fetched successfully']);
     }
-
 
     public function store(Request $request)
     {
@@ -71,14 +85,14 @@ class CampaignController extends ApiController
         $campaign->save();
 
         if ($request->is_faq == 'on') {
-            if ($request->faq_title && $request->faq_content)
+            if ($request->faq_title && $request->faq_content) {
                 foreach ($request->faq_title as $key => $question) {
                     $campaign->faqs()->create([
                         'title' => $question ? $question : null,
                         'content' => $request->faq_content[$key] ? $request->faq_content[$key] : null,
                     ]);
                 }
-
+            }
 
             if ($request->gallery) {
                 foreach ($request->gallery as $key => $gallery) {
@@ -92,13 +106,11 @@ class CampaignController extends ApiController
         return response()->json(['status' => true, 'data' => [], 'message' => 'Campaign created successfully']);
     }
 
-
     public function edit($id)
     {
         $data = Campaign::with(['galleries', 'faqs'])->findOrFail($id);
         return $this->sendResponse($data, 'Single Campaign');
     }
-
 
     public function update(Request $request, $id)
     {
@@ -118,7 +130,7 @@ class CampaignController extends ApiController
         $campaign->category_id = $request->category_id;
         $campaign->goal = $request->goal;
         if ($request->photo) {
-            $campaign->photo =  MediaHelper::handleUpdateImage($request->photo, $campaign->photo);
+            $campaign->photo = MediaHelper::handleUpdateImage($request->photo, $campaign->photo);
         }
 
         $campaign->is_faq = $request->is_faq == 'on' ? 1 : 0;
@@ -128,7 +140,6 @@ class CampaignController extends ApiController
 
         $new_faq_title = explode(',', $request->faq_title);
         $new_faq_content = explode(',', $request->faq_content);
-
 
         if ($request->faq_title && $request->faq_content) {
             $campaign->faqs()->delete();
@@ -145,8 +156,6 @@ class CampaignController extends ApiController
         }
         $campaign->update();
 
-
-
         if ($request->gallery) {
             foreach ($request->gallery as $key => $gallery) {
                 $photo = MediaHelper::handleMakeImage($gallery);
@@ -158,7 +167,6 @@ class CampaignController extends ApiController
 
         return $this->sendResponse([], 'Campaign updated successfully');
     }
-
 
     public function galleryRemove($id)
     {
@@ -175,7 +183,6 @@ class CampaignController extends ApiController
         $campaign->update();
         return redirect()->back()->with('success', 'Campaign status updated successfully');
     }
-
 
     public function destroy(Request $request)
     {
