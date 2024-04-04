@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\ManageCurrencyController;
 use App\Http\Controllers\Admin\ManageRoleController;
 use App\Http\Controllers\Admin\ManageStaffController;
 use App\Http\Controllers\Admin\ManageTestimonialController;
+use App\Http\Controllers\Admin\ManageTicketController;
+use App\Http\Controllers\Admin\ManageUserController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PaymentGatewayController;
 use App\Http\Controllers\Admin\PreloadedController;
@@ -25,8 +27,6 @@ use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\VolunteerController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\ManageTicketController;
-use App\Http\Controllers\Admin\ManageUserController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
@@ -48,7 +48,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/password', [AdminController::class, 'passwordreset'])->name('password');
         Route::post('/password/update', [AdminController::class, 'changepass'])->name('password.update');
 
-
         Route::group(['middleware' => 'permission:Manage Campaigns'], function () {
             // category
             Route::get('category', [CategoryController::class, 'index'])->name('category.index');
@@ -56,13 +55,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
             Route::delete('category/destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
 
-
-            // Preloaded 
+            // Preloaded
             Route::get('preloaded', [PreloadedController::class, 'index'])->name('preloaded.index');
             Route::post('preloaded/store', [PreloadedController::class, 'store'])->name('preloaded.store');
             Route::put('preloaded/update/{id}', [PreloadedController::class, 'update'])->name('preloaded.update');
             Route::delete('preloaded/destroy', [PreloadedController::class, 'destroy'])->name('preloaded.destroy');
-
 
             // campaign
             Route::get('campaign', [CampaignController::class, 'index'])->name('campaign.index');
@@ -75,9 +72,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('campaign/gallery/remove/{id}', [CampaignController::class, 'galleryRemove'])->name('campaign.gallery.remove');
         });
 
-
-
-
         //==================================== USER SECTION  ==============================================//
 
         Route::get('manage-users', [ManageUserController::class, 'index'])->name('user.index');
@@ -89,15 +83,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('user-login/{id}', [ManageUserController::class, 'login'])->name('user.login');
         Route::get('user-login/info/{id}', [ManageUserController::class, 'loginInfo'])->name('user.login.info');
 
-
-
-
-
-
+        //transactions
+        Route::get('/transaction-report', [AdminController::class, 'transactions'])->name('transactions')->middleware('permission:transactions');
 
         // Donation
         Route::get('donation', [DonationController::class, 'index'])->name('donation.index');
-
 
         // Currency
         Route::get('/manage-currency', [ManageCurrencyController::class, 'index'])->name('currency.index');
@@ -108,36 +98,26 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/currency/set-default/{id}', [ManageCurrencyController::class, 'setDefault'])->name('currency.default');
         Route::delete('/delete-currency', [ManageCurrencyController::class, 'deleteCurrency'])->name('currency.delete');
 
-
         Route::get('/payment-gateways', [PaymentGatewayController::class, 'index'])->name('gateway');
         Route::get('add/payment-gateway', [PaymentGatewayController::class, 'create'])->name('gateway.create');
         Route::post('/store/payment-gateway', [PaymentGatewayController::class, 'store'])->name('gateway.store');
         Route::get('/payment-gateway/edit/{paymentgateway}', [PaymentGatewayController::class, 'edit'])->name('gateway.edit');
         Route::post('/payment-gateway/update/{gateway}', [PaymentGatewayController::class, 'update'])->name('gateway.update');
 
-
-
         //support ticket
         Route::get('manage/tickets', [ManageTicketController::class, 'index'])->name('ticket.manage')->middleware('permission:manage ticket');
-        Route::post('reply/ticket/{ticket_num}',   [ManageTicketController::class, 'replyTicket'])->name('ticket.reply')->middleware('permission:manage ticket')->middleware('permission:reply ticket');
+        Route::post('reply/ticket/{ticket_num}', [ManageTicketController::class, 'replyTicket'])->name('ticket.reply')->middleware('permission:manage ticket')->middleware('permission:reply ticket');
 
+        //==================================== EMAIL SETTING SECTION ==============================================//
 
+        Route::get('/email-templates', [EmailController::class, 'index'])->name('mail.index');
+        Route::get('/email-templates/{id}', [EmailController::class, 'edit'])->name('mail.edit');
+        Route::post('/email-templates/{id}', [EmailController::class, 'update'])->name('mail.update');
+        Route::get('/email-config', [EmailController::class, 'config'])->name('mail.config');
+        Route::get('/group-email', [EmailController::class, 'groupEmail'])->name('mail.group.show');
+        Route::post('/groupemailpost', [EmailController::class, 'groupemailpost'])->name('group.submit');
 
-    //==================================== EMAIL SETTING SECTION ==============================================//
-
-        Route::get('/email-templates',      [EmailController::class,'index'])->name('mail.index');
-        Route::get('/email-templates/{id}', [EmailController::class,'edit'])->name('mail.edit');
-        Route::post('/email-templates/{id}',[EmailController::class,'update'])->name('mail.update');
-        Route::get('/email-config',         [EmailController::class,'config'])->name('mail.config');
-        Route::get('/group-email',           [EmailController::class,'groupEmail'])->name('mail.group.show');
-        Route::post('/groupemailpost',      [EmailController::class,'groupemailpost'])->name('group.submit');
-
-    //==================================== EMAIL SETTING SECTION END ==============================================//
-
-
-
-
-
+        //==================================== EMAIL SETTING SECTION END ==============================================//
 
         Route::group(['middleware' => 'permission:Manage Pages'], function () {
             //pages
@@ -174,7 +154,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('counter/update/{counter}', [CounterController::class, 'update'])->name('counter.update');
         Route::delete('counter-delete', [CounterController::class, 'destroy'])->name('counter.destroy');
 
-
         Route::group(['middleware' => 'permission:Manage Volunteer'], function () {
             // manage team
             Route::get('/volunteer', [VolunteerController::class, 'index'])->name('volunteer.index');
@@ -196,7 +175,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('home/page/sections', [GeneralSettingController::class, 'homeSections'])->name('home.sections');
             Route::post('home/page/sections/update', [GeneralSettingController::class, 'homeSectionUpdate'])->name('home.sections.update');
 
-
             // About section
             Route::get('about', [AboutController::class, 'index'])->name('about.index');
             Route::put('about/update', [AboutController::class, 'update'])->name('about.update');
@@ -205,14 +183,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('/feature/update/{id}', [FeatureController::class, 'update'])->name('feature.update');
             Route::delete('/feature/delete', [FeatureController::class, 'destroy'])->name('feature.destroy');
 
-
-            // brand section 
+            // brand section
             Route::get('/brands', [BrandController::class, 'index'])->name('brand.index');
             Route::post('/brand/store', [BrandController::class, 'store'])->name('brand.store');
             Route::put('/brand/update/{id}', [BrandController::class, 'update'])->name('brand.update');
             Route::delete('/brand/delete', [BrandController::class, 'destroy'])->name('brand.destroy');
-
-
 
             // Contact section
             Route::get('contact/section', [GeneralSettingController::class, 'contact_section'])->name('contact.section');

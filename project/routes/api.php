@@ -9,7 +9,6 @@ use App\Http\Controllers\Api\PaymentGatewayController;
 use App\Http\Controllers\Api\SupportTicketController;
 use App\Http\Controllers\Gateway\Flutterwave;
 use App\Http\Controllers\Gateway\Paypal;
-use App\Http\Controllers\Gateway\Razorpay;
 use App\Http\Controllers\Gateway\Stripe;
 use Illuminate\Support\Facades\Route;
 
@@ -48,9 +47,12 @@ Route::prefix('user')->group(function () {
         Route::post('open/support/ticket', [SupportTicketController::class, 'openTicket'])->name('merchant.ticket.open');
         Route::post('reply/ticket/{ticket_num}', [SupportTicketController::class, 'replyTicket'])->name('merchant.ticket.reply');
 
-
         // Donation Routes
         Route::get('donations', [DonationController::class, 'donations']);
+        Route::get('funds-raised', [DonationController::class, 'fundRised']);
+
+        // transaction
+        Route::get('transactions', [DonationController::class, 'transactions']);
     });
 });
 
@@ -87,4 +89,3 @@ Route::post('/campaign/submit', [PaymentGatewayController::class, 'campaignSubmi
 Route::get('stripe/notify', [Stripe::class, 'notify'])->name('stripe.notify');
 Route::get('paypal/notify', [Paypal::class, 'notify'])->name('paypal.notify');
 Route::post('flutterwave/notify', [Flutterwave::class, 'notify'])->name('flutterwave.notify');
-

@@ -9,6 +9,7 @@ use App\Models\ContactMessage;
 use App\Models\Generalsetting;
 use App\Models\Subscriber;
 use App\Models\Team;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use InvalidArgumentException;
@@ -20,11 +21,10 @@ class AdminController extends Controller
         $this->middleware('auth:admin');
     }
 
-   
     // DASHBOARD
     public function index()
     {
-        $data['getintouchs'] = ContactMessage::orderby('id','desc')->take(6)->get();
+        $data['getintouchs'] = ContactMessage::orderby('id', 'desc')->take(6)->get();
         $data['total_getintouchs'] = ContactMessage::count();
         $data['total_subscribers'] = Subscriber::count();
         $data['total_projects'] = 1;
@@ -92,7 +92,7 @@ class AdminController extends Controller
     public function languageUpdate(Request $request)
     {
         $merge = array_combine($request->key, $request->value);
-        file_put_contents(resource_path('lang/') . 'en.json' , json_encode($merge));
+        file_put_contents(resource_path('lang/') . 'en.json', json_encode($merge));
         return back()->with('success', __('Language Updated Successfully'));
     }
 
@@ -109,6 +109,21 @@ class AdminController extends Controller
         return back()->with('success', __('Subscriber Deleted Successfully'));
     }
 
+    public function transactions()
+    {
+        $remark = request('remark');
+        $search = request('search');
+
+        $transactions = Transaction::when($remark, function ($q) use ($remark) {
+            return $q->where('remark', $remark);
+        })
+            ->when($search, function ($q) use ($search) {
+                return $q->where('trnx', $search);
+            })
+            ->latest()->paginate(15);
+        return view('admin.transactions', compact('transactions', 'search'));
+    }
+
     public function cookie()
     {
         return view('admin.cookie');
@@ -116,7 +131,7 @@ class AdminController extends Controller
 
     public function updateCookie(Request $request)
     {
-        
+
         $data = $request->validate([
             'is_cookie' => 'required',
             'cookie_btn_text' => 'required',

@@ -3,6 +3,7 @@
 use App\Models\Currency;
 use App\Models\EmailTemplate;
 use App\Models\Generalsetting;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -310,4 +311,16 @@ function deleteStorage($key)
     if (file_exists(storage_path('ORD' . $key))) {
         unlink(storage_path('ORD' . $key));
     }
+}
+
+function transaction($amount, $txn_id, $user_id, $type, $remark = null)
+{
+    $transaction = new Transaction();
+    $transaction->user_id = $user_id;
+    $transaction->amount = $amount;
+    $transaction->txn_id = $txn_id;
+    $transaction->type = $type;
+    $transaction->remark = $remark;
+    $transaction->created_at = Carbon::now();
+    $transaction->save();
 }
