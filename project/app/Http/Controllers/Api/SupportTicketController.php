@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\MediaHelper;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\ApiController;
 use App\Models\SupportTicket;
 use App\Models\TicketMessage;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\Api\ApiController;
 
 class SupportTicketController extends ApiController
 {
@@ -15,16 +15,17 @@ class SupportTicketController extends ApiController
     {
         $user = auth()->user();
         $success = SupportTicket::with('lastMessage')
-        ->where('user_id', $user->id)
-        ->latest()
-        ->paginate(15);
+            ->where('user_id', $user->id)
+            ->latest()
+            ->paginate(15);
         return $this->sendResponse($success, 'Your tickets');
     }
 
     public function messages($ticket_num)
     {
         $user = request()->user();
-        $success['messages'] = TicketMessage::where('ticket_num', $ticket_num)->where('user_id', $user->id)->get();
+        $success['messages'] = TicketMessage::with('user:id,photo')->where('ticket_num', $ticket_num)->where('user_id', $user->id)->get();
+        $success['ticket'] = SupportTicket::where('ticket_num', $ticket_num)->where('user_id', $user->id)->first();
         return $this->sendResponse($success, 'Ticket messages of ' . $ticket_num);
     }
 
@@ -48,7 +49,7 @@ class SupportTicketController extends ApiController
             'user_id' => $user->id,
             'user_type' => $type,
             'ticket_num' => $tkt,
-            'subject'  => $request->subject,
+            'subject' => $request->subject,
         ]);
 
         return $this->sendResponse(['ticket_num' => $tkt], 'New ticket has been opened');

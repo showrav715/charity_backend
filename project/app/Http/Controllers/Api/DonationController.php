@@ -35,6 +35,14 @@ class DonationController extends ApiController
 
     public function transactions(Request $request)
     {
+        if ($request->limit) {
+            $donations = Transaction::with(['user'])->where('user_id', auth()->id())
+                ->latest()
+                ->take($request->limit)
+                ->get();
+                return $this->sendResponse($donations, 'transactions fetched successfully.');
+        }
+
         $txn = $request->txn_id;
         $donations = Transaction::with(['user'])->where('user_id', auth()->id())
             ->when($txn, function ($query) use ($txn) {

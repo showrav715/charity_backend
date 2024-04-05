@@ -16,6 +16,8 @@ class User extends Authenticatable
      *
      * @var string[]
      */
+    public $appends = ['api_photo'];
+
     protected $fillable = [
         'name',
         'email',
@@ -29,9 +31,26 @@ class User extends Authenticatable
         'status',
         'zip',
         'password',
-        'owner_id',
-        'force_login'
+
     ];
+
+    
+    public function campaigns()
+    {
+        return $this->hasMany(Campaign::class);
+    }
+
+    public function donations()
+    {
+        return $this->hasMany(Donation::class,'user_id','id');
+    }
+
+
+    public function getApiPhotoAttribute()
+    {
+        return getPhoto($this->photo, 'user');
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

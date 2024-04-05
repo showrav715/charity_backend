@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Helpers\MediaHelper;
+use App\Http\Helpers\MediaHelper;
 use Illuminate\Http\Request;
 use App\Models\SupportTicket;
 use App\Models\TicketMessage;
@@ -36,7 +36,6 @@ class ManageTicketController extends Controller
         $message->ticket_num     = $ticket->ticket_num;
         $message->user_id        = $ticket->user_id;
         $message->admin_id       = admin()->id;
-        $message->user_type      = $ticket->user_type;
         $message->message        = $request->message;
 
         if ($request->file) {

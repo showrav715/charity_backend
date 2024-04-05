@@ -107,6 +107,11 @@ function dateFormat($date, $format = 'd M Y -- h:i a')
     return Carbon::parse($date)->format($format);
 }
 
+function diffTime($date)
+{
+    return Carbon::parse($date)->diffForHumans();
+}
+
 function randNum($digits = 6)
 {
     return rand(pow(10, $digits - 1), pow(10, $digits) - 1);
