@@ -7,6 +7,7 @@ use App\Http\Helpers\MediaHelper;
 use App\Models\Generalsetting;
 use App\Models\HomePageSection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class GeneralSettingController extends Controller
 {
@@ -42,7 +43,6 @@ class GeneralSettingController extends Controller
             $gs->cta_btn_url = $request->cta_btn_url;
         }
 
-
         if ($request->check_smtp) {
             $request->validate([
                 'smtp_host' => 'required',
@@ -67,7 +67,6 @@ class GeneralSettingController extends Controller
             $gs->cta_btn_url = $request->cta_btn_url;
         }
 
-
         if ($request->hero) {
             $gs->hero_subtitle = $request->hero_subtitle;
             $gs->hero_title = $request->hero_title;
@@ -79,24 +78,39 @@ class GeneralSettingController extends Controller
             $gs->maintenance = $request->maintenance_message;
         }
 
-        $images = ['header_logo', 'footer_logo',  'maintenance_photo', 'contact_section_photo', 'breadcumb', 'hero_photo', 'cta_photo'];
+        $images = ['header_logo', 'footer_logo', 'maintenance_photo', 'contact_section_photo', 'breadcumb', 'hero_photo', 'cta_photo'];
         foreach ($images as $image) {
             if (isset($request[$image])) {
                 $gs[$image] = MediaHelper::handleUpdateImage($request[$image], $gs[$image]);
+                $gs->update();
+                
+                $array_forapi = ['header_logo', 'footer_logo', 'breadcumb'];
+                // dd(in_array($image, $array_forapi));
+                if (in_array($image, $array_forapi)) {
+                    //$this->callApi($image, $request[$image]->getClientOriginalExtension());
+
+
+                    $gs = Generalsetting::first();
+                    // call a api to update the logo in the frontend
+                    $url = 'http://localhost:3000/api/upload';
+                    $data = [
+                        'url' => getPhoto($gs[$image]),
+                        'filename' => $image.".png",
+                    ];
+                    $res = Http::get($url, $data);
+                }
             }
         }
-        $gs->update();
+
         return redirect()->back()->with('success', 'Data updated successfully');
     }
 
-
-
-
-
-    public function logo()
-    {
+    function logo() {
         return view('admin.generalsetting.logo');
     }
+
+  
+
     public function breadcumb()
     {
         return view('admin.generalsetting.breadcumb');
@@ -117,12 +131,10 @@ class GeneralSettingController extends Controller
         return view('admin.generalsetting.cta_section');
     }
 
-
     public function siteSettings()
     {
         return view('admin.generalsetting.settings');
     }
-
 
     public function banner_section()
     {
@@ -134,7 +146,6 @@ class GeneralSettingController extends Controller
         $data = HomePageSection::first();
         return view('admin.generalsetting.home_sections', compact('data'));
     }
-
 
     public function homeSectionUpdate(Request $request)
     {
@@ -153,7 +164,6 @@ class GeneralSettingController extends Controller
         $data->update();
         return redirect()->back()->with('success', 'Data updated successfully');
     }
-
 
     public function maintainance()
     {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2024 at 11:58 AM
+-- Generation Time: Apr 05, 2024 at 11:37 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -228,13 +228,13 @@ INSERT INTO `campaigns` (`id`, `title`, `slug`, `category_id`, `user_id`, `photo
 (13, 'DSAFASDF', 'dsafasdf', 3, 22, '4156866211708165984.png', 0, 5, '<p>SDFASDF</p>', 1, 0, 0, 0, 'TEST', 5, 'Sat Feb 17 2024 15:55:31 GMT+0600 (Bangladesh Standard Time)', 'ASDFAS', '2024-02-17 04:33:04', '2024-02-17 04:33:04'),
 (14, 'SDFASD', 'sdfasd', 2, 22, '20421391321708166036.png', 0, 5, '<p>ASDFAS</p>', 1, 0, 0, 0, '5', 5, '2024-03-20', 'ASDFA', '2024-02-17 04:33:56', '2024-03-22 22:11:03'),
 (15, 'SDFASDASDFA', 'sdfasdasdfa', 3, 22, '1537121141708166093.png', 0, 5, '<p>ASDFASDF</p>', 2, 0, 0, 0, '5', 5, 'Sat Feb 17 2024 16:33:39 GMT+0600 (Bangladesh Standard Time)', 'ASDFA', '2024-02-17 04:34:53', '2024-02-17 04:34:53'),
-(16, 'ASDFASDF', 'asdfasdf', 3, 22, '7852570471708166141.png', 0, 5, '<p>ASDFASDF</p>', 1, 0, 0, 0, '5', 5, 'Sat Feb 17 2024 16:35:26 GMT+0600 (Bangladesh Standard Time)', 'DFASDF', '2024-02-17 04:35:41', '2024-02-17 04:35:41'),
+(16, 'ASDFASDF', 'asdfasdf', 3, 22, '7852570471708166141.png', 50, 5, '<p>ASDFASDF</p>', 1, 0, 0, 0, '5', 5, 'Sat Feb 17 2024 16:35:26 GMT+0600 (Bangladesh Standard Time)', 'DFASDF', '2024-02-17 04:35:41', '2024-04-04 00:21:43'),
 (17, 'ASDFASDFFGHDGH', 'asdfasdffghdgh', 3, 22, '5230319571708166183.jpg', 0, 5, '<p>GFSDFGS</p>', 1, 0, 0, 0, '5', 5, 'Sat Feb 17 2024 16:35:26 GMT+0600 (Bangladesh Standard Time)', 'DFASDF', '2024-02-17 04:36:23', '2024-02-17 04:36:23'),
 (18, 'ASDFASDFFGHDGH ADSFGASD', 'asdfasdffghdgh-adsfgasd', 3, 22, '14172479461708166296.jpg', 0, 5, '<p>ASDFGSDFGSD</p>', 0, 0, 0, 0, '5', 5, 'Sat Feb 17 2024 16:35:26 GMT+0600 (Bangladesh Standard Time)', 'DFASDF', '2024-02-17 04:38:16', '2024-02-17 04:38:16'),
 (19, 'asdfasdfsadfasdfasdfasfasfasff', 'asdfasdfsadfasdfasdfasfasfasff', 2, 22, '21465030701708166397.png', 0, 78, '<p>asdfasdf</p>', 1, 0, 0, 0, 'asdf', 77, 'Sat Feb 17 2024 00:00:00 GMT+0600 (Bangladesh Standard Time)', 'erertew', '2024-02-17 04:39:57', '2024-02-17 04:39:57'),
 (20, 'sadfasdf', 'sadfasdf', 3, 22, '15035961041708166486.png', 0, 5, '<p>asdfasdf</p>', 0, 0, 0, 0, 'dfasdf', 5, 'Sat Feb 17 2024 16:41:03 GMT+0600 (Bangladesh Standard Time)', 'asdfasd', '2024-02-17 04:41:26', '2024-02-17 04:41:26'),
-(21, 'dsfaf', 'dsfaf', 3, 22, '21410562541708166600.jpg', 0, 56, '<p>asdfas</p>', 1, 0, 0, 0, 'asdfas', 5, 'Sat Feb 17 2024 16:42:54 GMT+0600 (Bangladesh Standard Time)', 'asdfa', '2024-02-17 04:43:20', '2024-02-17 04:43:20'),
-(22, 'This is test for postman', 'this-is-test-for-postman', 4, 22, '17452860621708332489.jpg', 0, 1, 'Postman test description', 1, 0, 0, 0, 'dhaka', 40, '2024-12-02', 'ok', '2024-02-19 02:48:10', '2024-02-19 02:48:10'),
+(21, 'dsfaf', 'dsfaf', 3, 22, '21410562541708166600.jpg', 52.49, 56, '<p>asdfas</p>', 1, 0, 0, 0, 'asdfas', 5, 'Sat Feb 17 2024 16:42:54 GMT+0600 (Bangladesh Standard Time)', 'asdfa', '2024-02-17 04:43:20', '2024-04-04 03:21:56'),
+(22, 'This is test for postman', 'this-is-test-for-postman', 4, 0, '17452860621708332489.jpg', 0, 1, 'Postman test description', 1, 0, 0, 0, 'dhaka', 40, '2024-12-02', 'ok', '2024-02-19 02:48:10', '2024-02-19 02:48:10'),
 (23, 'taba to', 'taba-to', 2, 22, '5213016221710068281.jpg', 0, 5, '<p>asdfasdf</p>', 0, 0, 0, 0, '5', 5, '2024-03-10', '5', '2024-03-10 04:58:02', '2024-03-23 21:50:41');
 
 -- --------------------------------------------------------
@@ -503,10 +503,17 @@ CREATE TABLE `donations` (
   `campaign_slug` text DEFAULT NULL,
   `payment_method` varchar(255) NOT NULL,
   `txn_id` varchar(255) NOT NULL,
-  `payment_status` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `donations`
+--
+
+INSERT INTO `donations` (`id`, `name`, `email`, `phone`, `address`, `owner_id`, `user_id`, `total`, `tips`, `currency`, `status`, `campaign_slug`, `payment_method`, `txn_id`, `created_at`, `updated_at`) VALUES
+(8, 'showrav Hasan', NULL, '1728332009', 'Dhaka,Bangladesh', 22, 22, 50, 0, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'asdfasdf', 'paypal', '48377622EA270843D', '2024-04-04 00:21:43', '2024-04-04 00:21:43'),
+(9, 'showrav Hasan', 'showrabhasan715@gmail.com', '17283320', 'Tangail,Dhaka,Bangladesh', 22, 22, 50, 0, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'dsfaf', 'stripe', 'pi_3P1mUWJlIV5dN9n71cAqD68b', '2024-04-04 03:21:56', '2024-04-04 03:21:56');
 
 -- --------------------------------------------------------
 
@@ -781,7 +788,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2024_01_03_091827_create_preloadeds_table', 5),
 (10, '2024_01_04_083632_create_features_table', 5),
 (11, '2024_01_08_055021_create_volunters_table', 5),
-(13, '2024_04_02_093614_create_donations_table', 6);
+(13, '2024_04_02_093614_create_donations_table', 6),
+(15, '2024_04_04_075952_create_transactions_table', 7);
 
 -- --------------------------------------------------------
 
@@ -916,7 +924,7 @@ INSERT INTO `payment_gateways` (`id`, `subtitle`, `title`, `details`, `name`, `t
 (13, NULL, NULL, NULL, 'Instamojo', 'automatic', '{\"key\":\"test_172371aa837ae5cad6047dc3052\",\"token\":\"test_4ac5a785e25fc596b67dbc5c267\",\"sandbox_check\":1,\"text\":\"Pay via your Instamojo account.\"}', 'instamojo', '[\"8\"]', 0, NULL),
 (14, NULL, NULL, '', 'Stripe', 'automatic', '{\"key\":\"pk_test_UnU1Coi1p5qFGwtpjZMRMgJM\",\"secret\":\"sk_test_QQcg3vGsKRPlW6T3dXcNJsor\",\"text\":\"Pay via your Credit Card.\"}', 'stripe', '[\"1\"]', 1, '13080571861711961996.png'),
 (15, NULL, NULL, '', 'Paypal', 'automatic', '{\"client_id\":\"AcWYnysKa_elsQIAnlfsJXokR64Z31CeCbpis9G3msDC-BvgcbAwbacfDfEGSP-9Dp9fZaGgD05pX5Qi\",\"client_secret\":\"EGZXTq6d6vBPq8kysVx8WQA5NpavMpDzOLVOb9u75UfsJ-cFzn6aeBXIMyJW2lN1UZtJg5iDPNL9ocYE\",\"text\":\"Pay via your PayPal account.\",\"sandbox_check\":1}', 'paypal', '[\"1\",\"4\"]', 1, '17470991311711962984.png'),
-(18, NULL, NULL, NULL, 'Flutter Wave', 'automatic', '{\"public_key\":\"FLWPUBK_TEST-299dc2c8bf4c7f14f7d7f48c32433393-X\",\"secret_key\":\"FLWSECK_TEST-afb1f2a4789002d7c0f2185b830450b7-X\",\"text\":\"Pay via your Flutter Wave account.\"}', 'flutterwave', '0', 0, NULL);
+(18, NULL, NULL, '', 'Flutter Wave', 'automatic', '{\"public_key\":\"FLWPUBK_TEST-299dc2c8bf4c7f14f7d7f48c32433393-X\",\"secret_key\":\"FLWSECK_TEST-afb1f2a4789002d7c0f2185b830450b7-X\",\"text\":\"Pay via your Flutter Wave account.\"}', 'flutterwave', '[\"1\"]', 1, '12882558951712115448.png');
 
 -- --------------------------------------------------------
 
@@ -947,7 +955,11 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (183, 'App\\Models\\User', 24, 'authToken', '04d9af1e213275e4eed3af45b1b28288d9a94ad0fb95420616566e9abd84d46e', '[\"*\"]', NULL, '2024-03-18 01:04:10', '2024-03-18 01:04:10', NULL),
 (184, 'App\\Models\\User', 24, 'authToken', '6de62fd4dd7fab3efa43078cdfd2d9e7e6a5b1f7ade8fab4212bf5916514cb8d', '[\"*\"]', NULL, '2024-03-18 01:04:16', '2024-03-18 01:04:16', NULL),
 (185, 'App\\Models\\User', 24, 'authToken', 'e2ad9dad21c89e11bd5783a88fe9c8eec5d46717d59056148bc2c14bcf44afce', '[\"*\"]', NULL, '2024-03-18 01:07:55', '2024-03-18 01:07:55', NULL),
-(218, 'App\\Models\\User', 22, 'authToken', '0f71573fa6428758f0daafe1a674fd7a9954d97cd6a5cdc4b15855e7b44951db', '[\"*\"]', '2024-03-24 04:10:08', '2024-03-24 03:16:20', '2024-03-24 04:10:08', NULL);
+(223, 'App\\Models\\User', 22, 'authToken', '69468352ab1ca474d6c022b46d00d131128a39e447ae916cfb9d0590b10b99b4', '[\"*\"]', '2024-04-03 03:53:17', '2024-04-03 02:44:46', '2024-04-03 03:53:17', NULL),
+(224, 'App\\Models\\User', 22, 'authToken', '3c7cee17a81c6a065f9ed178c44e5abc9bead917410c2b5c8deb6516e61c1fd7', '[\"*\"]', '2024-04-05 03:13:04', '2024-04-03 03:13:54', '2024-04-05 03:13:04', NULL),
+(225, 'App\\Models\\User', 22, 'authToken', '4069d6db3ec4d9fdd7a6a9c47c43ac7053b05374bfb9be874a3fbf5fa84511a9', '[\"*\"]', '2024-04-04 04:00:29', '2024-04-04 00:22:56', '2024-04-04 04:00:29', NULL),
+(226, 'App\\Models\\User', 22, 'authToken', 'c16dccc0802f4f0fae0fe545a7017cdd8024e817d6bb6a09b21e458f231dcd98', '[\"*\"]', '2024-04-05 00:24:45', '2024-04-04 21:29:21', '2024-04-05 00:24:45', NULL),
+(227, 'App\\Models\\User', 22, 'authToken', '34cc4916c9a4c4ec9a1fbbea71f72865a3df1738476a46d30e9d53727ae06430', '[\"*\"]', '2024-04-05 03:27:22', '2024-04-05 02:26:43', '2024-04-05 03:27:22', NULL);
 
 -- --------------------------------------------------------
 
@@ -1233,7 +1245,7 @@ CREATE TABLE `support_tickets` (
 --
 
 INSERT INTO `support_tickets` (`id`, `user_id`, `guest_email`, `guest_name`, `ticket_num`, `subject`, `status`, `created_at`, `updated_at`) VALUES
-(7, 22, NULL, NULL, 'tk345434534', 'Hi', 0, NULL, NULL);
+(7, 22, NULL, NULL, 'tk345434534', 'Hi', 1, NULL, '2024-04-05 02:48:46');
 
 -- --------------------------------------------------------
 
@@ -1308,7 +1320,33 @@ CREATE TABLE `ticket_messages` (
 --
 
 INSERT INTO `ticket_messages` (`id`, `ticket_id`, `ticket_num`, `user_id`, `admin_id`, `message`, `file`, `created_at`, `updated_at`) VALUES
-(1, 7, 'tk345434534', 22, NULL, 'dadf', NULL, '2024-03-13 09:08:31', NULL);
+(1, 7, 'tk345434534', 22, NULL, 'dadf', NULL, '2024-03-13 09:08:31', NULL),
+(2, 7, 'tk345434534', 22, 1, 'Hello', NULL, '2024-04-05 02:48:46', '2024-04-05 02:48:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transactions`
+--
+
+CREATE TABLE `transactions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `amount` double(8,2) NOT NULL DEFAULT 0.00,
+  `txn_id` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `user_id`, `amount`, `txn_id`, `type`, `remark`, `created_at`, `updated_at`) VALUES
+(1, 22, 50.00, 'pi_3P1mUWJlIV5dN9n71cAqD68b', '-', 'My Donation', '2024-04-04 03:21:56', '2024-04-04 03:21:56'),
+(2, 22, 50.00, 'pi_3P1mUWJlIV5dN9n71cAqD68b', '+', 'Donation Received', '2024-04-04 03:21:56', '2024-04-04 03:21:56');
 
 -- --------------------------------------------------------
 
@@ -1695,6 +1733,12 @@ ALTER TABLE `ticket_messages`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `transactions`
+--
+ALTER TABLE `transactions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -1817,7 +1861,7 @@ ALTER TABLE `deposits`
 -- AUTO_INCREMENT for table `donations`
 --
 ALTER TABLE `donations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `email_templates`
@@ -1877,7 +1921,7 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `packages`
@@ -1907,7 +1951,7 @@ ALTER TABLE `payment_gateways`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=219;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=228;
 
 --
 -- AUTO_INCREMENT for table `preloadeds`
@@ -1991,7 +2035,13 @@ ALTER TABLE `testimonials`
 -- AUTO_INCREMENT for table `ticket_messages`
 --
 ALTER TABLE `ticket_messages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `transactions`
+--
+ALTER TABLE `transactions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
