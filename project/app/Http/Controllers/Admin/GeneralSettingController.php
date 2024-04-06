@@ -83,21 +83,17 @@ class GeneralSettingController extends Controller
             if (isset($request[$image])) {
                 $gs[$image] = MediaHelper::handleUpdateImage($request[$image], $gs[$image]);
                 $gs->update();
-                
+
                 $array_forapi = ['header_logo', 'footer_logo', 'breadcumb'];
-                // dd(in_array($image, $array_forapi));
+
                 if (in_array($image, $array_forapi)) {
-                    //$this->callApi($image, $request[$image]->getClientOriginalExtension());
-
-
                     $gs = Generalsetting::first();
-                    // call a api to update the logo in the frontend
                     $url = 'http://localhost:3000/api/upload';
                     $data = [
                         'url' => getPhoto($gs[$image]),
-                        'filename' => $image.".png",
+                        'filename' => $image . $request[$image]->getClientOriginalExtension(),
                     ];
-                    $res = Http::get($url, $data);
+                    Http::get($url, $data);
                 }
             }
         }
@@ -105,11 +101,10 @@ class GeneralSettingController extends Controller
         return redirect()->back()->with('success', 'Data updated successfully');
     }
 
-    function logo() {
+    public function logo()
+    {
         return view('admin.generalsetting.logo');
     }
-
-  
 
     public function breadcumb()
     {
