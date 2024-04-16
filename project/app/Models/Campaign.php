@@ -45,6 +45,6 @@ class Campaign extends Model
         }
         $founded = ($raised / $goal) * 100;
         return round($founded, 2);
-    
+
     }
 }

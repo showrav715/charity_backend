@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2024 at 11:37 AM
+-- Generation Time: Apr 16, 2024 at 01:35 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -204,6 +204,7 @@ CREATE TABLE `campaigns` (
   `goal` double NOT NULL DEFAULT 0,
   `description` longtext DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 0,
+  `close_type` varchar(191) DEFAULT NULL,
   `is_faq` int(11) NOT NULL DEFAULT 0,
   `is_feature` tinyint(4) NOT NULL DEFAULT 0,
   `is_preloaded` tinyint(4) NOT NULL DEFAULT 1,
@@ -219,23 +220,23 @@ CREATE TABLE `campaigns` (
 -- Dumping data for table `campaigns`
 --
 
-INSERT INTO `campaigns` (`id`, `title`, `slug`, `category_id`, `user_id`, `photo`, `raised`, `goal`, `description`, `status`, `is_faq`, `is_feature`, `is_preloaded`, `location`, `benefits`, `end_date`, `video_link`, `created_at`, `updated_at`) VALUES
-(8, 'test', 'test', 3, NULL, '8465080681708142609.jpg', 0, 5, '<p>test</p>', 1, 1, 1, 1, 'test', 5, '2024-03-15', 'r2456246', '2024-02-16 22:03:29', '2024-03-22 21:47:17'),
-(9, 'dasfa', 'dasfa', 3, NULL, '2837413001708164872.jpg', 50, 500, '<p>asdfasdf</p>', 1, 0, 1, 0, 'London', 5, '2024-03-15', 'adfssd', '2024-02-17 04:14:32', '2024-03-22 21:47:19'),
-(10, 'test test5 last check', 'test-test5-last-check', 3, 22, '12978448341710133301.png', 0, 5, '<p>asdfasdf hgjgjg jhufgjktg</p>', 1, 1, 1, 0, 'asdfad', 5, 'Sat Feb 17 2024 15:55:31 GMT+0600 (Bangladesh Standard Time)', 'adfssd', '2024-02-17 04:28:52', '2024-03-22 21:47:21'),
-(11, 'New Data again', 'new-data-again', 3, 22, '13510299461708165868.png', 0, 5, '<p>asdfasdf</p>', 1, 0, 0, 0, 'asdfad', 5, 'Sat Feb 17 2024 15:55:31 GMT+0600 (Bangladesh Standard Time)', 'adfssd', '2024-02-17 04:31:08', '2024-02-17 04:31:08'),
-(12, 'New Data again 5', 'new-data-again-5', 3, 22, '5042978721708165880.png', 0, 5, '<p><br></p>', 1, 0, 0, 0, 'asdfad', 5, 'Sat Feb 17 2024 15:55:31 GMT+0600 (Bangladesh Standard Time)', 'adfssd', '2024-02-17 04:31:21', '2024-02-17 04:31:21'),
-(13, 'DSAFASDF', 'dsafasdf', 3, 22, '4156866211708165984.png', 0, 5, '<p>SDFASDF</p>', 1, 0, 0, 0, 'TEST', 5, 'Sat Feb 17 2024 15:55:31 GMT+0600 (Bangladesh Standard Time)', 'ASDFAS', '2024-02-17 04:33:04', '2024-02-17 04:33:04'),
-(14, 'SDFASD', 'sdfasd', 2, 22, '20421391321708166036.png', 0, 5, '<p>ASDFAS</p>', 1, 0, 0, 0, '5', 5, '2024-03-20', 'ASDFA', '2024-02-17 04:33:56', '2024-03-22 22:11:03'),
-(15, 'SDFASDASDFA', 'sdfasdasdfa', 3, 22, '1537121141708166093.png', 0, 5, '<p>ASDFASDF</p>', 2, 0, 0, 0, '5', 5, 'Sat Feb 17 2024 16:33:39 GMT+0600 (Bangladesh Standard Time)', 'ASDFA', '2024-02-17 04:34:53', '2024-02-17 04:34:53'),
-(16, 'ASDFASDF', 'asdfasdf', 3, 22, '7852570471708166141.png', 50, 5, '<p>ASDFASDF</p>', 1, 0, 0, 0, '5', 5, 'Sat Feb 17 2024 16:35:26 GMT+0600 (Bangladesh Standard Time)', 'DFASDF', '2024-02-17 04:35:41', '2024-04-04 00:21:43'),
-(17, 'ASDFASDFFGHDGH', 'asdfasdffghdgh', 3, 22, '5230319571708166183.jpg', 0, 5, '<p>GFSDFGS</p>', 1, 0, 0, 0, '5', 5, 'Sat Feb 17 2024 16:35:26 GMT+0600 (Bangladesh Standard Time)', 'DFASDF', '2024-02-17 04:36:23', '2024-02-17 04:36:23'),
-(18, 'ASDFASDFFGHDGH ADSFGASD', 'asdfasdffghdgh-adsfgasd', 3, 22, '14172479461708166296.jpg', 0, 5, '<p>ASDFGSDFGSD</p>', 0, 0, 0, 0, '5', 5, 'Sat Feb 17 2024 16:35:26 GMT+0600 (Bangladesh Standard Time)', 'DFASDF', '2024-02-17 04:38:16', '2024-02-17 04:38:16'),
-(19, 'asdfasdfsadfasdfasdfasfasfasff', 'asdfasdfsadfasdfasdfasfasfasff', 2, 22, '21465030701708166397.png', 0, 78, '<p>asdfasdf</p>', 1, 0, 0, 0, 'asdf', 77, 'Sat Feb 17 2024 00:00:00 GMT+0600 (Bangladesh Standard Time)', 'erertew', '2024-02-17 04:39:57', '2024-02-17 04:39:57'),
-(20, 'sadfasdf', 'sadfasdf', 3, 22, '15035961041708166486.png', 0, 5, '<p>asdfasdf</p>', 0, 0, 0, 0, 'dfasdf', 5, 'Sat Feb 17 2024 16:41:03 GMT+0600 (Bangladesh Standard Time)', 'asdfasd', '2024-02-17 04:41:26', '2024-02-17 04:41:26'),
-(21, 'dsfaf', 'dsfaf', 3, 22, '21410562541708166600.jpg', 52.49, 56, '<p>asdfas</p>', 1, 0, 0, 0, 'asdfas', 5, 'Sat Feb 17 2024 16:42:54 GMT+0600 (Bangladesh Standard Time)', 'asdfa', '2024-02-17 04:43:20', '2024-04-04 03:21:56'),
-(22, 'This is test for postman', 'this-is-test-for-postman', 4, 0, '17452860621708332489.jpg', 0, 1, 'Postman test description', 1, 0, 0, 0, 'dhaka', 40, '2024-12-02', 'ok', '2024-02-19 02:48:10', '2024-02-19 02:48:10'),
-(23, 'taba to', 'taba-to', 2, 22, '5213016221710068281.jpg', 0, 5, '<p>asdfasdf</p>', 0, 0, 0, 0, '5', 5, '2024-03-10', '5', '2024-03-10 04:58:02', '2024-03-23 21:50:41');
+INSERT INTO `campaigns` (`id`, `title`, `slug`, `category_id`, `user_id`, `photo`, `raised`, `goal`, `description`, `status`, `close_type`, `is_faq`, `is_feature`, `is_preloaded`, `location`, `benefits`, `end_date`, `video_link`, `created_at`, `updated_at`) VALUES
+(8, 'test', 'test', 3, NULL, '8465080681708142609.jpg', 3, 5, '<p>test</p>', 1, 'goal', 1, 1, 1, 'test', 5, '2024-03-15', 'r2456246', '2024-02-16 22:03:29', '2024-04-16 00:17:33'),
+(9, 'dasfa', 'dasfa', 3, NULL, '2837413001708164872.jpg', 50, 500, '<p>asdfasdf</p>', 1, 'goal', 0, 1, 0, 'London', 5, '2024-03-15', 'adfssd', '2024-02-17 04:14:32', '2024-03-22 21:47:19'),
+(10, 'test test5 last check', 'test-test5-last-check', 3, 22, '12978448341710133301.png', 0, 5, '<p>asdfasdf hgjgjg jhufgjktg</p>', 1, 'goal', 1, 1, 0, 'asdfad', 5, '2024-12-02', 'adfssd', '2024-02-17 04:28:52', '2024-03-22 21:47:21'),
+(11, 'New Data again', 'new-data-again', 3, 22, '13510299461708165868.png', 0, 5, '<p>asdfasdf</p>', 1, 'goal', 0, 0, 0, 'asdfad', 5, '2024-12-02', 'adfssd', '2024-02-17 04:31:08', '2024-02-17 04:31:08'),
+(12, 'New Data again 5', 'new-data-again-5', 3, 22, '5042978721708165880.png', 0, 5, '<p><br></p>', 2, 'end_date', 0, 0, 0, 'asdfad', 5, '2024-12-02', 'adfssd', '2024-02-17 04:31:21', '2024-04-16 02:39:32'),
+(13, 'DSAFASDF', 'dsafasdf', 3, 22, '4156866211708165984.png', 0, 5, '<p>SDFASDF</p>', 2, 'end_date', 0, 0, 0, 'TEST', 5, '2024-12-02', 'ASDFAS', '2024-02-17 04:33:04', '2024-04-16 02:35:40'),
+(14, 'SDFASD', 'sdfasd', 2, 22, '20421391321708166036.png', 0, 5, '<p>ASDFAS</p>', 2, 'end_date', 0, 0, 0, '5', 5, '2024-03-20', 'ASDFA', '2024-02-17 04:33:56', '2024-04-16 02:32:29'),
+(15, 'SDFASDASDFA', 'sdfasdasdfa', 3, 22, '1537121141708166093.png', 0, 5, '<p>ASDFASDF</p>', 2, 'end_date', 0, 0, 0, '5', 5, '2024-12-02', 'ASDFA', '2024-02-17 04:34:53', '2024-02-17 04:34:53'),
+(16, 'ASDFASDF', 'asdfasdf', 3, 22, '7852570471708166141.png', 50, 5, '<p>ASDFASDF</p>', 1, 'end_date', 0, 0, 0, '5', 5, '2024-12-02', 'DFASDF', '2024-02-17 04:35:41', '2024-04-04 00:21:43'),
+(17, 'ASDFASDFFGHDGH', 'asdfasdffghdgh', 3, 22, '5230319571708166183.jpg', 8.9, 5, '<p>GFSDFGS</p>', 1, 'end_date', 0, 0, 0, '5', 5, '2024-12-02', 'DFASDF', '2024-02-17 04:36:23', '2024-04-06 00:10:56'),
+(18, 'ASDFASDFFGHDGH ADSFGASD', 'asdfasdffghdgh-adsfgasd', 3, 22, '14172479461708166296.jpg', 0, 5, '<p>ASDFGSDFGSD</p>', 0, 'goal', 0, 0, 0, '5', 5, '2024-12-02', 'DFASDF', '2024-02-17 04:38:16', '2024-02-17 04:38:16'),
+(19, 'asdfasdfsadfasdfasdfasfasfasff', 'asdfasdfsadfasdfasdfasfasfasff', 2, 22, '21465030701708166397.png', 0, 78, '<p>asdfasdf</p>', 2, 'goal', 0, 0, 0, 'asdf', 77, '2024-12-02', 'erertew', '2024-02-17 04:39:57', '2024-04-16 02:36:08'),
+(20, 'sadfasdf', 'sadfasdf', 3, 22, '15035961041708166486.png', 0, 5, '<p>asdfasdf</p>', 0, 'goal', 0, 0, 0, 'dfasdf', 5, '2024-12-02', 'asdfasd', '2024-02-17 04:41:26', '2024-02-17 04:41:26'),
+(21, 'dsfaf', 'dsfaf', 3, 22, '21410562541708166600.jpg', 52.49, 56, '<p>asdfas</p>', 1, 'end_date', 0, 0, 0, 'asdfas', 5, '2024-12-02', 'asdfa', '2024-02-17 04:43:20', '2024-04-04 03:21:56'),
+(22, 'This is test for postman', 'this-is-test-for-postman', 4, 0, '17452860621708332489.jpg', 0, 1, 'Postman test description', 1, 'end_date', 0, 0, 0, 'dhaka', 40, '2024-12-02', 'ok', '2024-02-19 02:48:10', '2024-04-16 03:08:55'),
+(23, 'taba to', 'taba-to', 2, 22, '5213016221710068281.jpg', 0, 5, '<p>asdfasdf</p>', 2, 'end_date', 0, 0, 0, '5', 5, '2024-03-10', '5', '2024-03-10 04:58:02', '2024-04-16 03:10:02');
 
 -- --------------------------------------------------------
 
@@ -255,9 +256,9 @@ CREATE TABLE `campaign_faqs` (
 --
 
 INSERT INTO `campaign_faqs` (`id`, `campaign_id`, `title`, `content`) VALUES
-(38, 8, 'asdfa', 'sdafasdf'),
 (93, 10, 'tt', 'tt'),
-(94, 10, 'a', 'a');
+(94, 10, 'a', 'a'),
+(96, 8, 'asdfa', 'sdafasdf');
 
 -- --------------------------------------------------------
 
@@ -513,7 +514,8 @@ CREATE TABLE `donations` (
 
 INSERT INTO `donations` (`id`, `name`, `email`, `phone`, `address`, `owner_id`, `user_id`, `total`, `tips`, `currency`, `status`, `campaign_slug`, `payment_method`, `txn_id`, `created_at`, `updated_at`) VALUES
 (8, 'showrav Hasan', NULL, '1728332009', 'Dhaka,Bangladesh', 22, 22, 50, 0, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'asdfasdf', 'paypal', '48377622EA270843D', '2024-04-04 00:21:43', '2024-04-04 00:21:43'),
-(9, 'showrav Hasan', 'showrabhasan715@gmail.com', '17283320', 'Tangail,Dhaka,Bangladesh', 22, 22, 50, 0, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'dsfaf', 'stripe', 'pi_3P1mUWJlIV5dN9n71cAqD68b', '2024-04-04 03:21:56', '2024-04-04 03:21:56');
+(9, 'showrav Hasan', 'showrabhasan715@gmail.com', '17283320', 'Tangail,Dhaka,Bangladesh', 22, 22, 50, 0, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'dsfaf', 'stripe', 'pi_3P1mUWJlIV5dN9n71cAqD68b', '2024-04-04 03:21:56', '2024-04-04 03:21:56'),
+(10, 'showrav Hasan', 'showrabhasan715@gmail.com', '17283320', 'Tangail,Dhaka,Bangladesh', 22, NULL, 8.9, 0, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'asdfasdffghdgh', 'flutterwave', '5009240', '2024-04-06 00:10:56', '2024-04-06 00:10:56');
 
 -- --------------------------------------------------------
 
@@ -646,7 +648,7 @@ CREATE TABLE `generalsettings` (
 --
 
 INSERT INTO `generalsettings` (`id`, `logo`, `phone`, `email`, `address`, `copyright_text`, `header_logo`, `breadcumb`, `title`, `is_maintenance`, `maintenance`, `maintenance_photo`, `frontend_url`, `header_text`, `footer_logo`, `footer_text`, `hero_title`, `hero_subtitle`, `hero_video_link`, `hero_btn_text`, `hero_btn_url`, `hero_photo`, `cta_photo`, `cta_title`, `cta_btn_url`, `cta_btn_text`, `smtp_host`, `smtp_port`, `smtp_user`, `mail_encryption`, `smtp_pass`, `from_email`, `from_name`, `mail_type`) VALUES
-(1, '1571567292logo.png', '01700000000', 'genius@gmail.com', '380 St, New York, USA', 'Copyright © 2023 Reserved Passion by GeniusOcean', '12240972881711272613.png', '11517024121711958341.png', 'Car Service', 0, '<div style=\"text-align: center;\"><span class=\"pp-infobox-title-prefix\" style=\"font-size: 20px; color: rgb(0, 0, 0); margin-top: 30px; font-family: sans-serif;\">WE ARE COMING SOON</span><div class=\"pp-infobox-title-wrapper\" style=\"text-align: left; color: rgb(83, 100, 121); font-family: Inter, sans-serif; font-size: 16px;\"><h3 class=\"pp-infobox-title\" style=\"margin: 10px 0px; line-height: 54px; font-size: 40px; color: rgb(0, 0, 0); font-family: sans-serif; text-align: center; word-break: break-word;\">The website under maintenance!</h3></div><div class=\"pp-infobox-description\" style=\"color: rgb(0, 0, 0); font-family: Poppins, sans-serif; font-size: 18px; margin-top: 0px; margin-bottom: 0px;\"><p style=\"margin-right: 0px; margin-bottom: 0px; margin-left: 0px; line-height: 19.5px; font-size: 13px;\">Someone has kidnapped our site. We are negotiation ransom and<br>will resolve this issue in 24/7 hours</p></div></div>', '1560221241689753866.png', 'https://carservice.geniusocean.xyz/', 'best Car Service company website forever!', '12300160261690957908.png', 'Your Car Deserves the Best Care', 'Keep you on tha road with services you can trust', 'AUTO REPAIR SPECIALIST', 'TqhNILVX8IE', 'Click Our Service', '#', '16865032191688551090.jpg', '12680630721711185679.webp', 'If You Want To Join With Us As a Volunteer. Contact Us Today!', NULL, NULL, 'sandbox.smtp.mailtrap.io', '2525', '77c8df7c3e0779', 'tls', '509dc95e1382f5', 'support@gmail.com', 'Charity', 'php_mailer');
+(1, '1571567292logo.png', '01700000000', 'genius@gmail.com', '380 St, New York, USA', 'Copyright © 2023 Reserved Passion by GeniusOcean', '14323369791712379160.png', '9239898951712378821.png', 'Car Service', 0, '<div style=\"text-align: center;\"><span class=\"pp-infobox-title-prefix\" style=\"font-size: 20px; color: rgb(0, 0, 0); margin-top: 30px; font-family: sans-serif;\">WE ARE COMING SOON</span><div class=\"pp-infobox-title-wrapper\" style=\"text-align: left; color: rgb(83, 100, 121); font-family: Inter, sans-serif; font-size: 16px;\"><h3 class=\"pp-infobox-title\" style=\"margin: 10px 0px; line-height: 54px; font-size: 40px; color: rgb(0, 0, 0); font-family: sans-serif; text-align: center; word-break: break-word;\">The website under maintenance!</h3></div><div class=\"pp-infobox-description\" style=\"color: rgb(0, 0, 0); font-family: Poppins, sans-serif; font-size: 18px; margin-top: 0px; margin-bottom: 0px;\"><p style=\"margin-right: 0px; margin-bottom: 0px; margin-left: 0px; line-height: 19.5px; font-size: 13px;\">Someone has kidnapped our site. We are negotiation ransom and<br>will resolve this issue in 24/7 hours</p></div></div>', '1560221241689753866.png', 'https://carservice.geniusocean.xyz/', 'best Car Service company website forever!', '8665975201712379174.png', 'Your Car Deserves the Best Care', 'Keep you on tha road with services you can trust', 'AUTO REPAIR SPECIALIST', 'TqhNILVX8IE', 'Click Our Service', '#', '16865032191688551090.jpg', '12680630721711185679.webp', 'If You Want To Join With Us As a Volunteer. Contact Us Today!', NULL, NULL, 'sandbox.smtp.mailtrap.io', '2525', '77c8df7c3e0779', 'tls', '509dc95e1382f5', 'support@gmail.com', 'Charity', 'php_mailer');
 
 -- --------------------------------------------------------
 
@@ -959,7 +961,9 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (224, 'App\\Models\\User', 22, 'authToken', '3c7cee17a81c6a065f9ed178c44e5abc9bead917410c2b5c8deb6516e61c1fd7', '[\"*\"]', '2024-04-05 03:13:04', '2024-04-03 03:13:54', '2024-04-05 03:13:04', NULL),
 (225, 'App\\Models\\User', 22, 'authToken', '4069d6db3ec4d9fdd7a6a9c47c43ac7053b05374bfb9be874a3fbf5fa84511a9', '[\"*\"]', '2024-04-04 04:00:29', '2024-04-04 00:22:56', '2024-04-04 04:00:29', NULL),
 (226, 'App\\Models\\User', 22, 'authToken', 'c16dccc0802f4f0fae0fe545a7017cdd8024e817d6bb6a09b21e458f231dcd98', '[\"*\"]', '2024-04-05 00:24:45', '2024-04-04 21:29:21', '2024-04-05 00:24:45', NULL),
-(227, 'App\\Models\\User', 22, 'authToken', '34cc4916c9a4c4ec9a1fbbea71f72865a3df1738476a46d30e9d53727ae06430', '[\"*\"]', '2024-04-05 03:27:22', '2024-04-05 02:26:43', '2024-04-05 03:27:22', NULL);
+(227, 'App\\Models\\User', 22, 'authToken', '34cc4916c9a4c4ec9a1fbbea71f72865a3df1738476a46d30e9d53727ae06430', '[\"*\"]', '2024-04-05 03:27:22', '2024-04-05 02:26:43', '2024-04-05 03:27:22', NULL),
+(228, 'App\\Models\\User', 22, 'authToken', '9fe509ae36d24893b3bcb7c31cf6e5b1475aae60e5fed5ec8866705b995783be', '[\"*\"]', '2024-04-06 00:51:24', '2024-04-06 00:11:26', '2024-04-06 00:51:24', NULL),
+(229, 'App\\Models\\User', 22, 'authToken', 'ffc7ae06e4ab5c89f9f63b75fd6c8565f455e3085b1ddf2ba6af554493040769', '[\"*\"]', '2024-04-16 04:48:46', '2024-04-16 02:08:13', '2024-04-16 04:48:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -978,7 +982,9 @@ CREATE TABLE `preloadeds` (
 
 INSERT INTO `preloadeds` (`id`, `amount`) VALUES
 (1, 50),
-(3, 10);
+(3, 10),
+(4, 100),
+(5, 200);
 
 -- --------------------------------------------------------
 
@@ -1346,7 +1352,8 @@ CREATE TABLE `transactions` (
 
 INSERT INTO `transactions` (`id`, `user_id`, `amount`, `txn_id`, `type`, `remark`, `created_at`, `updated_at`) VALUES
 (1, 22, 50.00, 'pi_3P1mUWJlIV5dN9n71cAqD68b', '-', 'My Donation', '2024-04-04 03:21:56', '2024-04-04 03:21:56'),
-(2, 22, 50.00, 'pi_3P1mUWJlIV5dN9n71cAqD68b', '+', 'Donation Received', '2024-04-04 03:21:56', '2024-04-04 03:21:56');
+(2, 22, 50.00, 'pi_3P1mUWJlIV5dN9n71cAqD68b', '+', 'Donation Received', '2024-04-04 03:21:56', '2024-04-04 03:21:56'),
+(3, 22, 8.90, '5009240', '+', 'Donation Received', '2024-04-06 00:10:56', '2024-04-06 00:10:56');
 
 -- --------------------------------------------------------
 
@@ -1813,7 +1820,7 @@ ALTER TABLE `campaigns`
 -- AUTO_INCREMENT for table `campaign_faqs`
 --
 ALTER TABLE `campaign_faqs`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT for table `campaign_galleries`
@@ -1861,7 +1868,7 @@ ALTER TABLE `deposits`
 -- AUTO_INCREMENT for table `donations`
 --
 ALTER TABLE `donations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `email_templates`
@@ -1951,13 +1958,13 @@ ALTER TABLE `payment_gateways`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=228;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=230;
 
 --
 -- AUTO_INCREMENT for table `preloadeds`
 --
 ALTER TABLE `preloadeds`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -2041,7 +2048,7 @@ ALTER TABLE `ticket_messages`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`

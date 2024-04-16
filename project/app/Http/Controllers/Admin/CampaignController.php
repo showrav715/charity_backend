@@ -14,7 +14,39 @@ class CampaignController extends Controller
 {
     public function index()
     {
-        $campaigns = Campaign::get();
+
+
+        $campaign=Campaign::all();
+        foreach($campaign as $camp){
+            if($camp->close_type == 'goal'){
+                if($camp->raised >= $camp->goal){
+                    $camp->status = 2;
+                    $camp->update();
+                }
+            }else{
+                if($camp->end_date < now()->toDateString()){
+                    $camp->status = 2;
+                    $camp->update();
+                }
+            }
+        }
+
+
+
+        $campaigns = Campaign::
+        orderby('id','desc')
+        ->paginate(10);
+        // where(function ($query) {
+        //     $query->where('close_type', 'goal')
+        //     ->whereColumn('raised', '<=', 'goal'); 
+        // })
+        // ->orWhere(function ($query) {
+            
+        //     $query->where('close_type', 'end_date')
+        //         ->whereDate('end_date', '>=', now()->toDateString()); 
+        // })
+        
+
         return view('admin.campaign.index', compact('campaigns'));
     }
 
@@ -54,6 +86,7 @@ class CampaignController extends Controller
         $campaign->is_faq = $request->is_faq == 'on' ? 1 : 0;
         $campaign->is_preloaded = $request->is_preloaded == 'on' ? 1 : 0;
         $campaign->status = $request->status == 1 ? 1 : 0;
+        $campaign->close_type = $request->close_type ?? 'goal';
         $campaign->save();
 
         if ($request->is_faq == 'on') {
@@ -119,7 +152,8 @@ class CampaignController extends Controller
 
         $campaign->is_faq = $request->is_faq == 'on' ? 1 : 0;
         $campaign->is_preloaded = $request->is_preloaded == 'on' ? 1 : 0;
-        $campaign->status = $request->status == 1 ? 1 : 0;
+        $campaign->status = $request->status;
+        $campaign->close_type = $request->close_type ?? 'goal';
         $campaign->update();
 
 
@@ -162,6 +196,9 @@ class CampaignController extends Controller
         $campaign->update();
         return redirect()->back()->with('success', 'Campaign status updated successfully');
     }
+
+
+
 
 
     public function destroy(Request $request)

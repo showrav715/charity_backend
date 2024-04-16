@@ -205,12 +205,21 @@
                         </label>
                     </div>
 
+                    <div class="form-group">
+                        <label for="close_type">{{ __('Close Type') }}</label>
+                        <select class="form-control  mb-3" id="close_type" name="close_type" required>
+                            <option value="end_date" {{$data->close_type == 'end_date' ? 'selected' : ''}}>{{ __('End Date') }}</option>
+                            <option value="goal" {{$data->close_type == 'goal' ? 'selected' : ''}}>{{ __('Goal Achieved') }}</option>
+                        </select>
+                    </div>
+
 
                     <div class="form-group">
                         <label>{{ __('Status') }}</label>
                         <select class="form-control  mb-3" name="status" required>
-                            <option value="1" {{$data->status == 1 ? 'selected' : ''}}>{{__('Active')}}</option>
-                            <option value="0" {{$data->status == 0 ? 'selected' : ''}}>{{__('Inactive')}}</option>
+                            <option value="1" {{$data->status == 1 ? 'selected' : ''}}>{{__('Running')}}</option>
+                            <option value="0" {{$data->status == 0 ? 'selected' : ''}}>{{__('Pending')}}</option>
+                            <option value="2" {{$data->status == 2 ? 'selected' : ''}}>{{__('Closed')}}</option>
                         </select>
                     </div>
 

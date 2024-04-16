@@ -34,7 +34,7 @@ class FrontendController extends ApiController
         }
 
         if (in_array('about', $all) || in_array('*', $all)) {
-            $about =  About::first();
+            $about = About::first();
             $about['photo'] = asset('assets/images/' . $about->photo);
             $data['about'] = $about;
         }
@@ -43,6 +43,15 @@ class FrontendController extends ApiController
             $data['feature_campaign'] = Campaign::with('category')
                 ->where('status', 1)
                 ->where('is_feature', 1)
+                ->where(function ($query) {
+                    $query->where('close_type', 'goal')
+                        ->where('goal', '=>', 'raised');
+                })
+                ->orWhere(function ($query) {
+                    // Check if close_type is 'end_date'
+                    $query->where('close_type', 'end_date')
+                        ->whereDate('end_date', '>=', now()->toDateString());
+                })
                 ->limit(9)
                 ->get()
                 ->map(function ($campaign) {
@@ -57,7 +66,6 @@ class FrontendController extends ApiController
                 ->limit(9)
                 ->get();
         }
-
 
         if (in_array('newest_campaign', $all) || in_array('*', $all)) {
             $data['newest_campaign'] = Campaign::with('category')
@@ -88,9 +96,6 @@ class FrontendController extends ApiController
                 });
         }
 
-
-
-
         return $this->sendResponse($data, 'Home Content');
     }
 
@@ -106,7 +111,6 @@ class FrontendController extends ApiController
         return $this->sendResponse($hero_section, 'Setting Data');
     }
 
-
     public function getCategory()
     {
         $categories = Category::where('status', 1)->get();
@@ -114,14 +118,12 @@ class FrontendController extends ApiController
         return $this->sendResponse($categories, 'Category Data');
     }
 
-
     public function getCampaign(Request $request)
     {
         $category = $request->category ? Category::where('slug', $request->category)->first()->id : null;
         $sortby = $request->sortby;
         $condition = $request->has('condition') ? $request->condition : null;
         $campaigns = Campaign::with(['category', "galleries"])
-            ->where('status', 1)
             ->when($category, function ($query, $category) {
                 return $query->where('category_id', $category);
             })
@@ -135,7 +137,7 @@ class FrontendController extends ApiController
             ->when($condition, function ($query) {
                 return $query->where('is_feature', 1);
             })
-
+            ->where('status', 1)
             ->orderBy('id', 'desc')
             ->paginate(12);
         return $this->sendResponse($campaigns, 'Campaign Data');
@@ -144,8 +146,7 @@ class FrontendController extends ApiController
     public function singleCampaign($slug)
     {
         $campaign = Campaign::with(['category', 'faqs', 'galleries'])->where('slug', $slug)->first();
-
-
+        
         if ($campaign) {
             foreach ($campaign->galleries as $gallery) {
                 $gallery['original'] = $gallery->photo;
@@ -156,13 +157,18 @@ class FrontendController extends ApiController
             }
         }
 
+        if($campaign->user_id != null || $campaign->user_id != 0){
+            $campaign['author'] = $campaign->user->username;
+        }else{
+            $campaign['author'] = 'Admin';
+        }
+
         $campaign['founded'] = dateFormat($campaign->founded);
         $data['campaign'] = $campaign;
         $data['preloaded'] = Preloaded::get();
         $data['related_campaigns'] = Campaign::with('category')->where('status', 1)->where('category_id', $campaign->category_id)->where('id', '!=', $campaign->id)->orderBy('id', 'desc')->limit(6)->get();
         return $this->sendResponse($data, 'Single Campaign');
     }
-
 
     public function getBlogs(Request $request)
     {
@@ -183,7 +189,6 @@ class FrontendController extends ApiController
                 return $query->where('tags', 'like', '%' . $tag . '%');
             })
             ->paginate(12);
-
 
         $data['recent_blogs'] = Blog::orderBy('id', 'desc')->limit(4)->get();
         return $this->sendResponse($data, 'Blog Data');
@@ -209,7 +214,7 @@ class FrontendController extends ApiController
 
     public function aboutPage()
     {
-        $about =  About::first();
+        $about = About::first();
         $about['photo'] = getPhoto($about->photo);
         $about['backgroud_photo'] = getPhoto($about->backgroud_photo);
         $data['about'] = $about;
@@ -218,7 +223,6 @@ class FrontendController extends ApiController
         $data['brands'] = Brand::orderby('id')->get();
         return $this->sendResponse($data, 'Contact Page');
     }
-
 
     public function getCurrency()
     {
@@ -232,11 +236,10 @@ class FrontendController extends ApiController
         return $this->sendResponse($currency, 'Single Currency Data');
     }
 
-
-    function newsletterSubmit(Request $request)
+    public function newsletterSubmit(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|unique:subscribers,email'
+            'email' => 'required|email|unique:subscribers,email',
         ]);
 
         $newsletter = new Subscriber();
@@ -245,14 +248,13 @@ class FrontendController extends ApiController
         return $this->sendResponse($newsletter, 'Newsletter Subscribed');
     }
 
-
     public function contactSubmit(Request $request)
     {
         $request->validate([
             'name' => 'required',
             'email' => 'required|email',
             'subject' => 'required',
-            'message' => 'required'
+            'message' => 'required',
         ]);
 
         $contact = new ContactMessage();
@@ -263,7 +265,6 @@ class FrontendController extends ApiController
         $contact->save();
         return $this->sendResponse($contact, 'Message Sent');
     }
-
 
     public function volunteerSubmit(Request $request)
     {

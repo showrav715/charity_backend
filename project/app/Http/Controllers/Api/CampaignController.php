@@ -18,7 +18,7 @@ class CampaignController extends ApiController
         $search = $request->search;
         switch ($request->type) {
 
-            case 'cancel':
+            case 'closed':
                 $campaigns = Campaign::with(['user', 'category'])
                     ->where('user_id', auth()->id())->whereStatus(2)
                     ->when($search, function ($query) use ($search) {
@@ -26,12 +26,11 @@ class CampaignController extends ApiController
                     })->latest()->paginate(12);
 
                 break;
-            case 'complete':
+            case 'running':
                 $campaigns = Campaign::with(['user', 'category'])->where('user_id', auth()->id())->whereStatus(1)
                     ->when($search, function ($query) use ($search) {
                         return $query->where('title', 'like', '%' . $search . '%');
                     })->latest()->paginate(12);
-
                 break;
             case 'pending':
                 $campaigns = Campaign::with(['user', 'category'])->where('user_id', auth()->id())->whereStatus(0)
@@ -82,6 +81,7 @@ class CampaignController extends ApiController
         $campaign->is_faq = $request->is_faq == 'on' ? 1 : 0;
         $campaign->is_preloaded = $request->is_preloaded == 'on' ? 1 : 0;
         $campaign->status = $request->status == 1 ? 1 : 0;
+        $campaign->close_type = $request->close_type ?? 'goal';
         $campaign->save();
 
         if ($request->is_faq == 'on') {
@@ -121,6 +121,7 @@ class CampaignController extends ApiController
             'category_id' => 'required',
             'photo' => 'mimes:jpeg,jpg,png',
             'goal' => 'required',
+            "end_date" => "required",
         ]);
 
         $campaign = Campaign::findOrFail($id);
@@ -136,6 +137,7 @@ class CampaignController extends ApiController
         $campaign->is_faq = $request->is_faq == 'on' ? 1 : 0;
         $campaign->is_preloaded = $request->is_preloaded == 'on' ? 1 : 0;
         $campaign->status = $request->status == 1 ? 1 : 0;
+        $campaign->close_type = $request->close_type ?? 'goal';
         $campaign->update();
 
         $new_faq_title = explode(',', $request->faq_title);
