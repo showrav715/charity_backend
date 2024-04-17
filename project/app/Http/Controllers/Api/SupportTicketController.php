@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Helpers\MediaHelper;
 use App\Http\Controllers\Api\ApiController;
 use App\Models\SupportTicket;
 use App\Models\TicketMessage;
@@ -57,39 +56,21 @@ class SupportTicketController extends ApiController
 
     public function replyTicket(Request $request, $ticket_num)
     {
-        $validator = Validator::make($request->all(), ['message' => 'required', 'file' => 'mimes:pdf,jpeg,jpg,png,PNG,JPG']);
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error', $validator->errors());
-        }
 
-        if (request()->routeIs('user.*')) {
-            $user = auth()->user();
-            $type = 1;
-        } else {
-            $user = request()->user();
-            $type = 2;
-        }
-
+        $request->validate([
+            'message' => 'required',
+        ]);
+        
+        $user = auth()->user();
         $ticket = SupportTicket::where('ticket_num', $ticket_num)->where('user_id', $user->id)
-            ->where('user_type', $type)->first();
+            ->first();
 
         if (!$ticket) {
-            return $this->sendError('Error', ['Ticket not fount']);
+            return $this->sendError('Ticket not fount');
         }
-
-        $message = new TicketMessage();
-        $message->ticket_id = $ticket->id;
-        $message->ticket_num = $ticket->ticket_num;
-        $message->user_id = $user->id;
-        $message->user_type = $type;
-        $message->message = $request->message;
-        if ($request->file) {
-            $message->file = MediaHelper::handleMakeImage($request->file, null, true);
-        }
-        $message->save();
 
         $ticket->status = 0;
         $ticket->save();
-        return $this->sendResponse(['success'], 'Replied successfully');
+        return $this->sendResponse('success', 'Replied successfully.');
     }
 }

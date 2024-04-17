@@ -22,7 +22,6 @@ Route::prefix('user')->group(function () {
     Route::post('resend/verify-email/code', [AuthController::class, 'verifyEmailResendCode']);
 
     Route::post('token', [AuthController::class, 'token']);
-    Route::post('/otp', [DashboardController::class, 'otp'])->name('user.otp.submit')->middleware('auth:api');
 
     Route::middleware(['auth:sanctum', "email_verify"])->group(function () {
 
@@ -30,7 +29,7 @@ Route::prefix('user')->group(function () {
         // Profile Routes
         Route::get('get-details', [DashboardController::class, 'getDetails']);
         Route::post('profile-settings', [DashboardController::class, 'profileSubmit']);
-        Route::post('change-password', [DashboardController::class, 'changePass'])->name('change.pass');
+        Route::post('change-password', [DashboardController::class, 'changePass']);
         Route::get('logout', [AuthController::class, 'logout'])->name('user.logout');
 
         // Campaign Routes
@@ -42,10 +41,10 @@ Route::prefix('user')->group(function () {
         Route::get('campaign/gallery/remove/{id}', [CampaignController::class, 'galleryRemove']);
 
         //support ticket
-        Route::get('support/tickets', [SupportTicketController::class, 'index'])->name('merchant.tickets');
-        Route::get('support/ticket/messages/{ticket_num}', [SupportTicketController::class, 'messages'])->name('merchant.ticket.messages');
-        Route::post('open/support/ticket', [SupportTicketController::class, 'openTicket'])->name('merchant.ticket.open');
-        Route::post('reply/ticket/{ticket_num}', [SupportTicketController::class, 'replyTicket'])->name('merchant.ticket.reply');
+        Route::get('support/tickets', [SupportTicketController::class, 'index']);
+        Route::get('support/ticket/messages/{ticket_num}', [SupportTicketController::class, 'messages']);
+        Route::post('open/support/ticket', [SupportTicketController::class, 'openTicket']);
+        Route::post('reply/ticket/{ticket_num}', [SupportTicketController::class, 'replyTicket']);
 
         // Donation Routes
         Route::get('donations', [DonationController::class, 'donations']);

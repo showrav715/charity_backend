@@ -24,6 +24,7 @@ class AdminController extends Controller
     // DASHBOARD
     public function index()
     {
+
         $data['getintouchs'] = ContactMessage::orderby('id', 'desc')->take(6)->get();
         $data['total_getintouchs'] = ContactMessage::count();
         $data['total_subscribers'] = Subscriber::count();
