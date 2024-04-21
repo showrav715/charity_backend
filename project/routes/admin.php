@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\DonationController;
 use App\Http\Controllers\Admin\EmailController;
+use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\GeneralSettingController;
 use App\Http\Controllers\Admin\LoginController;
@@ -127,6 +128,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('page/edit/{page}', [PageController::class, 'edit'])->name('page.edit');
             Route::put('page/update/{page}', [PageController::class, 'update'])->name('page.update');
             Route::post('page/remove', [PageController::class, 'destroy'])->name('page.remove');
+        });
+
+        Route::group(['middleware' => 'permission:Manage Event'], function () {
+            //manage event
+            Route::get('event', [EventController::class, 'index'])->name('event.index');
+            Route::get('event/create', [EventController::class, 'create'])->name('event.create');
+            Route::post('event/store', [EventController::class, 'store'])->name('event.store');
+            Route::get('event/edit/{event}', [EventController::class, 'edit'])->name('event.edit');
+            Route::put('event/update/{event}', [EventController::class, 'update'])->name('event.update');
+            Route::post('event/remove', [EventController::class, 'destroy'])->name('event.remove');
         });
 
         Route::group(['middleware' => 'permission:Manage Project'], function () {
