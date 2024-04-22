@@ -13,11 +13,15 @@ use App\Models\ContactMessage;
 use App\Models\ContactPage;
 use App\Models\Counter;
 use App\Models\Currency;
+use App\Models\Donation;
+use App\Models\Event;
+use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\Generalsetting;
 use App\Models\Page;
 use App\Models\Preloaded;
 use App\Models\Subscriber;
+use App\Models\Testimonial;
 use App\Models\Volunteer;
 use Illuminate\Http\Request;
 
@@ -65,6 +69,17 @@ class FrontendController extends ApiController
                 ->orderBy('id', 'desc')
                 ->limit(9)
                 ->get();
+        }
+
+        if (in_array('faq', $all) || in_array('*', $all)) {
+            $data['faqs'] = Faq::
+                orderBy('id', 'desc')
+                ->limit(9)
+                ->get();
+        }
+
+        if (in_array('testimonials', $all) || in_array('*', $all)) {
+            $data['testimonials'] = Testimonial::orderBy('id', 'desc')->get();
         }
 
         if (in_array('newest_campaign', $all) || in_array('*', $all)) {
@@ -146,7 +161,7 @@ class FrontendController extends ApiController
     public function singleCampaign($slug)
     {
         $campaign = Campaign::with(['category', 'faqs', 'galleries'])->where('slug', $slug)->first();
-        
+
         if ($campaign) {
             foreach ($campaign->galleries as $gallery) {
                 $gallery['original'] = $gallery->photo;
@@ -157,9 +172,9 @@ class FrontendController extends ApiController
             }
         }
 
-        if($campaign->user_id != null || $campaign->user_id != 0){
+        if ($campaign->user_id != null || $campaign->user_id != 0) {
             $campaign['author'] = $campaign->user->username;
-        }else{
+        } else {
             $campaign['author'] = 'Admin';
         }
 
@@ -299,5 +314,69 @@ class FrontendController extends ApiController
         $data->save();
 
         return $this->sendResponse($data, 'Volunteer Request Submitted Successfully ');
+    }
+
+    public function GetEvents(Request $request)
+    {
+        $data['events'] = Event::where('status', 1)->orderBy('id', 'desc')->paginate(12);
+
+        $search = $request->search;
+
+        $data['blogs'] = Blog::with('category')->orderBy('id', 'desc')
+            ->when($search, function ($query, $search) {
+                return $query->where('title', 'like', '%' . $search . '%')->orWhere('sort_text', 'like', '%' . $search . '%');
+            })
+            ->paginate(12);
+        $data['recent_events'] = Blog::orderBy('id', 'desc')->limit(4)->get();
+        return $this->sendResponse($data, 'Event Fetch');
+    }
+
+    public function singleEvent($slug)
+    {
+        $events = Event::whereSlug($slug)->first();
+        if ($events) {
+            return $this->sendResponse($events, 'Event Fetch');
+        } else {
+            return $this->sendError('Event Not Found', 404);
+        }
+    }
+
+    public function getGallery()
+    {
+        $data['gallery'] = Campaign::whereIn('status', [1, 2])
+            ->join('campaign_galleries', 'campaigns.id', '=', 'campaign_galleries.campaign_id')
+            ->select('campaign_galleries.photo', 'campaign_galleries.campaign_id')
+            ->paginate(15);
+
+        return $this->sendResponse($data, 'Gellery Fetch');
+    }
+
+    public function getTestimonials()
+    {
+        $testimonials = Testimonial::orderBy('id', 'desc')->get();
+        return $this->sendResponse($testimonials, 'Gellery Fetch');
+    }
+
+    public function donorList()
+    {
+        $donors = Donation::with(['campaign:id,title,slug'])->where('status', 1)->orderBy('id', 'desc')->select(
+            'name',
+            'total',
+            "campaign_slug",
+            'created_at'
+        )->paginate(15);
+        return $this->sendResponse($donors, 'Donor List');
+
+    }
+    public function getFaq()
+    {
+        $donors = Faq::orderBy('id', 'desc')->get();
+        return $this->sendResponse($donors, 'Faq List');
+    }
+
+    public function volunteerList()
+    {
+        $data['volunteers'] = Volunteer::orderBy('id', 'desc')->paginate(20);
+        return $this->sendResponse($data, 'Volunteer List');
     }
 }

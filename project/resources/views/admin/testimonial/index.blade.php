@@ -25,9 +25,7 @@
                 <div class="table-responsive p-3">
                     <table class="table table-striped">
                         <tr>
-                            <th>@lang('Title')</th>
-                            <th>@lang('Designation')</th>
-                            <th>@lang('Rating')</th>
+                            <th>@lang('Name')</th>
                             <th>@lang('Photo')</th>
                             <th>@lang('Message')</th>
                             <th class="text-right">@lang('Action')</th>
@@ -38,24 +36,20 @@
                                 <td data-label="@lang('name')">
                                     {{ $item->name }}
                                 </td>
-                                <td data-label="@lang('designation')">
-                                    {{ $item->designation }}
-                                </td>
-                                <td data-label="@lang('Rating')">
-                                    {{ $item->rating }}
-                                </td>
+
                                 <td data-label="@lang('Icon')">
-                                    <img src="{{ getPhoto($item->photo) }}" alt="icon"
-                                        class="img-fluid" style="width: 50px">
+                                    <img src="{{ getPhoto($item->photo) }}" alt="icon" class="img-fluid"
+                                        style="width: 50px">
                                 </td>
                                 <td data-label="@lang('message')">
                                     {{ $item->message }}
                                 </td>
-                                
+
                                 <td data-label="@lang('Action')" class="text-right">
                                     <a href="javascript:void()" class="btn btn-primary approve btn-sm edit mb-1"
                                         data-route="{{ route('admin.testimonial.update', $item->id) }}"
-                                        data-item="{{ $item }}" data-toggle="tooltip" data-path="{{adminpath()}}" title="@lang('Edit')"><i
+                                        data-item="{{ $item }}" data-toggle="tooltip"
+                                        data-path="{{ adminpath() }}" title="@lang('Edit')"><i
                                             class="fas fa-edit"></i></a>
                                     <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
                                         data-id="{{ $item->id }}" data-toggle="tooltip" title="@lang('Remove')"><i
@@ -99,20 +93,13 @@
                             <label>@lang('Name')</label>
                             <input class="form-control" type="text" name="name">
                         </div>
-                        <div class="form-group">
-                            <label>@lang('Designation')</label>
-                            <input class="form-control" type="text" name="designation">
-                        </div>
-                        <div class="form-group">
-                            <label>@lang('Rating')</label>
-                            <input class="form-control" type="text" name="rating">
-                        </div>
+
                         <div class="form-group">
                             <label>@lang('Message')</label>
-                              <textarea class="form-control" name="message" rows="5"></textarea>
+                            <textarea class="form-control" name="message" rows="5"></textarea>
                         </div>
 
-                     
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
@@ -138,31 +125,24 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                     <div class="form-group">
-                        <label>@lang('Feature Photo')</label>
-                        <div class="form-group d-flex justify-content-center">
-                            <div id="image-preview1" class="image-preview image-preview_alt" style="">
-                                <label for="image-upload1" id="image-label1">@lang('Choose File')</label>
-                                <input type="file" name="photo" id="image-upload1" />
+                        <div class="form-group">
+                            <label>@lang('Feature Photo')</label>
+                            <div class="form-group d-flex justify-content-center">
+                                <div id="image-preview1" class="image-preview image-preview_alt" style="">
+                                    <label for="image-upload1" id="image-label1">@lang('Choose File')</label>
+                                    <input type="file" name="photo" id="image-upload1" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label>@lang('Name')</label>
-                        <input class="form-control" type="text" name="name">
-                    </div>
-                    <div class="form-group">
-                        <label>@lang('Designation')</label>
-                        <input class="form-control" type="text" name="designation">
-                    </div>
-                    <div class="form-group">
-                        <label>@lang('Rating')</label>
-                        <input class="form-control" type="text" name="rating">
-                    </div>
-                    <div class="form-group">
-                        <label>@lang('Message')</label>
-                          <textarea class="form-control" name="message" rows="5"></textarea>
-                    </div>
+                        <div class="form-group">
+                            <label>@lang('Name')</label>
+                            <input class="form-control" type="text" name="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>@lang('Message')</label>
+                            <textarea class="form-control" name="message" rows="5"></textarea>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
@@ -174,7 +154,7 @@
     </div>
 
 
-    <!-- Modal -->
+
     <div class="modal fade" id="removeMod" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <form action="{{ route('admin.testimonial.destroy') }}" method="POST">
@@ -198,7 +178,7 @@
 @push('script')
     <script>
         'use strict';
-
+        
         $.uploadPreview({
             input_field: "#image-upload",
             preview_box: "#image-preview",

@@ -78,7 +78,18 @@ class GeneralSettingController extends Controller
             $gs->maintenance = $request->maintenance_message;
         }
 
-        $images = ['header_logo', 'footer_logo', 'maintenance_photo', 'contact_section_photo', 'breadcumb', 'hero_photo', 'cta_photo'];
+      
+        if ($request->checkout == 1) {
+            $gs->checkout_success_text = $request->checkout_success_text;
+            $gs->checkout_faild_text = $request->checkout_faild_text;
+        }
+
+
+        $gs->update();
+
+
+
+        $images = ['header_logo', 'footer_logo', 'maintenance_photo', 'contact_section_photo', 'breadcumb', 'hero_photo', 'cta_photo','checkout_success_photo','checkout_faild_photo'];
         foreach ($images as $image) {
             if (isset($request[$image])) {
                 $gs[$image] = MediaHelper::handleUpdateImage($request[$image], $gs[$image]);
@@ -163,5 +174,10 @@ class GeneralSettingController extends Controller
     public function maintainance()
     {
         return view('admin.generalsetting.maintainance');
+    }
+
+
+    public function checkout() {
+        return view('admin.generalsetting.checkout');
     }
 }

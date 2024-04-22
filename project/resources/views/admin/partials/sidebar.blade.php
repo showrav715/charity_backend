@@ -6,27 +6,26 @@
                     class="fas fa-fire"></i><span>@lang('Dashboard')</span></a>
         </li>
 
-        <li class="nav-item dropdown {{ menu(['admin.contact*']) }}">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                    class="fas fa-envelope-open-text"></i></i>
-                <span>@lang('Manage Donations')</span></a>
-            <ul class="dropdown-menu">
+      
 
-                <li class="{{ menu('admin.contact.message') }}"><a class="nav-link"
-                        href="{{ route('admin.donation.index') }}">@lang('All Donations')</a>
-                </li>
-                <li class="{{ menu('admin.contact.message') }}"><a class="nav-link"
-                        href="{{ route('admin.preloaded.index') }}">@lang('Preloaded
-                                                                                                Amount')</a>
-                </li>
-                <li class="{{ menu('admin.campaign.index') }}"><a class="nav-link"
-                        href="{{ route('admin.campaign.index') }}">@lang('Manage Campaigns')</a>
-                </li>
-            </ul>
+        <li class="nav-item {{ menu(['admin.user.index', 'admin.user.details']) }}">
+            <a href="{{ route('admin.donation.index') }}" class="nav-link">
+                <i class="fas fa-envelope-open-text">
+                </i>
+                <span>@lang('Manage Donations')
+                </span>
+            </a>
         </li>
 
 
-        <li class="menu-header">@lang('Manage Donations')</li>
+        <li class="nav-item {{ menu(['admin.user.index', 'admin.user.details']) }}">
+            <a href="{{ route('admin.event.index') }}" class="nav-link">
+                <i class="fas fa-users">
+                </i>
+                <span>@lang('Manage Events')
+                </span>
+            </a>
+        </li>
 
         <li class="nav-item {{ menu(['admin.user.index', 'admin.user.details']) }}">
             <a href="{{ route('admin.user.index') }}" class="nav-link">
@@ -36,23 +35,6 @@
                 </span>
             </a>
         </li>
-
-
-        <li class="menu-header">@lang('Manage')</li>
-
-        <li class="nav-item {{ menu(['admin.user.index', 'admin.user.details']) }}">
-            <a href="{{ route('admin.user.index') }}" class="nav-link">
-                <i class="fas fa-users">
-                </i>
-                <span>@lang('Manage User')
-                </span>
-            </a>
-        </li>
-
-
-
-
-
 
 
         <li class="nav-item dropdown {{ menu(['admin.contact*']) }}">
@@ -65,14 +47,14 @@
                         href="{{ route('admin.category.index') }}">@lang('Categories')</a>
                 </li>
                 <li class="{{ menu('admin.contact.message') }}"><a class="nav-link"
-                        href="{{ route('admin.preloaded.index') }}">@lang('Preloaded
-                                                                                                Amount')</a>
+                        href="{{ route('admin.preloaded.index') }}">@lang('Preloaded Amount')</a>
                 </li>
                 <li class="{{ menu('admin.campaign.index') }}"><a class="nav-link"
                         href="{{ route('admin.campaign.index') }}">@lang('Manage Campaigns')</a>
                 </li>
             </ul>
         </li>
+
         <li class="nav-item dropdown {{ menu(['admin.contact*']) }}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                     class="fas fa-envelope-open-text"></i></i>
@@ -80,12 +62,10 @@
             <ul class="dropdown-menu">
 
                 <li class="{{ menu('admin.contact.message') }}"><a class="nav-link"
-                        href="{{ route('admin.contact.message') }}">@lang('Contact
-                                                                                                Messages')</a>
+                        href="{{ route('admin.contact.message') }}">@lang('Contact Messages')</a>
                 </li>
                 <li class="{{ menu('admin.contact.setting.index') }}"><a class="nav-link"
-                        href="{{ route('admin.contact.setting.index') }}">@lang('Contact
-                                                                                                Setting')</a></li>
+                        href="{{ route('admin.contact.setting.index') }}">@lang('Contact Setting')</a></li>
             </ul>
         </li>
 
@@ -164,6 +144,9 @@
                 <li class="{{ menu('admin.language') }}"><a class="nav-link"
                         href="{{ route('admin.language') }}">@lang('Language')</a></li>
 
+                <li class="{{ menu('admin.language') }}"><a class="nav-link"
+                        href="{{ route('admin.checkout') }}">@lang('Checkout Settings')</a></li>
+
                 <li class="{{ menu('admin.gs.maintainance.settings') }}"><a class="nav-link"
                         href="{{ route('admin.gs.maintainance.settings') }}">@lang('Maintenance')</a>
                 </li>
@@ -196,7 +179,7 @@
 
                 <li class="{{ menu('admin.home.sections') }}"><a class="nav-link"
                         href="{{ route('admin.home.sections') }}">@lang('Home Page Sections
-                                                                                                ')</a>
+                                                                                                                        ')</a>
                 </li>
 
                 <li class="{{ menu('admin.brand.index') }}"><a class="nav-link"

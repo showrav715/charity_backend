@@ -9,6 +9,11 @@ class Testimonial extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    // table 
+    // table
     protected $table = 'testimonials';
+    protected $appends = ['api_photo'];
+    public function getApiPhotoAttribute()
+    {
+        return getPhoto($this->photo, 'feature');
+    }
 }

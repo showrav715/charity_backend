@@ -491,7 +491,7 @@ $(document).on("change", "#upload_gallery_image", function (event) {
     )}"
           alt="}" class="imagecheck-image">
       </figure>
-</div>`;
+    </div>`;
   }
   $("#view_gallery_images").append(html);
 });
@@ -505,4 +505,19 @@ $(document).on("click", ".removeGalleryPermanent", function () {
       $this.parent().parent().remove();
     }
   });
+});
+
+$(document).on("change", "#event_type", function () {
+  let type = $(this).val();
+  if (type == "offline") {
+    $(".event_location").removeClass("d-none");
+    $(".event_link").addClass("d-none");
+    $("#event_location").attr("required", true);
+    $("#event_link").attr("required",false);
+  } else {
+    $(".event_location").addClass("d-none");
+    $("#event_location").attr("required", false);
+    $("#event_link").attr("required",true);
+    $(".event_link").removeClass("d-none");
+  }
 });

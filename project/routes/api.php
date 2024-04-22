@@ -60,6 +60,13 @@ Route::get('home-content', [FrontendController::class, 'homeContent']);
 Route::post('newsletter/submit', [FrontendController::class, 'newsletterSubmit']);
 Route::post('contact/submit', [FrontendController::class, 'contactSubmit']);
 Route::post('volunteer/submit', [FrontendController::class, 'volunteerSubmit']);
+Route::get('events', [FrontendController::class, 'GetEvents']);
+Route::get('event/{slug}', [FrontendController::class, 'singleEvent']);
+Route::get('get/gallery', [FrontendController::class, 'getGallery']);
+Route::get('testimonials', [FrontendController::class, 'getTestimonials']);
+Route::get('get/donations', [FrontendController::class, 'donorList']);
+Route::get('get/faqs', [FrontendController::class, 'getFaq']);
+Route::get('get/volunteer', [FrontendController::class, 'volunteerList']);
 
 // Campaign Routes
 Route::get('get/category', [FrontendController::class, 'getCategory']);

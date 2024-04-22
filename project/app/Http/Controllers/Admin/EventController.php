@@ -30,7 +30,7 @@ class EventController extends Controller
 
     public function edit(Event $event)
     {
-        return view('admin.event.edit', compact('event'));
+      return view('admin.event.edit', compact('event'));
     }
 
     public function update(Request $request, $id)
@@ -42,19 +42,33 @@ class EventController extends Controller
 
     public function storeData($request, $data, $id = null)
     {
+        $photo = $id ? '' : 'required';
         $request->validate([
             'title' => 'required|string|max:255|unique:events,title,' . $id,
-            'category_id' => 'required|integer',
-            'sort_text' => 'required|string',
+            'date' => 'required|date',
+            'start_time' => 'required|string',
+            'end_time' => 'required|string',
+            'event_type' => 'required|string',
+            'organizar_name' => 'required|string',
             'description' => 'required|string',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo' => $photo.'|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'required|integer',
         ]);
 
         $data->title = $request->title;
         $data->slug = Str::slug($request->title);
-        $data->category_id = $request->category_id;
-        $data->sort_text = $request->sort_text;
+        $data->date = $request->date;
+        $data->start_time = $request->start_time;
+        $data->end_time = $request->end_time;
+        $data->event_type = $request->event_type;
+        $data->event_link = $request->event_link;
+        $data->event_location = $request->event_location;
+        $data->organizar_name = $request->organizar_name;
+        $data->organizar_email = $request->organizar_email;
+        $data->organizar_phone = $request->organizar_phone;
+        $data->website = $request->website;
+        $data->map_link = $request->map_link;
+
         $data->description = $request->description;
         $data->status = $request->status;
         if (isset($request['photo'])) {

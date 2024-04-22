@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2024 at 01:35 PM
+-- Generation Time: Apr 22, 2024 at 01:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -223,14 +223,14 @@ CREATE TABLE `campaigns` (
 INSERT INTO `campaigns` (`id`, `title`, `slug`, `category_id`, `user_id`, `photo`, `raised`, `goal`, `description`, `status`, `close_type`, `is_faq`, `is_feature`, `is_preloaded`, `location`, `benefits`, `end_date`, `video_link`, `created_at`, `updated_at`) VALUES
 (8, 'test', 'test', 3, NULL, '8465080681708142609.jpg', 3, 5, '<p>test</p>', 1, 'goal', 1, 1, 1, 'test', 5, '2024-03-15', 'r2456246', '2024-02-16 22:03:29', '2024-04-16 00:17:33'),
 (9, 'dasfa', 'dasfa', 3, NULL, '2837413001708164872.jpg', 50, 500, '<p>asdfasdf</p>', 1, 'goal', 0, 1, 0, 'London', 5, '2024-03-15', 'adfssd', '2024-02-17 04:14:32', '2024-03-22 21:47:19'),
-(10, 'test test5 last check', 'test-test5-last-check', 3, 22, '12978448341710133301.png', 0, 5, '<p>asdfasdf hgjgjg jhufgjktg</p>', 1, 'goal', 1, 1, 0, 'asdfad', 5, '2024-12-02', 'adfssd', '2024-02-17 04:28:52', '2024-03-22 21:47:21'),
+(10, 'test test5 last check', 'test-test5-last-check', 3, 22, '12978448341710133301.png', 10, 5, '<p>asdfasdf hgjgjg jhufgjktg</p>', 2, 'goal', 1, 1, 0, 'asdfad', 5, '2024-12-02', 'adfssd', '2024-02-17 04:28:52', '2024-04-16 21:42:01'),
 (11, 'New Data again', 'new-data-again', 3, 22, '13510299461708165868.png', 0, 5, '<p>asdfasdf</p>', 1, 'goal', 0, 0, 0, 'asdfad', 5, '2024-12-02', 'adfssd', '2024-02-17 04:31:08', '2024-02-17 04:31:08'),
 (12, 'New Data again 5', 'new-data-again-5', 3, 22, '5042978721708165880.png', 0, 5, '<p><br></p>', 2, 'end_date', 0, 0, 0, 'asdfad', 5, '2024-12-02', 'adfssd', '2024-02-17 04:31:21', '2024-04-16 02:39:32'),
 (13, 'DSAFASDF', 'dsafasdf', 3, 22, '4156866211708165984.png', 0, 5, '<p>SDFASDF</p>', 2, 'end_date', 0, 0, 0, 'TEST', 5, '2024-12-02', 'ASDFAS', '2024-02-17 04:33:04', '2024-04-16 02:35:40'),
 (14, 'SDFASD', 'sdfasd', 2, 22, '20421391321708166036.png', 0, 5, '<p>ASDFAS</p>', 2, 'end_date', 0, 0, 0, '5', 5, '2024-03-20', 'ASDFA', '2024-02-17 04:33:56', '2024-04-16 02:32:29'),
 (15, 'SDFASDASDFA', 'sdfasdasdfa', 3, 22, '1537121141708166093.png', 0, 5, '<p>ASDFASDF</p>', 2, 'end_date', 0, 0, 0, '5', 5, '2024-12-02', 'ASDFA', '2024-02-17 04:34:53', '2024-02-17 04:34:53'),
-(16, 'ASDFASDF', 'asdfasdf', 3, 22, '7852570471708166141.png', 50, 5, '<p>ASDFASDF</p>', 1, 'end_date', 0, 0, 0, '5', 5, '2024-12-02', 'DFASDF', '2024-02-17 04:35:41', '2024-04-04 00:21:43'),
-(17, 'ASDFASDFFGHDGH', 'asdfasdffghdgh', 3, 22, '5230319571708166183.jpg', 8.9, 5, '<p>GFSDFGS</p>', 1, 'end_date', 0, 0, 0, '5', 5, '2024-12-02', 'DFASDF', '2024-02-17 04:36:23', '2024-04-06 00:10:56'),
+(16, 'ASDFASDF', 'asdfasdf', 3, 22, '7852570471708166141.png', 100, 5, '<p>ASDFASDF</p>', 1, 'end_date', 0, 0, 0, '5', 5, '2024-12-02', 'DFASDF', '2024-02-17 04:35:41', '2024-04-16 21:40:00'),
+(17, 'ASDFASDFFGHDGH', 'asdfasdffghdgh', 3, 22, '5230319571708166183.jpg', 18.9, 5, '<p>GFSDFGS</p>', 1, 'end_date', 0, 0, 0, '5', 5, '2024-12-02', 'DFASDF', '2024-02-17 04:36:23', '2024-04-16 21:37:04'),
 (18, 'ASDFASDFFGHDGH ADSFGASD', 'asdfasdffghdgh-adsfgasd', 3, 22, '14172479461708166296.jpg', 0, 5, '<p>ASDFGSDFGSD</p>', 0, 'goal', 0, 0, 0, '5', 5, '2024-12-02', 'DFASDF', '2024-02-17 04:38:16', '2024-02-17 04:38:16'),
 (19, 'asdfasdfsadfasdfasdfasfasfasff', 'asdfasdfsadfasdfasdfasfasfasff', 2, 22, '21465030701708166397.png', 0, 78, '<p>asdfasdf</p>', 2, 'goal', 0, 0, 0, 'asdf', 77, '2024-12-02', 'erertew', '2024-02-17 04:39:57', '2024-04-16 02:36:08'),
 (20, 'sadfasdf', 'sadfasdf', 3, 22, '15035961041708166486.png', 0, 5, '<p>asdfasdf</p>', 0, 'goal', 0, 0, 0, 'dfasdf', 5, '2024-12-02', 'asdfasd', '2024-02-17 04:41:26', '2024-02-17 04:41:26'),
@@ -515,7 +515,10 @@ CREATE TABLE `donations` (
 INSERT INTO `donations` (`id`, `name`, `email`, `phone`, `address`, `owner_id`, `user_id`, `total`, `tips`, `currency`, `status`, `campaign_slug`, `payment_method`, `txn_id`, `created_at`, `updated_at`) VALUES
 (8, 'showrav Hasan', NULL, '1728332009', 'Dhaka,Bangladesh', 22, 22, 50, 0, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'asdfasdf', 'paypal', '48377622EA270843D', '2024-04-04 00:21:43', '2024-04-04 00:21:43'),
 (9, 'showrav Hasan', 'showrabhasan715@gmail.com', '17283320', 'Tangail,Dhaka,Bangladesh', 22, 22, 50, 0, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'dsfaf', 'stripe', 'pi_3P1mUWJlIV5dN9n71cAqD68b', '2024-04-04 03:21:56', '2024-04-04 03:21:56'),
-(10, 'showrav Hasan', 'showrabhasan715@gmail.com', '17283320', 'Tangail,Dhaka,Bangladesh', 22, NULL, 8.9, 0, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'asdfasdffghdgh', 'flutterwave', '5009240', '2024-04-06 00:10:56', '2024-04-06 00:10:56');
+(10, 'showrav Hasan', 'showrabhasan715@gmail.com', '17283320', 'Tangail,Dhaka,Bangladesh', 22, NULL, 8.9, 0, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'asdfasdffghdgh', 'flutterwave', '5009240', '2024-04-06 00:10:56', '2024-04-06 00:10:56'),
+(11, NULL, NULL, NULL, NULL, 22, NULL, 10, 0, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'asdfasdffghdgh', 'stripe', 'pi_3P6PIuJlIV5dN9n70m377oAk', '2024-04-16 21:37:04', '2024-04-16 21:37:04'),
+(12, NULL, NULL, NULL, NULL, 22, NULL, 50, 0, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'asdfasdf', 'flutterwave', '5031923', '2024-04-16 21:40:00', '2024-04-16 21:40:00'),
+(13, 'showrav Hasan', 'teacher@gmail.com', '1728332009', 'Munshinogor,Delduar,Tangail,Dhaka,Bangladesh', 22, NULL, 11, 1, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'test-test5-last-check', 'paypal', '8N8700445X518633T', '2024-04-16 21:40:47', '2024-04-16 21:40:47');
 
 -- --------------------------------------------------------
 
@@ -539,6 +542,45 @@ INSERT INTO `email_templates` (`id`, `email_type`, `email_subject`, `email_body`
 (1, 'new_order', 'Your Order Placed Successfully', '<p>Hello {customer_name},<br>Your Order Number is {order_number}<br>Your order has been placed successfully</p>', 1),
 (2, 'new_registration', 'Welcome To Booking Core', '<p>Hello {customer_name},<br>You have successfully registered to {website_title}, We wish you will have a wonderful experience using our service.</p><p>Thank You<br></p>', 1),
 (5, 'user_verification', 'Request for verification.', '<p>Hello {customer_name},<br>You are requested verify your account. Please send us photo of your passport.</p><p>Thank You<br></p>', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `events`
+--
+
+CREATE TABLE `events` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `date` date NOT NULL,
+  `start_time` varchar(255) NOT NULL,
+  `end_time` varchar(255) DEFAULT NULL,
+  `event_type` varchar(255) NOT NULL,
+  `event_link` varchar(255) DEFAULT NULL,
+  `event_location` varchar(255) DEFAULT NULL,
+  `organizar_name` varchar(255) NOT NULL,
+  `organizar_email` varchar(255) DEFAULT NULL,
+  `organizar_phone` varchar(255) DEFAULT NULL,
+  `map_link` text DEFAULT NULL,
+  `description` text NOT NULL,
+  `photo` varchar(255) NOT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  `status` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `title`, `slug`, `date`, `start_time`, `end_time`, `event_type`, `event_link`, `event_location`, `organizar_name`, `organizar_email`, `organizar_phone`, `map_link`, `description`, `photo`, `website`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Giving Hope: A Charity Gala for Children in Need', 'giving-hope-a-charity-gala-for-children-in-need', '2024-04-25', '18:34', '19:34', 'offline', 'test', '170 Washington Square South, New York, NY 10012, United States', 'asdfasd', 'dasfa', 'asdf', 'sdfasd', '<span style=\"color: rgb(77, 81, 86); font-family: arial, sans-serif;\">In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available.</span>', '6650090181713780218.png', NULL, 1, '2024-04-22 00:18:52', '2024-04-22 04:34:28'),
+(2, 'Giving Hope: A Gala for Children in Need', 'giving-hope-a-gala-for-children-in-need', '2024-04-25', '15:16', '18:36', 'online', 'test', 'dfasd', 'asdfasd', 'dasfa', 'asdf', 'sdfasd', 'asdf test', '9167718691713780252.png', NULL, 1, '2024-04-22 00:18:52', '2024-04-22 04:36:08'),
+(3, 'A Charity Gala for Children in Need', 'a-charity-gala-for-children-in-need', '2024-04-25', '15:16', '20:36', 'online', 'test', 'dfasd', 'asdfasd', 'dasfa', 'asdf', 'sdfasd', 'asdf test', '5055423321713780268.png', NULL, 1, '2024-04-22 00:18:52', '2024-04-22 04:36:18'),
+(4, 'A charity new event', 'a-charity-new-event', '2024-04-25', '15:16', '20:36', 'online', 'test', 'dfasd', 'asdfasd', 'dasfa', 'asdf', 'sdfasd', 'asdf test', '1050554961713780286.png', NULL, 1, '2024-04-22 00:18:52', '2024-04-22 04:36:27'),
+(5, 'New event Comming', 'new-event-comming', '2024-04-25', '15:16', '21:36', 'online', 'test', 'dfasd', 'asdfasd', 'dasfa', 'asdf', 'sdfasd', 'asdf test', '14244038021713780311.png', NULL, 1, '2024-04-22 00:18:52', '2024-04-22 04:36:38');
 
 -- --------------------------------------------------------
 
@@ -577,7 +619,7 @@ INSERT INTO `faqs` (`id`, `title`, `details`) VALUES
 (5, 'Our proprietary enables Quality', 'People tend to do such a thing is because they find hiring a cleaning service company too expensive. Even if they do end up hiring a cleaning service, they tend to cheap out on this. Doing so can result in spending more money than you initially thought. So, let us find out how choosing the proper cleaning services can benefit you in more ways than you are thinking.'),
 (6, 'Locate Clean USA Office Near You', 'People tend to do such a thing is because they find hiring a cleaning service company too expensive. Even if they do end up hiring a cleaning service, they tend to cheap out on this. Doing so can result in spending more money than you initially thought. So, let us find out how choosing the proper cleaning services can benefit you in more ways than you are thinking.'),
 (7, 'Visit our office and see services', 'People tend to do such a thing is because they find hiring a cleaning service company too expensive. Even if they do end up hiring a cleaning service, they tend to cheap out on this. Doing so can result in spending more money than you initially thought. So, let us find out how choosing the proper cleaning services can benefit you in more ways than you are thinking.'),
-(8, 'How to get Services', 'People tend to do such a thing is because they find hiring a cleaning service company too expensive. Even if they do end up hiring a cleaning service, they tend to cheap out on this. Doing so can result in spending more money than you initially thought. So, let us find out how choosing the proper cleaning services can benefit you in more ways than you are thinking.');
+(8, 'How to get Services.', 'People tend to do such a thing is because they find hiring a cleaning service company too expensive. Even if they do end up hiring a cleaning service, they tend to cheap out on this. Doing so can result in spending more money than you initially thought. So, let us find out how choosing the proper cleaning services can benefit you in more ways than you are thinking.');
 
 -- --------------------------------------------------------
 
@@ -640,15 +682,19 @@ CREATE TABLE `generalsettings` (
   `smtp_pass` varchar(191) DEFAULT NULL,
   `from_email` varchar(191) DEFAULT NULL,
   `from_name` varchar(191) DEFAULT NULL,
-  `mail_type` varchar(100) DEFAULT NULL
+  `mail_type` varchar(100) DEFAULT NULL,
+  `checkout_success_photo` varchar(255) DEFAULT NULL,
+  `checkout_success_text` text DEFAULT NULL,
+  `checkout_faild_photo` varchar(255) DEFAULT NULL,
+  `checkout_faild_text` text DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `generalsettings`
 --
 
-INSERT INTO `generalsettings` (`id`, `logo`, `phone`, `email`, `address`, `copyright_text`, `header_logo`, `breadcumb`, `title`, `is_maintenance`, `maintenance`, `maintenance_photo`, `frontend_url`, `header_text`, `footer_logo`, `footer_text`, `hero_title`, `hero_subtitle`, `hero_video_link`, `hero_btn_text`, `hero_btn_url`, `hero_photo`, `cta_photo`, `cta_title`, `cta_btn_url`, `cta_btn_text`, `smtp_host`, `smtp_port`, `smtp_user`, `mail_encryption`, `smtp_pass`, `from_email`, `from_name`, `mail_type`) VALUES
-(1, '1571567292logo.png', '01700000000', 'genius@gmail.com', '380 St, New York, USA', 'Copyright © 2023 Reserved Passion by GeniusOcean', '14323369791712379160.png', '9239898951712378821.png', 'Car Service', 0, '<div style=\"text-align: center;\"><span class=\"pp-infobox-title-prefix\" style=\"font-size: 20px; color: rgb(0, 0, 0); margin-top: 30px; font-family: sans-serif;\">WE ARE COMING SOON</span><div class=\"pp-infobox-title-wrapper\" style=\"text-align: left; color: rgb(83, 100, 121); font-family: Inter, sans-serif; font-size: 16px;\"><h3 class=\"pp-infobox-title\" style=\"margin: 10px 0px; line-height: 54px; font-size: 40px; color: rgb(0, 0, 0); font-family: sans-serif; text-align: center; word-break: break-word;\">The website under maintenance!</h3></div><div class=\"pp-infobox-description\" style=\"color: rgb(0, 0, 0); font-family: Poppins, sans-serif; font-size: 18px; margin-top: 0px; margin-bottom: 0px;\"><p style=\"margin-right: 0px; margin-bottom: 0px; margin-left: 0px; line-height: 19.5px; font-size: 13px;\">Someone has kidnapped our site. We are negotiation ransom and<br>will resolve this issue in 24/7 hours</p></div></div>', '1560221241689753866.png', 'https://carservice.geniusocean.xyz/', 'best Car Service company website forever!', '8665975201712379174.png', 'Your Car Deserves the Best Care', 'Keep you on tha road with services you can trust', 'AUTO REPAIR SPECIALIST', 'TqhNILVX8IE', 'Click Our Service', '#', '16865032191688551090.jpg', '12680630721711185679.webp', 'If You Want To Join With Us As a Volunteer. Contact Us Today!', NULL, NULL, 'sandbox.smtp.mailtrap.io', '2525', '77c8df7c3e0779', 'tls', '509dc95e1382f5', 'support@gmail.com', 'Charity', 'php_mailer');
+INSERT INTO `generalsettings` (`id`, `logo`, `phone`, `email`, `address`, `copyright_text`, `header_logo`, `breadcumb`, `title`, `is_maintenance`, `maintenance`, `maintenance_photo`, `frontend_url`, `header_text`, `footer_logo`, `footer_text`, `hero_title`, `hero_subtitle`, `hero_video_link`, `hero_btn_text`, `hero_btn_url`, `hero_photo`, `cta_photo`, `cta_title`, `cta_btn_url`, `cta_btn_text`, `smtp_host`, `smtp_port`, `smtp_user`, `mail_encryption`, `smtp_pass`, `from_email`, `from_name`, `mail_type`, `checkout_success_photo`, `checkout_success_text`, `checkout_faild_photo`, `checkout_faild_text`) VALUES
+(1, '1571567292logo.png', '01700000000', 'genius@gmail.com', '380 St, New York, USA', 'Copyright © 2023 Reserved Passion by GeniusOcean', '14323369791712379160.png', '9239898951712378821.png', 'Car Service', 0, 'test', '1560221241689753866.png', 'https://carservice.geniusocean.xyz/', 'best Car Service company website forever!', '8665975201712379174.png', 'Your Car Deserves the Best Care', 'Keep you on tha road with services you can trust', 'AUTO REPAIR SPECIALIST', 'TqhNILVX8IE', 'Click Our Service', '#', '16865032191688551090.jpg', '12680630721711185679.webp', 'If You Want To Join With Us As a Volunteer. Contact Us Today!', NULL, NULL, 'sandbox.smtp.mailtrap.io', '2525', '77c8df7c3e0779', 'tls', '509dc95e1382f5', 'support@gmail.com', 'Charity', 'php_mailer', '300097761713773488.png', 'asdf', '5789672881713773533.png', 'asdfad');
 
 -- --------------------------------------------------------
 
@@ -791,7 +837,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (10, '2024_01_04_083632_create_features_table', 5),
 (11, '2024_01_08_055021_create_volunters_table', 5),
 (13, '2024_04_02_093614_create_donations_table', 6),
-(15, '2024_04_04_075952_create_transactions_table', 7);
+(15, '2024_04_04_075952_create_transactions_table', 7),
+(16, '2024_04_20_030938_create_events_table', 8);
 
 -- --------------------------------------------------------
 
@@ -963,7 +1010,8 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (226, 'App\\Models\\User', 22, 'authToken', 'c16dccc0802f4f0fae0fe545a7017cdd8024e817d6bb6a09b21e458f231dcd98', '[\"*\"]', '2024-04-05 00:24:45', '2024-04-04 21:29:21', '2024-04-05 00:24:45', NULL),
 (227, 'App\\Models\\User', 22, 'authToken', '34cc4916c9a4c4ec9a1fbbea71f72865a3df1738476a46d30e9d53727ae06430', '[\"*\"]', '2024-04-05 03:27:22', '2024-04-05 02:26:43', '2024-04-05 03:27:22', NULL),
 (228, 'App\\Models\\User', 22, 'authToken', '9fe509ae36d24893b3bcb7c31cf6e5b1475aae60e5fed5ec8866705b995783be', '[\"*\"]', '2024-04-06 00:51:24', '2024-04-06 00:11:26', '2024-04-06 00:51:24', NULL),
-(229, 'App\\Models\\User', 22, 'authToken', 'ffc7ae06e4ab5c89f9f63b75fd6c8565f455e3085b1ddf2ba6af554493040769', '[\"*\"]', '2024-04-16 04:48:46', '2024-04-16 02:08:13', '2024-04-16 04:48:46', NULL);
+(229, 'App\\Models\\User', 22, 'authToken', 'ffc7ae06e4ab5c89f9f63b75fd6c8565f455e3085b1ddf2ba6af554493040769', '[\"*\"]', '2024-04-16 04:48:46', '2024-04-16 02:08:13', '2024-04-16 04:48:46', NULL),
+(230, 'App\\Models\\User', 22, 'authToken', 'f7eb433dc2787640335d80fba211f7901340af84343a62f8e5827ed5a7c146f2', '[\"*\"]', '2024-04-17 00:41:40', '2024-04-16 21:41:30', '2024-04-17 00:41:40', NULL);
 
 -- --------------------------------------------------------
 
@@ -1251,7 +1299,7 @@ CREATE TABLE `support_tickets` (
 --
 
 INSERT INTO `support_tickets` (`id`, `user_id`, `guest_email`, `guest_name`, `ticket_num`, `subject`, `status`, `created_at`, `updated_at`) VALUES
-(7, 22, NULL, NULL, 'tk345434534', 'Hi', 1, NULL, '2024-04-05 02:48:46');
+(7, 22, NULL, NULL, 'tk345434534', 'Hi', 0, NULL, '2024-04-17 00:07:03');
 
 -- --------------------------------------------------------
 
@@ -1287,21 +1335,19 @@ INSERT INTO `teams` (`id`, `name`, `designation`, `photo`) VALUES
 CREATE TABLE `testimonials` (
   `id` bigint(20) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `designation` varchar(255) DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
-  `message` text DEFAULT NULL,
-  `rating` int(11) NOT NULL DEFAULT 0
+  `message` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `testimonials`
 --
 
-INSERT INTO `testimonials` (`id`, `name`, `designation`, `photo`, `message`, `rating`) VALUES
-(2, 'Mr. Aashik', 'UI Designer', '572951221688621014.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 3),
-(3, 'Jhon Due', 'Creative Director', '12756126191688621009.jpg', 'Car battery performance checks are essential to ensure your vehicle starts reliably and to prevent unexpected breakdowns.', 4),
-(4, 'Mr. Marlie', 'CEO GeniusTeam', '17895208911688621004.jpg', 'The purpose of the testimonial section is to build trust and credibility by showcasing positive feedback from satisfied patients.', 5),
-(6, 'Brain Due', 'Creative Director', '1600736101688621040.jpg', 'The Creative Director is a visionary leader responsible for shaping and executing the overall creative direction of a company or organization.', 5);
+INSERT INTO `testimonials` (`id`, `name`, `photo`, `message`) VALUES
+(2, 'Mr. Aashik', '572951221688621014.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam'),
+(3, 'Jhon Due', '12756126191688621009.jpg', 'Car battery performance checks are essential to ensure your vehicle starts reliably and to prevent unexpected breakdowns.'),
+(4, 'Mr. Marlie', '17895208911688621004.jpg', 'The purpose of the testimonial section is to build trust and credibility by showcasing positive feedback from satisfied patients.'),
+(6, 'Brain Due', '1600736101688621040.jpg', 'The Creative Director is a visionary leader responsible for shaping and executing the overall creative direction of a company or organization.');
 
 -- --------------------------------------------------------
 
@@ -1327,7 +1373,8 @@ CREATE TABLE `ticket_messages` (
 
 INSERT INTO `ticket_messages` (`id`, `ticket_id`, `ticket_num`, `user_id`, `admin_id`, `message`, `file`, `created_at`, `updated_at`) VALUES
 (1, 7, 'tk345434534', 22, NULL, 'dadf', NULL, '2024-03-13 09:08:31', NULL),
-(2, 7, 'tk345434534', 22, 1, 'Hello', NULL, '2024-04-05 02:48:46', '2024-04-05 02:48:46');
+(2, 7, 'tk345434534', 22, 1, 'Hello', NULL, '2024-04-05 02:48:46', '2024-04-05 02:48:46'),
+(3, 7, 'tk345434534', 22, 1, 'hI', NULL, '2024-04-16 21:48:28', '2024-04-16 21:48:28');
 
 -- --------------------------------------------------------
 
@@ -1353,7 +1400,10 @@ CREATE TABLE `transactions` (
 INSERT INTO `transactions` (`id`, `user_id`, `amount`, `txn_id`, `type`, `remark`, `created_at`, `updated_at`) VALUES
 (1, 22, 50.00, 'pi_3P1mUWJlIV5dN9n71cAqD68b', '-', 'My Donation', '2024-04-04 03:21:56', '2024-04-04 03:21:56'),
 (2, 22, 50.00, 'pi_3P1mUWJlIV5dN9n71cAqD68b', '+', 'Donation Received', '2024-04-04 03:21:56', '2024-04-04 03:21:56'),
-(3, 22, 8.90, '5009240', '+', 'Donation Received', '2024-04-06 00:10:56', '2024-04-06 00:10:56');
+(3, 22, 8.90, '5009240', '+', 'Donation Received', '2024-04-06 00:10:56', '2024-04-06 00:10:56'),
+(4, 22, 10.00, 'pi_3P6PIuJlIV5dN9n70m377oAk', '+', 'Donation Received', '2024-04-16 21:37:04', '2024-04-16 21:37:04'),
+(5, 22, 50.00, '5031923', '+', 'Donation Received', '2024-04-16 21:40:00', '2024-04-16 21:40:00'),
+(6, 22, 10.00, '8N8700445X518633T', '+', 'Donation Received', '2024-04-16 21:40:47', '2024-04-16 21:40:47');
 
 -- --------------------------------------------------------
 
@@ -1554,6 +1604,12 @@ ALTER TABLE `donations`
 -- Indexes for table `email_templates`
 --
 ALTER TABLE `email_templates`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1868,13 +1924,19 @@ ALTER TABLE `deposits`
 -- AUTO_INCREMENT for table `donations`
 --
 ALTER TABLE `donations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `email_templates`
 --
 ALTER TABLE `email_templates`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -1886,7 +1948,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `faqs`
 --
 ALTER TABLE `faqs`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `features`
@@ -1928,7 +1990,7 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `packages`
@@ -1958,7 +2020,7 @@ ALTER TABLE `payment_gateways`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=230;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
 
 --
 -- AUTO_INCREMENT for table `preloadeds`
@@ -2042,13 +2104,13 @@ ALTER TABLE `testimonials`
 -- AUTO_INCREMENT for table `ticket_messages`
 --
 ALTER TABLE `ticket_messages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`

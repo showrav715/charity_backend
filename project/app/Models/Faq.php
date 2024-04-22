@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Volunteer extends Model
+class Faq extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $appends = ['api_photo'];
-    public function getApiPhotoAttribute()
-    {
-        return getPhoto($this->photo, 'photo');
-    }
+    protected $fillable = [
+        'title',
+        'slug',
+        'details',
+    ];
 }

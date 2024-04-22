@@ -18,7 +18,6 @@ class ManageTestimonialController extends Controller
 
     public function store(Request $request)
     {
-       
         $this->storeData($request, new Testimonial());
         return back()->with('success', __('Testimonial added successfully'));
     }
@@ -42,28 +41,23 @@ class ManageTestimonialController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:testimonials,name' . ($id ? ',' . $id : ''),
-            'designation' => 'required|string',
-            'rating' => 'required|numeric|min:1|max:5',
             'message' => 'required|string',
-            'photo' =>  $id ? '' : 'required|' . 'image|mimes:jpeg,png,jpg|max:2048',
+            'photo' => $id ? '' : 'required|' . 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        if(isset($request['photo'])){
+        if (isset($request['photo'])) {
             $status = MediaHelper::ExtensionValidation($request['photo']);
-            if(!$status){
-                return ['errors' => [0=>'file format not supported']];
+            if (!$status) {
+                return ['errors' => [0 => 'file format not supported']];
             }
-            if($id){
-                $data->photo = MediaHelper::handleUpdateImage($request['photo'],$data->photo);
-            }else{
+            if ($id) {
+                $data->photo = MediaHelper::handleUpdateImage($request['photo'], $data->photo);
+            } else {
                 $data->photo = MediaHelper::handleMakeImage($request['photo']);
             }
-            
         }
 
         $data->name = $request->name;
-        $data->rating = $request->rating;
-        $data->designation = $request->designation;
         $data->message = $request->message;
         $data->save();
 

@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\DonationController;
 use App\Http\Controllers\Admin\EmailController;
 use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\GeneralSettingController;
 use App\Http\Controllers\Admin\LoginController;
@@ -137,7 +138,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('event/store', [EventController::class, 'store'])->name('event.store');
             Route::get('event/edit/{event}', [EventController::class, 'edit'])->name('event.edit');
             Route::put('event/update/{event}', [EventController::class, 'update'])->name('event.update');
-            Route::post('event/remove', [EventController::class, 'destroy'])->name('event.remove');
+            Route::post('event/delete', [EventController::class, 'destroy'])->name('event.destroy');
         });
 
         Route::group(['middleware' => 'permission:Manage Project'], function () {
@@ -174,6 +175,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('/update-volunteer/{id}', [VolunteerController::class, 'update'])->name('volunteer.update');
             Route::delete('/delete-volunteer', [VolunteerController::class, 'destroy'])->name('volunteer.destroy');
         });
+
+        Route::get('faq', [FaqController::class, 'index'])->name('faq.index');
+        Route::post('faq/store', [FaqController::class, 'store'])->name('faq.store');
+        Route::put('faq/update/{id}', [FaqController::class, 'update'])->name('faq.update');
+        Route::delete('faq/destroy', [FaqController::class, 'destroy'])->name('faq.destroy');
 
         Route::group(['middleware' => 'permission:Frontend Settings'], function () {
             // HERO SECTION
@@ -220,10 +226,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/general-settings/breadcumb', [GeneralSettingController::class, 'breadcumb'])->name('gs.breadcumb');
             Route::get('/general-settings/maintenance', [GeneralSettingController::class, 'maintenance'])->name('gs.maintenance');
             Route::get('/general-settings/status/update/{value}', [GeneralSettingController::class, 'StatusUpdate'])->name('gs.status');
+            Route::get('/manage-checkout', [GeneralSettingController::class, 'checkout'])->name('checkout');
             //cookie
             Route::get('/manage-cookie', [AdminController::class, 'cookie'])->name('cookie');
             Route::post('/manage-cookie', [AdminController::class, 'updateCookie'])->name('update.cookie');
             Route::get('/manage-language', [AdminController::class, 'language'])->name('language');
+
             Route::post('/language/update', [AdminController::class, 'languageUpdate'])->name('language.update');
             Route::get('social/link', [SocialController::class, 'index'])->name('social.manage');
             Route::post('add/social/link', [SocialController::class, 'store'])->name('social.store');
