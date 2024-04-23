@@ -22,7 +22,8 @@ class SupportTicketController extends ApiController
 
     public function messages($ticket_num)
     {
-        $user = request()->user();
+        $user = auth()->user();
+        $success['status'] = true;
         $success['messages'] = TicketMessage::with('user:id,photo')->where('ticket_num', $ticket_num)->where('user_id', $user->id)->get();
         $success['ticket'] = SupportTicket::where('ticket_num', $ticket_num)->where('user_id', $user->id)->first();
         return $this->sendResponse($success, 'Ticket messages of ' . $ticket_num);
@@ -60,17 +61,34 @@ class SupportTicketController extends ApiController
         $request->validate([
             'message' => 'required',
         ]);
-        
+
         $user = auth()->user();
         $ticket = SupportTicket::where('ticket_num', $ticket_num)->where('user_id', $user->id)
             ->first();
-
         if (!$ticket) {
             return $this->sendError('Ticket not fount');
         }
-
+        $message = new TicketMessage();
+        $message->ticket_id = $ticket->id;
+        $message->ticket_num = $ticket->ticket_num;
+        $message->user_id = $user->id;
+        $message->message = $request->message;
+        $message->save();
         $ticket->status = 0;
         $ticket->save();
-        return $this->sendResponse('success', 'Replied successfully.');
+        return $this->sendResponse('success', 'Replied successfully');
+    }
+
+    public function closeTicket($ticket_num)
+    {
+        $user = auth()->user();
+        $ticket = SupportTicket::where('ticket_num', $ticket_num)->where('user_id', $user->id)
+            ->first();
+        if (!$ticket) {
+            return $this->sendError('Ticket not fount');
+        }
+        $ticket->status = 2;
+        $ticket->save();
+        return $this->sendResponse('success', 'Ticket closed successfully');
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2024 at 08:19 AM
+-- Generation Time: Apr 23, 2024 at 12:34 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -227,7 +227,6 @@ INSERT INTO `campaigns` (`id`, `title`, `slug`, `category_id`, `user_id`, `photo
 (19, 'asdfasdfsadfasdfasdfasfasfasff', 'asdfasdfsadfasdfasdfasfasfasff', 2, 22, '21465030701708166397.png', 0, 78, '<p>asdfasdf</p>', 2, 'goal', 0, 0, 0, 'asdf', 77, '2024-12-02', 'erertew', '2024-02-17 04:39:57', '2024-04-16 02:36:08'),
 (20, 'sadfasdf', 'sadfasdf', 3, 22, '15035961041708166486.png', 0, 5, '<p>asdfasdf</p>', 0, 'goal', 0, 0, 0, 'dfasdf', 5, '2024-12-02', 'asdfasd', '2024-02-17 04:41:26', '2024-02-17 04:41:26'),
 (21, 'dsfaf', 'dsfaf', 3, 22, '21410562541708166600.jpg', 52.49, 56, '<p>asdfas</p>', 1, 'end_date', 0, 0, 0, 'asdfas', 5, '2024-12-02', 'asdfa', '2024-02-17 04:43:20', '2024-04-04 03:21:56'),
-(22, 'This is test for postman', 'this-is-test-for-postman', 4, 0, '17452860621708332489.jpg', 0, 1, 'Postman test description', 1, 'end_date', 0, 0, 0, 'dhaka', 40, '2024-12-02', 'ok', '2024-02-19 02:48:10', '2024-04-16 03:08:55'),
 (23, 'taba to', 'taba-to', 2, 22, '5213016221710068281.jpg', 0, 5, '<p>asdfasdf</p>', 2, 'end_date', 0, 0, 0, '5', 5, '2024-03-10', '5', '2024-03-10 04:58:02', '2024-04-16 03:10:02');
 
 -- --------------------------------------------------------
@@ -1003,7 +1002,8 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (227, 'App\\Models\\User', 22, 'authToken', '34cc4916c9a4c4ec9a1fbbea71f72865a3df1738476a46d30e9d53727ae06430', '[\"*\"]', '2024-04-05 03:27:22', '2024-04-05 02:26:43', '2024-04-05 03:27:22', NULL),
 (228, 'App\\Models\\User', 22, 'authToken', '9fe509ae36d24893b3bcb7c31cf6e5b1475aae60e5fed5ec8866705b995783be', '[\"*\"]', '2024-04-06 00:51:24', '2024-04-06 00:11:26', '2024-04-06 00:51:24', NULL),
 (229, 'App\\Models\\User', 22, 'authToken', 'ffc7ae06e4ab5c89f9f63b75fd6c8565f455e3085b1ddf2ba6af554493040769', '[\"*\"]', '2024-04-16 04:48:46', '2024-04-16 02:08:13', '2024-04-16 04:48:46', NULL),
-(230, 'App\\Models\\User', 22, 'authToken', 'f7eb433dc2787640335d80fba211f7901340af84343a62f8e5827ed5a7c146f2', '[\"*\"]', '2024-04-17 00:41:40', '2024-04-16 21:41:30', '2024-04-17 00:41:40', NULL);
+(230, 'App\\Models\\User', 22, 'authToken', 'f7eb433dc2787640335d80fba211f7901340af84343a62f8e5827ed5a7c146f2', '[\"*\"]', '2024-04-17 00:41:40', '2024-04-16 21:41:30', '2024-04-17 00:41:40', NULL),
+(231, 'App\\Models\\User', 22, 'authToken', 'e7370d44d81f576920fdc15098f3d24542ca752b5e145cf3a2a9464853dbaca8', '[\"*\"]', '2024-04-23 04:21:01', '2024-04-23 03:01:21', '2024-04-23 04:21:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -1281,7 +1281,7 @@ CREATE TABLE `support_tickets` (
   `guest_name` varchar(255) DEFAULT NULL,
   `ticket_num` varchar(255) NOT NULL,
   `subject` varchar(255) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 = pending, 1 = replied. ',
+  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 = pending, 1 = replied, 2 = closed',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1291,7 +1291,7 @@ CREATE TABLE `support_tickets` (
 --
 
 INSERT INTO `support_tickets` (`id`, `user_id`, `guest_email`, `guest_name`, `ticket_num`, `subject`, `status`, `created_at`, `updated_at`) VALUES
-(7, 22, NULL, NULL, 'tk345434534', 'Hi', 0, NULL, '2024-04-17 00:07:03');
+(7, 22, NULL, NULL, 'tk345434534', 'Hi', 2, NULL, '2024-04-23 04:18:14');
 
 -- --------------------------------------------------------
 
@@ -1364,9 +1364,9 @@ CREATE TABLE `ticket_messages` (
 --
 
 INSERT INTO `ticket_messages` (`id`, `ticket_id`, `ticket_num`, `user_id`, `admin_id`, `message`, `file`, `created_at`, `updated_at`) VALUES
-(1, 7, 'tk345434534', 22, NULL, 'dadf', NULL, '2024-03-13 09:08:31', NULL),
-(2, 7, 'tk345434534', 22, 1, 'Hello', NULL, '2024-04-05 02:48:46', '2024-04-05 02:48:46'),
-(3, 7, 'tk345434534', 22, 1, 'hI', NULL, '2024-04-16 21:48:28', '2024-04-16 21:48:28');
+(32, 7, 'tk345434534', 22, NULL, 'Hi', NULL, '2024-04-23 03:37:36', '2024-04-23 03:37:36'),
+(33, 7, 'tk345434534', 22, 1, 'hello', NULL, '2024-04-23 03:38:04', '2024-04-23 03:38:04'),
+(34, 7, 'tk345434534', 22, NULL, 'ydy', NULL, '2024-04-23 04:18:09', '2024-04-23 04:18:09');
 
 -- --------------------------------------------------------
 
@@ -2012,7 +2012,7 @@ ALTER TABLE `payment_gateways`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
 
 --
 -- AUTO_INCREMENT for table `preloadeds`
@@ -2096,7 +2096,7 @@ ALTER TABLE `testimonials`
 -- AUTO_INCREMENT for table `ticket_messages`
 --
 ALTER TABLE `ticket_messages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `transactions`

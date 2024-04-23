@@ -45,6 +45,7 @@ Route::prefix('user')->group(function () {
         Route::get('support/ticket/messages/{ticket_num}', [SupportTicketController::class, 'messages']);
         Route::post('open/support/ticket', [SupportTicketController::class, 'openTicket']);
         Route::post('reply/ticket/{ticket_num}', [SupportTicketController::class, 'replyTicket']);
+        Route::get('close/ticket/{ticket_num}', [SupportTicketController::class, 'closeTicket']);
 
         // Donation Routes
         Route::get('donations', [DonationController::class, 'donations']);
