@@ -50,9 +50,9 @@
               <span class="font-weight-bold">{{$curr->rate}} {{$curr->code}}</span>
             </li>
           </ul>
-          @if (access('edit currency'))
+     
           <a href="{{route('admin.currency.edit',$curr->id)}}" class="btn btn-primary btn-block"><i class="fas fa-edit"></i> @lang('Edit Currency')</a>  
-          @endif
+          
         </div>
       </div>
     </div>

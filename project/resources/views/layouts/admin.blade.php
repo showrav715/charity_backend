@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/css/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/tagify.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/admin/css/tagify.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/taginput.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/summernote.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/bootstrap-iconpicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/style.css') }}">
@@ -58,6 +58,7 @@
     <script src="{{ asset('assets/admin/js/summernote.js') }}"></script>
     <script src="{{ asset('assets/admin/js/select2.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/tagify.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/taginput.js') }}"></script>
     <script src="{{ asset('assets/admin/js/sortable.js') }}"></script>
     <script src="{{ asset('assets/admin/js/stisla.js') }}"></script>
     <script src="{{ asset('assets/admin/js/bootstrap-iconpicker.bundle.min.js') }}"></script>

@@ -48,14 +48,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label>@lang('Currency Type')</label>
-                            <select class="form-control" name="type" required>
-                                <option value="" selected>--@lang('Select Type')--</option>
-                                <option value="1">@lang('FIAT')</option>
-                                <option value="2">@lang('CRYPTO')</option>
-                            </select>
-                        </div>
+                       
                        
                         <div class="form-group col-md-6">
                             <label>@lang('Set As Default') </label>

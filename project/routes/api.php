@@ -59,6 +59,7 @@ Route::prefix('user')->group(function () {
 Route::get('home-content', [FrontendController::class, 'homeContent']);
 Route::post('newsletter/submit', [FrontendController::class, 'newsletterSubmit']);
 Route::post('contact/submit', [FrontendController::class, 'contactSubmit']);
+Route::post('comment/submit', [FrontendController::class, 'blogCommentSubmit']);
 Route::post('volunteer/submit', [FrontendController::class, 'volunteerSubmit']);
 Route::get('events', [FrontendController::class, 'GetEvents']);
 Route::get('event/{slug}', [FrontendController::class, 'singleEvent']);

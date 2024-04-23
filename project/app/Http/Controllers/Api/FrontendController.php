@@ -6,6 +6,7 @@ use App\Http\Helpers\MediaHelper;
 use App\Models\About;
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Models\BlogComment;
 use App\Models\Brand;
 use App\Models\Campaign;
 use App\Models\Category;
@@ -211,8 +212,10 @@ class FrontendController extends ApiController
 
     public function singleBlog($slug)
     {
-        $blog = Blog::with('category')->where('slug', $slug)->first();
-        return $this->sendResponse($blog, 'Single Blog');
+        $data['blog'] = Blog::with('category')->where('slug', $slug)->first();
+        $data['recent_blogs'] = Blog::orderBy('id', 'desc')->limit(4)->get();
+        $data['comments'] = BlogComment::where('blog_id', $data['blog']->id)->orderBy('id', 'desc')->get();
+        return $this->sendResponse($data, 'Single Blog');
     }
 
     public function page($slug)
@@ -281,6 +284,23 @@ class FrontendController extends ApiController
         return $this->sendResponse($contact, 'Message Sent');
     }
 
+    public function blogCommentSubmit(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'comment' => 'required',
+        ]);
+
+        $comment = new BlogComment();
+        $comment->blog_id = $request->blog_id;
+        $comment->name = $request->name;
+        $comment->email = $request->email;
+        $comment->comment = $request->comment;
+        $comment->save();
+        return $this->sendResponse($comment, 'Comment Submitted');
+    }
+
     public function volunteerSubmit(Request $request)
     {
         $request->validate([
@@ -318,16 +338,15 @@ class FrontendController extends ApiController
 
     public function GetEvents(Request $request)
     {
-        $data['events'] = Event::where('status', 1)->orderBy('id', 'desc')->paginate(12);
 
         $search = $request->search;
 
-        $data['blogs'] = Blog::with('category')->orderBy('id', 'desc')
+        $data['events'] = Event::orderBy('id', 'desc')
             ->when($search, function ($query, $search) {
-                return $query->where('title', 'like', '%' . $search . '%')->orWhere('sort_text', 'like', '%' . $search . '%');
+                return $query->where('title', 'like', '%' . $search . '%')->orWhere('description', 'like', '%' . $search . '%');
             })
             ->paginate(12);
-        $data['recent_events'] = Blog::orderBy('id', 'desc')->limit(4)->get();
+        $data['recent_events'] = Event::orderBy('id', 'desc')->limit(4)->get();
         return $this->sendResponse($data, 'Event Fetch');
     }
 

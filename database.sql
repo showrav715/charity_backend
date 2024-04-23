@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2024 at 01:48 PM
+-- Generation Time: Apr 23, 2024 at 08:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -167,14 +167,6 @@ CREATE TABLE `blog_comments` (
   `email` varchar(255) DEFAULT NULL,
   `comment` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `blog_comments`
---
-
-INSERT INTO `blog_comments` (`id`, `blog_id`, `name`, `email`, `comment`) VALUES
-(10, 72, 'Showrav', 'showrabhasan715@gmail.com', 'Hello'),
-(11, 73, 'gjhkgsad', 'pronobsarker16@gmail.com', 'sfgsfg');
 
 -- --------------------------------------------------------
 
@@ -1858,7 +1850,7 @@ ALTER TABLE `blog_categories`
 -- AUTO_INCREMENT for table `blog_comments`
 --
 ALTER TABLE `blog_comments`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `brands`

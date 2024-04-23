@@ -184,6 +184,10 @@ function notify(type, message) {
   });
 })(jQuery); // End of use strict
 
+
+
+
+
 // Modal Javascript
 
 $(document).ready(function () {
