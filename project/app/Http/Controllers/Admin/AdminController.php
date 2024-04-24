@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\MediaHelper;
 use App\Models\Blog;
+use App\Models\Campaign;
 use App\Models\ContactMessage;
+use App\Models\Donation;
 use App\Models\Generalsetting;
 use App\Models\Subscriber;
 use App\Models\Team;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use InvalidArgumentException;
@@ -25,8 +28,10 @@ class AdminController extends Controller
     public function index()
     {
 
-        $data['getintouchs'] = ContactMessage::orderby('id', 'desc')->take(6)->get();
-        $data['total_getintouchs'] = ContactMessage::count();
+        $data['recent_campaigns'] = Campaign::orderby('id', 'desc')->take(5)->get();
+        $data['recent_messages'] = ContactMessage::orderby('id', 'desc')->take(6)->get();
+        $data['recent_donations'] = Donation::orderby('id', 'desc')->take(7)->get();
+        $data['recent_users'] = User::orderby('id', 'desc')->take(6)->get();
         $data['total_subscribers'] = Subscriber::count();
         $data['total_projects'] = 1;
         $data['total_teams'] = Team::count();

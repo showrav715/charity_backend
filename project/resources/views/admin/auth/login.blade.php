@@ -8,7 +8,6 @@
     <div class="card card-primary logincard">
       <div class="card-header d-flex justify-content-between">
           <h4>@lang('Admin Login')</h4>
-          <a href="{{url('/')}}">@lang('Home')</a>
         </div>
 
       <div class="card-body">
@@ -21,7 +20,7 @@
             @csrf
                 <div class="form-group">
                     <label for="email">@lang('Email')</label>
-                    <input id="email" type="email" class="form-control  @error('email') is-invalid  @enderror" name="email" tabindex="1" required>
+                    <input id="email" type="email" class="form-control  @error('email') is-invalid  @enderror" name="email" placeholder="Enter Email" tabindex="1" required>
                     @error('email')
                      <span class="text-danger mt-2">{{ $message }}</span>
                     @enderror
@@ -29,7 +28,7 @@
 
                 <div class="form-group">
                     <label for="password" class="control-label">@lang('Password')</label>
-                    <input id="password" type="password" class="form-control @error('password') is-invalid  @enderror " name="password" tabindex="2">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid  @enderror" placeholder="Enter Password" name="password" tabindex="2">
                     @error('password')
                         <span class="text-danger mt-2">{{ $message }}</span>
                     @enderror

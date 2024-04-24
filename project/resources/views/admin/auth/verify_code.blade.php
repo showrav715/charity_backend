@@ -9,7 +9,7 @@
     <div class="card card-primary logincard">
       <div class="card-header d-flex justify-content-between">
           <h4>@lang('Reset Password Code')</h4>
-          <a href="{{url('/')}}">@lang('Home')</a>
+          <a href="{{url('/')}}">@lang('Login')</a>
         </div>
 
       <div class="card-body">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2024 at 12:34 PM
+-- Generation Time: Apr 24, 2024 at 11:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -165,7 +165,9 @@ CREATE TABLE `blog_comments` (
   `blog_id` bigint(20) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `comment` text DEFAULT NULL
+  `comment` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -567,11 +569,11 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `title`, `slug`, `date`, `start_time`, `end_time`, `event_type`, `event_link`, `event_location`, `organizar_name`, `organizar_email`, `organizar_phone`, `map_link`, `description`, `photo`, `website`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Giving Hope: A Charity Gala for Children in Need', 'giving-hope-a-charity-gala-for-children-in-need', '2024-04-25', '18:34', '19:34', 'offline', 'test', '170 Washington Square South, New York, NY 10012, United States', 'asdfasd', 'dasfa', 'asdf', 'sdfasd', '<span style=\"color: rgb(77, 81, 86); font-family: arial, sans-serif;\">In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available.</span>', '6650090181713780218.png', NULL, 1, '2024-04-22 00:18:52', '2024-04-22 04:34:28'),
-(2, 'Giving Hope: A Gala for Children in Need', 'giving-hope-a-gala-for-children-in-need', '2024-04-25', '15:16', '18:36', 'online', 'test', 'dfasd', 'asdfasd', 'dasfa', 'asdf', 'sdfasd', 'asdf test', '9167718691713780252.png', NULL, 1, '2024-04-22 00:18:52', '2024-04-22 04:36:08'),
-(3, 'A Charity Gala for Children in Need', 'a-charity-gala-for-children-in-need', '2024-04-25', '15:16', '20:36', 'online', 'test', 'dfasd', 'asdfasd', 'dasfa', 'asdf', 'sdfasd', 'asdf test', '5055423321713780268.png', NULL, 1, '2024-04-22 00:18:52', '2024-04-22 04:36:18'),
-(4, 'A charity new event', 'a-charity-new-event', '2024-04-25', '15:16', '20:36', 'online', 'test', 'dfasd', 'asdfasd', 'dasfa', 'asdf', 'sdfasd', 'asdf test', '1050554961713780286.png', NULL, 1, '2024-04-22 00:18:52', '2024-04-22 04:36:27'),
-(5, 'New event Comming', 'new-event-comming', '2024-04-25', '15:16', '21:36', 'online', 'test', 'dfasd', 'asdfasd', 'dasfa', 'asdf', 'sdfasd', 'asdf test', '14244038021713780311.png', NULL, 1, '2024-04-22 00:18:52', '2024-04-22 04:36:38');
+(1, 'Giving Hope: A Charity Gala for Children in Need', 'giving-hope-a-charity-gala-for-children-in-need', '2024-04-25', '18:34', '19:34', 'offline', 'test', '170 Washington Square South, New York, NY 10012, United States', 'asdfasd', 'dasfa', 'asdf', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.4587740876873!2d90.39145547593027!3d23.87334528404414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c1c1b79fa481%3A0x59dde35061261ea6!2sGeniusOcean!5e0!3m2!1sen!2sbd!4v1713847038332!5m2!1sen!2sbd', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '6650090181713780218.png', 'https://www.google.com/', 1, '2024-04-22 00:18:52', '2024-04-22 04:34:28'),
+(2, 'Giving Hope: A Gala for Children in Need', 'giving-hope-a-gala-for-children-in-need', '2024-04-25', '15:16', '18:36', 'online', 'test', 'dfasd', 'asdfasd', 'dasfa', 'asdf', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.4587740876873!2d90.39145547593027!3d23.87334528404414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c1c1b79fa481%3A0x59dde35061261ea6!2sGeniusOcean!5e0!3m2!1sen!2sbd!4v1713847038332!5m2!1sen!2sbd', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '9167718691713780252.png', 'https://www.google.com/', 1, '2024-04-22 00:18:52', '2024-04-22 04:36:08'),
+(3, 'A Charity Gala for Children in Need', 'a-charity-gala-for-children-in-need', '2024-04-25', '15:16', '20:36', 'online', 'test', 'dfasd', 'asdfasd', 'dasfa', 'asdf', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.4587740876873!2d90.39145547593027!3d23.87334528404414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c1c1b79fa481%3A0x59dde35061261ea6!2sGeniusOcean!5e0!3m2!1sen!2sbd!4v1713847038332!5m2!1sen!2sbd', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '5055423321713780268.png', 'https://www.google.com/', 1, '2024-04-22 00:18:52', '2024-04-22 04:36:18'),
+(4, 'A charity new event', 'a-charity-new-event', '2024-04-25', '15:16', '20:36', 'online', 'test', 'dfasd', 'asdfasd', 'dasfa', 'asdf', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.4587740876873!2d90.39145547593027!3d23.87334528404414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c1c1b79fa481%3A0x59dde35061261ea6!2sGeniusOcean!5e0!3m2!1sen!2sbd!4v1713847038332!5m2!1sen!2sbd', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1050554961713780286.png', 'https://www.google.com/', 1, '2024-04-22 00:18:52', '2024-04-22 04:36:27'),
+(5, 'New event Comming', 'new-event-comming', '2024-04-25', '15:16', '21:36', 'online', 'test', 'dfasd', 'asdfasd', 'dasfa', 'asdf', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.4587740876873!2d90.39145547593027!3d23.87334528404414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c1c1b79fa481%3A0x59dde35061261ea6!2sGeniusOcean!5e0!3m2!1sen!2sbd!4v1713847038332!5m2!1sen!2sbd', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '14244038021713780311.png', 'https://www.google.com/', 1, '2024-04-22 00:18:52', '2024-04-22 04:36:38');
 
 -- --------------------------------------------------------
 
@@ -1003,7 +1005,8 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (228, 'App\\Models\\User', 22, 'authToken', '9fe509ae36d24893b3bcb7c31cf6e5b1475aae60e5fed5ec8866705b995783be', '[\"*\"]', '2024-04-06 00:51:24', '2024-04-06 00:11:26', '2024-04-06 00:51:24', NULL),
 (229, 'App\\Models\\User', 22, 'authToken', 'ffc7ae06e4ab5c89f9f63b75fd6c8565f455e3085b1ddf2ba6af554493040769', '[\"*\"]', '2024-04-16 04:48:46', '2024-04-16 02:08:13', '2024-04-16 04:48:46', NULL),
 (230, 'App\\Models\\User', 22, 'authToken', 'f7eb433dc2787640335d80fba211f7901340af84343a62f8e5827ed5a7c146f2', '[\"*\"]', '2024-04-17 00:41:40', '2024-04-16 21:41:30', '2024-04-17 00:41:40', NULL),
-(231, 'App\\Models\\User', 22, 'authToken', 'e7370d44d81f576920fdc15098f3d24542ca752b5e145cf3a2a9464853dbaca8', '[\"*\"]', '2024-04-23 04:21:01', '2024-04-23 03:01:21', '2024-04-23 04:21:01', NULL);
+(231, 'App\\Models\\User', 22, 'authToken', 'e7370d44d81f576920fdc15098f3d24542ca752b5e145cf3a2a9464853dbaca8', '[\"*\"]', '2024-04-23 04:21:01', '2024-04-23 03:01:21', '2024-04-23 04:21:01', NULL),
+(232, 'App\\Models\\User', 22, 'authToken', 'dc9f953af33225aa9603c036e7a17984ee20bb31db07e0713829285b1d5e3a71', '[\"*\"]', '2024-04-24 03:09:08', '2024-04-24 02:34:53', '2024-04-24 03:09:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -2012,7 +2015,7 @@ ALTER TABLE `payment_gateways`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=233;
 
 --
 -- AUTO_INCREMENT for table `preloadeds`
