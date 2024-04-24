@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Donation extends Model
 {
     use HasFactory;
-
+    public $appends = ['api_date'];
 
     public function campaign()
     {
@@ -22,6 +22,10 @@ class Donation extends Model
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id', 'id')->withDefault();
+    }
+
+    public function getApiDateAttribute() {
+        return $this->created_at->format('Y-m-d');
     }
 
    

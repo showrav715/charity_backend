@@ -124,6 +124,8 @@ class FrontendController extends ApiController
         $hero_section['maintenance_photo'] = getPhoto($hero_section->maintenance_photo);
         $hero_section['hero_photo'] = getPhoto($hero_section->hero_photo);
         $hero_section['cta_photo'] = getPhoto($hero_section->cta_photo);
+        $hero_section['checkout_success_photo'] = getPhoto($hero_section->checkout_success_photo);
+        $hero_section['checkout_faild_photo'] = getPhoto($hero_section->checkout_faild_photo);
         return $this->sendResponse($hero_section, 'Setting Data');
     }
 
@@ -297,6 +299,8 @@ class FrontendController extends ApiController
         $comment->name = $request->name;
         $comment->email = $request->email;
         $comment->comment = $request->comment;
+        $comment->created_at = now();
+
         $comment->save();
         return $this->sendResponse($comment, 'Comment Submitted');
     }
@@ -352,9 +356,9 @@ class FrontendController extends ApiController
 
     public function singleEvent($slug)
     {
-        $events = Event::whereSlug($slug)->first();
-        if ($events) {
-            return $this->sendResponse($events, 'Event Fetch');
+        $data['event'] = Event::whereSlug($slug)->first();
+        if ($data['event']) {
+            return $this->sendResponse($data, 'Single Event Fetch');
         } else {
             return $this->sendError('Event Not Found', 404);
         }
@@ -372,25 +376,25 @@ class FrontendController extends ApiController
 
     public function getTestimonials()
     {
-        $testimonials = Testimonial::orderBy('id', 'desc')->get();
-        return $this->sendResponse($testimonials, 'Gellery Fetch');
+        $data = Testimonial::orderBy('id', 'desc')->paginate(16);
+        return $this->sendResponse($data, 'Gellery Fetch');
     }
 
     public function donorList()
     {
-        $donors = Donation::with(['campaign:id,title,slug'])->where('status', 1)->orderBy('id', 'desc')->select(
+        $donors = Donation::with(['campaign:id,title,slug,photo'])->where('status', 1)->orderBy('id', 'desc')->select(
             'name',
             'total',
             "campaign_slug",
             'created_at'
-        )->paginate(15);
+        )->paginate(20);
         return $this->sendResponse($donors, 'Donor List');
 
     }
     public function getFaq()
     {
-        $donors = Faq::orderBy('id', 'desc')->get();
-        return $this->sendResponse($donors, 'Faq List');
+        $data['faqs'] = Faq::orderBy('id', 'desc')->get();
+        return $this->sendResponse($data, 'Faq List');
     }
 
     public function volunteerList()
