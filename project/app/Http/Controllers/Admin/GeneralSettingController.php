@@ -7,7 +7,6 @@ use App\Http\Helpers\MediaHelper;
 use App\Models\Generalsetting;
 use App\Models\HomePageSection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class GeneralSettingController extends Controller
 {
@@ -78,7 +77,6 @@ class GeneralSettingController extends Controller
             $gs->maintenance = $request->maintenance_message;
         }
 
-      
         if ($request->checkout == 1) {
             $gs->checkout_success_text = $request->checkout_success_text;
             $gs->checkout_faild_text = $request->checkout_faild_text;
@@ -88,28 +86,13 @@ class GeneralSettingController extends Controller
             $gs->theme = $request->theme;
         }
 
-
         $gs->update();
 
-
-
-        $images = ['header_logo', 'footer_logo', 'maintenance_photo', 'contact_section_photo', 'breadcumb', 'hero_photo', 'cta_photo','checkout_success_photo','checkout_faild_photo',"hero_photo2"];
+        $images = ['header_logo', 'footer_logo', 'maintenance_photo', 'contact_section_photo', 'breadcumb', 'hero_photo', 'cta_photo', 'checkout_success_photo', 'checkout_faild_photo', "hero_photo2"];
         foreach ($images as $image) {
             if (isset($request[$image])) {
                 $gs[$image] = MediaHelper::handleUpdateImage($request[$image], $gs[$image]);
                 $gs->update();
-
-                $array_forapi = ['header_logo', 'footer_logo', 'breadcumb'];
-
-                if (in_array($image, $array_forapi)) {
-                    $gs = Generalsetting::first();
-                    $url = 'http://localhost:3000/api/upload';
-                    $data = [
-                        'url' => getPhoto($gs[$image]),
-                        'filename' => $image . $request[$image]->getClientOriginalExtension(),
-                    ];
-                    Http::get($url, $data);
-                }
             }
         }
 
@@ -184,8 +167,8 @@ class GeneralSettingController extends Controller
         return view('admin.generalsetting.maintainance');
     }
 
-
-    public function checkout() {
+    public function checkout()
+    {
         return view('admin.generalsetting.checkout');
     }
 }

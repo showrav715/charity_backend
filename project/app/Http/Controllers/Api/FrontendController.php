@@ -62,7 +62,6 @@ class FrontendController extends ApiController
                     $query->where('close_type', 'end_date')
                         ->whereDate('end_date', '>=', now()->toDateString());
                 })
-                ->limit(9)
                 ->get()
                 ->map(function ($campaign) {
                     $campaign->formatted_created_at = dateFormat($campaign->created_at->format('Y-m-d'));
@@ -73,14 +72,14 @@ class FrontendController extends ApiController
         if (in_array('latest_category', $all) || in_array('*', $all)) {
             $data['latest_category'] = Category::where('status', 1)
                 ->orderBy('id', 'desc')
-                ->limit(9)
+                ->take(9)
                 ->get();
         }
 
         if (in_array('faq', $all) || in_array('*', $all)) {
             $data['faqs'] = Faq::
                 orderBy('id', 'desc')
-                ->limit(9)
+                ->take(9)
                 ->get();
         }
 
@@ -92,7 +91,7 @@ class FrontendController extends ApiController
             $data['newest_campaign'] = Campaign::with('category')
                 ->where('status', 1)
                 ->latest()
-                ->limit(9)
+                ->take(9)
                 ->get()
                 ->map(function ($campaign) {
                     $campaign->formatted_created_at = dateFormat($campaign->created_at->format('Y-m-d'));
@@ -170,6 +169,10 @@ class FrontendController extends ApiController
     public function singleCampaign($slug)
     {
         $campaign = Campaign::with(['category', 'faqs', 'galleries'])->where('slug', $slug)->first();
+
+        if(!$campaign) {
+            return $this->sendError('Campaign Not Found', 404);
+        }
 
         if ($campaign) {
             foreach ($campaign->galleries as $gallery) {

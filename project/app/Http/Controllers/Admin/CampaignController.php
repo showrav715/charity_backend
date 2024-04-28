@@ -36,16 +36,7 @@ class CampaignController extends Controller
         $campaigns = Campaign::
         orderby('id','desc')
         ->paginate(10);
-        // where(function ($query) {
-        //     $query->where('close_type', 'goal')
-        //     ->whereColumn('raised', '<=', 'goal'); 
-        // })
-        // ->orWhere(function ($query) {
-            
-        //     $query->where('close_type', 'end_date')
-        //         ->whereDate('end_date', '>=', now()->toDateString()); 
-        // })
-        
+   
 
         return view('admin.campaign.index', compact('campaigns'));
     }

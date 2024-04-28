@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2024 at 11:22 AM
+-- Generation Time: Apr 28, 2024 at 01:55 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -73,7 +73,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `email_verify_token`, `phone`, `photo`, `role_id`, `role`, `status`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@gmail.com', '', '09000000', '13920742411690092167.jpg', '0', 'Administrator', 1, '$2y$10$WpCFoErUffgj0T59dorrKuJH5Nef6z7PCpgY52XPNbpWUVBrTw/6C', 'mTwysgKKc9RRPqZAUOPQnN08ci0QsFu5SZ1GDIe9dCXgIqn8PRcAAgjLqWu7', NULL, '2023-07-23 13:02:47'),
+(1, 'admin', 'admin@gmail.com', '', '09000000', '13920742411690092167.jpg', '0', 'Administrator', 1, '$2y$10$WpCFoErUffgj0T59dorrKuJH5Nef6z7PCpgY52XPNbpWUVBrTw/6C', '0jneYkgLF9PvD2mYTzsdYAM0obsh9yx5fSBv0OkstvqKlasMCqq9Flbvrmda', NULL, '2023-07-23 13:02:47'),
 (3, 'showrav Hasan', 'showrabhasan715@gmail.com', NULL, NULL, NULL, NULL, 'Farhad', 1, '$2y$10$WpCFoErUffgj0T59dorrKuJH5Nef6z7PCpgY52XPNbpWUVBrTw/6C', NULL, '2023-03-20 16:32:09', '2023-03-20 16:32:09'),
 (4, 'pronob', 'pronobsarker16@gmail.com', NULL, NULL, NULL, NULL, 'pronob', 1, '$2y$10$FyqCOJm5fsO7OcyL5sfd0.hIvyfM3HH1x153NzpG6niG57uhy2AsO', NULL, '2023-07-25 11:23:56', '2023-07-25 11:23:56');
 
@@ -170,6 +170,13 @@ CREATE TABLE `blog_comments` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `blog_comments`
+--
+
+INSERT INTO `blog_comments` (`id`, `blog_id`, `name`, `email`, `comment`, `created_at`, `updated_at`) VALUES
+(22, 72, 'showrav Hasan', 'showrabhasan715@gmail.com', 'hello', '2024-04-27 03:30:22', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -215,16 +222,16 @@ CREATE TABLE `campaigns` (
 --
 
 INSERT INTO `campaigns` (`id`, `title`, `slug`, `category_id`, `user_id`, `photo`, `raised`, `goal`, `description`, `status`, `close_type`, `is_faq`, `is_feature`, `is_preloaded`, `location`, `benefits`, `end_date`, `video_link`, `created_at`, `updated_at`) VALUES
-(8, 'test', 'test', 3, NULL, '8465080681708142609.jpg', 3, 5, '<p>test</p>', 1, 'goal', 1, 1, 1, 'test', 5, '2024-03-15', 'r2456246', '2024-02-16 22:03:29', '2024-04-16 00:17:33'),
-(9, 'dasfa', 'dasfa', 3, NULL, '2837413001708164872.jpg', 50, 500, '<p>asdfasdf</p>', 1, 'goal', 0, 1, 0, 'London', 5, '2024-03-15', 'adfssd', '2024-02-17 04:14:32', '2024-03-22 21:47:19'),
+(8, 'test', 'test', 3, NULL, '8465080681708142609.jpg', 4163, 5, '<p>test</p>', 2, 'goal', 1, 1, 1, 'test', 5, '2024-03-15', 'r2456246', '2024-02-16 22:03:29', '2024-04-28 03:41:02'),
+(9, 'dasfa', 'dasfa', 3, NULL, '2837413001708164872.jpg', 25020, 500, '<p>asdfasdf</p>', 2, 'goal', 0, 1, 0, 'London', 5, '2024-03-15', 'adfssd', '2024-02-17 04:14:32', '2024-04-28 03:41:02'),
 (10, 'test test5 last check', 'test-test5-last-check', 3, 22, '12978448341710133301.png', 10, 5, '<p>asdfasdf hgjgjg jhufgjktg</p>', 2, 'goal', 1, 1, 0, 'asdfad', 5, '2024-12-02', 'adfssd', '2024-02-17 04:28:52', '2024-04-16 21:42:01'),
-(11, 'New Data again', 'new-data-again', 3, 22, '13510299461708165868.png', 0, 5, '<p>asdfasdf</p>', 1, 'goal', 0, 0, 0, 'asdfad', 5, '2024-12-02', 'adfssd', '2024-02-17 04:31:08', '2024-02-17 04:31:08'),
+(11, 'New Data again', 'new-data-again', 3, 22, '13510299461708165868.png', 66720, 5, '<p>asdfasdf</p>', 2, 'goal', 0, 0, 0, 'asdfad', 5, '2024-12-02', 'adfssd', '2024-02-17 04:31:08', '2024-04-28 03:41:02'),
 (12, 'New Data again 5', 'new-data-again-5', 3, 22, '5042978721708165880.png', 0, 5, '<p><br></p>', 2, 'end_date', 0, 0, 0, 'asdfad', 5, '2024-12-02', 'adfssd', '2024-02-17 04:31:21', '2024-04-16 02:39:32'),
 (13, 'DSAFASDF', 'dsafasdf', 3, 22, '4156866211708165984.png', 0, 5, '<p>SDFASDF</p>', 2, 'end_date', 0, 0, 0, 'TEST', 5, '2024-12-02', 'ASDFAS', '2024-02-17 04:33:04', '2024-04-16 02:35:40'),
 (14, 'SDFASD', 'sdfasd', 2, 22, '20421391321708166036.png', 0, 5, '<p>ASDFAS</p>', 2, 'end_date', 0, 0, 0, '5', 5, '2024-03-20', 'ASDFA', '2024-02-17 04:33:56', '2024-04-16 02:32:29'),
 (15, 'SDFASDASDFA', 'sdfasdasdfa', 3, 22, '1537121141708166093.png', 0, 5, '<p>ASDFASDF</p>', 2, 'end_date', 0, 0, 0, '5', 5, '2024-12-02', 'ASDFA', '2024-02-17 04:34:53', '2024-02-17 04:34:53'),
-(16, 'ASDFASDF', 'asdfasdf', 3, 22, '7852570471708166141.png', 100, 5, '<p>ASDFASDF</p>', 1, 'end_date', 0, 0, 0, '5', 5, '2024-12-02', 'DFASDF', '2024-02-17 04:35:41', '2024-04-16 21:40:00'),
-(17, 'ASDFASDFFGHDGH', 'asdfasdffghdgh', 3, 22, '5230319571708166183.jpg', 18.9, 5, '<p>GFSDFGS</p>', 1, 'end_date', 0, 0, 0, '5', 5, '2024-12-02', 'DFASDF', '2024-02-17 04:36:23', '2024-04-16 21:37:04'),
+(16, 'ASDFASDF', 'asdfasdf', 3, 22, '7852570471708166141.png', 45870, 5, '<p>ASDFASDF</p>', 1, 'end_date', 0, 0, 0, '5', 5, '2024-12-02', 'DFASDF', '2024-02-17 04:35:41', '2024-04-27 02:51:57'),
+(17, 'ASDFASDFFGHDGH', 'asdfasdffghdgh', 3, 22, '5230319571708166183.jpg', 24988.9, 5, '<p>GFSDFGS</p>', 1, 'end_date', 0, 0, 0, '5', 5, '2024-12-02', 'DFASDF', '2024-02-17 04:36:23', '2024-04-27 02:45:47'),
 (18, 'ASDFASDFFGHDGH ADSFGASD', 'asdfasdffghdgh-adsfgasd', 3, 22, '14172479461708166296.jpg', 0, 5, '<p>ASDFGSDFGSD</p>', 0, 'goal', 0, 0, 0, '5', 5, '2024-12-02', 'DFASDF', '2024-02-17 04:38:16', '2024-02-17 04:38:16'),
 (19, 'asdfasdfsadfasdfasdfasfasfasff', 'asdfasdfsadfasdfasdfasfasfasff', 2, 22, '21465030701708166397.png', 0, 78, '<p>asdfasdf</p>', 2, 'goal', 0, 0, 0, 'asdf', 77, '2024-12-02', 'erertew', '2024-02-17 04:39:57', '2024-04-16 02:36:08'),
 (20, 'sadfasdf', 'sadfasdf', 3, 22, '15035961041708166486.png', 0, 5, '<p>asdfasdf</p>', 0, 'goal', 0, 0, 0, 'dfasdf', 5, '2024-12-02', 'asdfasd', '2024-02-17 04:41:26', '2024-02-17 04:41:26'),
@@ -444,7 +451,7 @@ INSERT INTO `currencies` (`id`, `default`, `symbol`, `code`, `status`, `value`, 
 (4, 1, '€', 'EUR', 1, 0.89, '2021-12-19 16:12:58', '2022-12-06 15:31:17'),
 (7, 0, '₹', 'INR', 1, 75.00, '2022-01-25 14:28:23', '2022-11-29 22:37:29'),
 (8, 0, '₦', 'NGN', 1, 416.00, '2022-02-05 17:41:35', '2022-11-29 21:14:16'),
-(11, 0, 'SAR', 'SAR', 1, 1.00, '2022-02-05 17:41:35', '2022-11-29 21:14:16');
+(12, 0, '৳', 'BDT', 1, 1.00, '2022-02-05 17:41:35', '2022-11-29 21:14:16');
 
 -- --------------------------------------------------------
 
@@ -511,7 +518,18 @@ INSERT INTO `donations` (`id`, `name`, `email`, `phone`, `address`, `owner_id`, 
 (10, 'showrav Hasan', 'showrabhasan715@gmail.com', '17283320', 'Tangail,Dhaka,Bangladesh', 22, NULL, 8.9, 0, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'asdfasdffghdgh', 'flutterwave', '5009240', '2024-04-06 00:10:56', '2024-04-06 00:10:56'),
 (11, NULL, NULL, NULL, NULL, 22, NULL, 10, 0, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'asdfasdffghdgh', 'stripe', 'pi_3P6PIuJlIV5dN9n70m377oAk', '2024-04-16 21:37:04', '2024-04-16 21:37:04'),
 (12, NULL, NULL, NULL, NULL, 22, NULL, 50, 0, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'asdfasdf', 'flutterwave', '5031923', '2024-04-16 21:40:00', '2024-04-16 21:40:00'),
-(13, 'showrav Hasan', 'teacher@gmail.com', '1728332009', 'Munshinogor,Delduar,Tangail,Dhaka,Bangladesh', 22, NULL, 11, 1, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'test-test5-last-check', 'paypal', '8N8700445X518633T', '2024-04-16 21:40:47', '2024-04-16 21:40:47');
+(13, 'showrav Hasan', 'teacher@gmail.com', '1728332009', 'Munshinogor,Delduar,Tangail,Dhaka,Bangladesh', 22, NULL, 11, 1, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'test-test5-last-check', 'paypal', '8N8700445X518633T', '2024-04-16 21:40:47', '2024-04-16 21:40:47'),
+(14, 'showrav Hasan', 'teacher@gmail.com', '1728332009', 'Munshinogor,Delduar,Tangail,Dhaka,Bangladesh', 22, NULL, 11, 1, '{\"id\":1,\"default\":0,\"symbol\":\"$\",\"code\":\"USD\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2021-12-19T22:12:58.000000Z\",\"updated_at\":\"2022-11-30T04:53:30.000000Z\"}', '1', 'test-test5-last-check', 'paypal', '8N8700445X518633T', '2024-04-16 21:40:47', '2024-04-16 21:40:47'),
+(26, NULL, NULL, NULL, NULL, 22, NULL, 10, 0, '{\"id\":8,\"default\":0,\"symbol\":\"\\u20a6\",\"code\":\"NGN\",\"status\":1,\"value\":\"416.00\",\"created_at\":\"2022-02-05T23:41:35.000000Z\",\"updated_at\":\"2022-11-30T03:14:16.000000Z\"}', '1', 'asdfasdffghdgh', 'paystack', '3746228568', '2024-04-27 00:27:03', '2024-04-27 00:27:03'),
+(27, NULL, NULL, NULL, NULL, NULL, NULL, 10, 0, '{\"id\":8,\"default\":0,\"symbol\":\"\\u20a6\",\"code\":\"NGN\",\"status\":1,\"value\":\"416.00\",\"created_at\":\"2022-02-05T23:41:35.000000Z\",\"updated_at\":\"2022-11-30T03:14:16.000000Z\"}', '1', 'test', 'paystack', '3746230152', '2024-04-27 00:27:27', '2024-04-27 00:27:27'),
+(28, NULL, NULL, NULL, NULL, 22, NULL, 50, 0, '{\"id\":8,\"default\":0,\"symbol\":\"\\u20a6\",\"code\":\"NGN\",\"status\":1,\"value\":\"416.00\",\"created_at\":\"2022-02-05T23:41:35.000000Z\",\"updated_at\":\"2022-11-30T03:14:16.000000Z\"}', '1', 'new-data-again', 'paystack', '3746239840', '2024-04-27 00:30:43', '2024-04-27 00:30:43'),
+(29, NULL, NULL, NULL, NULL, 22, NULL, 50, 0, '{\"id\":8,\"default\":0,\"symbol\":\"\\u20a6\",\"code\":\"NGN\",\"status\":1,\"value\":\"416.00\",\"created_at\":\"2022-02-05T23:41:35.000000Z\",\"updated_at\":\"2022-11-30T03:14:16.000000Z\"}', '1', 'asdfasdf', 'paystack', '3746240730', '2024-04-27 00:31:03', '2024-04-27 00:31:03'),
+(30, NULL, NULL, NULL, NULL, 22, NULL, 50, 0, '{\"id\":8,\"default\":0,\"symbol\":\"\\u20a6\",\"code\":\"NGN\",\"status\":1,\"value\":\"416.00\",\"created_at\":\"2022-02-05T23:41:35.000000Z\",\"updated_at\":\"2022-11-30T03:14:16.000000Z\"}', '1', 'new-data-again', 'paystack', '3746243267', '2024-04-27 00:31:53', '2024-04-27 00:31:53'),
+(31, NULL, NULL, NULL, NULL, 22, NULL, 10, 0, '{\"id\":12,\"default\":0,\"symbol\":\"\\u09f3\",\"code\":\"BDT\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2022-02-05T23:41:35.000000Z\",\"updated_at\":\"2022-11-30T03:14:16.000000Z\"}', '1', 'asdfasdffghdgh', 'sslcommerz', 'THlgCebpLbyQTnQ9c9LL', '2024-04-27 02:45:47', '2024-04-27 02:45:47'),
+(32, NULL, NULL, NULL, NULL, 22, NULL, 10, 0, '{\"id\":12,\"default\":0,\"symbol\":\"\\u09f3\",\"code\":\"BDT\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2022-02-05T23:41:35.000000Z\",\"updated_at\":\"2022-11-30T03:14:16.000000Z\"}', '1', 'new-data-again', 'sslcommerz', 'Uo6KQcZi07aBJKlR5fmY', '2024-04-27 02:46:24', '2024-04-27 02:46:24'),
+(33, NULL, NULL, NULL, NULL, 22, NULL, 10, 0, '{\"id\":12,\"default\":0,\"symbol\":\"\\u09f3\",\"code\":\"BDT\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2022-02-05T23:41:35.000000Z\",\"updated_at\":\"2022-11-30T03:14:16.000000Z\"}', '1', 'asdfasdf', 'sslcommerz', '5crNo06kNwzgrkK6KPTQ', '2024-04-27 02:51:57', '2024-04-27 02:51:57'),
+(34, NULL, NULL, NULL, NULL, NULL, NULL, 10, 0, '{\"id\":12,\"default\":0,\"symbol\":\"\\u09f3\",\"code\":\"BDT\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2022-02-05T23:41:35.000000Z\",\"updated_at\":\"2022-11-30T03:14:16.000000Z\"}', '1', 'dasfa', 'sslcommerz', 'sovHJZzPxBhBs2ln9bmT', '2024-04-27 02:53:52', '2024-04-27 02:53:52'),
+(35, NULL, NULL, NULL, NULL, 22, NULL, 50, 0, '{\"id\":12,\"default\":0,\"symbol\":\"\\u09f3\",\"code\":\"BDT\",\"status\":1,\"value\":\"1.00\",\"created_at\":\"2022-02-05T23:41:35.000000Z\",\"updated_at\":\"2022-11-30T03:14:16.000000Z\"}', '1', 'new-data-again', 'sslcommerz', 'WQUWSzrkfsgy7rtAFzl9', '2024-04-27 02:55:03', '2024-04-27 03:03:11');
 
 -- --------------------------------------------------------
 
@@ -644,6 +662,7 @@ INSERT INTO `features` (`id`, `title`, `text`, `photo`) VALUES
 CREATE TABLE `generalsettings` (
   `id` int(11) NOT NULL,
   `logo` varchar(191) DEFAULT NULL,
+  `theme` varchar(50) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
@@ -664,6 +683,7 @@ CREATE TABLE `generalsettings` (
   `hero_btn_text` varchar(255) NOT NULL,
   `hero_btn_url` varchar(255) DEFAULT NULL,
   `hero_photo` varchar(255) DEFAULT NULL,
+  `hero_photo2` varchar(255) DEFAULT NULL,
   `cta_photo` varchar(255) DEFAULT NULL,
   `cta_title` varchar(255) DEFAULT NULL,
   `cta_btn_url` text DEFAULT NULL,
@@ -686,8 +706,8 @@ CREATE TABLE `generalsettings` (
 -- Dumping data for table `generalsettings`
 --
 
-INSERT INTO `generalsettings` (`id`, `logo`, `phone`, `email`, `address`, `copyright_text`, `header_logo`, `breadcumb`, `title`, `is_maintenance`, `maintenance`, `maintenance_photo`, `frontend_url`, `header_text`, `footer_logo`, `footer_text`, `hero_title`, `hero_subtitle`, `hero_video_link`, `hero_btn_text`, `hero_btn_url`, `hero_photo`, `cta_photo`, `cta_title`, `cta_btn_url`, `cta_btn_text`, `smtp_host`, `smtp_port`, `smtp_user`, `mail_encryption`, `smtp_pass`, `from_email`, `from_name`, `mail_type`, `checkout_success_photo`, `checkout_success_text`, `checkout_faild_photo`, `checkout_faild_text`) VALUES
-(1, '1571567292logo.png', '01700000000', 'genius@gmail.com', '380 St, New York, USA', 'Copyright © 2023 Reserved Passion by GeniusOcean', '14323369791712379160.png', '9239898951712378821.png', 'Car Service', 0, 'test', '1560221241689753866.png', 'https://carservice.geniusocean.xyz/', 'best Car Service company website forever!', '8665975201712379174.png', 'Your Car Deserves the Best Care', 'Keep you on tha road with services you can trust', 'AUTO REPAIR SPECIALIST', 'TqhNILVX8IE', 'Click Our Service', '#', '16865032191688551090.jpg', '12680630721711185679.webp', 'If You Want To Join With Us As a Volunteer. Contact Us Today!', NULL, NULL, 'sandbox.smtp.mailtrap.io', '2525', '77c8df7c3e0779', 'tls', '509dc95e1382f5', 'support@gmail.com', 'Charity', 'php_mailer', '300097761713773488.png', 'asdf', '5789672881713773533.png', 'asdfad');
+INSERT INTO `generalsettings` (`id`, `logo`, `theme`, `phone`, `email`, `address`, `copyright_text`, `header_logo`, `breadcumb`, `title`, `is_maintenance`, `maintenance`, `maintenance_photo`, `frontend_url`, `header_text`, `footer_logo`, `footer_text`, `hero_title`, `hero_subtitle`, `hero_video_link`, `hero_btn_text`, `hero_btn_url`, `hero_photo`, `hero_photo2`, `cta_photo`, `cta_title`, `cta_btn_url`, `cta_btn_text`, `smtp_host`, `smtp_port`, `smtp_user`, `mail_encryption`, `smtp_pass`, `from_email`, `from_name`, `mail_type`, `checkout_success_photo`, `checkout_success_text`, `checkout_faild_photo`, `checkout_faild_text`) VALUES
+(1, '1571567292logo.png', 'theme2', '01700000000', 'genius@gmail.com', '380 St, New York, USA', 'Copyright © 2023 Reserved Passion by GeniusOcean', '14323369791712379160.png', '4726516861714280714.png', 'Car Service', 0, 'test', '1560221241689753866.png', 'http://localhost:3000/', 'best Car Service company website forever!', '8665975201712379174.png', 'Your Car Deserves the Best Care', 'Keep you on tha road with services you can trust', 'AUTO REPAIR SPECIALIST', 'TqhNILVX8IE', 'Click Our Service', '#', '13598298971714274746.png', '12091145591714274775.png', '12680630721711185679.webp', 'If You Want To Join With Us As a Volunteer. Contact Us Today!', NULL, NULL, 'sandbox.smtp.mailtrap.io', '2525', '77c8df7c3e0779', 'tls', '509dc95e1382f5', 'support@gmail.com', 'Charity', 'php_mailer', '300097761713773488.png', 'asdf', '5789672881713773533.png', 'asdfad');
 
 -- --------------------------------------------------------
 
@@ -954,15 +974,14 @@ CREATE TABLE `payment_gateways` (
 --
 
 INSERT INTO `payment_gateways` (`id`, `subtitle`, `title`, `details`, `name`, `type`, `information`, `keyword`, `currency_id`, `status`, `photo`) VALUES
-(1, 'Pay with cash upon delivery.', 'Cash On Delivery', NULL, NULL, 'manual', NULL, 'cod', '0', 0, NULL),
 (2, '(5 - 6 days)', 'Mobile Money', '<b>Payment Number: </b>69234324233423', NULL, 'manual', NULL, NULL, '0', 0, NULL),
-(4, NULL, NULL, NULL, 'SSLCommerz', 'automatic', '{\"store_id\":\"geniu5e1b00621f81e\",\"store_password\":\"geniu5e1b00621f81e@ssl\",\"sandbox_check\":1,\"text\":\"Pay Via SSLCommerz.\"}', 'sslcommerz', '[\"4\"]', 0, NULL),
+(4, NULL, NULL, '', 'SSLCommerz', 'automatic', '{\"store_id\":\"geniu5e1b00621f81e\",\"store_password\":\"geniu5e1b00621f81e@ssl\",\"text\":\"Pay Via SSLCommerz.\",\"sandbox_check\":1}', 'sslcommerz', '[\"12\"]', 1, '18446332961714206592.png'),
 (7, NULL, NULL, NULL, 'Mercadopago', 'automatic', '{\"public_key\":\"TEST-6f72a502-51c8-4e9a-8ca3-cb7fa0addad8\",\"token\":\"TEST-6068652511264159-022306-e78da379f3963916b1c7130ff2906826-529753482\",\"sandbox_check\":1,\"text\":\"Pay Via MercadoPago\"}', 'mercadopago', '[\"1\"]', 0, NULL),
-(8, NULL, NULL, NULL, 'Authorize.Net', 'automatic', '{\"login_id\":\"76zu9VgUSxrJ\",\"txn_key\":\"2Vj62a6skSrP5U3X\",\"sandbox_check\":1,\"text\":\"Pay Via Authorize.Net\"}', 'authorize', '[\"1\"]', 0, NULL),
+(8, NULL, NULL, '', 'Authorize.Net', 'automatic', '{\"login_id\":\"76zu9VgUSxrJ\",\"txn_key\":\"2Vj62a6skSrP5U3X\",\"text\":\"Pay Via Authorize.Net\",\"sandbox_check\":1}', 'authorize', '[\"1\",\"4\"]', 1, '7631393711714189602.png'),
 (9, NULL, NULL, '', 'Razorpay', 'automatic', '{\"key\":\"rzp_test_xDH74d48cwl8DF\",\"secret\":\"cr0H1BiQ20hVzhpHfHuNbGri\",\"text\":\"Pay via your Razorpay account.\"}', 'razorpay', '[\"7\"]', 1, '10765182811711964934.png'),
 (10, NULL, NULL, NULL, 'Mollie Payment', 'automatic', '{\"key\":\"test_5HcWVs9qc5pzy36H9Tu9mwAyats33J\",\"text\":\"Pay with Mollie Payment.\"}', 'mollie', '[\"1\",\"6\"]', 0, NULL),
 (11, NULL, NULL, NULL, 'Paytm', 'automatic', '{\"merchant\":\"tkogux49985047638244\",\"secret\":\"LhNGUUKE9xCQ9xY8\",\"website\":\"WEBSTAGING\",\"industry\":\"Retail\",\"sandbox_check\":1,\"text\":\"Pay via your Paytm account.\"}', 'paytm', '[\"8\"]', 0, NULL),
-(12, NULL, NULL, NULL, 'Paystack', 'automatic', '{\"key\":\"pk_test_162a56d42131cbb01932ed0d2c48f9cb99d8e8e2\",\"email\":\"junnuns@gmail.com\",\"text\":\"Pay via your Paystack account.\"}', 'paystack', '[\"9\"]', 0, NULL),
+(12, NULL, NULL, '', 'Paystack', 'automatic', '{\"key\":\"pk_test_162a56d42131cbb01932ed0d2c48f9cb99d8e8e2\",\"email\":\"junnuns@gmail.com\",\"text\":\"Pay via your Paystack account.\"}', 'paystack', '[\"8\"]', 1, '3813075801714194059.png'),
 (13, NULL, NULL, NULL, 'Instamojo', 'automatic', '{\"key\":\"test_172371aa837ae5cad6047dc3052\",\"token\":\"test_4ac5a785e25fc596b67dbc5c267\",\"sandbox_check\":1,\"text\":\"Pay via your Instamojo account.\"}', 'instamojo', '[\"8\"]', 0, NULL),
 (14, NULL, NULL, '', 'Stripe', 'automatic', '{\"key\":\"pk_test_UnU1Coi1p5qFGwtpjZMRMgJM\",\"secret\":\"sk_test_QQcg3vGsKRPlW6T3dXcNJsor\",\"text\":\"Pay via your Credit Card.\"}', 'stripe', '[\"1\"]', 1, '13080571861711961996.png'),
 (15, NULL, NULL, '', 'Paypal', 'automatic', '{\"client_id\":\"AcWYnysKa_elsQIAnlfsJXokR64Z31CeCbpis9G3msDC-BvgcbAwbacfDfEGSP-9Dp9fZaGgD05pX5Qi\",\"client_secret\":\"EGZXTq6d6vBPq8kysVx8WQA5NpavMpDzOLVOb9u75UfsJ-cFzn6aeBXIMyJW2lN1UZtJg5iDPNL9ocYE\",\"text\":\"Pay via your PayPal account.\",\"sandbox_check\":1}', 'paypal', '[\"1\",\"4\"]', 1, '17470991311711962984.png'),
@@ -1006,7 +1025,8 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (229, 'App\\Models\\User', 22, 'authToken', 'ffc7ae06e4ab5c89f9f63b75fd6c8565f455e3085b1ddf2ba6af554493040769', '[\"*\"]', '2024-04-16 04:48:46', '2024-04-16 02:08:13', '2024-04-16 04:48:46', NULL),
 (230, 'App\\Models\\User', 22, 'authToken', 'f7eb433dc2787640335d80fba211f7901340af84343a62f8e5827ed5a7c146f2', '[\"*\"]', '2024-04-17 00:41:40', '2024-04-16 21:41:30', '2024-04-17 00:41:40', NULL),
 (231, 'App\\Models\\User', 22, 'authToken', 'e7370d44d81f576920fdc15098f3d24542ca752b5e145cf3a2a9464853dbaca8', '[\"*\"]', '2024-04-23 04:21:01', '2024-04-23 03:01:21', '2024-04-23 04:21:01', NULL),
-(232, 'App\\Models\\User', 22, 'authToken', 'dc9f953af33225aa9603c036e7a17984ee20bb31db07e0713829285b1d5e3a71', '[\"*\"]', '2024-04-24 03:09:08', '2024-04-24 02:34:53', '2024-04-24 03:09:08', NULL);
+(232, 'App\\Models\\User', 22, 'authToken', 'dc9f953af33225aa9603c036e7a17984ee20bb31db07e0713829285b1d5e3a71', '[\"*\"]', '2024-04-24 03:09:08', '2024-04-24 02:34:53', '2024-04-24 03:09:08', NULL),
+(233, 'App\\Models\\User', 22, 'authToken', '54d2ada6bb6393f1e75c5468e9edd6cb5487c6f684a8e7ed2a986883ef914215', '[\"*\"]', '2024-04-24 05:14:17', '2024-04-24 04:56:06', '2024-04-24 05:14:17', NULL);
 
 -- --------------------------------------------------------
 
@@ -1398,7 +1418,24 @@ INSERT INTO `transactions` (`id`, `user_id`, `amount`, `txn_id`, `type`, `remark
 (3, 22, 8.90, '5009240', '+', 'Donation Received', '2024-04-06 00:10:56', '2024-04-06 00:10:56'),
 (4, 22, 10.00, 'pi_3P6PIuJlIV5dN9n70m377oAk', '+', 'Donation Received', '2024-04-16 21:37:04', '2024-04-16 21:37:04'),
 (5, 22, 50.00, '5031923', '+', 'Donation Received', '2024-04-16 21:40:00', '2024-04-16 21:40:00'),
-(6, 22, 10.00, '8N8700445X518633T', '+', 'Donation Received', '2024-04-16 21:40:47', '2024-04-16 21:40:47');
+(6, 22, 10.00, '8N8700445X518633T', '+', 'Donation Received', '2024-04-16 21:40:47', '2024-04-16 21:40:47'),
+(7, 22, 4160.00, '3746133694', '+', 'Donation Received', '2024-04-26 23:54:22', '2024-04-26 23:54:22'),
+(8, 22, 4160.00, '3746138127', '+', 'Donation Received', '2024-04-26 23:55:52', '2024-04-26 23:55:52'),
+(9, 22, 4160.00, '3746143222', '+', 'Donation Received', '2024-04-26 23:57:28', '2024-04-26 23:57:28'),
+(10, 22, 4160.00, '3746161509', '+', 'Donation Received', '2024-04-27 00:03:39', '2024-04-27 00:03:39'),
+(11, 22, 4160.00, '3746175764', '+', 'Donation Received', '2024-04-27 00:07:59', '2024-04-27 00:07:59'),
+(12, 22, 4160.00, '3746189940', '+', 'Donation Received', '2024-04-27 00:13:21', '2024-04-27 00:13:21'),
+(13, 22, 4160.00, '3746209325', '+', 'Donation Received', '2024-04-27 00:20:12', '2024-04-27 00:20:12'),
+(14, 22, 20800.00, '3746217967', '+', 'Donation Received', '2024-04-27 00:23:20', '2024-04-27 00:23:20'),
+(15, 22, 20800.00, '3746223726', '+', 'Donation Received', '2024-04-27 00:25:24', '2024-04-27 00:25:24'),
+(16, 22, 4160.00, '3746228568', '+', 'Donation Received', '2024-04-27 00:27:03', '2024-04-27 00:27:03'),
+(17, 22, 20800.00, '3746239840', '+', 'Donation Received', '2024-04-27 00:30:43', '2024-04-27 00:30:43'),
+(18, 22, 20800.00, '3746240730', '+', 'Donation Received', '2024-04-27 00:31:03', '2024-04-27 00:31:03'),
+(19, 22, 20800.00, '3746243267', '+', 'Donation Received', '2024-04-27 00:31:53', '2024-04-27 00:31:53'),
+(20, 22, 10.00, 'THlgCebpLbyQTnQ9c9LL', '+', 'Donation Received', '2024-04-27 02:45:47', '2024-04-27 02:45:47'),
+(21, 22, 10.00, 'Uo6KQcZi07aBJKlR5fmY', '+', 'Donation Received', '2024-04-27 02:46:24', '2024-04-27 02:46:24'),
+(22, 22, 10.00, '5crNo06kNwzgrkK6KPTQ', '+', 'Donation Received', '2024-04-27 02:51:57', '2024-04-27 02:51:57'),
+(23, 22, 50.00, 'WQUWSzrkfsgy7rtAFzl9', '+', 'Donation Received', '2024-04-27 02:55:17', '2024-04-27 02:55:17');
 
 -- --------------------------------------------------------
 
@@ -1441,7 +1478,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `photo`, `phone`, `country`, `city`, `address`, `zip`, `balance`, `status`, `email_verified`, `verified`, `verification_link`, `verify_code`, `password`, `remember_token`, `kyc_status`, `kyc_info`, `kyc_reject_reason`, `two_fa_status`, `two_fa`, `two_fa_code`, `created_at`, `updated_at`) VALUES
 (21, 'pronob', 'pronob sarker', 'pronobsarker16@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 0.0000000000, 1, 1, 0, '2b87825289f1295548cb02ead5e26f26', 509122, '$2y$10$WFScVHDotNTlCOkJdI.LH./TLEYTq4U9IB73jY4QKVtyO3xh0n0G.', NULL, 0, NULL, NULL, 0, 0, NULL, '2024-01-29 02:43:28', '2024-01-29 02:43:28'),
-(22, 'John Doe 1', 'showrav', 'user@gmail.com', '8015376991708331559.jpg', '01777777777', NULL, 'dhaka', 'Uttara', '1230', 0.0000000000, 1, 1, 0, '2389aeac2249c3ea428bdbe5c780fe48', NULL, '$2y$10$jjViKn87SZ.1V0pCOBEg5OEZtHLOnGRk6geaMWaX1921ktlaLYp2i', NULL, 0, NULL, NULL, 0, 0, NULL, '2024-01-29 02:44:23', '2024-03-18 03:04:14'),
+(22, 'John Doe 1', 'showrav', 'user@gmail.com', '8015376991708331559.jpg', '01777777777', 'fasdf', 'dhaka', 'Uttara', '1230', 0.0000000000, 1, 1, 0, '2389aeac2249c3ea428bdbe5c780fe48', NULL, '$2y$10$jjViKn87SZ.1V0pCOBEg5OEZtHLOnGRk6geaMWaX1921ktlaLYp2i', NULL, 0, NULL, NULL, 0, 0, NULL, '2024-01-29 02:44:23', '2024-04-24 05:14:14'),
 (23, 'user', 'user hasan', 'user1@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 0.0000000000, 1, 1, 0, '3d8d196830d53237aaf2413aa8f511d4', 840977, '$2y$10$6DKHhIUA26qFd5iGfjDSIeoaemZeVb0zZLDP37kYhkFiS94vxmHki', NULL, 0, NULL, NULL, 0, 0, NULL, '2024-01-30 00:31:21', '2024-01-30 00:31:21'),
 (24, 'showrav Hasan', 'showrav', 'showrav@gmail.com', '7097274731707732769.jpg', '17283320', NULL, 'add', 'Tangail,Dhaka,Bangladesh', '1234', 0.0000000000, 1, 0, 0, '2598e04c45701b2519f7e3a2ec6f28fc', 579718, '$2y$10$YHxF9kWfgwB9s5dK1DXJ3eRFh72Wrc6LRZQjIrIuy6eCtB0/DW71C', NULL, 0, NULL, NULL, 0, 0, NULL, '2024-02-12 02:08:27', '2024-03-18 00:18:49');
 
@@ -1853,7 +1890,7 @@ ALTER TABLE `blog_categories`
 -- AUTO_INCREMENT for table `blog_comments`
 --
 ALTER TABLE `blog_comments`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `brands`
@@ -1907,7 +1944,7 @@ ALTER TABLE `counters`
 -- AUTO_INCREMENT for table `currencies`
 --
 ALTER TABLE `currencies`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `deposits`
@@ -1919,7 +1956,7 @@ ALTER TABLE `deposits`
 -- AUTO_INCREMENT for table `donations`
 --
 ALTER TABLE `donations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `email_templates`
@@ -2015,7 +2052,7 @@ ALTER TABLE `payment_gateways`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=233;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=234;
 
 --
 -- AUTO_INCREMENT for table `preloadeds`
@@ -2105,7 +2142,7 @@ ALTER TABLE `ticket_messages`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `users`

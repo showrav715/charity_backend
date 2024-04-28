@@ -2,12 +2,12 @@
 @section('breadcrumb')
  <section class="section">
         <div class="section-header">
-        <h1>@lang('Theme Settings')</h1>
+        <h1>@lang('Home Page')</h1>
         </div>
 </section>
 @endsection
 @section('title')
-   @lang('Theme Settings')
+   @lang('Home Page')
 @endsection
 @section('content')
 
@@ -15,7 +15,7 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-               <h6 class="text-primary"> @lang('Theme1')</h6>
+               <h6 class="text-primary"> @lang('Home Page 1')</h6>
             </div>
             <div class="card-body">
               <form id="" action="{{ route('admin.gs.update') }}" enctype="multipart/form-data" method="POST">
@@ -43,7 +43,7 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-header  d-flex flex-row align-items-center justify-content-between">
-          <h6 class="m-0 font-weight-bold text-primary">{{ __('Theme2') }}</h6>
+          <h6 class="m-0 font-weight-bold text-primary">{{ __('Home Page 2') }}</h6>
         </div>
         <div class="card-body">
             <form id="" action="{{ route('admin.gs.update') }}" enctype="multipart/form-data" method="POST">

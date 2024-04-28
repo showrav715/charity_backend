@@ -25,7 +25,9 @@
                     <form action="{{ route('admin.campaign.store') }}" enctype="multipart/form-data" method="POST">
                         @csrf
                         <div class="col-md-12 ShowImage mb-3  text-center">
-                            <img src="{{ getPhoto('') }}" class="img-fluid" alt="image" width="400">
+                            <label for="image">
+                                <img src="{{ getPhoto('') }}" class="img-fluid" alt="image" width="400">
+                            </label>
                         </div>
 
                         <div class="row">
@@ -39,7 +41,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
+                            </div> 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="image">{{ __('Feature Photo') }}</label>

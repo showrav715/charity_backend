@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Campaign extends Model
 {
     use HasFactory;
 
-    protected $appends = ['api_photo', 'founded'];
+    protected $appends = ['api_photo', 'founded', 'sort_details'];
 
     public function faqs()
     {
@@ -34,6 +35,12 @@ class Campaign extends Model
     public function getApiPhotoAttribute()
     {
         return getPhoto($this->photo, 'campaign');
+    }
+
+    public function getSortDetailsAttribute()
+    {
+        $rvalue = empty($this->description) && !is_numeric($this->description) ? null : trim(strip_tags($this->description));
+        return Str::limit($rvalue, 700);
     }
 
     public function getFoundedAttribute()

@@ -134,6 +134,9 @@
                 <li class="{{ menu('admin.gs.site.settings') }}"><a class="nav-link"
                         href="{{ route('admin.gs.site.settings') }}">@lang('Site Settings')</a>
                 </li>
+                <li class="{{ menu('admin.gs.site.settings') }}"><a class="nav-link"
+                        href="{{ route('admin.gs.theme.home.page') }}">@lang('Home Page')</a>
+                </li>
                 <li class="{{ menu('admin.mail.config') }}"><a class="nav-link"
                         href="{{ route('admin.mail.config') }}">@lang('Email Config')</a>
                 </li>

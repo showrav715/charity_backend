@@ -42,9 +42,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('reset-password', [LoginController::class, 'resetPassword'])->name('reset.password');
     Route::post('reset-password', [LoginController::class, 'resetPasswordSubmit']);
 
-
-
-    Route::middleware(['auth:admin',"api-check"])->group(function () {
+    Route::middleware(['auth:admin', "api-check"])->group(function () {
         Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
         Route::get('/', [AdminController::class, 'index'])->name('dashboard');
         Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
@@ -231,9 +229,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/general-settings/maintenance', [GeneralSettingController::class, 'maintenance'])->name('gs.maintenance');
             Route::get('/general-settings/status/update/{value}', [GeneralSettingController::class, 'StatusUpdate'])->name('gs.status');
             Route::get('/manage-checkout', [GeneralSettingController::class, 'checkout'])->name('checkout');
-            //cookie
-            Route::get('/manage-cookie', [AdminController::class, 'cookie'])->name('cookie');
-            Route::post('/manage-cookie', [AdminController::class, 'updateCookie'])->name('update.cookie');
             Route::get('/manage-language', [AdminController::class, 'language'])->name('language');
 
             Route::post('/language/update', [AdminController::class, 'languageUpdate'])->name('language.update');
@@ -242,7 +237,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('update/social/link/{id}', [SocialController::class, 'update'])->name('social.update');
             Route::delete('destroy/social/link', [SocialController::class, 'destroy'])->name('social.destroy');
             // theme
-            Route::get('/theme-settings', [GeneralSettingController::class, 'themeSettings'])->name('gs.theme.settings');
+            Route::get('/home-page', [GeneralSettingController::class, 'themeSettings'])->name('gs.theme.home.page');
             //==================================== GENERAL SETTING SECTION ==============================================//
 
         });
