@@ -64,7 +64,7 @@ class Razorpay
         ];
 
         // Save order data to file
-        storeStorage('ORD' . $razorpayOrder['id'], $payment_data);
+        storeStorage($razorpayOrder['id'], $payment_data);
      
         $json = json_encode($data, true);
         $displayCurrency = $displayCurrency;

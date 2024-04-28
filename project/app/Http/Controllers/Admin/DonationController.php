@@ -16,4 +16,21 @@ class DonationController extends Controller
         return view('admin.donation.index', compact('donations'));
     }
 
+
+    function status($id, $status)  {
+        $donation = Donation::find($id);
+        $donation->status = $status;
+        $donation->save();
+        return back()->with('success', 'Donation status updated successfully');
+        
+    }
+
+    public function destroy(Request $request)
+    {
+        Donation::destroy($request->id);
+        return back()->with('success', 'Donation deleted successfully');
+    }
+  
+
+
 }

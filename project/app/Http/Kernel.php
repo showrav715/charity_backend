@@ -74,5 +74,6 @@ class Kernel extends HttpKernel
         'permission' => \App\Http\Middleware\Permission::class,
         'maintenance' => \App\Http\Middleware\Maintenance::class,
         'email_verify' => \App\Http\Middleware\EmailVerify::class,
+        'api-check' => \App\Http\Middleware\FrontendApiCheck::class,
     ];
 }

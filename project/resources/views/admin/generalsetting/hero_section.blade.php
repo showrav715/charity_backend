@@ -20,15 +20,24 @@
                         @method('post')
                         @csrf
 
-                        <div class="row">
-
-                            <div class="col-8 offset-2 text-center">
-                                <label for="">Photo</label>
+                        <div class="row d-flex">
+                            <div class="col-6 text-center">
+                                <label for="">@lang('Theme 1 Hero Image')</label>
                                 <div class="form-group d-flex justify-content-center">
                                     <div id="image-preview" class="image-preview image-preview_alt"
                                         style="background-image:url({{ getPhoto($gs->hero_photo) }});">
                                         <label for="image-upload" id="image-label">@lang('Choose File')</label>
                                         <input type="file" name="hero_photo" id="image-upload" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 text-center">
+                                <label for="">@lang('Theme 2 Hero Image')</label>
+                                <div class="form-group d-flex justify-content-center">
+                                    <div id="image-preview1" class="image-preview image-preview_alt"
+                                        style="background-image:url({{ getPhoto($gs->hero_photo2) }});">
+                                        <label for="image-upload1" id="image-label1">@lang('Choose File')</label>
+                                        <input type="file" name="hero_photo2" id="image-upload1" />
                                     </div>
                                 </div>
                             </div>
@@ -65,6 +74,15 @@
             input_field: "#image-upload", // Default: .image-upload
             preview_box: "#image-preview", // Default: .image-preview
             label_field: "#image-label", // Default: .image-label
+            label_default: "{{ __('Choose File') }}", // Default: Choose File
+            label_selected: "{{ __('Update Image') }}", // Default: Change File
+            no_label: false, // Default: false
+            success_callback: null // Default: null
+        });
+        $.uploadPreview({
+            input_field: "#image-upload1", // Default: .image-upload
+            preview_box: "#image-preview1", // Default: .image-preview
+            label_field: "#image-label1", // Default: .image-label
             label_default: "{{ __('Choose File') }}", // Default: Choose File
             label_selected: "{{ __('Update Image') }}", // Default: Change File
             no_label: false, // Default: false

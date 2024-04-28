@@ -9,6 +9,9 @@ use App\Http\Controllers\Api\PaymentGatewayController;
 use App\Http\Controllers\Api\SupportTicketController;
 use App\Http\Controllers\Gateway\Flutterwave;
 use App\Http\Controllers\Gateway\Paypal;
+use App\Http\Controllers\Gateway\Paystack;
+use App\Http\Controllers\Gateway\SslCommerce;
+use App\Http\Controllers\Gateway\Sslcommerz;
 use App\Http\Controllers\Gateway\Stripe;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +60,7 @@ Route::prefix('user')->group(function () {
 });
 
 // FRONTEND
+Route::get('/language', [FrontendController::class, 'language']);
 Route::get('home-content', [FrontendController::class, 'homeContent']);
 Route::post('newsletter/submit', [FrontendController::class, 'newsletterSubmit']);
 Route::post('contact/submit', [FrontendController::class, 'contactSubmit']);
@@ -97,3 +101,5 @@ Route::post('/campaign/submit', [PaymentGatewayController::class, 'campaignSubmi
 Route::get('stripe/notify', [Stripe::class, 'notify'])->name('stripe.notify');
 Route::get('paypal/notify', [Paypal::class, 'notify'])->name('paypal.notify');
 Route::post('flutterwave/notify', [Flutterwave::class, 'notify'])->name('flutterwave.notify');
+Route::post('paystack/notify', [Paystack::class, 'notify'])->name('paystack.notify');
+Route::post('sslcommerz/notify', [Sslcommerz::class, 'notify'])->name('sslcommerz.notify');

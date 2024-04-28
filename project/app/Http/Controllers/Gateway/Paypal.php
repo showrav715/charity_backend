@@ -15,7 +15,7 @@ class Paypal extends Controller
     public static function initiate($payment_data)
     {
         $campaign = Campaign::where('slug', $payment_data['campaign'])->first();
-        $cancel_url = 'http://localhost:3000/checkout/cancel?slug=' . $campaign->slug;
+        $cancel_url = fronturl().'/checkout/cancel?slug=' . $campaign->slug;
 
         $payment_amount = $payment_data['amount'];
 

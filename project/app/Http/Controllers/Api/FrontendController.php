@@ -28,6 +28,11 @@ use Illuminate\Http\Request;
 
 class FrontendController extends ApiController
 {
+
+    public function language() {
+        $language = file_get_contents(base_path('resources/lang/hindi.json'));
+        return $this->sendResponse(json_decode($language), 'Language Data');
+    }
     public function homeContent(Request $request)
     {
         $content = explode(',', $request->content);
@@ -123,6 +128,7 @@ class FrontendController extends ApiController
         $hero_section['breadcumb'] = getPhoto($hero_section->breadcumb);
         $hero_section['maintenance_photo'] = getPhoto($hero_section->maintenance_photo);
         $hero_section['hero_photo'] = getPhoto($hero_section->hero_photo);
+        $hero_section['hero_photo2'] = getPhoto($hero_section->hero_photo2);
         $hero_section['cta_photo'] = getPhoto($hero_section->cta_photo);
         $hero_section['checkout_success_photo'] = getPhoto($hero_section->checkout_success_photo);
         $hero_section['checkout_faild_photo'] = getPhoto($hero_section->checkout_faild_photo);
@@ -261,6 +267,11 @@ class FrontendController extends ApiController
         $request->validate([
             'email' => 'required|email|unique:subscribers,email',
         ]);
+
+        $exist = Subscriber::where('email', $request->email)->first();
+        if ($exist) {
+            return $this->sendError('Email Already Subscribed');
+        }
 
         $newsletter = new Subscriber();
         $newsletter->email = $request->email;

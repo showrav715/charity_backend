@@ -42,7 +42,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('reset-password', [LoginController::class, 'resetPassword'])->name('reset.password');
     Route::post('reset-password', [LoginController::class, 'resetPasswordSubmit']);
 
-    Route::middleware('auth:admin')->group(function () {
+
+
+    Route::middleware(['auth:admin',"api-check"])->group(function () {
         Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
         Route::get('/', [AdminController::class, 'index'])->name('dashboard');
         Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
@@ -90,6 +92,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Donation
         Route::get('donation', [DonationController::class, 'index'])->name('donation.index');
+        Route::get('donation/status/{id}/{status}', [DonationController::class, 'status'])->name('donation.status');
+        Route::delete('donation/destroy', [DonationController::class, 'destroy'])->name('donation.destroy');
 
         // Currency
         Route::get('/manage-currency', [ManageCurrencyController::class, 'index'])->name('currency.index');

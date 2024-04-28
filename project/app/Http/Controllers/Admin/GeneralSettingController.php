@@ -84,12 +84,16 @@ class GeneralSettingController extends Controller
             $gs->checkout_faild_text = $request->checkout_faild_text;
         }
 
+        if ($request->type == "theme") {
+            $gs->theme = $request->theme;
+        }
+
 
         $gs->update();
 
 
 
-        $images = ['header_logo', 'footer_logo', 'maintenance_photo', 'contact_section_photo', 'breadcumb', 'hero_photo', 'cta_photo','checkout_success_photo','checkout_faild_photo'];
+        $images = ['header_logo', 'footer_logo', 'maintenance_photo', 'contact_section_photo', 'breadcumb', 'hero_photo', 'cta_photo','checkout_success_photo','checkout_faild_photo',"hero_photo2"];
         foreach ($images as $image) {
             if (isset($request[$image])) {
                 $gs[$image] = MediaHelper::handleUpdateImage($request[$image], $gs[$image]);
@@ -112,6 +116,10 @@ class GeneralSettingController extends Controller
         return redirect()->back()->with('success', 'Data updated successfully');
     }
 
+    public function themeSettings()
+    {
+        return view('admin.generalsetting.theme');
+    }
     public function logo()
     {
         return view('admin.generalsetting.logo');

@@ -306,6 +306,23 @@ function storeStorage($key, $value)
     file_put_contents(storage_path('ORD' . $key), json_encode($value));
 }
 
+
+function fronturl()
+{
+    $gs = Generalsetting::first();
+
+    $url = $gs->frontend_url;
+    // last character check remove / if exist
+    if (substr($url, -1) == '/') {
+        $url = substr($url, 0, -1);
+    }
+    return $url;
+}
+
+
+
+
+
 function getStorage($key)
 {
     return json_decode(file_get_contents(storage_path('ORD' . $key)));

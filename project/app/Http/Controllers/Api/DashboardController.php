@@ -55,6 +55,7 @@ class DashboardController extends Controller
             $user->city = $request->city;
             $user->zip = $request->zip;
             $user->address = $request->address;
+            $user->country = $request->country;
 
             if ($request->photo) {
                 $user->photo = MediaHelper::handleUpdateImage($request->photo, $user->photo, [300, 300]);

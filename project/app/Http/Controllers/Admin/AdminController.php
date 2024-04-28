@@ -13,8 +13,10 @@ use App\Models\Subscriber;
 use App\Models\Team;
 use App\Models\Transaction;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
 
 class AdminController extends Controller
@@ -24,10 +26,8 @@ class AdminController extends Controller
         $this->middleware('auth:admin');
     }
 
-    // DASHBOARD
     public function index()
     {
-
         $data['recent_campaigns'] = Campaign::orderby('id', 'desc')->take(5)->get();
         $data['recent_messages'] = ContactMessage::orderby('id', 'desc')->take(6)->get();
         $data['recent_donations'] = Donation::orderby('id', 'desc')->take(7)->get();
