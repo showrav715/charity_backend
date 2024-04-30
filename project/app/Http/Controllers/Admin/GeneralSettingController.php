@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\MediaHelper;
+use App\Models\Currency;
 use App\Models\Generalsetting;
 use App\Models\HomePageSection;
 use Illuminate\Http\Request;
@@ -82,13 +83,20 @@ class GeneralSettingController extends Controller
             $gs->checkout_faild_text = $request->checkout_faild_text;
         }
 
+        if ($request->withdraw == 1) {
+            $curr = Currency::where('default', 1)->first();
+            $gs->withdraw_min = $request->withdraw_min;
+            $gs->withdraw_max = $request->withdraw_max;
+            $gs->withdraw_charge = $request->withdraw_charge;
+        }
+
         if ($request->type == "theme") {
             $gs->theme = $request->theme;
         }
 
         $gs->update();
 
-        $images = ['header_logo', 'footer_logo', 'maintenance_photo', 'contact_section_photo', 'breadcumb', 'hero_photo', 'cta_photo', 'checkout_success_photo', 'checkout_faild_photo', "hero_photo2"];
+        $images = ['header_logo', 'footer_logo', 'maintenance_photo', 'contact_section_photo', 'breadcumb', 'hero_photo', 'cta_photo', 'checkout_success_photo', 'checkout_faild_photo', "hero_photo2","faq_background","testimonial_background"];
         foreach ($images as $image) {
             if (isset($request[$image])) {
                 $gs[$image] = MediaHelper::handleUpdateImage($request[$image], $gs[$image]);

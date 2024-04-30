@@ -37,14 +37,13 @@ class PaymentGatewayController extends ApiController
 
     public function notifyOperation($res)
     {
-        
 
         if (!isset($res['access_id'])) {
-            return redirect(fronturl()."/checkout/failed?message=Invalid Transaction");
+            return redirect(fronturl() . "/checkout/failed?message=Invalid Transaction");
         }
 
         if ($res['status'] == 0) {
-            return redirect(fronturl()."/checkout/failed?message=" . $res['message']);
+            return redirect(fronturl() . "/checkout/failed?message=" . $res['message']);
         }
 
         try {
@@ -71,7 +70,6 @@ class PaymentGatewayController extends ApiController
             $donation->created_at = Carbon::now();
             $donation->save();
 
-        
             // donar transaction create
             if (isset($orderData['user_id'])) {
                 transaction($orderData['amount'], $res['txn_id'], $orderData['user_id'], '-', 'My Donation');
@@ -86,14 +84,14 @@ class PaymentGatewayController extends ApiController
                 return response()->json(["status" => 1, 'message' => 'Donation successful', 'txn_id' => $res['txn_id']]);
             }
 
-            return redirect(fronturl()."/checkout/success?txn_id=" . $res['txn_id'] . "&message=" . $res['message']);
+            return redirect(fronturl() . "/checkout/success?txn_id=" . $res['txn_id'] . "&message=" . $res['message']);
 
         } catch (Exception $e) {
 
             if (isset($res['redirect']) && $res['redirect'] == false) {
                 return response()->json(['message' => $e->getMessage(), "status" => 0, "slug" => $orderData['campaign']]);
             }
-            return redirect(fronturl()."/checkout/fail?message=" . $e->getMessage() . "&slug=" . $orderData['campaign']);
+            return redirect(fronturl() . "/checkout/fail?message=" . $e->getMessage() . "&slug=" . $orderData['campaign']);
         }
 
     }

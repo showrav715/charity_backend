@@ -29,7 +29,8 @@ use Illuminate\Http\Request;
 class FrontendController extends ApiController
 {
 
-    public function language() {
+    public function language()
+    {
         $language = file_get_contents(base_path('resources/lang/hindi.json'));
         return $this->sendResponse(json_decode($language), 'Language Data');
     }
@@ -58,7 +59,6 @@ class FrontendController extends ApiController
                         ->where('goal', '=>', 'raised');
                 })
                 ->orWhere(function ($query) {
-                    // Check if close_type is 'end_date'
                     $query->where('close_type', 'end_date')
                         ->whereDate('end_date', '>=', now()->toDateString());
                 })
@@ -76,6 +76,12 @@ class FrontendController extends ApiController
                 ->get();
         }
 
+        if (in_array('counters', $all) || in_array('*', $all)) {
+            $data['counters'] = Counter::orderBy('id', 'desc')
+                ->take(4)
+                ->get();
+        }
+
         if (in_array('faq', $all) || in_array('*', $all)) {
             $data['faqs'] = Faq::
                 orderBy('id', 'desc')
@@ -83,8 +89,9 @@ class FrontendController extends ApiController
                 ->get();
         }
 
+        
         if (in_array('testimonials', $all) || in_array('*', $all)) {
-            $data['testimonials'] = Testimonial::orderBy('id', 'desc')->get();
+            $data['testimonials'] = Testimonial::orderBy('id', 'desc')->take(10)->get();
         }
 
         if (in_array('newest_campaign', $all) || in_array('*', $all)) {
@@ -109,7 +116,7 @@ class FrontendController extends ApiController
 
         if (in_array('recent_blogs', $all) || in_array('*', $all)) {
 
-            $data['recent_blogs'] = Blog::orderBy('id', 'desc')->limit(2)->get()
+            $data['recent_blogs'] = Blog::orderBy('id', 'desc')->limit(3)->get()
                 ->map(function ($blog) {
                     $blog->formatted_created_at = dateFormat($blog->created_at->format('Y-m-d'));
                     return $blog;
@@ -131,6 +138,8 @@ class FrontendController extends ApiController
         $hero_section['cta_photo'] = getPhoto($hero_section->cta_photo);
         $hero_section['checkout_success_photo'] = getPhoto($hero_section->checkout_success_photo);
         $hero_section['checkout_faild_photo'] = getPhoto($hero_section->checkout_faild_photo);
+        $hero_section['faq_background'] = getPhoto($hero_section->faq_background);
+        $hero_section['testimonial_background'] = getPhoto($hero_section->testimonial_background);
         return $this->sendResponse($hero_section, 'Setting Data');
     }
 
@@ -170,7 +179,7 @@ class FrontendController extends ApiController
     {
         $campaign = Campaign::with(['category', 'faqs', 'galleries'])->where('slug', $slug)->first();
 
-        if(!$campaign) {
+        if (!$campaign) {
             return $this->sendError('Campaign Not Found', 404);
         }
 

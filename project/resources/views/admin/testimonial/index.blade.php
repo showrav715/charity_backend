@@ -15,6 +15,28 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body text-center">
+                    <p class="mb-2">@lang('Testimonial Background') <small>
+                        (@lang('recommended size (1920x672)'))
+                    </small></p>
+                    <form action="{{ route('admin.gs.update') }}" enctype="multipart/form-data" method="POST">
+                        @csrf
+                        
+                        <div class="col-md-12 ShowImage mb-3  text-center">
+                            <label for="image">
+                                <img src="{{ getPhoto($gs->testimonial_background) }}" class="img-fluid" alt="image"
+                                    width="400">
+                            </label>
+                            <input type="file" class="d-none" id="image" name="testimonial_background">
+                        </div>
+                        <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                    </form>
+                </div>
+            </div>
+
+
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-end">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">

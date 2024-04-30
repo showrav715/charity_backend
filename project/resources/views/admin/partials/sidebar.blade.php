@@ -6,7 +6,7 @@
                     class="fas fa-fire"></i><span>@lang('Dashboard')</span></a>
         </li>
 
-      
+
 
         <li class="nav-item {{ menu(['admin.user.index', 'admin.user.details']) }}">
             <a href="{{ route('admin.donation.index') }}" class="nav-link">
@@ -78,6 +78,19 @@
                         href="{{ route('admin.currency.index') }}">@lang('Currency')</a></li>
                 <li class="{{ menu('admin.gateway') }}"><a class="nav-link"
                         href="{{ route('admin.gateway') }}">@lang('Gateways')</a>
+                </li>
+            </ul>
+        </li>
+
+
+        <li class="nav-item dropdown {{ menu(['admin.withdraw*']) }}">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                    class="fas fa-money-check-alt"></i> <span>@lang('Manage Withdraw')</span></a>
+            <ul class="dropdown-menu">
+                <li class="{{ menu('admin.withdraw.settings') }}"><a class="nav-link"
+                        href="{{ route('admin.withdraw.settings') }}">@lang('Withdraw Settings')</a></li>
+                <li class="{{ menu('admin.withdraw.request') }}"><a class="nav-link"
+                        href="{{ route('admin.withdraw.request') }}">@lang('Withdraw Requests')</a>
                 </li>
             </ul>
         </li>
@@ -182,7 +195,13 @@
 
                 <li class="{{ menu('admin.home.sections') }}"><a class="nav-link"
                         href="{{ route('admin.home.sections') }}">@lang('Home Page Sections
-                                                                                                                        ')</a>
+                                                                                                                                                                        ')</a>
+                </li>
+
+
+                <li class="{{ menu('admin.home.sections') }}"><a class="nav-link"
+                        href="{{ route('admin.faq.index') }}">@lang('Manage Faq
+                                                                                                                                                                        ')</a>
                 </li>
 
                 <li class="{{ menu('admin.brand.index') }}"><a class="nav-link"

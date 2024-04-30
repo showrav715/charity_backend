@@ -31,6 +31,8 @@ class User extends Authenticatable
         'status',
         'zip',
         'password',
+        "balance",
+        "total_withdraw",
 
     ];
 
@@ -49,6 +51,11 @@ class User extends Authenticatable
     public function getApiPhotoAttribute()
     {
         return getPhoto($this->photo, 'user');
+    }
+
+    public function withdraws()
+    {
+        return $this->hasMany(Withdraw::class);
     }
 
 

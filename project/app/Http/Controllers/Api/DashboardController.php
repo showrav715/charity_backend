@@ -22,8 +22,8 @@ class DashboardController extends Controller
         $data['cancel_campaign'] = $user->campaigns()->whereStatus(2)->count();
         $data['total_fund'] = $user->campaigns()->sum('raised');
         $data['my_donations'] = $user->donations()->sum('total');
-        $data['total_withdraw'] = 0;
-        $data['current_balance'] = 0;
+        $data['total_withdraw'] = $user->withdraws()->sum('total');
+        $data['current_balance'] = $user->balance;
   
         return response()->json(['status' => true, 'data' => $data, 'error' => []]);
     }

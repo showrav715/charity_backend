@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\DonationController;
 use App\Http\Controllers\Api\FrontendController;
 use App\Http\Controllers\Api\PaymentGatewayController;
 use App\Http\Controllers\Api\SupportTicketController;
+use App\Http\Controllers\Api\WithdrawController;
 use App\Http\Controllers\Gateway\Flutterwave;
 use App\Http\Controllers\Gateway\Paypal;
 use App\Http\Controllers\Gateway\Paystack;
@@ -53,6 +54,10 @@ Route::prefix('user')->group(function () {
         // Donation Routes
         Route::get('donations', [DonationController::class, 'donations']);
         Route::get('funds-raised', [DonationController::class, 'fundRised']);
+
+        // withdraw
+        Route::get('withdraws', [WithdrawController::class, 'getWithdraws']);
+        Route::post('withdraw/request', [WithdrawController::class, 'withdrawStore']);
 
         // transaction
         Route::get('transactions', [DonationController::class, 'transactions']);

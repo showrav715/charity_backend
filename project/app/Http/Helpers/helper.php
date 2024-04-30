@@ -4,6 +4,7 @@ use App\Models\Currency;
 use App\Models\EmailTemplate;
 use App\Models\Generalsetting;
 use App\Models\Transaction;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -306,7 +307,6 @@ function storeStorage($key, $value)
     file_put_contents(storage_path('ORD' . $key), json_encode($value));
 }
 
-
 function fronturl()
 {
     $gs = Generalsetting::first();
@@ -318,10 +318,6 @@ function fronturl()
     }
     return $url;
 }
-
-
-
-
 
 function getStorage($key)
 {
@@ -337,6 +333,11 @@ function deleteStorage($key)
 
 function transaction($amount, $txn_id, $user_id, $type, $remark = null)
 {
+
+    $user = User::findOrFail($user_id);
+    $user->balance += $amount;
+    $user->save();
+
     $transaction = new Transaction();
     $transaction->user_id = $user_id;
     $transaction->amount = $amount;

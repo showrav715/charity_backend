@@ -21,37 +21,31 @@
                 <div class="card-body">
 
 
-                    <h6 class="mt-3">@lang('User details')</h6>
-                    <hr>
+                    <h6 class="mt-3 ">@lang('User details')</h6>
+                    <hr class="mb-5">
                     <form action="{{ route('admin.user.profile.update', $user->id) }}" method="POST" class="row">
                         @csrf
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6 mt-1">
                             <label>@lang('Name')</label>
                             <input class="form-control" type="text" name="name" value="{{ $user->name }}" required>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6 mt-1">
                             <label>@lang('Email')</label>
                             <input class="form-control" type="email" name="email" value="{{ $user->email }}" required>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6 mt-1">
                             <label>@lang('Phone')</label>
                             <input class="form-control" type="text" name="phone" value="{{ $user->phone }}" required>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6 mt-1">
                             <label>@lang('Country')</label>
-                            <Select class="form-control js-example-basic-single" name="country" required>
-                                @foreach ([] as $item)
-                                    <option value="{{ $item->name }}"
-                                        {{ $user->country == $item->name ? 'selected' : '' }}>
-                                        {{ $item->name }}</option>
-                                @endforeach
-                            </Select>
+                            <input class="form-control" type="text" name="country" value="{{ $user->country }}" required>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6 mt-1">
                             <label>@lang('City')</label>
                             <input class="form-control" type="text" name="city" value="{{ $user->city }}">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6 mt-1">
                             <label>@lang('Zip')</label>
                             <input class="form-control" type="text" name="zip" value="{{ $user->zip }}">
                         </div>
@@ -59,7 +53,7 @@
                             <label>@lang('Address')</label>
                             <input class="form-control" type="text" name="address" value="{{ $user->address }}">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group my-3 col-md-6 mt-1">
                             <label class="cswitch d-flex justify-content-between align-items-center border p-2">
                                 <input class="cswitch--input" name="status" type="checkbox"
                                     {{ $user->status == 1 ? 'checked' : '' }} /><span
@@ -67,7 +61,7 @@
                                 <span class="cswitch--label font-weight-bold">@lang('User status')</span>
                             </label>
                         </div>
-                        <div class="form-group col-md-6 ">
+                        <div class="form-group my-3 col-md-6 mt-1 ">
                             <label class="cswitch d-flex justify-content-between align-items-center border p-2">
                                 <input class="cswitch--input update" name="email_verified" type="checkbox"
                                     {{ $user->email_verified == 1 ? 'checked' : '' }} /><span
@@ -77,7 +71,7 @@
                         </div>
 
 
-                        <div class="form-group col-md-12 text-right">
+                        <div class="form-group col-md-12 text-right mt-5">
                             <button type="submit" class="btn btn-primary btn-lg">@lang('Submit')</button>
                         </div>
 
@@ -101,131 +95,136 @@
                             <h5>@lang('Information')</h5>
                         </li>
 
-                        <li class="list-group-item d-flex justify-content-between">@lang('Total Withdraw')
-                            <span>{{ $data['totalWithdraw'] }} {{ $gs->curr_code }}</span>
+                        <li class="list-group-item d-flex justify-content-between">@lang('Total Campaign')
+                            <span>{{ $user->campaigns()->count() }} {{ $gs->curr_code }}</span>
                         </li>
-
-                        <li class="list-group-item d-flex justify-content-between">@lang('Login to User') <span><a
-                                    target="_blank" href="{{ route('admin.user.login', $user->id) }}"
-                                    class="btn btn-dark">@lang('Login')</a></span></li>
-
-                        <li class="list-group-item d-flex justify-content-between">@lang('User Login Info') <span><a
-                                    href="{{ route('admin.user.login.info', $user->id) }}"
-                                    class="btn btn-dark">@lang('View')</a></span></li>
+                        <li class="list-group-item d-flex justify-content-between">@lang('Total Withdraw')
+                            <span>{{ showAdminAmount($user->total_withdraw) }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">@lang('Current Balance')
+                            <span>{{ showAdminAmount($user->balance) }}</span>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
+
     <div class="row">
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>@lang('Date')</th>
-                        <th>@lang('User')</th>
-                        <th>@lang('Transaction ID')</th>
-                        <th>@lang('Description')</th>
-                        <th>@lang('Remark')</th>
-                        <th>@lang('Amount')</th>
-                        <th>@lang('Charge')</th>
+        <div class="col-6 col-md-6 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>@lang('Recent Donations')</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>@lang('Campaign Name')</th>
+                                <th>@lang('Total')</th>
+                                <th>@lang('Campaign Owner')</th>
+                                <th>@lang('Donar Name')</th>
+                                <th class="text-right">@lang('Action')</th>
+                            </tr>
+                            @forelse ($user->donations->take(5) as $item)
+                                <tr>
+                                    <td data-label="@lang('Campaign Name')">
+                                        <a
+                                            href="{{ route('admin.campaign.edit', $item->campaign->id) }}">{{ $item->campaign->title }}</a>
+                                    </td>
+                                    <td data-label="@lang('Total')">
+                                        {{ showAdminAmount($item->total) }}
+                                    </td>
 
-                    </tr>
-                </thead>
+                                    <td data-label="@lang('Raised')">
+                                        <a href="">
+                                            <strong>
+                                                {{ $item->owner_id ? $item->owner->username : __('Admin') }}
+                                            </strong>
+                                        </a>
+                                    </td>
 
-                @php
-                    $transactions = [];
+                                    <td data-label="@lang('Donor Name')">
+                                        {{ $item->name ?? 'N/A' }}
+                                    </td>
 
-                @endphp
+                                    <td data-label="@lang('Action')" class="text-right">
+                                        <a href="{{ route('admin.campaign.edit', $item->id) }}"
+                                            class="btn btn-primary btn-sm  mb-1" data-toggle="tooltip"
+                                            title="@lang('Edit')">@lang('Detail')</a>
+                                    </td>
+                                </tr>
+                            @empty
 
-                <tbody>
-                    @forelse($transactions as $item)
-                        <tr>
-                            <td data-label="@lang('Date')">{{ dateFormat($item->created_at, 'd-M-Y') }}</td>
-                            <td>
-                                @if ($item->user_type == 1)
-                                    <a href="{{ route('admin.user.details', $item->user_id) }}">{{ $item->user->name }}</a>
-                                @elseif($item->user_type == 2)
-                                    <a
-                                        href="{{ route('admin.merchant.details', $item->user_id) }}">{{ $item->merchant->name }}</a>
-                                @elseif($item->user_type == 3)
-                                    <a
-                                        href="{{ route('admin.agent.details', $item->user_id) }}">{{ $item->agent->name }}</a>
-                                @endif
-
-                            </td>
-                            <td data-label="@lang('Transaction ID')">
-                                {{ __($item->trnx) }}
-                            </td>
-                            <td data-label="@lang('Description')">
-                                {{ __($item->details) }}
-                            </td>
-                            <td data-label="@lang('Remark')">
-                                <span class="badge badge-dark">{{ ucwords(str_replace('_', ' ', $item->remark)) }}</span>
-                            </td>
-                            <td data-label="@lang('Amount')">
-                                <span class="{{ $item->type == '+' ? 'text-success' : 'text-danger' }}">{{ $item->type }}
-                                    {{ amount($item->amount, $item->currency->type, 2) }} {{ $item->currency->code }}</span>
-                            </td>
-                            <td data-label="@lang('Charge')">
-                                {{ amount($item->charge, $item->currency->type, 2) }} {{ $item->currency->code }}
-                            </td>
-
-                        </tr>
-                    @empty
-                        <tr>
-                            <td class="text-center" colspan="12">@lang('No data found!')</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                                <tr>
+                                    <td class="text-center" colspan="100%">@lang('No Data Found')</td>
+                                </tr>
+                            @endforelse
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-        {{-- @if ($transactions->hasPages())
-    <div class="card-footer">
-        {{$transactions->links('admin.partials.paginate')}}
-    </div>
-    @endif --}}
+
+
+        <div class="col-6 col-md-6 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>@lang('Recent Campaigns')</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>@lang('Photo')</th>
+                                <th>@lang('Title')</th>
+                                <th>@lang('Goal')</th>
+                                <th>@lang('Status')</th>
+
+                            </tr>
+                            @forelse ($user->campaigns->take(5) as $item)
+                                <tr>
+                                    <td data-label="@lang('Photo')">
+                                        <img src="{{ getPhoto($item->photo) }}" height="85" width="80"
+                                            alt="icon">
+                                    </td>
+                                    <td data-label="@lang('Title')">
+                                        <a href="{{ route('admin.campaign.edit', $item->id) }}"> {{ $item->title }}</a>
+                                    </td>
+                                    <td data-label="@lang('Goal')">
+                                        {{ showAdminAmount($item->goal) }}
+                                    </td>
+
+                                    <td data-label="@lang('Status')">
+                                        @if ($item->status == 1)
+                                            <span class="badge badge-success"> @lang('Running') </span>
+                                        @elseif($item->status == 2)
+                                            <span class="badge badge-danger"> @lang('Closed') </span>
+                                        @else
+                                            <span class="badge badge-warning"> @lang('Pending') </span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @empty
+
+                                <tr>
+                                    <td class="text-center" colspan="100%">@lang('No Data Found')</td>
+                                </tr>
+                            @endforelse
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
 
     </div>
 
     <!-- Modal -->
-    @if (access('user balance modify'))
-        <div class="modal fade" id="balanceModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <form action="{{ route('admin.user.balance.modify') }}" method="post">
-                    @csrf
-                    <input type="hidden" name="wallet_id">
-                    <input type="hidden" name="user_id" value="{{ $user->id }}">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">@lang('Add/Subract Balance -- ') <span class="code"></span></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>@lang('Amount')</label>
-                                <input class="form-control" type="text" name="amount" required>
-                            </div>
-                            <div class="form-group">
-                                <label>@lang('Type')</label>
-                                <select name="type" id="" class="form-control">
-                                    <option value="1">@lang('Add Balance')</option>
-                                    <option value="2">@lang('Subtract Balance')</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
-                            <button type="submit" class="btn btn-primary">@lang('Confirm')</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    @endif
 @endsection
 @push('script')
     <script>
@@ -239,13 +238,6 @@
             no_label: false, // Default: false
             success_callback: null // Default: null
         });
-
-        $('.wallet').on('click', function() {
-            $('#balanceModal').find('input[name=wallet_id]').val($(this).data('id'))
-            $('#balanceModal').find('.code').text($(this).data('code'))
-            $('#balanceModal').modal('show')
-        })
-
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });

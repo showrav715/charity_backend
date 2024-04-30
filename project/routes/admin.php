@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\PaymentGatewayController;
 use App\Http\Controllers\Admin\PreloadedController;
 use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\VolunteerController;
+use App\Http\Controllers\Admin\WithdrawController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -241,6 +242,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
             //==================================== GENERAL SETTING SECTION ==============================================//
 
         });
+
+
+        // ==================================== WITHDRAW SECTION ====================================//
+        Route::get('/withdraw/settings', [WithdrawController::class, 'index'])->name('withdraw.settings');
+        Route::get('/withdraw/request', [WithdrawController::class, 'withdrawRequest'])->name('withdraw.request');
+        Route::get('/withdraw/approve/{id}', [WithdrawController::class, 'withdrawApprove'])->name('withdraw.approve');
+        Route::get('/withdraw/reject/{id}', [WithdrawController::class, 'withdrawReject'])->name('withdraw.reject');
+
 
         Route::group(['middleware' => 'permission:Manage Contact'], function () {
             // ==================================== ADMIN CONTACT SECTION ====================================//

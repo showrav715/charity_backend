@@ -15,6 +15,28 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
+
+            <div class="card">
+                <div class="card-body text-center">
+                    <p class="mb-2">@lang('Faq Background') <small>
+                        (@lang('recommended size (620x580)'))
+                    </small></p>
+                    <form action="{{ route('admin.gs.update') }}" enctype="multipart/form-data" method="POST">
+                        @csrf
+                        
+                        <div class="col-md-12 ShowImage mb-3  text-center">
+                            <label for="image">
+                                <img src="{{ getPhoto($gs->faq_background) }}" class="img-fluid" alt="image"
+                                    width="400">
+                            </label>
+                            <input type="file" class="d-none" id="image" name="faq_background">
+                        </div>
+                        <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                    </form>
+                </div>
+            </div>
+
+
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h4>@lang('Faq')</h4>
@@ -22,6 +44,7 @@
                         @lang('Add New')</button>
                 </div>
                 <div class="card-body">
+
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <tr>
