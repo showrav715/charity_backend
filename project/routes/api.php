@@ -11,7 +11,6 @@ use App\Http\Controllers\Api\WithdrawController;
 use App\Http\Controllers\Gateway\Flutterwave;
 use App\Http\Controllers\Gateway\Paypal;
 use App\Http\Controllers\Gateway\Paystack;
-use App\Http\Controllers\Gateway\SslCommerce;
 use App\Http\Controllers\Gateway\Sslcommerz;
 use App\Http\Controllers\Gateway\Stripe;
 use Illuminate\Support\Facades\Route;
@@ -78,7 +77,6 @@ Route::get('testimonials', [FrontendController::class, 'getTestimonials']);
 Route::get('get/donations', [FrontendController::class, 'donorList']);
 Route::get('get/faqs', [FrontendController::class, 'getFaq']);
 Route::get('get/volunteer', [FrontendController::class, 'volunteerList']);
-
 // Campaign Routes
 Route::get('get/category', [FrontendController::class, 'getCategory']);
 Route::get('/campaigns', [FrontendController::class, 'getCampaign']);
@@ -91,6 +89,7 @@ Route::get('blog/{slug}', [FrontendController::class, 'singleBlog']);
 // Page Routes
 Route::get('/contact/page', [FrontendController::class, 'contactPage']);
 Route::get('/about/page', [FrontendController::class, 'aboutPage']);
+Route::get('/get/pages', [FrontendController::class, 'page']);
 Route::get('/page/{slug}', [FrontendController::class, 'page']);
 
 // Setting Routes

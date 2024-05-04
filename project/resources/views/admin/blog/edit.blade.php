@@ -26,7 +26,9 @@
                         @csrf
                         @method('PUT')
                         <div class="col-md-12 ShowImage mb-3  text-center">
+                            <label for="image">
                             <img src="{{ getPhoto($blog->photo) }}" class="img-fluid" alt="image" width="400">
+                            </label>
                         </div>
                         <div class="form-group">
                             <label for="title">{{ __('Blog Title') }}</label>

@@ -32,6 +32,7 @@
                             <th>@lang('Feature')</th>
                             <th>@lang('Close Type')</th>
                             <th>@lang('Status')</th>
+                            <th>@lang('From')</th>
                             <th class="text-right">@lang('Action')</th>
                         </tr>
                         @forelse ($campaigns as $item)
@@ -65,14 +66,14 @@
                                         <div class="dropdown-menu" x-placement="bottom-start"
                                             style="position: absolute; transform: translate3d(0px, 29px, 0px); top: 0px; left: 0px; will-change: transform;">
                                             <a class="dropdown-item"
-                                                href="{{ route('admin.campaign.status', [$item->id, 1]) }}">Yes</a>
+                                                href="{{ route('admin.campaign.status', [$item->id, 1,"feature"]) }}">Yes</a>
                                             <a class="dropdown-item"
-                                                href="{{ route('admin.campaign.status', [$item->id, 0]) }}">No</a>
+                                                href="{{ route('admin.campaign.status', [$item->id, 0,"feature"]) }}">No</a>
                                         </div>
                                     </div>
                                 </td>
 
-                              
+
                                 <td data-label="@lang('Close Type')">
                                     @if ($item->close_type == 'end_date')
                                         <span class="badge badge-dark mb-1"> @lang('End Date') </span>
@@ -83,13 +84,49 @@
                                     @endif
                                 </td>
 
-                                <td data-label="@lang('Status')">
-                                    @if ($item->status == 1)
-                                        <span class="badge badge-success"> @lang('Running') </span>
-                                    @elseif($item->status == 2)
-                                        <span class="badge badge-danger"> @lang('Closed') </span>
+                                <td data-label="@lang('Feature')">
+                                    @php
+                                        if ($item->status == 1) {
+                                            $status = 'success';
+                                        } elseif ($item->status == 2) {
+                                            $status = 'danger';
+                                        } else {
+                                            $status = 'warning';
+                                        }
+                                    @endphp
+                                    <div class="btn-group mb-2">
+                                        <button class="btn btn-{{ $status }} btn-sm dropdown-toggle" type="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            @if ($item->status == 1)
+                                                @lang('Running')
+                                            @elseif($item->status == 2)
+                                                @lang('Closed')
+                                            @else
+                                                @lang('Pending')
+                                            @endif
+
+                                        </button>
+                                        <div class="dropdown-menu" x-placement="bottom-start"
+                                            style="position: absolute; transform: translate3d(0px, 29px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                            <a class="dropdown-item"
+                                                href="{{ route('admin.campaign.status', [$item->id, 1,"status"]) }}">@lang('Running')</a>
+                                            <a class="dropdown-item"
+                                                href="{{ route('admin.campaign.status', [$item->id, 2,"status"]) }}">@lang('Closed')</a>
+                                            <a class="dropdown-item"
+                                                href="{{ route('admin.campaign.status', [$item->id, 0,"status"]) }}">@lang('Pending')</a>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    @if ($item->user_id == 0)
+                                        <span class="badge badge-dark">
+                                            @lang('Admin')
+                                        </span>
                                     @else
-                                        <span class="badge badge-warning"> @lang('Pending') </span>
+                                        <span class="badge badge-dark">
+                                            {{ $item->user->username }}
+                                        </span>
                                     @endif
                                 </td>
 

@@ -75,8 +75,10 @@ class PaymentGatewayController extends ApiController
                 transaction($orderData['amount'], $res['txn_id'], $orderData['user_id'], '-', 'My Donation');
             }
 
-            // campaign owner transaction create
-            transaction($orderData['amount'], $res['txn_id'], $campaign['user_id'], '+', 'Donation Received');
+            if ($campaign['user_id'] != 0) {
+                // campaign owner transaction create
+                transaction($orderData['amount'], $res['txn_id'], $campaign['user_id'], '+', 'Donation Received');
+            }
 
             // delete storage
             deleteStorage($res['access_id']);

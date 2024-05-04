@@ -68,7 +68,7 @@ class Flutterwave
 
     public function notify(Request $request)
     {
-  
+
         $data = PaymentGateway::whereKeyword('flutterwave')->first();
         $paydata = $data->convertAutoData();
         $secret_key = $paydata['secret_key'];

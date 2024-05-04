@@ -24,7 +24,7 @@ class VolunteerController extends Controller
     public function store(Request $request)
     {
         $this->storeData($request, new Volunteer());
-        return back()->with('success', 'New Volunteer has been created');
+        return redirect()->route("admin.volunteer.index")->with('success', 'New Volunteer has been created');
     }
 
     public function edit($id)
@@ -38,7 +38,7 @@ class VolunteerController extends Controller
         $volunteer = Volunteer::findOrFail($id);
 
         $this->storeData($request, $volunteer, $volunteer->id);
-        return back()->with('success', 'Volunteer has been updated');
+        return redirect()->route("admin.volunteer.index")->with('success', 'Volunteer has been updated');
     }
 
     public function storeData($request, $data, $id = null)

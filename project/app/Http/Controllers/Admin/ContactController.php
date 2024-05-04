@@ -28,6 +28,7 @@ class ContactController extends Controller
 
         $contact = ContactPage::first();
         $contact->title = $request->title;
+        $contact->text = $request->text;
         $contact->email1 = $request->email1;
         $contact->email2 = $request->email2;
         $contact->address = $request->address;

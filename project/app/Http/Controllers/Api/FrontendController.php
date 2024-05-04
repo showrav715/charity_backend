@@ -76,6 +76,11 @@ class FrontendController extends ApiController
                 ->get();
         }
 
+        if (in_array('brands', $all) || in_array('*', $all)) {
+            $data['brands'] = Brand::orderBy('id', 'desc')
+                ->get();
+        }
+
         if (in_array('counters', $all) || in_array('*', $all)) {
             $data['counters'] = Counter::orderBy('id', 'desc')
                 ->take(4)
@@ -89,7 +94,6 @@ class FrontendController extends ApiController
                 ->get();
         }
 
-        
         if (in_array('testimonials', $all) || in_array('*', $all)) {
             $data['testimonials'] = Testimonial::orderBy('id', 'desc')->take(10)->get();
         }
@@ -118,7 +122,7 @@ class FrontendController extends ApiController
 
             $data['recent_blogs'] = Blog::orderBy('id', 'desc')->limit(3)->get()
                 ->map(function ($blog) {
-                    $blog->formatted_created_at = dateFormat($blog->created_at->format('Y-m-d'));
+                    $blog->formatted_created_at = dateFormat($blog->created_at);
                     return $blog;
                 });
         }
@@ -136,6 +140,7 @@ class FrontendController extends ApiController
         $hero_section['hero_photo'] = getPhoto($hero_section->hero_photo);
         $hero_section['hero_photo2'] = getPhoto($hero_section->hero_photo2);
         $hero_section['cta_photo'] = getPhoto($hero_section->cta_photo);
+        $hero_section['cta_photo2'] = getPhoto($hero_section->cta_photo2);
         $hero_section['checkout_success_photo'] = getPhoto($hero_section->checkout_success_photo);
         $hero_section['checkout_faild_photo'] = getPhoto($hero_section->checkout_faild_photo);
         $hero_section['faq_background'] = getPhoto($hero_section->faq_background);
@@ -226,16 +231,22 @@ class FrontendController extends ApiController
             })
             ->paginate(12);
 
-        $data['recent_blogs'] = Blog::orderBy('id', 'desc')->limit(4)->get();
+        $data['recent_blogs'] = Blog::orderBy('id', 'desc')->limit(6)->get();
         return $this->sendResponse($data, 'Blog Data');
     }
 
     public function singleBlog($slug)
     {
         $data['blog'] = Blog::with('category')->where('slug', $slug)->first();
-        $data['recent_blogs'] = Blog::orderBy('id', 'desc')->limit(4)->get();
+        $data['recent_blogs'] = Blog::orderBy('id', 'desc')->limit(6)->get();
         $data['comments'] = BlogComment::where('blog_id', $data['blog']->id)->orderBy('id', 'desc')->get();
         return $this->sendResponse($data, 'Single Blog');
+    }
+
+    public function getPages()
+    {
+        $pages = Page::get();
+        return $this->sendResponse($pages, 'Page Data');
     }
 
     public function page($slug)
@@ -254,6 +265,7 @@ class FrontendController extends ApiController
     {
         $about = About::first();
         $about['photo'] = getPhoto($about->photo);
+        $about['photo2'] = getPhoto($about->photo2);
         $about['backgroud_photo'] = getPhoto($about->backgroud_photo);
         $data['about'] = $about;
         $data['features'] = Feature::orderby('id')->get();

@@ -11,7 +11,7 @@ class Brand extends Model
     // timestamps
     public $timestamps = false;
 
-    public $appends = ['photo_url'];
+    public $appends = ['api_photo'];
 
     public function getApiPhotoAttribute()
     {

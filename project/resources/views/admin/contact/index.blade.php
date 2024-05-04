@@ -24,6 +24,10 @@
                             <label>@lang('Contact Page Title')</label>
                             <input class="form-control" type="text" name="title" value="{{ $contact->title }}">
                         </div>
+                        <div class="form-group">
+                            <label>@lang('Contact Page Text')</label>
+                            <input class="form-control" type="text" name="text" value="{{ $contact->text }}">
+                        </div>
 
                   
 

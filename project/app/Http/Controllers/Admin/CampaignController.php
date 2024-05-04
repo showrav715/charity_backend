@@ -15,39 +15,33 @@ class CampaignController extends Controller
     public function index()
     {
 
-
-        $campaign=Campaign::all();
-        foreach($campaign as $camp){
-            if($camp->close_type == 'goal'){
-                if($camp->raised >= $camp->goal){
+        $campaign = Campaign::all();
+        foreach ($campaign as $camp) {
+            if ($camp->close_type == 'goal') {
+                if ($camp->raised >= $camp->goal) {
                     $camp->status = 2;
                     $camp->update();
                 }
-            }else{
-                if($camp->end_date < now()->toDateString()){
+            } else {
+                if ($camp->end_date < now()->toDateString()) {
                     $camp->status = 2;
                     $camp->update();
                 }
             }
         }
 
-
-
         $campaigns = Campaign::
-        orderby('id','desc')
-        ->paginate(10);
-   
+            orderby('id', 'desc')
+            ->paginate(10);
 
         return view('admin.campaign.index', compact('campaigns'));
     }
 
-
-    function create()
+    public function create()
     {
         $categories = Category::get();
         return view('admin.campaign.create', compact('categories'));
     }
-
 
     public function store(Request $request)
     {
@@ -81,14 +75,14 @@ class CampaignController extends Controller
         $campaign->save();
 
         if ($request->is_faq == 'on') {
-            if ($request->faq_title && $request->faq_content)
+            if ($request->faq_title && $request->faq_content) {
                 foreach ($request->faq_title as $key => $question) {
                     $campaign->faqs()->create([
                         'title' => $question ? $question : null,
                         'content' => $request->faq_content[$key] ? $request->faq_content[$key] : null,
                     ]);
                 }
-
+            }
 
             if ($request->gallery) {
                 foreach ($request->gallery as $key => $gallery) {
@@ -102,14 +96,12 @@ class CampaignController extends Controller
         return redirect()->route('admin.campaign.index')->with('success', 'Campaign created successfully');
     }
 
-
     public function edit($id)
     {
         $data = Campaign::with(['galleries', 'faqs'])->findOrFail($id);
         $categories = Category::get();
         return view('admin.campaign.edit', compact('data', 'categories'));
     }
-
 
     public function update(Request $request, $id)
     {
@@ -136,9 +128,9 @@ class CampaignController extends Controller
         $campaign->benefits = $request->benefits;
         $campaign->end_date = $request->end_date;
         $campaign->video_link = $request->video_link;
-        
+
         if ($request->photo) {
-            $campaign->photo =  MediaHelper::handleUpdateImage($request->photo, $campaign->photo);
+            $campaign->photo = MediaHelper::handleUpdateImage($request->photo, $campaign->photo);
         }
 
         $campaign->is_faq = $request->is_faq == 'on' ? 1 : 0;
@@ -147,10 +139,11 @@ class CampaignController extends Controller
         $campaign->close_type = $request->close_type ?? 'goal';
         $campaign->update();
 
-
         if ($request->is_faq == 'on') {
-            if ($request->faq_title && $request->faq_content)
+            if ($request->faq_title && $request->faq_content) {
                 $campaign->faqs()->delete();
+            }
+
             foreach ($request->faq_title as $key => $question) {
                 $campaign->faqs()->create([
                     'title' => $question ? $question : null,
@@ -171,7 +164,6 @@ class CampaignController extends Controller
         return redirect()->route('admin.campaign.index')->with('success', 'Campaign updated successfully');
     }
 
-
     public function galleryRemove($id)
     {
         $gallery = CampaignGallery::findOrFail($id);
@@ -180,17 +172,18 @@ class CampaignController extends Controller
         return response()->json(['success' => 'Gallery deleted successfully']);
     }
 
-    public function status($id, $status)
+    public function status($id, $status, $type)
     {
         $campaign = Campaign::findOrFail($id);
-        $campaign->is_feature = $status;
+        if ($type == 'status') {
+            $campaign->status = $status;
+        } else {
+            $campaign->is_feature = $status;
+        }
+
         $campaign->update();
         return redirect()->back()->with('success', 'Campaign status updated successfully');
     }
-
-
-
-
 
     public function destroy(Request $request)
     {

@@ -59,6 +59,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('category/destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
 
             // Preloaded
+
             Route::get('preloaded', [PreloadedController::class, 'index'])->name('preloaded.index');
             Route::post('preloaded/store', [PreloadedController::class, 'store'])->name('preloaded.store');
             Route::put('preloaded/update/{id}', [PreloadedController::class, 'update'])->name('preloaded.update');
@@ -70,7 +71,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('campaign/store', [CampaignController::class, 'store'])->name('campaign.store');
             Route::get('campaign/edit/{campaign}', [CampaignController::class, 'edit'])->name('campaign.edit');
             Route::put('campaign/update/{campaign}', [CampaignController::class, 'update'])->name('campaign.update');
-            Route::get('campaign/status/{id}/{status}', [CampaignController::class, 'status'])->name('campaign.status');
+            Route::get('campaign/status/{id}/{status},{type}', [CampaignController::class, 'status'])->name('campaign.status');
             Route::delete('campaign-delete', [CampaignController::class, 'destroy'])->name('campaign.destroy');
             Route::get('campaign/gallery/remove/{id}', [CampaignController::class, 'galleryRemove'])->name('campaign.gallery.remove');
         });
@@ -243,13 +244,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         });
 
-
         // ==================================== WITHDRAW SECTION ====================================//
         Route::get('/withdraw/settings', [WithdrawController::class, 'index'])->name('withdraw.settings');
         Route::get('/withdraw/request', [WithdrawController::class, 'withdrawRequest'])->name('withdraw.request');
         Route::get('/withdraw/approve/{id}', [WithdrawController::class, 'withdrawApprove'])->name('withdraw.approve');
         Route::get('/withdraw/reject/{id}', [WithdrawController::class, 'withdrawReject'])->name('withdraw.reject');
-
 
         Route::group(['middleware' => 'permission:Manage Contact'], function () {
             // ==================================== ADMIN CONTACT SECTION ====================================//

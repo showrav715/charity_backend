@@ -32,6 +32,15 @@ class AboutController extends Controller
             }
             $about->photo = MediaHelper::handleUpdateImage($request['photo'], $about->photo);
         }
+        if (
+            isset($request['photo2'])
+        ) {
+            $status = MediaHelper::ExtensionValidation($request['photo2']);
+            if (!$status) {
+                return back()->with('error', 'Please upload a valid image');
+            }
+            $about->photo2 = MediaHelper::handleUpdateImage($request['photo2'], $about->photo2);
+        }
 
         if (
             isset($request['backgroud_photo'])
