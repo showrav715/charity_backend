@@ -59,7 +59,7 @@
                             </select>
                         </div>
                        
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-6">
                             <label>@lang('Status') </label>
                             <select class="form-control" name="status" required>
                                 <option value="" selected>--@lang('Select')--</option>

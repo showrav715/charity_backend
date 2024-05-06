@@ -27,6 +27,7 @@
                         <th>{{ __('Photo') }}</th>
                         <th>{{ __('Name') }}</th>
                         <th>{{ __('Designation') }}</th>
+                        <th>{{ __('Status') }}</th>
                         <th>{{ __('Action') }}</th>
                     </tr>
 
@@ -43,13 +44,35 @@
                             {{ $item->designation }}
                         </td>
 
+                        <td data-label="@lang('Feature')">
+                            <div class="btn-group mb-2">
+                                <button
+                                    class="btn btn-{{ $item->status == 1 ? 'success' : 'danger' }} btn-sm dropdown-toggle"
+                                    type="button" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    @if ($item->status == 1)
+                                        @lang('Active')
+                                    @else
+                                        @lang('Inactive')
+                                    @endif
+                                </button>
+                                <div class="dropdown-menu" x-placement="bottom-start"
+                                    style="position: absolute; transform: translate3d(0px, 29px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                    <a class="dropdown-item"
+                                        href="{{ route('admin.volunteer.status', [$item->id, 1]) }}">@lang('Active')</a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('admin.volunteer.status', [$item->id, 0]) }}">@lang('Inactive')</a>
+                                </div>
+                            </div>
+                        </td>
+
                         <td data-label="{{ __('Action') }}">
                             <a href="{{ route('admin.volunteer.edit', $item->id) }}"
                                 class="btn btn-primary  btn-sm edit mb-1" data-toggle="tooltip" title="@lang('Edit')"><i
                                     class="fas fa-edit"></i></a>
 
                             <a href="javascript:void(0)" class="btn btn-danger  btn-sm remove mb-1"
-                                data-route="{{ route('admin.volunteer.destroy', $item) }}" data-toggle="tooltip"
+                            data-id="{{$item->id}}" data-toggle="tooltip"
                                 title="@lang('Delete')"><i class="fas fa-trash"></i></a>
 
                         </td>
@@ -75,13 +98,14 @@
 <!-- Modal -->
 <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form action="" method="post">
+        <form action="{{route('admin.volunteer.destroy')}}" method="post">
             @csrf
             @method('DELETE')
             <div class="modal-content">
                 <div class="modal-body">
                     <h5 class="mt-3">@lang('Are you sure to remove?')</h5>
                 </div>
+                <input type="hidden" name="id">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
                     <button type="submit" class="btn btn-danger">@lang('Confirm')</button>
@@ -97,7 +121,7 @@
     'use strict';
         $('.remove').on('click', function() {
             var route = $(this).data('route')
-            $('#del').find('form').attr('action', route)
+            $('#del').find('input[name=id]').val($(this).data('id'))
             $('#del').modal('show')
         })
 </script>

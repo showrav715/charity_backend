@@ -8,6 +8,7 @@ use App\Models\Blog;
 use App\Models\Campaign;
 use App\Models\ContactMessage;
 use App\Models\Donation;
+use App\Models\Event;
 use App\Models\Generalsetting;
 use App\Models\Subscriber;
 use App\Models\Team;
@@ -28,14 +29,16 @@ class AdminController extends Controller
 
     public function index()
     {
+        $data['total_campaign'] = Campaign::count();
         $data['recent_campaigns'] = Campaign::orderby('id', 'desc')->take(5)->get();
         $data['recent_messages'] = ContactMessage::orderby('id', 'desc')->take(6)->get();
         $data['recent_donations'] = Donation::orderby('id', 'desc')->take(7)->get();
         $data['recent_users'] = User::orderby('id', 'desc')->take(6)->get();
         $data['total_subscribers'] = Subscriber::count();
         $data['total_projects'] = 1;
-        $data['total_teams'] = Team::count();
-        $data['total_blogs'] = Blog::count();
+        $data['total_donations'] = Donation::count();
+        $data['total_users'] = User::count();
+        $data['total_events'] = Event::count();
         return view('admin.dashboard', $data);
     }
 

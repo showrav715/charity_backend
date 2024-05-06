@@ -40,7 +40,7 @@
                                     {{ showAdminAmount($item->total) }}
                                 </td>
                                 <td data-label="@lang('Tips')">
-                                    {{ showAdminAmount($item->tips) ?? 'N/A'}}
+                                    {{ showAdminAmount($item->tips) ?? 'N/A' }}
                                 </td>
 
                                 <td data-label="@lang('Raised')">
@@ -51,8 +51,8 @@
                                     </a>
                                 </td>
 
-                                <td data-label="@lang('Raised')">
-                                    {{ $item->name ?? 'N/A' }}
+                                <td data-label="@lang('Donor Name')">
+                                    {{ $item->name ?? 'Anonymous' }}
                                 </td>
 
                                 <td data-label="@lang('Raised')">
@@ -98,6 +98,10 @@
                         @endforelse
                     </table>
                 </div>
+
+                @if ($donations->hasPages())
+                    {{ $donations->links('admin.partials.paginate') }}
+                @endif
             </div>
         </div>
     </div>
@@ -131,6 +135,5 @@
             $('#removeMod').find('input[name=id]').val($(this).data('id'))
             $('#removeMod').modal('show')
         })
-
     </script>
 @endpush

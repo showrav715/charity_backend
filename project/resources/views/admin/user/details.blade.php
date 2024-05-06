@@ -35,11 +35,11 @@
                         </div>
                         <div class="form-group col-md-6 mt-1">
                             <label>@lang('Phone')</label>
-                            <input class="form-control" type="text" name="phone" value="{{ $user->phone }}" required>
+                            <input class="form-control" type="text" name="phone" value="{{ $user->phone }}" >
                         </div>
                         <div class="form-group col-md-6 mt-1">
                             <label>@lang('Country')</label>
-                            <input class="form-control" type="text" name="country" value="{{ $user->country }}" required>
+                            <input class="form-control" type="text" name="country" value="{{ $user->country }}" >
                         </div>
                         <div class="form-group col-md-6 mt-1">
                             <label>@lang('City')</label>

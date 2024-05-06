@@ -19,7 +19,7 @@ class WithdrawController extends ApiController
                 return $query->where('txn_id', $txn);
             })
             ->latest()
-            ->paginate(16);
+            ->paginate(10);
 
         return $this->sendResponse($datas, 'Withdraws fetched successfully.');
     }

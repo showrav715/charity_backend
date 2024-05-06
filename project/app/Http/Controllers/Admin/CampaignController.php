@@ -12,8 +12,10 @@ use Illuminate\Support\Str;
 
 class CampaignController extends Controller
 {
-    public function index()
-    {
+    public function index(Request $request)
+    {   
+     
+  
 
         $campaign = Campaign::all();
         foreach ($campaign as $camp) {
@@ -30,9 +32,36 @@ class CampaignController extends Controller
             }
         }
 
-        $campaigns = Campaign::
+
+        switch ($request->type) {
+            case 'pending':
+                $campaigns = Campaign::
+                where('status', 0)
+                ->orderby('id', 'desc')
+                ->paginate(10);
+                break;
+
+            case 'running':
+                $campaigns = Campaign::
+                where('status', 1)
+                ->orderby('id', 'desc')
+                ->paginate(10);
+                break;
+            case 'closed':
+                $campaigns = Campaign::
+                where('status', 2)
+                ->orderby('id', 'desc')
+                ->paginate(10);
+                break;
+            
+            default:
+            $campaigns = Campaign::
             orderby('id', 'desc')
             ->paginate(10);
+                break;
+        }
+
+        
 
         return view('admin.campaign.index', compact('campaigns'));
     }

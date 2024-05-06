@@ -27,7 +27,9 @@
                         @method('PUT')
                         @csrf
                         <div class="col-md-12 ShowImage mb-3  text-center">
+                            <label for="image">
                             <img src="{{ getPhoto($event->photo) }}" class="img-fluid" alt="image" width="400">
+                            </label>
                         </div>
 
                         <div class="row">

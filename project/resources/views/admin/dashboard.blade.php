@@ -20,9 +20,11 @@
                     <div class="card-header">
                         <h4>@lang('Total Campaign')</h4>
                     </div>
-                    <div class="card-body">
-                        167856246
-                        <a href="{{ route('admin.campaign.index') }}">@lang('View')</a>
+                    <div class="card-body d-flex justify-content-between">
+                        {{$total_campaign}}
+                        <a href="{{ route('admin.campaign.index') }}">
+                            <i class="fas fa-eye"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -39,9 +41,9 @@
                     <div class="card-header">
                         <h4>@lang('Total Donations')</h4>
                     </div>
-                    <div class="card-body">
-                        {{ $total_teams }}
-                        <a href="{{ route('admin.donation.index') }}">@lang('View')</a>
+                    <div class="card-body d-flex justify-content-between">
+                        {{ $total_donations }}
+                        <a href="{{ route('admin.donation.index') }}"><i class="fas fa-eye"></i></a>
                     </div>
                 </div>
             </div>
@@ -57,9 +59,9 @@
                     <div class="card-header">
                         <h4>@lang('Total Users')</h4>
                     </div>
-                    <div class="card-body">
-                        {{ $total_blogs }}
-                        <a href="{{ route('admin.user.index') }}">@lang('View')</a>
+                    <div class="card-body d-flex justify-content-between">
+                        {{ $total_users }}
+                        <a href="{{ route('admin.user.index') }}"><i class="fas fa-eye"></i></a>
                     </div>
                 </div>
             </div>
@@ -74,9 +76,9 @@
                     <div class="card-header">
                         <h4>@lang('Total Events')</h4>
                     </div>
-                    <div class="card-body">
-                        {{ $total_blogs }}
-                        <a href="{{ route('admin.event.index') }}">@lang('View')</a>
+                    <div class="card-body d-flex justify-content-between">
+                        {{ $total_events }}
+                        <a href="{{ route('admin.event.index') }}"><i class="fas fa-eye"></i></a>
                     </div>
                 </div>
             </div>
@@ -122,9 +124,9 @@
                                     </td>
 
                                     <td data-label="@lang('Action')" class="text-right">
-                                        <a href="{{ route('admin.campaign.edit', $item->id) }}"
-                                            class="btn btn-primary btn-sm  mb-1" data-toggle="tooltip"
-                                            title="@lang('Edit')">@lang('Detail')</a>
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
+                                            data-id="{{ $item->id }}" data-toggle="tooltip"
+                                            title="@lang('Remove')"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             @empty
@@ -207,7 +209,7 @@
                             </tr>
                             @forelse ($recent_users as $key => $user)
                                 <tr>
-                                    <td data-label="@lang('Sl')">{{ $key }}</td>
+                                    <td data-label="@lang('Sl')">{{ $key + 1 }}</td>
 
                                     <td data-label="@lang('Name')">
                                         {{ $user->name }}
@@ -245,7 +247,7 @@
 
                                     <th>@lang('Name')</th>
                                     <th>@lang('Email')</th>
-                                    <th>@lang('Phone')</th>
+                                    <th>@lang('Subject')</th>
                                     <th>@lang('Message')</th>
                                     <th class="text-right">@lang('Action')</th>
                                 </tr>
@@ -259,12 +261,12 @@
                                         <td data-label="@lang('Email')">
                                             {{ $item->email ?? 'N/A' }}
                                         </td>
-                                        <td data-label="@lang('Phone')">
-                                            {{ $item->phone ?? 'N/A' }}
+                                        <td data-label="@lang('Subject')">
+                                            {{ $item->subject }}
                                         </td>
 
                                         <td data-label="@lang('Message')">
-                                            {{ $item->message }}
+                                            {{ Str::limit($item->message, 30) }}
                                         </td>
                                         <td data-label="@lang('Action')" class="text-right">
                                             <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
@@ -280,7 +282,33 @@
             </div>
         </div>
 
+    </div>
 
-
+    <div class="modal fade" id="removeMod" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <form action="{{ route('admin.donation.destroy') }}" method="POST">
+                @method('DELETE')
+                @csrf
+                <input type="hidden" name="id">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h5>@lang('Are you sure to remove?')</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
+                        <button type="submit" class="btn btn-danger">@lang('Confirm')</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 @endsection
+@push('script')
+    <script>
+        'use strict';
+        $('.remove').on('click', function() {
+            $('#removeMod').find('input[name=id]').val($(this).data('id'))
+            $('#removeMod').modal('show')
+        })
+    </script>
+@endpush

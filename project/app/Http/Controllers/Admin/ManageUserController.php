@@ -41,57 +41,13 @@ class ManageUserController extends Controller
     }
 
 
-    public function store(Request $request)
-    {
-        $gs = Generalsetting::first();
-        if ($gs->registration == 0) {
-            return back()->with('error', 'Registration is currently off.');
-        }
-
-        $countries = Country::query();
-        $name = $countries->pluck('name')->toArray();
-        $data = $request->validate(
-            [
-                'name' => 'required',
-                'email' => ['required', 'email', 'unique:users', $gs->allowed_email != null ? 'email_domain:' . $request->email : ''],
-                'phone' => 'required',
-                'country' => 'required|in:' . implode(',', $name),
-                'address' => 'required',
-                'password' => 'required|min:6|confirmed',
-            ]
-
-        );
-
-        $currency = $countries->where('name', $request->country)->value('currency_id');
-        $data['phone'] = $request->dial_code . $request->phone;
-        $data['password'] = bcrypt($request->password);
-        $data['email_verified'] = $gs->is_verify == 1;
-        $user = User::create($data);
-
-        Wallet::create([
-            'user_id' => $user->id,
-            'user_type' => 1,
-            'currency_id' => $currency,
-            'balance' => 0
-        ]);
-
-    
-        return back()->with('success', 'User created successfully');
-    }
-
 
     public function details($id)
     {
         $user = User::findOrFail($id);
-        //$countries = Country::get(['id', 'name']);
-
+   
         $deposit = collect([]);
-     
-      
         $withdraw = collect([]);
-        // Withdrawals::where('user_id', $user->id)->with('currency')->get()->map(function ($q) use ($withdraw) {
-        //     $withdraw->push((float) amountConv($q->amount, $q->currency));
-        // });
         $data['totalWithdraw'] = $withdraw->sum();
 
         return view('admin.user.details', compact('user',  'data'));
@@ -102,8 +58,6 @@ class ManageUserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
-            'phone' => 'required',
-            'country' => 'required',
         ]);
 
         $user          = User::findOrFail($id);

@@ -38,9 +38,16 @@
 
 
         <li class="nav-item dropdown {{ menu(['admin.contact*']) }}">
+              @php
+                  $pending = \App\Models\Campaign::where('status', 0)->count();
+              @endphp
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                    class="fas fa-envelope-open-text"></i></i>
-                <span>@lang('Manage Campaigns')</span></a>
+                    class="fas fa-envelope-open-text"></i>
+                    <span>@lang('Manage Campaign')
+                     @if ($pending > 0) <small class="badge badge-danger mr-4">!</small>
+                         @endif
+                </span>
+                </a>
             <ul class="dropdown-menu">
 
                 <li class="{{ menu('admin.contact.message') }}"><a class="nav-link"
@@ -50,7 +57,17 @@
                         href="{{ route('admin.preloaded.index') }}">@lang('Preloaded Amount')</a>
                 </li>
                 <li class="{{ menu('admin.campaign.index') }}"><a class="nav-link"
-                        href="{{ route('admin.campaign.index') }}">@lang('Manage Campaigns')</a>
+                        href="{{ route('admin.campaign.index') }}">@lang('All Campaigns')</a>
+                </li>
+                <li class="{{ menu('admin.campaign.index') }}">
+                        <a class="nav-link {{$pending > 0 ? 'beep beep-sidebar':""}}"
+                        href="{{ route('admin.campaign.index') ."?type=pending" }}">@lang('Pending Campaigns')</a>
+                </li>
+                <li class="{{ menu('admin.campaign.index') }}"><a class="nav-link"
+                        href="{{ route('admin.campaign.index') ."?type=running" }}">@lang('Running Campaigns')</a>
+                </li>
+                <li class="{{ menu('admin.campaign.index') }}"><a class="nav-link"
+                        href="{{ route('admin.campaign.index') ."?type=closed" }}">@lang('Closed Campaigns')</a>
                 </li>
             </ul>
         </li>
@@ -193,15 +210,10 @@
                         href="{{ route('admin.cta.index') }}">@lang('CTA Section')</a>
                 </li>
 
-                <li class="{{ menu('admin.home.sections') }}"><a class="nav-link"
-                        href="{{ route('admin.home.sections') }}">@lang('Home Page Sections
-                                                                                                                                                                        ')</a>
-                </li>
-
 
                 <li class="{{ menu('admin.home.sections') }}"><a class="nav-link"
                         href="{{ route('admin.faq.index') }}">@lang('Manage Faq
-                                                                                                                                                                        ')</a>
+                                                                                                                                                                                                ')</a>
                 </li>
 
                 <li class="{{ menu('admin.brand.index') }}"><a class="nav-link"

@@ -25,7 +25,10 @@
                     <form action="{{ route('admin.event.store') }}" enctype="multipart/form-data" method="POST">
                         @csrf
                         <div class="col-md-12 ShowImage mb-3  text-center">
-                            <img src="{{ getPhoto('') }}" class="img-fluid" alt="image" width="400">
+                            <label for="image">
+                                <img src="{{ getPhoto('') }}" class="img-fluid" alt="image" width="400">
+                            </label>
+                            
                         </div>
 
                         <div class="row">

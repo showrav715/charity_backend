@@ -76,9 +76,18 @@
                                             @if ($item->status == 0)
                                                 <button class="btn btn-primary accept m-1 btn-sm"
                                                     data-url="{{ route('admin.withdraw.approve', $item->id) }}">@lang('Accept')</button>
-
                                                 <button class="btn btn-danger reject m-1 btn-sm"
                                                     data-url="{{ route('admin.withdraw.reject', $item->id) }}">@lang('Reject')</button>
+                                                @else
+                                                @if ($item->status == 1)
+                                                    <span class="badge badge-dark">
+                                                        Accepted
+                                                    </span>
+                                                @else
+                                                    <span class="badge badge-dark">
+                                                        Rejected
+                                                    </span>
+                                                @endif
                                             @endif
                                         </div>
                                     </td>
@@ -107,7 +116,7 @@
     <div class="modal fade" id="accept" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
 
-            <form action="" method="post">
+            <form action="" method="get">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
@@ -134,7 +143,7 @@
     <div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
 
-            <form action="" method="post">
+            <form action="" method="get">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">

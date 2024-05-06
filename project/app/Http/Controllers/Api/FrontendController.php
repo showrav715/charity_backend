@@ -243,10 +243,10 @@ class FrontendController extends ApiController
         return $this->sendResponse($data, 'Single Blog');
     }
 
-    public function getPages()
+    public function getPage()
     {
-        $pages = Page::get();
-        return $this->sendResponse($pages, 'Page Data');
+        $data['data'] = Page::get();
+        return $this->sendResponse($data, 'Page Data');
     }
 
     public function page($slug)
@@ -271,7 +271,7 @@ class FrontendController extends ApiController
         $data['features'] = Feature::orderby('id')->get();
         $data['counters'] = Counter::orderby('id')->get();
         $data['brands'] = Brand::orderby('id')->get();
-        return $this->sendResponse($data, 'Contact Page');
+        return $this->sendResponse($data, 'Abount Page');
     }
 
     public function getCurrency()
@@ -434,7 +434,7 @@ class FrontendController extends ApiController
 
     public function volunteerList()
     {
-        $data['volunteers'] = Volunteer::orderBy('id', 'desc')->paginate(20);
+        $data['volunteers'] = Volunteer::orderBy('id', 'desc')->whereStatus(1)->paginate(20);
         return $this->sendResponse($data, 'Volunteer List');
     }
 }

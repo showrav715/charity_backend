@@ -12,7 +12,7 @@ class DonationController extends Controller
     public function index(Request $request)
     {
         $donations = Donation::with('campaign')
-            ->latest()->paginate(10);
+            ->latest()->paginate(12);
         return view('admin.donation.index', compact('donations'));
     }
 

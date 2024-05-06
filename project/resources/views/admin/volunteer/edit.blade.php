@@ -35,6 +35,16 @@
                         </div>
                     </div>
 
+                    @if ($volunteer->cv)
+
+                    <div class="form-group
+                        d-flex justify-content-center">
+                        <a href="{{ asset('assets/files/'.$volunteer->cv) }}" class="btn btn-success"
+                            download>{{ __('Download CV') }}</a>
+                    </div>
+                        
+                    @endif
+
                     <div class="form-group">
                         <label for="name">{{ __('Name') }}</label>
                         <input type="text" class="form-control" name="name" id="name" required

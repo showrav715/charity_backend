@@ -30,7 +30,7 @@ class EventController extends Controller
 
     public function edit(Event $event)
     {
-      return view('admin.event.edit', compact('event'));
+        return view('admin.event.edit', compact('event'));
     }
 
     public function update(Request $request, $id)
@@ -51,7 +51,7 @@ class EventController extends Controller
             'event_type' => 'required|string',
             'organizar_name' => 'required|string',
             'description' => 'required|string',
-            'photo' => $photo.'|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo' => $photo . '|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'required|integer',
         ]);
 
@@ -85,8 +85,9 @@ class EventController extends Controller
         $data->save();
     }
 
-    public function destroy(Event $event)
+    public function destroy(Request $request)
     {
+        $event = Event::findOrFail($request->id);
         MediaHelper::handleDeleteImage($event->photo);
         $event->delete();
 

@@ -16,7 +16,7 @@ class SupportTicketController extends ApiController
         $success = SupportTicket::with('lastMessage')
             ->where('user_id', $user->id)
             ->latest()
-            ->paginate(15);
+            ->paginate(10);
         return $this->sendResponse($success, 'Your tickets');
     }
 
@@ -36,21 +36,25 @@ class SupportTicketController extends ApiController
             return $this->sendError('Validation Error', $validator->errors());
         }
 
-        if (request()->routeIs('user.*')) {
-            $user = auth()->user();
-            $type = 1;
-        } else {
-            $user = request()->user();
-            $type = 2;
-        }
+        $user = auth()->user();
 
         $tkt = 'TKT' . randNum(8);
-        SupportTicket::create([
+       $ticket = SupportTicket::create([
             'user_id' => $user->id,
-            'user_type' => $type,
             'ticket_num' => $tkt,
             'subject' => $request->subject,
         ]);
+
+
+        $message = new TicketMessage();
+        $message->ticket_id = $ticket->id;
+        $message->ticket_num = $ticket->ticket_num;
+        $message->user_id = $user->id;
+        $message->message = $request->message;
+        $message->save();
+        
+        $ticket->save();
+
 
         return $this->sendResponse(['ticket_num' => $tkt], 'New ticket has been opened');
     }

@@ -17,7 +17,7 @@ class DonationController extends ApiController
                 return $query->where('txn_id', $txn);
             })
             ->latest()
-            ->paginate(16);
+            ->paginate(10);
         return $this->sendResponse($donations, 'Donations fetched successfully.');
     }
 
@@ -29,7 +29,7 @@ class DonationController extends ApiController
                 return $query->where('txn_id', $txn);
             })
             ->latest()
-            ->paginate(16);
+            ->paginate(10);
         return $this->sendResponse($donations, 'Donations fetched successfully.');
     }
 
@@ -49,7 +49,7 @@ class DonationController extends ApiController
                 return $query->where('txn_id', $txn);
             })
             ->latest()
-            ->paginate(16);
+            ->paginate(10);
         return $this->sendResponse($donations, 'transactions fetched successfully.');
     }
 

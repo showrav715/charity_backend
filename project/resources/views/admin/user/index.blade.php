@@ -33,8 +33,7 @@
 
             </div>
         </form>
-        <a href="{{route('admin.user.create')}}" class="btn btn-primary mb-1 my-2 mr-3"><i class="fas fa-plus"></i>
-            @lang('Add New')</a>
+       
     </div>
 </section>
 @endsection
@@ -76,7 +75,7 @@
                             <td data-label="@lang('Status')">
                                 @if($user->status == 1)
                                 <span class="badge badge-success">@lang('active')</span>
-                                @elseif($user->status == 2)
+                                @elseif($user->status == 0)
                                 <span class="badge badge-danger">@lang('banned')</span>
                                 @endif
                             </td>

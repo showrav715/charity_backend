@@ -49,7 +49,6 @@ class VolunteerController extends Controller
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $data->status = 1;
         $data->name = $request->name;
         $data->designation = $request->designation;
         $data->facebook = $request->facebook;
@@ -70,8 +69,19 @@ class VolunteerController extends Controller
         $data->save();
     }
 
-    public function destroy(Volunteer $volunteer)
+
+    function status($id,$status)
     {
+        $volunteer = Volunteer::findOrFail($id);
+        $volunteer->status = $status;
+        $volunteer->save();
+        return back()->with('success', 'Volunteer status has been updated');
+    }
+
+    public function destroy(Request $request)
+    {
+        $volunteer = Volunteer::findOrFail($request->id);
+
         MediaHelper::handleDeleteImage($volunteer->photo);
         $volunteer->delete();
         return back()->with('success', 'Volunteer has been deleted');

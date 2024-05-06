@@ -28,6 +28,7 @@
                             <th>@lang('Photo')</th>
                             <th>@lang('Title')</th>
                             <th>@lang('Type')</th>
+                            <th>@lang('Date & Time')</th>
                             <th>@lang('Status')</th>
                             <th>@lang('Action')</th>
                         </tr>
@@ -43,6 +44,11 @@
                                 <td data-label="@lang('Event Type')">
                                     {{ $item->event_type }}
                                 </td>
+
+                                <td>
+                                    {{ $item->date }} / {{ $item->start_time }} - {{ $item->end_time }}
+                                </td>
+
                                 <td data-label="@lang('Status')">
                                     @if ($item->status == 1)
                                         <span class="badge badge-success"> @lang('Active') </span>

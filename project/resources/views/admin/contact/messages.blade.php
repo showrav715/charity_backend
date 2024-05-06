@@ -23,7 +23,6 @@
 
                                 <th>@lang('Name')</th>
                                 <th>@lang('Email')</th>
-                                <th>@lang('Phone')</th>
                                 <th>@lang('Subject')</th>
                                 <th>@lang('Message')</th>
                                 <th class="text-right">@lang('Action')</th>
@@ -39,9 +38,7 @@
                                     <td data-label="@lang('Email')">
                                         {{ $item->email }}
                                     </td>
-                                    <td data-label="@lang('Phone')">
-                                        {{ $item->phone }}
-                                    </td>
+                                    
                                     <td data-label="@lang('Subject')">
                                         {{ $item->subject }}
                                     </td>

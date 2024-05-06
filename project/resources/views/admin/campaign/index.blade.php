@@ -150,7 +150,7 @@
                     </table>
                 </div>
                 @if ($campaigns->hasPages())
-                    {{ $campaigns->links('admin.partials.paginate') }}
+                    {{ $campaigns->appends(["type"=>request()->input('type')])->links('admin.partials.paginate') }}
                 @endif
             </div>
         </div>

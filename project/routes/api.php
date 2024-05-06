@@ -23,9 +23,7 @@ Route::prefix('user')->group(function () {
     Route::post('reset-password', [AuthController::class, 'resetPasswordSubmit']);
     Route::post('verify-email', [AuthController::class, 'verifyEmailSubmit']);
     Route::post('resend/verify-email/code', [AuthController::class, 'verifyEmailResendCode']);
-
     Route::post('token', [AuthController::class, 'token']);
-
     Route::middleware(['auth:sanctum', "email_verify"])->group(function () {
 
         Route::get('dashboard', [DashboardController::class, 'dashboard']);
@@ -89,7 +87,7 @@ Route::get('blog/{slug}', [FrontendController::class, 'singleBlog']);
 // Page Routes
 Route::get('/contact/page', [FrontendController::class, 'contactPage']);
 Route::get('/about/page', [FrontendController::class, 'aboutPage']);
-Route::get('/get/pages', [FrontendController::class, 'page']);
+Route::get('/get/pages', [FrontendController::class, 'getPage']);
 Route::get('/page/{slug}', [FrontendController::class, 'page']);
 
 // Setting Routes

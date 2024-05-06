@@ -37,12 +37,6 @@
                         </div>
 
                         <div class="form-group ">
-                            <label for="header_text" class="col-form-label">{{ __('Header Text') }}</label>
-                            <input type="text" class="form-control" id="header_text" name="header_text"
-                                placeholder="{{ __('Header Text') }}" value="{{ $gs->header_text }}">
-                        </div>
-                      
-                        <div class="form-group ">
                             <label for="phone" class="col-form-label">{{ __('Phone') }}</label>
                             <input type="text" class="form-control" id="phone" name="phone"
                                 placeholder="{{ __('Phone') }}" value="{{ $gs->phone }}">
@@ -53,7 +47,6 @@
                             <input type="text" class="form-control" id="email" name="email"
                                 placeholder="{{ __('Email') }}" value="{{ $gs->email }}">
                         </div>
-
 
                         <div class="form-group ">
                             <label for="address" class="col-form-label">{{ __('Address') }}</label>

@@ -84,7 +84,7 @@ class GeneralSettingController extends Controller
         }
 
         if ($request->withdraw == 1) {
-            $curr = Currency::where('default', 1)->first();
+        
             $gs->withdraw_min = $request->withdraw_min;
             $gs->withdraw_max = $request->withdraw_max;
             $gs->withdraw_charge = $request->withdraw_charge;

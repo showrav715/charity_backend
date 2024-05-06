@@ -22,15 +22,15 @@
                         <input type="hidden" name="withdraw" value="1">
                         <div class="form-group">
                             <label>@lang('Withdraw Minimun Amount')</label>
-                            <input class="form-control" name="withdraw_min" type="number" step="any" value="{{round($gs->withdraw_min)}}" required>
+                            <input class="form-control" name="withdraw_min" type="number" step="any" value="{{round($gs->withdraw_min,2)}}" required>
                         </div>
                         <div class="form-group">
                             <label>@lang('Withdraw Maximum Amount')</label>
-                            <input class="form-control" name="withdraw_max" type="number" step="any" value="{{round($gs->withdraw_max)}}" required>
+                            <input class="form-control" name="withdraw_max" type="number" step="any" value="{{round($gs->withdraw_max,2)}}" required>
                         </div>
                         <div class="form-group">
                             <label>@lang('Withdraw Charge')</label>
-                            <input class="form-control" name="withdraw_charge" type="number" step="any" value="{{round($gs->withdraw_charge)}}"  required>
+                            <input class="form-control" name="withdraw_charge" type="number" step="any" value="{{round($gs->withdraw_charge,2)}}"  required>
                         </div>
                         <div class="form-group text-right">
                             <button type="submit" class="btn btn-primary btn-lg">@lang('Update')</button>

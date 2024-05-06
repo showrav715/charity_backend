@@ -21,6 +21,7 @@
                 <div class="card-body">
                     <form action="{{ route('admin.currency.update', $currency->id) }}" method="post">
                         @csrf
+                        @method('PUT')
                         <div class="row">
 
                             <div class="form-group col-md-12">
@@ -38,7 +39,7 @@
                                 <label>@lang('Currency Value')</label>
                                 <div class="input-group has_append">
                                     <input type="text" class="form-control" placeholder="0" name="value"
-                                        value="{{ numFormat($currency->value, 8) }}" />
+                                        value="{{ numFormat($currency->value, 2) }}" />
                                     <div class="input-group-append">
                                         <div class="input-group-text">{{ $currency->code }}</div>
                                     </div>
@@ -58,7 +59,7 @@
                                 </div>
                             @endif
 
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-6">
                                 <label>@lang('Status') </label>
                                 <select class="form-control" name="status" required>
                                     <option value="">--@lang('Select')--</option>

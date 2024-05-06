@@ -23,20 +23,20 @@ class CampaignController extends ApiController
                     ->where('user_id', auth()->id())->whereStatus(2)
                     ->when($search, function ($query) use ($search) {
                         return $query->where('title', 'like', '%' . $search . '%');
-                    })->latest()->paginate(12);
+                    })->latest()->paginate(10);
 
                 break;
             case 'running':
                 $campaigns = Campaign::with(['user', 'category'])->where('user_id', auth()->id())->whereStatus(1)
                     ->when($search, function ($query) use ($search) {
                         return $query->where('title', 'like', '%' . $search . '%');
-                    })->latest()->paginate(12);
+                    })->latest()->paginate(10);
                 break;
             case 'pending':
                 $campaigns = Campaign::with(['user', 'category'])->where('user_id', auth()->id())->whereStatus(0)
                     ->when($search, function ($query) use ($search) {
                         return $query->where('title', 'like', '%' . $search . '%');
-                    })->latest()->paginate(12);
+                    })->latest()->paginate(10);
 
                 break;
             default:
@@ -44,7 +44,7 @@ class CampaignController extends ApiController
                     ->when($search, function ($query) use ($search) {
                         return $query->where('title', 'like', '%' . $search . '%');
                     })
-                    ->latest()->paginate(12);
+                    ->latest()->paginate(10);
                 break;
         }
 
@@ -78,31 +78,35 @@ class CampaignController extends ApiController
         $campaign->category_id = $request->category_id;
         $campaign->goal = $request->goal;
         $campaign->photo = MediaHelper::handleMakeImage($request->photo);
-        $campaign->is_faq = $request->is_faq == 'on' ? 1 : 0;
+        $campaign->is_faq = $request->faq_title ? 1 : 0;
         $campaign->is_preloaded = $request->is_preloaded == 'on' ? 1 : 0;
         $campaign->status = $request->status == 1 ? 1 : 0;
         $campaign->close_type = $request->close_type ?? 'goal';
         $campaign->save();
 
-        if ($request->is_faq == 'on') {
-            if ($request->faq_title && $request->faq_content) {
-                foreach ($request->faq_title as $key => $question) {
+        if ($request->faq_title && $request->faq_content) {
+            $faq_title = explode(',', $request->faq_title);
+            if (count($faq_title) != 0) {
+                foreach ($faq_title as $key => $question) {
+                    $content = explode(',', $request->faq_content);
                     $campaign->faqs()->create([
                         'title' => $question ? $question : null,
-                        'content' => $request->faq_content[$key] ? $request->faq_content[$key] : null,
+                        'content' => $content[$key] ? $content[$key] : null,
                     ]);
                 }
             }
 
-            if ($request->gallery) {
-                foreach ($request->gallery as $key => $gallery) {
-                    $photo = MediaHelper::handleMakeImage($gallery);
-                    $campaign->galleries()->create([
-                        'photo' => $photo ? $photo : null,
-                    ]);
-                }
+        }
+
+        if ($request->gallery) {
+            foreach ($request->gallery as $key => $gallery) {
+                $photo = MediaHelper::handleMakeImage($gallery);
+                $campaign->galleries()->create([
+                    'photo' => $photo ? $photo : null,
+                ]);
             }
         }
+
         return response()->json(['status' => true, 'data' => [], 'message' => 'Campaign created successfully']);
     }
 

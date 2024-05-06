@@ -11,7 +11,7 @@ class Authorize
 
     public static function initiate($payment_data)
     {
-      
+
         $payment_amount = $payment_data['amount'];
 
         $status = 0;
@@ -77,9 +77,9 @@ class Authorize
             $message = __('Payment Failed.');
         }
 
+        storeStorage($txn_id, $payment_data);
 
-
-        return ['status' => $status, 'message' => $message, 'txn_id' => $txn_id];
+        return ['status' => $status, 'txn_id' => $txn_id, "access_id"=>$txn_id, "authorize" => true,"redirect" => false, 'message' => $message];
 
     }
 }

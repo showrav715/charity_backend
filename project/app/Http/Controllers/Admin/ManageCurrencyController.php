@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Currency;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ManageCurrencyController extends Controller
 {
@@ -35,7 +34,7 @@ class ManageCurrencyController extends Controller
         $currency->symbol = $request->symbol;
         $currency->value = $request->value;
         $currency->status = $request->status;
-        $currency->user_id = Auth::id();
+        $currency->default = $request->default;
         $currency->save();
         return back()->with('success', 'New currency has been added');
     }
@@ -62,6 +61,20 @@ class ManageCurrencyController extends Controller
         $curr->value = $request->value;
         $curr->status = $request->status;
         $curr->save();
+
+        if ($request->default == 1) {
+            if ($curr->status == 0) {
+                return back()->with('error', 'Please active currency first');
+            }
+            $curr->default = 1;
+            $curr->save();
+            $currencies = Currency::where('id', '!=', $curr->id)->get();
+            foreach ($currencies as $currency) {
+                $currency->default = 0;
+                $currency->save();
+            }
+        }
+
         return back()->with('success', 'Currency has been updated');
     }
 
@@ -73,22 +86,6 @@ class ManageCurrencyController extends Controller
         }
         $curr->delete();
         return back()->with('success', 'Currency has been deleted');
-    }
-
-    public function setDefault($id)
-    {
-        $curr = Currency::findOrFail($id);
-        if ($curr->status == 0) {
-            return back()->with('error', 'Please active currency first');
-        }
-        $curr->default = 1;
-        $curr->save();
-        $currencies = Currency::findOrFail($id);
-        foreach ($currencies as $currency) {
-            $currency->default = 0;
-            $currency->save();
-        }
-        return back()->with('success', 'Default currency has been updated');
     }
 
 }

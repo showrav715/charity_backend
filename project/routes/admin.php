@@ -79,13 +79,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         //==================================== USER SECTION  ==============================================//
 
         Route::get('manage-users', [ManageUserController::class, 'index'])->name('user.index');
-        Route::get('user/create', [ManageUserController::class, 'create'])->name('user.create');
-        Route::post('user/store', [ManageUserController::class, 'store'])->name('user.store');
         Route::get('user-details/{id}', [ManageUserController::class, 'details'])->name('user.details');
         Route::post('user-profile/update/{id}', [ManageUserController::class, 'profileUpdate'])->name('user.profile.update');
-        Route::post('balance-modify', [ManageUserController::class, 'modifyBalance'])->name('user.balance.modify');
-        Route::get('user-login/{id}', [ManageUserController::class, 'login'])->name('user.login');
-        Route::get('user-login/info/{id}', [ManageUserController::class, 'loginInfo'])->name('user.login.info');
 
         //transactions
         Route::get('/transaction-report', [AdminController::class, 'transactions'])->name('transactions')->middleware('permission:transactions');
@@ -142,7 +137,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('event/store', [EventController::class, 'store'])->name('event.store');
             Route::get('event/edit/{event}', [EventController::class, 'edit'])->name('event.edit');
             Route::put('event/update/{event}', [EventController::class, 'update'])->name('event.update');
-            Route::post('event/delete', [EventController::class, 'destroy'])->name('event.destroy');
+            Route::delete('event/delete', [EventController::class, 'destroy'])->name('event.destroy');
         });
 
         Route::group(['middleware' => 'permission:Manage Project'], function () {
@@ -177,7 +172,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/store-volunteer', [VolunteerController::class, 'store'])->name('volunteer.store');
             Route::get('/edit-volunteer/{id}', [VolunteerController::class, 'edit'])->name('volunteer.edit');
             Route::put('/update-volunteer/{id}', [VolunteerController::class, 'update'])->name('volunteer.update');
-            Route::delete('/delete-volunteer', [VolunteerController::class, 'destroy'])->name('volunteer.destroy');
+            Route::get('/update-status/{id}/{status}', [VolunteerController::class, 'status'])->name('volunteer.status');
+            Route::delete('/volunteer/delete/volunteer', [VolunteerController::class, 'destroy'])->name('volunteer.destroy');
         });
 
         Route::get('faq', [FaqController::class, 'index'])->name('faq.index');
