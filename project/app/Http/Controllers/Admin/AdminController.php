@@ -4,20 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\MediaHelper;
-use App\Models\Blog;
 use App\Models\Campaign;
 use App\Models\ContactMessage;
 use App\Models\Donation;
 use App\Models\Event;
 use App\Models\Generalsetting;
 use App\Models\Subscriber;
-use App\Models\Team;
 use App\Models\Transaction;
 use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
 
 class AdminController extends Controller
@@ -89,20 +85,6 @@ class AdminController extends Controller
 
         return back()->with('success', __('Password Changed Successfully'));
 
-    }
-
-    public function language()
-    {
-        $lang = file_get_contents(resource_path('lang/en.json'));
-        $langs = json_decode($lang, true);
-        return view('admin.language', compact('langs'));
-    }
-
-    public function languageUpdate(Request $request)
-    {
-        $merge = array_combine($request->key, $request->value);
-        file_put_contents(resource_path('lang/') . 'en.json', json_encode($merge));
-        return back()->with('success', __('Language Updated Successfully'));
     }
 
     public function subscribers()

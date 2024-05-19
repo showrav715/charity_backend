@@ -21,7 +21,7 @@
                         <h4>@lang('Total Campaign')</h4>
                     </div>
                     <div class="card-body d-flex justify-content-between">
-                        {{$total_campaign}}
+                        {{ $total_campaign }}
                         <a href="{{ route('admin.campaign.index') }}">
                             <i class="fas fa-eye"></i>
                         </a>
@@ -266,7 +266,7 @@
                                         </td>
 
                                         <td data-label="@lang('Message')">
-                                            {{ Str::limit($item->message, 30) }}
+                                            {{ $item->message }}
                                         </td>
                                         <td data-label="@lang('Action')" class="text-right">
                                             <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"

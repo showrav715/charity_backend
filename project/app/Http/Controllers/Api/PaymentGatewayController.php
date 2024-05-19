@@ -68,19 +68,22 @@ class PaymentGatewayController extends ApiController
                 $donation->created_at = Carbon::now();
                 $donation->save();
 
+                $currency = apiCurrency($orderData['currency_id']);
+                $convertAmount = $orderData['amount'] / $currency['value'];
+
                 // donar transaction create
                 if (isset($orderData['user_id'])) {
-                    transaction($orderData['amount'], $res['txn_id'], $orderData['user_id'], '-', 'My Donation');
+                    transaction($convertAmount, $res['txn_id'], $orderData['user_id'], '-', 'My Donation');
                 }
 
                 if ($campaign['user_id'] != 0) {
                     // campaign owner transaction create
-                    transaction($orderData['amount'], $res['txn_id'], $campaign['user_id'], '+', 'Donation Received');
+                    transaction($convertAmount, $res['txn_id'], $campaign['user_id'], '+', 'Donation Received');
                 }
 
                 // delete storage
                 deleteStorage($res['access_id']);
-                return $this->sendResponse(["status" => 1, 'message' => 'Donation successfull', 'txn_id' => $res['txn_id'], "gateway" => "authorize"],"Success");
+                return $this->sendResponse(["status" => 1, 'message' => 'Donation successfull', 'txn_id' => $res['txn_id'], "gateway" => "authorize"], "Success");
 
             } catch (Exception $e) {
                 return response()->json(['message' => $e->getMessage(), "status" => 0, "slug" => $orderData['campaign']]);
@@ -126,14 +129,17 @@ class PaymentGatewayController extends ApiController
             $donation->created_at = Carbon::now();
             $donation->save();
 
+            $currency = apiCurrency($orderData['currency_id']);
+            $convertAmount = $orderData['amount'] / $currency['value'];
+
             // donar transaction create
             if (isset($orderData['user_id'])) {
-                transaction($orderData['amount'], $res['txn_id'], $orderData['user_id'], '-', 'My Donation');
+                transaction($convertAmount, $res['txn_id'], $orderData['user_id'], '-', 'My Donation');
             }
 
             if ($campaign['user_id'] != 0) {
                 // campaign owner transaction create
-                transaction($orderData['amount'], $res['txn_id'], $campaign['user_id'], '+', 'Donation Received');
+                transaction($convertAmount, $res['txn_id'], $campaign['user_id'], '+', 'Donation Received');
             }
 
             // delete storage

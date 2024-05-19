@@ -62,7 +62,7 @@ Route::prefix('user')->group(function () {
 });
 
 // FRONTEND
-Route::get('/language', [FrontendController::class, 'language']);
+Route::get('/language/{code}', [FrontendController::class, 'language']);
 Route::get('home-content', [FrontendController::class, 'homeContent']);
 Route::post('newsletter/submit', [FrontendController::class, 'newsletterSubmit']);
 Route::post('contact/submit', [FrontendController::class, 'contactSubmit']);

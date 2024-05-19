@@ -11,18 +11,22 @@ class DonationController extends Controller
 
     public function index(Request $request)
     {
+        $txn = $request->txn_id;
         $donations = Donation::with('campaign')
+            ->when($txn, function ($query, $txn) {
+                return $query->where('txn_id', $txn);
+            })
             ->latest()->paginate(12);
         return view('admin.donation.index', compact('donations'));
     }
 
-
-    function status($id, $status)  {
+    public function status($id, $status)
+    {
         $donation = Donation::find($id);
         $donation->status = $status;
         $donation->save();
         return back()->with('success', 'Donation status updated successfully');
-        
+
     }
 
     public function destroy(Request $request)
@@ -30,7 +34,5 @@ class DonationController extends Controller
         Donation::destroy($request->id);
         return back()->with('success', 'Donation deleted successfully');
     }
-  
-
 
 }

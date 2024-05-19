@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class DonationController extends ApiController
 {
-
     public function donations(Request $request)
     {
         $txn = $request->txn_id;
@@ -40,7 +39,7 @@ class DonationController extends ApiController
                 ->latest()
                 ->take($request->limit)
                 ->get();
-                return $this->sendResponse($donations, 'transactions fetched successfully.');
+            return $this->sendResponse($donations, 'transactions fetched successfully.');
         }
 
         $txn = $request->txn_id;

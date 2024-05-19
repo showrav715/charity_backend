@@ -25,7 +25,6 @@
                     <th>@lang('Title')</th>
                     <th>@lang('URL Slug')</th>
                     <th>@lang('Details')</th>
-                    <th>@lang('Language')</th>
                     <th>@lang('Actions')</th>
                 </tr>
                 @forelse ($pages as $info)
@@ -38,9 +37,7 @@
                            {{$info->slug	}}
                          </td>
                          <td data-label="@lang('Details')">{{Str::limit(strip_tags($info->details),40)}}</td>
-                         <td data-label="@lang('Language')">
-                           {{$info->lang	}}
-                         </td>
+                         
                          <td data-label="@lang('Actions')">
                             <a href="{{route('admin.page.edit',$info)}}" class="btn btn-primary btn-sm mb-1"  data-toggle="tooltip" title="@lang('Edit')"><i class="fas fa-edit"></i></a>
 

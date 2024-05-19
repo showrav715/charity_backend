@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\GeneralSettingController;
+use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\ManageCurrencyController;
 use App\Http\Controllers\Admin\ManageRoleController;
@@ -227,8 +228,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/general-settings/maintenance', [GeneralSettingController::class, 'maintenance'])->name('gs.maintenance');
             Route::get('/general-settings/status/update/{value}', [GeneralSettingController::class, 'StatusUpdate'])->name('gs.status');
             Route::get('/manage-checkout', [GeneralSettingController::class, 'checkout'])->name('checkout');
-            Route::get('/manage-language', [AdminController::class, 'language'])->name('language');
-
+         
             Route::post('/language/update', [AdminController::class, 'languageUpdate'])->name('language.update');
             Route::get('social/link', [SocialController::class, 'index'])->name('social.manage');
             Route::post('add/social/link', [SocialController::class, 'store'])->name('social.store');
@@ -239,6 +239,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
             //==================================== GENERAL SETTING SECTION ==============================================//
 
         });
+
+
+        Route::resource('language', LanguageController::class);
+        Route::post('add-translate/{id}', [LanguageController::class, 'storeTranslate'])->name('translate.store');
+        Route::post('update-translate/{id}', [LanguageController::class, 'updateTranslate'])->name('translate.update');
+        Route::post('remove-translate', [LanguageController::class, 'removeTranslate'])->name('translate.remove');
+        Route::post('language/status-update', [LanguageController::class, 'statusUpdate'])->name('update-status.language');
+        Route::post('language/remove', [LanguageController::class, 'destroy'])->name('remove.language');
+
+
 
         // ==================================== WITHDRAW SECTION ====================================//
         Route::get('/withdraw/settings', [WithdrawController::class, 'index'])->name('withdraw.settings');

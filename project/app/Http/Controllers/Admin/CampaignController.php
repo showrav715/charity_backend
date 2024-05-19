@@ -13,9 +13,7 @@ use Illuminate\Support\Str;
 class CampaignController extends Controller
 {
     public function index(Request $request)
-    {   
-     
-  
+    {
 
         $campaign = Campaign::all();
         foreach ($campaign as $camp) {
@@ -32,36 +30,47 @@ class CampaignController extends Controller
             }
         }
 
+        $search = $request->search;
 
         switch ($request->type) {
             case 'pending':
                 $campaigns = Campaign::
-                where('status', 0)
-                ->orderby('id', 'desc')
-                ->paginate(10);
+                    where('status', 0)
+                    ->when($search, function ($query, $search) {
+                        return $query->where('title', 'like', '%' . $search . '%');
+                    })
+                    ->orderby('id', 'desc')
+                    ->paginate(10);
                 break;
 
             case 'running':
                 $campaigns = Campaign::
-                where('status', 1)
-                ->orderby('id', 'desc')
-                ->paginate(10);
+                    where('status', 1)
+                    ->when($search, function ($query, $search) {
+                        return $query->where('title', 'like', '%' . $search . '%');
+                    })
+                    ->orderby('id', 'desc')
+                    ->paginate(10);
                 break;
             case 'closed':
                 $campaigns = Campaign::
-                where('status', 2)
-                ->orderby('id', 'desc')
-                ->paginate(10);
+                    where('status', 2)
+                    ->when($search, function ($query, $search) {
+                        return $query->where('title', 'like', '%' . $search . '%');
+                    })
+                    ->orderby('id', 'desc')
+                    ->paginate(10);
                 break;
-            
+
             default:
-            $campaigns = Campaign::
-            orderby('id', 'desc')
-            ->paginate(10);
+                $campaigns = Campaign::
+                    orderby('id', 'desc')
+                    ->when($search, function ($query, $search) {
+                        return $query->where('title', 'like', '%' . $search . '%');
+                    })
+                    ->paginate(10);
                 break;
         }
-
-        
 
         return view('admin.campaign.index', compact('campaigns'));
     }

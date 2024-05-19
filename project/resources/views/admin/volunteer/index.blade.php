@@ -86,6 +86,9 @@
 
                 </table>
             </div>
+            @if ($volunteers->hasPages())
+            {{ $volunteers->links('admin.partials.paginate') }}
+        @endif
         </div>
     </div>
     <!-- DataTable with Hover -->

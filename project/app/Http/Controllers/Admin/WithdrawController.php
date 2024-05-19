@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Currency;
 use App\Models\Transaction;
+use App\Models\User;
 use App\Models\Withdraw;
 use Illuminate\Support\Str;
 
@@ -45,6 +46,11 @@ class WithdrawController extends Controller
         $withdraw = Withdraw::find($id);
         $withdraw->status = 2;
         $withdraw->save();
+
+        
+        $user = User::find($withdraw->user_id);
+        $user->balance += $withdraw->total;
+        $user->save();
 
         $transaction = new Transaction();
         $transaction->txn_id = Str::random(12);

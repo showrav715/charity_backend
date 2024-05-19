@@ -42,7 +42,7 @@
                                     <a class="chat__item {{ request('messages') == $item->ticket_num ? 'active' : '' }}"
                                         href="{{ filter('messages', $item->ticket_num) }}" data-bs-toggle="tab">
                                         <div class="item__inner">
-                                            <div class="post__creator">
+                                            <div class="post__creator ">
                                                 <div class="post__creator-thumb d-flex justify-content-between">
                                                     <div>
                                                         <span class="username">{{ $item->ticket_num }} </span>
@@ -52,17 +52,16 @@
                                                         <small class="badge badge-danger">!</small>
                                                     @endif
                                                 </div>
-                                                <div class="post__creator-content">
+                                                <div class="post__creator-content ">
                                                     <h6 class="name d-inline-block">{{ $item->subject }}</h6>
                                                 </div>
                                             </div>
-                                            <ul class="chat__meta d-flex justify-content-between">
+                                            <ul class="chat__meta d-flex justify-content-between mt-2">
                                                 <li><span class="last-msg"></span></li>
                                                 <li><span
                                                         class="last-chat-time">{{ dateFormat(
                                                             $item->created_at,
-                                                            'd M
-                                                                                                        Y',
+                                                            'd M Y',
                                                         ) }}</span>
                                                 </li>
                                             </ul>

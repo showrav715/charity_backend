@@ -19,21 +19,33 @@ use App\Models\Event;
 use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\Generalsetting;
+use App\Models\Language;
 use App\Models\Page;
 use App\Models\Preloaded;
 use App\Models\Subscriber;
 use App\Models\Testimonial;
+use App\Models\SocialLink;
 use App\Models\Volunteer;
 use Illuminate\Http\Request;
+
 
 class FrontendController extends ApiController
 {
 
-    public function language()
+    public function language($code)
     {
-        $language = file_get_contents(base_path('resources/lang/hindi.json'));
-        return $this->sendResponse(json_decode($language), 'Language Data');
+        $data['languages'] = Language::orderBy('id', 'DESC')->get();
+        $default = Language::where('is_default', 1)->first();
+        if (!$code) {
+            $data['code'] = $default->code;
+            $data['language'] = file_get_contents(base_path('resources/lang/' . $default->code . '.json'));
+            return $this->sendResponse($data, 'Language Data');
+        }
+        $data['language'] = json_decode(file_get_contents(base_path('resources/lang/' . $code . '.json')));
+
+        return $this->sendResponse($data, 'Language Data');
     }
+
     public function homeContent(Request $request)
     {
         $content = explode(',', $request->content);
@@ -111,7 +123,7 @@ class FrontendController extends ApiController
         }
 
         if (in_array('volunteers', $all) || in_array('*', $all)) {
-            $data['volunteers'] = Volunteer::orderBy('id', 'desc')->get()
+            $data['volunteers'] = Volunteer::orderBy('id', 'desc')->whereStatus(1)->get()
                 ->map(function ($volunteer) {
                     $volunteer->photo = asset('assets/images/' . $volunteer->photo);
                     return $volunteer;
@@ -145,6 +157,7 @@ class FrontendController extends ApiController
         $hero_section['checkout_faild_photo'] = getPhoto($hero_section->checkout_faild_photo);
         $hero_section['faq_background'] = getPhoto($hero_section->faq_background);
         $hero_section['testimonial_background'] = getPhoto($hero_section->testimonial_background);
+        $hero_section['social_data'] = SocialLink::get();
         return $this->sendResponse($hero_section, 'Setting Data');
     }
 
@@ -237,7 +250,10 @@ class FrontendController extends ApiController
 
     public function singleBlog($slug)
     {
-        $data['blog'] = Blog::with('category')->where('slug', $slug)->first();
+        $blog = Blog::with('category')->where('slug', $slug)->first();
+        $blog->views = $blog->views + 1;
+        $blog->save();
+        $data['blog'] = $blog;
         $data['recent_blogs'] = Blog::orderBy('id', 'desc')->limit(6)->get();
         $data['comments'] = BlogComment::where('blog_id', $data['blog']->id)->orderBy('id', 'desc')->get();
         return $this->sendResponse($data, 'Single Blog');

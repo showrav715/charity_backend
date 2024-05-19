@@ -17,6 +17,41 @@
         <div class="col-lg-12">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-end">
+
+
+                    <form action="" class="d-flex flex-wrap justify-content-start mx-5">
+                        <div class="form-group m-1 flex-grow-1">
+                            <select class="form-control" onChange="window.location.href=this.value">
+                                <option value="{{ filter('type', '') }}">@lang('All Campaigns')</option>
+
+                                <option value="{{ filter('type', 'pending') }}"
+                                    {{ request('type') == 'pending' ? 'selected' : '' }}>@lang('Pending Campaigns')</option>
+
+                                <option value="{{ filter('type', 'running') }}"
+                                    {{ request('type') == 'running' ? 'selected' : '' }}>@lang('Completed Campaigns')</option>
+
+                                <option value="{{ filter('type', 'closed') }}"
+                                    {{ request('type') == 'closed' ? 'selected' : '' }}>
+                                    @lang('Rejected Campaigns')</option>
+                            </select>
+                        </div>
+
+
+                        <div class="form-group m-1 flex-grow-1">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="search"
+                                    value="{{ request()->input('search') }}" placeholder="@lang('Campaign Title')">
+                                <div class="input-group-append">
+                                    <button class="input-group-text btn btn-primary text-white" id="my-addon"><i
+                                            class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+
+
                     <a href="{{ route('admin.campaign.create') }}" class="btn btn-primary">
                         <i class="fas fa-plus"></i> @lang('Add New')
                     </a>
@@ -66,9 +101,9 @@
                                         <div class="dropdown-menu" x-placement="bottom-start"
                                             style="position: absolute; transform: translate3d(0px, 29px, 0px); top: 0px; left: 0px; will-change: transform;">
                                             <a class="dropdown-item"
-                                                href="{{ route('admin.campaign.status', [$item->id, 1,"feature"]) }}">Yes</a>
+                                                href="{{ route('admin.campaign.status', [$item->id, 1, 'feature']) }}">Yes</a>
                                             <a class="dropdown-item"
-                                                href="{{ route('admin.campaign.status', [$item->id, 0,"feature"]) }}">No</a>
+                                                href="{{ route('admin.campaign.status', [$item->id, 0, 'feature']) }}">No</a>
                                         </div>
                                     </div>
                                 </td>
@@ -109,11 +144,11 @@
                                         <div class="dropdown-menu" x-placement="bottom-start"
                                             style="position: absolute; transform: translate3d(0px, 29px, 0px); top: 0px; left: 0px; will-change: transform;">
                                             <a class="dropdown-item"
-                                                href="{{ route('admin.campaign.status', [$item->id, 1,"status"]) }}">@lang('Running')</a>
+                                                href="{{ route('admin.campaign.status', [$item->id, 1, 'status']) }}">@lang('Running')</a>
                                             <a class="dropdown-item"
-                                                href="{{ route('admin.campaign.status', [$item->id, 2,"status"]) }}">@lang('Closed')</a>
+                                                href="{{ route('admin.campaign.status', [$item->id, 2, 'status']) }}">@lang('Closed')</a>
                                             <a class="dropdown-item"
-                                                href="{{ route('admin.campaign.status', [$item->id, 0,"status"]) }}">@lang('Pending')</a>
+                                                href="{{ route('admin.campaign.status', [$item->id, 0, 'status']) }}">@lang('Pending')</a>
                                         </div>
                                     </div>
                                 </td>
@@ -150,7 +185,7 @@
                     </table>
                 </div>
                 @if ($campaigns->hasPages())
-                    {{ $campaigns->appends(["type"=>request()->input('type')])->links('admin.partials.paginate') }}
+                    {{ $campaigns->appends(['type' => request()->input('type')])->links('admin.partials.paginate') }}
                 @endif
             </div>
         </div>

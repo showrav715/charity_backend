@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Generalsetting;
+use App\Models\Transaction;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -12,7 +13,7 @@ class WithdrawController extends ApiController
 
     public function getWithdraws(Request $request)
     {
-        
+
         $txn = $request->txn_id;
         $datas = Withdraw::where('user_id', auth()->id())
             ->when($txn, function ($query) use ($txn) {
@@ -51,6 +52,15 @@ class WithdrawController extends ApiController
 
         $user->balance -= $total_amount;
         $user->save();
+
+        $transaction = new Transaction();
+        $transaction->txn_id = Str::random(12);
+        $transaction->user_id = $user->id;
+        $transaction->amount = $total_amount;
+        $transaction->type = "-";
+        $transaction->remark = "Withdraw Request";
+        $transaction->created_at = now();
+        $transaction->save();
 
         $withdraw = $user->withdraws()->create([
             'amount' => $request->amount,

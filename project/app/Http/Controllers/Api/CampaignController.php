@@ -71,7 +71,10 @@ class CampaignController extends ApiController
         $campaign->title = $request->title;
         $campaign->location = $request->location;
         $campaign->benefits = $request->benefits;
-        $campaign->end_date = Carbon::parse(now())->format('Y-m-d');
+        $dateString = preg_replace('/\s\(.*\)$/', '', $request->end_date);
+        $carbonDate = Carbon::createFromFormat('D M d Y H:i:s \G\M\TP', $dateString);
+        $formattedDate = $carbonDate->format('d-m-Y H:i:s');
+        $campaign->end_date = Carbon::parse($formattedDate);
         $campaign->video_link = $request->video_link;
         $campaign->slug = Str::slug($request->title);
         $campaign->description = $request->description;
@@ -133,6 +136,12 @@ class CampaignController extends ApiController
         $campaign->slug = Str::slug($request->title);
         $campaign->description = $request->description;
         $campaign->category_id = $request->category_id;
+
+        $dateString = preg_replace('/\s\(.*\)$/', '', $request->end_date);
+        $carbonDate = Carbon::createFromFormat('D M d Y H:i:s \G\M\TP', $dateString);
+        $formattedDate = $carbonDate->format('d-m-Y H:i:s');
+
+        $campaign->end_date = Carbon::parse($formattedDate);
         $campaign->goal = $request->goal;
         if ($request->photo) {
             $campaign->photo = MediaHelper::handleUpdateImage($request->photo, $campaign->photo);

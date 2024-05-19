@@ -335,7 +335,11 @@ function transaction($amount, $txn_id, $user_id, $type, $remark = null)
 {
 
     $user = User::findOrFail($user_id);
-    $user->balance += $amount;
+    if ($type == "+") {
+        $user->balance += $amount;
+    } else {
+        $user->balance -= $amount;
+    }
     $user->save();
 
     $transaction = new Transaction();

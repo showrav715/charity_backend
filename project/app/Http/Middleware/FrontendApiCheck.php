@@ -12,7 +12,7 @@ class FrontendApiCheck
     public function handle(Request $request, Closure $next)
     {
 
-        if($request->url()== route('admin.gs.site.settings') || $request->url()== route('admin.gs.update')){
+        if($request->url()== route('admin.gs.site.settings') || $request->url() == route('admin.gs.update')){
             return $next($request);
         }
         if($request->url()== route('admin.dashboard')){
@@ -22,8 +22,9 @@ class FrontendApiCheck
 
         $status = false;
         $gs = Generalsetting::first();
+
         try {
-            $response = Http::get($gs->frontend_url);
+            $response = Http::get($gs->frontend_url.'/api/connect');
             if ($response->status() == 200) {
                 $status = true;
             } else {

@@ -16,7 +16,22 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card mb-4">
+                <div class="card-header d-flex justify-content-end">
 
+
+                    <form action="" class="d-flex flex-wrap justify-content-start mx-5">
+                        <div class="form-group m-1 flex-grow-1">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="txn_id"
+                                    value="{{ request()->input('txn_id') }}" placeholder="@lang('Txn ID')">
+                                <div class="input-group-append">
+                                    <button class="input-group-text btn btn-primary text-white" id="my-addon"><i
+                                            class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <div class="table-responsive p-3">
                     <table class="table table-striped">
                         <tr>

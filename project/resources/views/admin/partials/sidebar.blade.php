@@ -8,7 +8,7 @@
 
 
 
-        <li class="nav-item {{ menu(['admin.user.index', 'admin.user.details']) }}">
+        <li class="nav-item {{ menu(['admin.donation.*']) }}">
             <a href="{{ route('admin.donation.index') }}" class="nav-link">
                 <i class="fas fa-envelope-open-text">
                 </i>
@@ -18,7 +18,7 @@
         </li>
 
 
-        <li class="nav-item {{ menu(['admin.user.index', 'admin.user.details']) }}">
+        <li class="nav-item {{ menu(['admin.event.*']) }}">
             <a href="{{ route('admin.event.index') }}" class="nav-link">
                 <i class="fas fa-users">
                 </i>
@@ -37,37 +37,38 @@
         </li>
 
 
-        <li class="nav-item dropdown {{ menu(['admin.contact*']) }}">
-              @php
-                  $pending = \App\Models\Campaign::where('status', 0)->count();
-              @endphp
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                    class="fas fa-envelope-open-text"></i>
-                    <span>@lang('Manage Campaign')
-                     @if ($pending > 0) <small class="badge badge-danger mr-4">!</small>
-                         @endif
+        <li class="nav-item dropdown {{ menu(['admin.category.index', 'admin.preloaded.index', 'admin.campaign.*']) }}">
+            @php
+                $pending = \App\Models\Campaign::where('status', 0)->count();
+            @endphp
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                <i class="fas fa-bullhorn"></i>
+                <span>@lang('Manage Campaign')
+                    @if ($pending > 0)
+                        <small class="badge badge-danger mr-4">!</small>
+                    @endif
                 </span>
-                </a>
+            </a>
             <ul class="dropdown-menu">
 
-                <li class="{{ menu('admin.contact.message') }}"><a class="nav-link"
+                <li class="{{ menu('admin.category.index') }}"><a class="nav-link"
                         href="{{ route('admin.category.index') }}">@lang('Categories')</a>
                 </li>
-                <li class="{{ menu('admin.contact.message') }}"><a class="nav-link"
+                <li class="{{ menu('admin.preloaded.index') }}"><a class="nav-link"
                         href="{{ route('admin.preloaded.index') }}">@lang('Preloaded Amount')</a>
                 </li>
                 <li class="{{ menu('admin.campaign.index') }}"><a class="nav-link"
                         href="{{ route('admin.campaign.index') }}">@lang('All Campaigns')</a>
                 </li>
-                <li class="{{ menu('admin.campaign.index') }}">
-                        <a class="nav-link {{$pending > 0 ? 'beep beep-sidebar':""}}"
-                        href="{{ route('admin.campaign.index') ."?type=pending" }}">@lang('Pending Campaigns')</a>
+                <li class="{{ menu('admin.campaign.index') . '?type=pending' }}">
+                    <a class="nav-link {{ $pending > 0 ? 'beep beep-sidebar' : '' }}"
+                        href="{{ route('admin.campaign.index') . '?type=pending' }}">@lang('Pending Campaigns')</a>
                 </li>
-                <li class="{{ menu('admin.campaign.index') }}"><a class="nav-link"
-                        href="{{ route('admin.campaign.index') ."?type=running" }}">@lang('Running Campaigns')</a>
+                <li class="{{ menu('admin.campaign.index') . '?type=running' }}"><a class="nav-link"
+                        href="{{ route('admin.campaign.index') . '?type=running' }}">@lang('Running Campaigns')</a>
                 </li>
-                <li class="{{ menu('admin.campaign.index') }}"><a class="nav-link"
-                        href="{{ route('admin.campaign.index') ."?type=closed" }}">@lang('Closed Campaigns')</a>
+                <li class="{{ menu('admin.campaign.index') . '?type=closed' }}"><a class="nav-link"
+                        href="{{ route('admin.campaign.index') . '?type=closed' }}">@lang('Closed Campaigns')</a>
                 </li>
             </ul>
         </li>
@@ -87,7 +88,7 @@
         </li>
 
 
-        <li class="nav-item dropdown {{ menu(['admin.gateway*']) }}">
+        <li class="nav-item dropdown {{ menu(['admin.gateway*', 'admin.currency.*']) }}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                     class="fas fa-money-check-alt"></i> <span>@lang('Payment Gateway')</span></a>
             <ul class="dropdown-menu">
@@ -101,8 +102,8 @@
 
 
         <li class="nav-item dropdown {{ menu(['admin.withdraw*']) }}">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                    class="fas fa-money-check-alt"></i> <span>@lang('Manage Withdraw')</span></a>
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                <i class="fas fa-hand-holding-usd"></i> <span>@lang('Manage Withdraw')</span></a>
             <ul class="dropdown-menu">
                 <li class="{{ menu('admin.withdraw.settings') }}"><a class="nav-link"
                         href="{{ route('admin.withdraw.settings') }}">@lang('Withdraw Settings')</a></li>
@@ -130,16 +131,16 @@
             </ul>
         </li>
 
-        <li class="nav-item dropdown {{ menu(['admin.page*']) }}">
+        <li class="nav-item dropdown {{ menu(['admin.page*', 'admin.counter.index', 'admin.about.index']) }}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-file-alt"></i>
                 <span>@lang('Manage Pages')</span></a>
             <ul class="dropdown-menu">
-                <li class="{{ menu('admin.about.index') }}"><a class="nav-link"
+                <li class="{{ menu('admin.counter.index') }}"><a class="nav-link"
                         href="{{ route('admin.counter.index') }}">@lang('About Counter')</a>
                 </li>
-                <li class="{{ menu('admin.counter.index') }}"><a class="nav-link"
+                <li class="{{ menu('admin.about.index') }}"><a class="nav-link"
                         href="{{ route('admin.about.index') }}">@lang('About Page')</a></li>
-                <li class="{{ menu('admin.gateway') }}"><a class="nav-link"
+                <li class="{{ menu('admin.page.index') }}"><a class="nav-link"
                         href="{{ route('admin.page.index') }}">@lang('Other Page')</a>
                 </li>
             </ul>
@@ -156,7 +157,7 @@
         <li class="menu-header">@lang('General')</li>
 
         <li
-            class="nav-item dropdown {{ menu(['admin.gs*', 'admin.social.manage*', 'admin.language*', 'admin.cookie']) }}">
+            class="nav-item dropdown {{ menu(['admin.gs*', 'admin.mail.config', 'admin.social.manage*', 'admin.language*', 'admin.cookie', 'admin.checkout']) }}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                     class="fas fa-cog"></i><span>@lang('General Settings')</span></a>
             <ul class="dropdown-menu">
@@ -164,7 +165,7 @@
                 <li class="{{ menu('admin.gs.site.settings') }}"><a class="nav-link"
                         href="{{ route('admin.gs.site.settings') }}">@lang('Site Settings')</a>
                 </li>
-                <li class="{{ menu('admin.gs.site.settings') }}"><a class="nav-link"
+                <li class="{{ menu('admin.gs.theme.home.page') }}"><a class="nav-link"
                         href="{{ route('admin.gs.theme.home.page') }}">@lang('Home Page')</a>
                 </li>
                 <li class="{{ menu('admin.mail.config') }}"><a class="nav-link"
@@ -174,10 +175,13 @@
                         href="{{ route('admin.gs.logo') }}">@lang('Logo')</a></li>
                 <li class="{{ menu('admin.gs.breadcumb') }}"><a class="nav-link"
                         href="{{ route('admin.gs.breadcumb') }}">@lang('Breadcumb')</a></li>
-                <li class="{{ menu('admin.language') }}"><a class="nav-link"
-                        href="{{ route('admin.language') }}">@lang('Language')</a></li>
+                <li class="{{ menu('admin.language.index') }}"><a class="nav-link"
+                        href="{{ route('admin.language.index') }}">@lang('Language')</a></li>
 
-                <li class="{{ menu('admin.language') }}"><a class="nav-link"
+                <li class="{{ menu('admin.social.manage') }}"><a class="nav-link"
+                        href="{{ route('admin.social.manage') }}">@lang('Social Links')</a></li>
+
+                <li class="{{ menu('admin.checkout') }}"><a class="nav-link"
                         href="{{ route('admin.checkout') }}">@lang('Checkout Settings')</a></li>
 
                 <li class="{{ menu('admin.gs.maintainance.settings') }}"><a class="nav-link"
@@ -192,7 +196,7 @@
 
 
         <li
-            class="nav-item dropdown {{ menu(['admin.front*', 'admin.faq*', 'admin.testimonial*', 'admin.brand*', 'admin.contact.section', 'admin.slider*', 'admin.counter*', 'admin.frontend*']) }}">
+            class="nav-item dropdown {{ menu(['admin.front*','admin.cta.index','admin.faq*', 'admin.testimonial*', 'admin.brand*', 'admin.contact.section', 'admin.slider*', 'admin.frontend*']) }}">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i>
                 <span>@lang('Frontend Setting')</span></a>
             <ul class="dropdown-menu">
@@ -206,14 +210,14 @@
                         href="{{ route('admin.testimonial.index') }}">@lang('Testimonials')</a>
                 </li>
 
-                <li class="{{ menu('admin.testimonial.index') }}"><a class="nav-link"
+                <li class="{{ menu('admin.cta.index') }}"><a class="nav-link"
                         href="{{ route('admin.cta.index') }}">@lang('CTA Section')</a>
                 </li>
 
 
-                <li class="{{ menu('admin.home.sections') }}"><a class="nav-link"
+                <li class="{{ menu('admin.faq.index') }}"><a class="nav-link"
                         href="{{ route('admin.faq.index') }}">@lang('Manage Faq
-                                                                                                                                                                                                ')</a>
+                                                                                                                                                                                                                                                ')</a>
                 </li>
 
                 <li class="{{ menu('admin.brand.index') }}"><a class="nav-link"
