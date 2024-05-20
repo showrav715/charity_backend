@@ -4530,3 +4530,7 @@ body:not(.sidebar-mini)
   height: 80px;
   object-fit: cover;
 }
+
+.w-150 {
+  width: 150px;
+}

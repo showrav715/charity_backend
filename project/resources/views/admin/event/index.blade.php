@@ -35,8 +35,8 @@
                         @forelse ($events as $item)
                             <tr>
                                 <td data-label="@lang('Photo')">
-                                    <img src="{{ getPhoto($item->photo) }}" alt="icon" class="img-fluid"
-                                        style="width: 150px">
+                                    <img src="{{ getPhoto($item->photo) }}" alt="icon" class="img-fluid w-150"
+                                       >
                                 </td>
                                 <td data-label="@lang('Title')">
                                     {{ $item->title }}
@@ -45,7 +45,7 @@
                                     {{ $item->event_type }}
                                 </td>
 
-                                <td>
+                                <td data-label="@lang('Date & Time')">
                                     {{ $item->date }} / {{ $item->start_time }} - {{ $item->end_time }}
                                 </td>
 
@@ -58,12 +58,15 @@
                                 </td>
 
                                 <td data-label="@lang('Action')">
-                                    <a href="{{ route('admin.event.edit', $item->id) }}"
-                                        class="btn btn-primary approve btn-sm  mb-1" data-toggle="tooltip"
-                                        title="@lang('Edit')"><i class="fas fa-edit"></i></a>
-                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
-                                        data-id="{{ $item->id }}" data-toggle="tooltip" title="@lang('Remove')"><i
-                                            class="fas fa-trash"></i></a>
+                                    <div class="d-flex">
+
+                                        <a href="{{ route('admin.event.edit', $item->id) }}"
+                                            class="btn btn-primary approve btn-sm  m-2" data-toggle="tooltip"
+                                            title="@lang('Edit')"><i class="fas fa-edit"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove m-2"
+                                            data-id="{{ $item->id }}" data-toggle="tooltip" title="@lang('Remove')"><i
+                                                class="fas fa-trash"></i></a>
+                                    </div>
                                 </td>
                             </tr>
                         @empty
