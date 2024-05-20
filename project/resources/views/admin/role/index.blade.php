@@ -37,7 +37,7 @@
                                 <td data-label="@lang('Permission')">
                                     @if ($item->section)
                                         @foreach (json_decode($item->section) as $permission)
-                                            <span class="badge badge-success"> {{ $permission }} </span>
+                                            <span class="badge badge-success py-2 my-1"> {{ $permission }} </span>
                                         @endforeach
                                     @endif
                                 </td>
