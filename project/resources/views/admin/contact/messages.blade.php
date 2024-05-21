@@ -24,31 +24,29 @@
                                 <th>@lang('Name')</th>
                                 <th>@lang('Email')</th>
                                 <th>@lang('Subject')</th>
-                                <th>@lang('Message')</th>
                                 <th class="text-right">@lang('Action')</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($messages as $item)
                                 <tr>
-
                                     <td data-label="@lang('Name')">
                                         {{ $item->name }}
                                     </td>
                                     <td data-label="@lang('Email')">
-                                        {{ $item->email }}
+                                        {{ $item->email ?? 'N/A' }}
                                     </td>
-                                    
                                     <td data-label="@lang('Subject')">
                                         {{ $item->subject }}
                                     </td>
-                                    <td data-label="@lang('Message')">
-                                        {{ $item->message }}
-                                    </td>
+                                 
                                     <td data-label="@lang('Action')" class="text-right">
                                         <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
                                             data-id="{{ $item->id }}" data-toggle="tooltip"
                                             title="@lang('Remove')"><i class="fas fa-trash"></i></a>
+                                            <a href="javascript:void()" class="btn btn-primary btn-sm view mb-1"
+                                            data-message="{{$item->message}}" data-toggle="tooltip" title="@lang('View Message')"><i
+                                            class="fas fa-eye"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -78,6 +76,33 @@
             </form>
         </div>
     </div>
+
+    
+    <div class="modal fade" id="view" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form action="{{ route('admin.brand.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@lang('View Message')</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                       
+                        <p id="view_message">
+
+                        </p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
 
 
@@ -88,5 +113,10 @@
             $('#removeMod').find('input[name=id]').val($(this).data('id'))
             $('#removeMod').modal('show')
         })
+
+        $('.view').on('click',function () { 
+            $('#view_message').text($(this).data('message'));
+             $('#view').modal('show');
+       })
     </script>
 @endpush

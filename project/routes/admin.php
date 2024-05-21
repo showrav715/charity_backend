@@ -52,7 +52,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/password', [AdminController::class, 'passwordreset'])->name('password');
         Route::post('/password/update', [AdminController::class, 'changepass'])->name('password.update');
 
-        Route::group(['middleware' => 'permission:Manage Campaigns'], function () {
+        Route::group(['middleware' => 'permission:Manage Campaign'], function () {
             // category
             Route::get('category', [CategoryController::class, 'index'])->name('category.index');
             Route::post('category/store', [CategoryController::class, 'store'])->name('category.store');
@@ -77,49 +77,44 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('campaign/gallery/remove/{id}', [CampaignController::class, 'galleryRemove'])->name('campaign.gallery.remove');
         });
 
-        //==================================== USER SECTION  ==============================================//
+        Route::group(['middleware' => 'permission:Manage User'], function () {
+            //==================================== USER SECTION  ==============================================//
+            Route::get('manage-users', [ManageUserController::class, 'index'])->name('user.index');
+            Route::get('user-details/{id}', [ManageUserController::class, 'details'])->name('user.details');
+            Route::post('user-profile/update/{id}', [ManageUserController::class, 'profileUpdate'])->name('user.profile.update');
+        });
 
-        Route::get('manage-users', [ManageUserController::class, 'index'])->name('user.index');
-        Route::get('user-details/{id}', [ManageUserController::class, 'details'])->name('user.details');
-        Route::post('user-profile/update/{id}', [ManageUserController::class, 'profileUpdate'])->name('user.profile.update');
+        Route::group(['middleware' => 'permission:Manage Donations'], function () {
+            // Donation
+            Route::get('donation', [DonationController::class, 'index'])->name('donation.index');
+            Route::get('donation/status/{id}/{status}', [DonationController::class, 'status'])->name('donation.status');
+            Route::delete('donation/destroy', [DonationController::class, 'destroy'])->name('donation.destroy');
+        });
 
-        //transactions
-        Route::get('/transaction-report', [AdminController::class, 'transactions'])->name('transactions')->middleware('permission:transactions');
+        Route::group(['middleware' => 'permission:Manage Gateway'], function () {
+            // Currency
+            Route::get('/manage-currency', [ManageCurrencyController::class, 'index'])->name('currency.index');
+            Route::get('/add-currency', [ManageCurrencyController::class, 'addCurrency'])->name('currency.add');
+            Route::post('/add/currency/store', [ManageCurrencyController::class, 'store'])->name('currency.store');
+            Route::get('/edit-currency/{id}', [ManageCurrencyController::class, 'editCurrency'])->name('currency.edit');
+            Route::put('/update-currency/{id}', [ManageCurrencyController::class, 'updateCurrency'])->name('currency.update');
+            Route::get('/currency/set-default/{id}', [ManageCurrencyController::class, 'setDefault'])->name('currency.default');
+            Route::delete('/delete-currency', [ManageCurrencyController::class, 'deleteCurrency'])->name('currency.delete');
 
-        // Donation
-        Route::get('donation', [DonationController::class, 'index'])->name('donation.index');
-        Route::get('donation/status/{id}/{status}', [DonationController::class, 'status'])->name('donation.status');
-        Route::delete('donation/destroy', [DonationController::class, 'destroy'])->name('donation.destroy');
+            Route::get('/payment-gateways', [PaymentGatewayController::class, 'index'])->name('gateway');
+            Route::get('add/payment-gateway', [PaymentGatewayController::class, 'create'])->name('gateway.create');
+            Route::post('/store/payment-gateway', [PaymentGatewayController::class, 'store'])->name('gateway.store');
+            Route::get('/payment-gateway/edit/{paymentgateway}', [PaymentGatewayController::class, 'edit'])->name('gateway.edit');
+            Route::post('/payment-gateway/update/{gateway}', [PaymentGatewayController::class, 'update'])->name('gateway.update');
 
-        // Currency
-        Route::get('/manage-currency', [ManageCurrencyController::class, 'index'])->name('currency.index');
-        Route::get('/add-currency', [ManageCurrencyController::class, 'addCurrency'])->name('currency.add');
-        Route::post('/add/currency/store', [ManageCurrencyController::class, 'store'])->name('currency.store');
-        Route::get('/edit-currency/{id}', [ManageCurrencyController::class, 'editCurrency'])->name('currency.edit');
-        Route::put('/update-currency/{id}', [ManageCurrencyController::class, 'updateCurrency'])->name('currency.update');
-        Route::get('/currency/set-default/{id}', [ManageCurrencyController::class, 'setDefault'])->name('currency.default');
-        Route::delete('/delete-currency', [ManageCurrencyController::class, 'deleteCurrency'])->name('currency.delete');
+        });
 
-        Route::get('/payment-gateways', [PaymentGatewayController::class, 'index'])->name('gateway');
-        Route::get('add/payment-gateway', [PaymentGatewayController::class, 'create'])->name('gateway.create');
-        Route::post('/store/payment-gateway', [PaymentGatewayController::class, 'store'])->name('gateway.store');
-        Route::get('/payment-gateway/edit/{paymentgateway}', [PaymentGatewayController::class, 'edit'])->name('gateway.edit');
-        Route::post('/payment-gateway/update/{gateway}', [PaymentGatewayController::class, 'update'])->name('gateway.update');
+        Route::group(['middleware' => 'permission:Support Tickets'], function () {
+            //support ticket
+            Route::get('manage/tickets', [ManageTicketController::class, 'index'])->name('ticket.manage')->middleware('permission:manage ticket');
+            Route::post('reply/ticket/{ticket_num}', [ManageTicketController::class, 'replyTicket'])->name('ticket.reply')->middleware('permission:manage ticket')->middleware('permission:reply ticket');
 
-        //support ticket
-        Route::get('manage/tickets', [ManageTicketController::class, 'index'])->name('ticket.manage')->middleware('permission:manage ticket');
-        Route::post('reply/ticket/{ticket_num}', [ManageTicketController::class, 'replyTicket'])->name('ticket.reply')->middleware('permission:manage ticket')->middleware('permission:reply ticket');
-
-        //==================================== EMAIL SETTING SECTION ==============================================//
-
-        Route::get('/email-templates', [EmailController::class, 'index'])->name('mail.index');
-        Route::get('/email-templates/{id}', [EmailController::class, 'edit'])->name('mail.edit');
-        Route::post('/email-templates/{id}', [EmailController::class, 'update'])->name('mail.update');
-        Route::get('/email-config', [EmailController::class, 'config'])->name('mail.config');
-        Route::get('/group-email', [EmailController::class, 'groupEmail'])->name('mail.group.show');
-        Route::post('/groupemailpost', [EmailController::class, 'groupemailpost'])->name('group.submit');
-
-        //==================================== EMAIL SETTING SECTION END ==============================================//
+        });
 
         Route::group(['middleware' => 'permission:Manage Pages'], function () {
             //pages
@@ -129,9 +124,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('page/edit/{page}', [PageController::class, 'edit'])->name('page.edit');
             Route::put('page/update/{page}', [PageController::class, 'update'])->name('page.update');
             Route::post('page/remove', [PageController::class, 'destroy'])->name('page.remove');
+
+            // counter section
+            Route::get('counter', [CounterController::class, 'index'])->name('counter.index');
+            Route::post('counter/store', [CounterController::class, 'store'])->name('counter.store');
+            Route::put('counter/update/{counter}', [CounterController::class, 'update'])->name('counter.update');
+            Route::delete('counter-delete', [CounterController::class, 'destroy'])->name('counter.destroy');
+
         });
 
-        Route::group(['middleware' => 'permission:Manage Event'], function () {
+        Route::group(['middleware' => 'permission:Manage Events'], function () {
             //manage event
             Route::get('event', [EventController::class, 'index'])->name('event.index');
             Route::get('event/create', [EventController::class, 'create'])->name('event.create');
@@ -141,7 +143,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('event/delete', [EventController::class, 'destroy'])->name('event.destroy');
         });
 
-        Route::group(['middleware' => 'permission:Manage Project'], function () {
+        Route::group(['middleware' => 'permission:Blogs'], function () {
             //manage blogs
             Route::get('blog-category', [BlogCategoryController::class, 'index'])->name('bcategory.index');
             Route::post('blog-category/store', [BlogCategoryController::class, 'store'])->name('bcategory.store');
@@ -160,12 +162,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('blog/comment/delete/{comment}', [BlogController::class, 'commentDelete'])->name('blog.comment.delete');
         });
 
-        // counter section
-        Route::get('counter', [CounterController::class, 'index'])->name('counter.index');
-        Route::post('counter/store', [CounterController::class, 'store'])->name('counter.store');
-        Route::put('counter/update/{counter}', [CounterController::class, 'update'])->name('counter.update');
-        Route::delete('counter-delete', [CounterController::class, 'destroy'])->name('counter.destroy');
-
         Route::group(['middleware' => 'permission:Manage Volunteer'], function () {
             // manage team
             Route::get('/volunteer', [VolunteerController::class, 'index'])->name('volunteer.index');
@@ -177,12 +173,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('/volunteer/delete/volunteer', [VolunteerController::class, 'destroy'])->name('volunteer.destroy');
         });
 
-        Route::get('faq', [FaqController::class, 'index'])->name('faq.index');
-        Route::post('faq/store', [FaqController::class, 'store'])->name('faq.store');
-        Route::put('faq/update/{id}', [FaqController::class, 'update'])->name('faq.update');
-        Route::delete('faq/destroy', [FaqController::class, 'destroy'])->name('faq.destroy');
-
-        Route::group(['middleware' => 'permission:Frontend Settings'], function () {
+        Route::group(['middleware' => 'permission:Frontend Setting'], function () {
             // HERO SECTION
 
             Route::get('/hero', [GeneralSettingController::class, 'hero'])->name('hero.index');
@@ -214,6 +205,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/add-testimonial', [ManageTestimonialController::class, 'store'])->name('testimonial.store');
             Route::put('/update-testimonial/{id}', [ManageTestimonialController::class, 'update'])->name('testimonial.update');
             Route::delete('/delete-testimonial', [ManageTestimonialController::class, 'destroy'])->name('testimonial.destroy');
+
+            // FAQ
+            Route::get('faq', [FaqController::class, 'index'])->name('faq.index');
+            Route::post('faq/store', [FaqController::class, 'store'])->name('faq.store');
+            Route::put('faq/update/{id}', [FaqController::class, 'update'])->name('faq.update');
+            Route::delete('faq/destroy', [FaqController::class, 'destroy'])->name('faq.destroy');
+
         });
 
         Route::group(['middleware' => 'permission:General Settings'], function () {
@@ -228,7 +226,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/general-settings/maintenance', [GeneralSettingController::class, 'maintenance'])->name('gs.maintenance');
             Route::get('/general-settings/status/update/{value}', [GeneralSettingController::class, 'StatusUpdate'])->name('gs.status');
             Route::get('/manage-checkout', [GeneralSettingController::class, 'checkout'])->name('checkout');
-         
+            Route::get('/email-config', [EmailController::class, 'config'])->name('mail.config');
             Route::post('/language/update', [AdminController::class, 'languageUpdate'])->name('language.update');
             Route::get('social/link', [SocialController::class, 'index'])->name('social.manage');
             Route::post('add/social/link', [SocialController::class, 'store'])->name('social.store');
@@ -238,23 +236,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/home-page', [GeneralSettingController::class, 'themeSettings'])->name('gs.theme.home.page');
             //==================================== GENERAL SETTING SECTION ==============================================//
 
+            Route::resource('language', LanguageController::class);
+            Route::post('add-translate/{id}', [LanguageController::class, 'storeTranslate'])->name('translate.store');
+            Route::post('update-translate/{id}', [LanguageController::class, 'updateTranslate'])->name('translate.update');
+            Route::post('remove-translate', [LanguageController::class, 'removeTranslate'])->name('translate.remove');
+            Route::post('language/status-update', [LanguageController::class, 'statusUpdate'])->name('update-status.language');
+            Route::post('language/remove', [LanguageController::class, 'destroy'])->name('remove.language');
+
         });
 
-
-        Route::resource('language', LanguageController::class);
-        Route::post('add-translate/{id}', [LanguageController::class, 'storeTranslate'])->name('translate.store');
-        Route::post('update-translate/{id}', [LanguageController::class, 'updateTranslate'])->name('translate.update');
-        Route::post('remove-translate', [LanguageController::class, 'removeTranslate'])->name('translate.remove');
-        Route::post('language/status-update', [LanguageController::class, 'statusUpdate'])->name('update-status.language');
-        Route::post('language/remove', [LanguageController::class, 'destroy'])->name('remove.language');
-
-
-
-        // ==================================== WITHDRAW SECTION ====================================//
-        Route::get('/withdraw/settings', [WithdrawController::class, 'index'])->name('withdraw.settings');
-        Route::get('/withdraw/request', [WithdrawController::class, 'withdrawRequest'])->name('withdraw.request');
-        Route::get('/withdraw/approve/{id}', [WithdrawController::class, 'withdrawApprove'])->name('withdraw.approve');
-        Route::get('/withdraw/reject/{id}', [WithdrawController::class, 'withdrawReject'])->name('withdraw.reject');
+        Route::group(['middleware' => 'permission:Manage Withdraw'], function () {
+            // ==================================== WITHDRAW SECTION ====================================//
+            Route::get('/withdraw/settings', [WithdrawController::class, 'index'])->name('withdraw.settings');
+            Route::get('/withdraw/request', [WithdrawController::class, 'withdrawRequest'])->name('withdraw.request');
+            Route::get('/withdraw/approve/{id}', [WithdrawController::class, 'withdrawApprove'])->name('withdraw.approve');
+            Route::get('/withdraw/reject/{id}', [WithdrawController::class, 'withdrawReject'])->name('withdraw.reject');
+        });
 
         Route::group(['middleware' => 'permission:Manage Contact'], function () {
             // ==================================== ADMIN CONTACT SECTION ====================================//

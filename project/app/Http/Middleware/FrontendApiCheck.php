@@ -20,6 +20,17 @@ class FrontendApiCheck
         }
 
 
+        if($request->isMethod('post')){
+            return $next($request);
+        }
+        if($request->isMethod('delete')){
+            return $next($request);
+        }
+        if($request->isMethod('put')){
+            return $next($request);
+        }
+
+
         $status = false;
         $gs = Generalsetting::first();
 

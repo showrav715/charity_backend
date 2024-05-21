@@ -31,11 +31,11 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-6 text-center">
+
                             <div class="col-sm-6 text-center">
-                                <label for="">@lang('Home 2 Photo')</label>
-                                <div class="form-group d-flex justify-content-center">
-                                    <div id="image-preview_about1" class="image-preview image-preview_alt"
-                                        style="background-image:url({{ getPhoto($about->photo2) }});">
+                                    <div id="image-preview_about1" class="image-preview image-preview_alt">
                                         <label for="image-upload_about1" id="image-label_about1">@lang('Choose File')</label>
                                         <input type="file" name="photo2" id="image-upload_about1" />
                                     </div>

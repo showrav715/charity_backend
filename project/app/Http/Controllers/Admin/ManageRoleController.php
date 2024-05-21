@@ -52,11 +52,6 @@ class ManageRoleController extends Controller
     public function destroy(Request $request)
     {
         $role = Role::find($request->id);
-        $admin = Admin::where('role', $role->name)->first();
-        if ($admin) {
-            return redirect()->route('admin.role.index')->with('error', 'Role is assigned to admin.');
-        }
-
         $role->delete();
         return redirect()->route('admin.role.index')->with('success', 'Role deleted successfully.');
     }

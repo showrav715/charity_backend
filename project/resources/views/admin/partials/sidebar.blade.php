@@ -196,7 +196,7 @@
 
 
         <li
-            class="nav-item dropdown {{ menu(['admin.front*','admin.cta.index','admin.faq*', 'admin.testimonial*', 'admin.brand*', 'admin.contact.section', 'admin.slider*', 'admin.frontend*']) }}">
+            class="nav-item dropdown {{ menu(['admin.front*', 'admin.cta.index', 'admin.faq*', 'admin.testimonial*', 'admin.brand*', 'admin.contact.section', 'admin.slider*', 'admin.frontend*']) }}">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i>
                 <span>@lang('Frontend Setting')</span></a>
             <ul class="dropdown-menu">
@@ -217,7 +217,7 @@
 
                 <li class="{{ menu('admin.faq.index') }}"><a class="nav-link"
                         href="{{ route('admin.faq.index') }}">@lang('Manage Faq
-                                                                                                                                                                                                                                                ')</a>
+                                                                                                                                                                                                                                                                        ')</a>
                 </li>
 
                 <li class="{{ menu('admin.brand.index') }}"><a class="nav-link"

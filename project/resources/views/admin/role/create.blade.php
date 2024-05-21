@@ -27,16 +27,20 @@
                         <div class="form-group">
                             <label>@lang('Permission')</label>
                             <select name="section[]" class="select2" multiple>
-                                <option value="Services">@lang('Services')</option>
+                                <option value="Manage Donations">@lang('Manage Donations')</option>
+                                <option value="Manage Events">@lang('Manage Events')</option>
+                                <option value="Manage User">@lang('Manage User')</option>
+                                <option value="Manage Campaign">@lang('Manage Campaign')</option>
                                 <option value="Manage Contact">@lang('Manage Contact')</option>
+                                <option value="Manage Gateway">@lang('Manage Gateway')</option>
+                                <option value="Manage Withdraw">@lang('Manage Withdraw')</option>
                                 <option value="Blogs">@lang('Blogs')</option>
-                                <option value="Manage Project">@lang('Manage Project')</option>
                                 <option value="Manage Pages">@lang('Manage Pages')</option>
-                                <option value="General Settings">@lang('General Settings')</option>
-                                <option value="Frontend Settings">@lang('Frontend Settings')</option>
-                                <option value="Manage Role">@lang('Manage Role')</option>
                                 <option value="Manage Staff">@lang('Manage Staff')</option>
-                                <option value="Subscribers">@lang('Subscribers')</option>
+                                <option value="Manage Volunteer">@lang('Manage Volunteer')</option>
+                                <option value="General Settings">@lang('General Settings')</option>
+                                <option value="Frontend Setting">@lang('Frontend Setting')</option>
+                                <option value="Support Tickets">@lang('Support Tickets')</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>

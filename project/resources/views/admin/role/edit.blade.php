@@ -35,16 +35,33 @@
                         <div class="form-group">
                             <label>@lang('Permission')</label>
                             <select name="section[]" class="select2" multiple>
-                                    <option value="Services"  {{ in_array('Services', $data) ? 'selected' : '' }}>@lang('Services')</option>
-                                    <option value="Manage Contact" {{ in_array('Manage Contact', $data) ? 'selected' : '' }}>@lang('Manage Contact')</option>
-                                    <option value="Blogs"  {{ in_array('Blogs', $data) ? 'selected' : '' }}>@lang('Blogs')</option>
-                                    <option value="Manage Project"  {{ in_array('Manage Project', $data) ? 'selected' : '' }}>@lang('Manage Project')</option>
-                                    <option value="Manage Pages"  {{ in_array('Manage Pages', $data) ? 'selected' : '' }}>@lang('Manage Pages')</option>
-                                    <option value="General Settings"  {{ in_array('General Settings', $data) ? 'selected' : '' }}>@lang('General Settings')</option>
-                                    <option value="Frontend Settings"  {{ in_array('Frontend Settings', $data) ? 'selected' : '' }}>@lang('Frontend Settings')</option>
-                                    <option value="Manage Role"  {{ in_array('Manage Role', $data) ? 'selected' : '' }}>@lang('Manage Role')</option>
-                                    <option value="Manage Staff"  {{ in_array('Manage Staff', $data) ? 'selected' : '' }}>@lang('Manage Staff')</option>
-                                    <option value="Subscribers"  {{ in_array('Subscribers', $data) ? 'selected' : '' }}>@lang('Subscribers')</option>
+                                <option value="Manage Donations"
+                                    {{ in_array('Manage Donations', $data) ? 'selected' : '' }}>@lang('Manage Donations')</option>
+                                <option value="Manage Events" {{ in_array('Manage Events', $data) ? 'selected' : '' }}>
+                                    @lang('Manage Events')</option>
+                                <option value="Manage User" {{ in_array('Manage User', $data) ? 'selected' : '' }}>
+                                    @lang('Manage User')</option>
+                                <option value="Manage Campaign" {{ in_array('Manage Campaign', $data) ? 'selected' : '' }}>
+                                    @lang('Manage Campaign')</option>
+                                <option value="Manage Contact" {{ in_array('Manage Contact', $data) ? 'selected' : '' }}>
+                                    @lang('Manage Contact')</option>
+                                <option value="Manage Gateway" {{ in_array('Manage Gateway', $data) ? 'selected' : '' }}>
+                                    @lang('Manage Gateway')</option>
+                                    <option value="Manage Withdraw" {{ in_array('Manage Withdraw', $data) ? 'selected' : '' }}>@lang('Manage Withdraw')</option>
+                                <option value="Blogs" {{ in_array('Blogs', $data) ? 'selected' : '' }}>@lang('Blogs')
+                                </option>
+                                <option value="Manage Pages" {{ in_array('Manage Pages', $data) ? 'selected' : '' }}>
+                                    @lang('Manage Pages')</option>
+                                <option value="Manage Staff" {{ in_array('Manage Staff', $data) ? 'selected' : '' }}>
+                                    @lang('Manage Staff')</option>
+                                <option value="Manage Volunteer"
+                                    {{ in_array('Manage Volunteer', $data) ? 'selected' : '' }}>@lang('Manage Volunteer')</option>
+                                <option value="General Settings"
+                                    {{ in_array('General Settings', $data) ? 'selected' : '' }}>@lang('General Settings')</option>
+                                <option value="Frontend Setting"
+                                    {{ in_array('Frontend Setting', $data) ? 'selected' : '' }}>@lang('Frontend Setting')</option>
+                                <option value="Support Tickets" {{ in_array('Support Tickets', $data) ? 'selected' : '' }}>
+                                    @lang('Support Tickets')</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>

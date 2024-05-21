@@ -35,13 +35,11 @@
                                     {{ $item->name }}
                                 </td>
                                 <td data-label="@lang('Permission')">
-                                    <div class="d-flex flex-wrap justify-content-end">
-                                        @if ($item->section)
-                                            @foreach (json_decode($item->section) as $permission)
-                                                <span class="badge badge-success inline-block m-2"> {{ $permission }} </span>
-                                            @endforeach
-                                        @endif
-                                    </div>
+                                    @if ($item->section)
+                                        @foreach (json_decode($item->section) as $permission)
+                                            <span class="badge badge-success py-2 my-1"> {{ $permission }} </span>
+                                        @endforeach
+                                    @endif
                                 </td>
                                 <td data-label="@lang('Action')" class="text-right">
                                     <a href="{{ route('admin.role.edit', $item->id) }}" class="btn btn-primary btn-sm mb-1"
