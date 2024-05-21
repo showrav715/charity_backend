@@ -4534,3 +4534,11 @@ body:not(.sidebar-mini)
 .w-150 {
   width: 150px;
 }
+
+.object-cover {
+  object-fit: cover!important;
+}
+
+.max-w-150 {
+  width: 150px!important;
+}
