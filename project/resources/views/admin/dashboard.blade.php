@@ -86,7 +86,7 @@
     </div>
 
     <div class="row">
-        <div class="col-6 col-md-6 col-lg-6">
+        <div class="col-12 col-xl-6">
             <div class="card">
                 <div class="card-header">
                     <h4>@lang('Recent Donations')</h4>
@@ -142,7 +142,7 @@
         </div>
 
 
-        <div class="col-6 col-md-6 col-lg-6">
+        <div class="col-12 col-xl-6">
             <div class="card">
                 <div class="card-header">
                     <h4>@lang('Recent Campaigns')</h4>
@@ -161,7 +161,7 @@
                                 <tr>
                                     <td data-label="@lang('Photo')">
                                         <img src="{{ getPhoto($item->photo) }}" height="85" width="80"
-                                            alt="icon">
+                                            alt="icon" class="chv1-dash-rc-img ">
                                     </td>
                                     <td data-label="@lang('Title')">
                                         <a href="{{ route('admin.campaign.edit', $item->id) }}"> {{ $item->title }}</a>
@@ -193,7 +193,7 @@
         </div>
 
 
-        <div class="col-6 col-md-6 col-lg-6">
+        <div class="col-12 col-xl-6">
             <div class="card">
                 <div class="card-header">
                     <h4>@lang('Recent Customers')</h4>
@@ -234,7 +234,7 @@
         </div>
 
 
-        <div class="col-6 col-md-6 col-lg-6">
+        <div class="col-12 col-xl-6">
             <div class="card">
                 <div class="card-header">
                     <h4>@lang('Recent Contact Messages')</h4>
@@ -248,6 +248,7 @@
                                     <th>@lang('Name')</th>
                                     <th>@lang('Email')</th>
                                     <th>@lang('Subject')</th>
+                                    <th>@lang('Message')</th>
                                     <th class="text-right">@lang('Action')</th>
                                 </tr>
                             </thead>

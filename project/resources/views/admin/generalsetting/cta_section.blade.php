@@ -22,7 +22,7 @@
 
                         <div class="row">
 
-                            <div class="col-6 text-center">
+                            <div class="col-sm-6 text-center">
                                 <label for="">@lang('Cta Section Photo For Home 1')</label>
                                 <div class="form-group d-flex justify-content-center">
                                     <div id="image-preview" class="image-preview image-preview_alt"
@@ -33,7 +33,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-6 text-center">
+                            <div class="col-sm-6 text-center">
                                 <label for="">@lang('Cta Section Photo For Home 2')</label>
                                 <div class="form-group d-flex justify-content-center">
                                     <div id="image-preview1" class="image-preview image-preview_alt"

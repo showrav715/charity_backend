@@ -11,7 +11,7 @@
     </section>
 @endsection
 @section('content')
-    <div class="row justify-content-center">
+    <div class="row justify-content-center overflow-hidden">
         <div class="col-md-12">
             <div class="card mb-4">
                 <div class="card-body">
@@ -21,7 +21,7 @@
                         @csrf
 
                         <div class="row d-flex">
-                            <div class="col-6 text-center">
+                            <div class="col-sm-6 text-center">
                                 <label for="">@lang('Theme 1 Hero Image')</label>
                                 <div class="form-group d-flex justify-content-center">
                                     <div id="image-preview" class="image-preview image-preview_alt"
@@ -31,7 +31,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6 text-center">
+                            <div class="col-sm-6 text-center">
                                 <label for="">@lang('Theme 2 Hero Image')</label>
                                 <div class="form-group d-flex justify-content-center">
                                     <div id="image-preview1" class="image-preview image-preview_alt"

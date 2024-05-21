@@ -19,8 +19,8 @@
                 <div class="card-header d-flex justify-content-end">
 
 
-                    <form action="" class="d-flex flex-wrap justify-content-start mx-5">
-                        <div class="form-group m-1 flex-grow-1">
+                    <form action="" class="d-flex flex-wrap flex-md-nowrap  justify-content-start mr-md-4">
+                        <div class="form-group  m-1 flex-grow-1">
                             <select class="form-control" onChange="window.location.href=this.value">
                                 <option value="{{ filter('type', '') }}">@lang('All Campaigns')</option>
 
@@ -73,8 +73,7 @@
                         @forelse ($campaigns as $item)
                             <tr>
                                 <td data-label="@lang('Photo')">
-                                    <img src="{{ getPhoto($item->photo) }}" alt="icon" class="img-fluid"
-                                        style="width: 150px">
+                                    <img src="{{ getPhoto($item->photo) }}" alt="icon" class="img-fluid w-150">
                                 </td>
                                 <td data-label="@lang('Title')">
                                     {{ $item->title }}
@@ -168,12 +167,14 @@
 
 
                                 <td data-label="@lang('Action')" class="text-right">
-                                    <a href="{{ route('admin.campaign.edit', $item->id) }}"
-                                        class="btn btn-primary approve btn-sm  mb-1" data-toggle="tooltip"
-                                        title="@lang('Edit')"><i class="fas fa-edit"></i></a>
-                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
-                                        data-id="{{ $item->id }}" data-toggle="tooltip" title="@lang('Remove')"><i
-                                            class="fas fa-trash"></i></a>
+                                    <div class="d-flex">
+                                        <a href="{{ route('admin.campaign.edit', $item->id) }}"
+                                            class="btn btn-primary approve btn-sm  m-2" data-toggle="tooltip"
+                                            title="@lang('Edit')"><i class="fas fa-edit"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove m-2"
+                                            data-id="{{ $item->id }}" data-toggle="tooltip"
+                                            title="@lang('Remove')"><i class="fas fa-trash"></i></a>
+                                    </div>
                                 </td>
                             </tr>
                         @empty

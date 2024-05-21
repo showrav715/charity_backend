@@ -4524,3 +4524,13 @@ body:not(.sidebar-mini)
 .imagecheck-image:hover {
   opacity: 1;
 }
+
+.chv1-dash-rc-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.w-150 {
+  width: 150px;
+}

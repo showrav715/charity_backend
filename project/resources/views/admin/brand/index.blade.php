@@ -32,11 +32,11 @@
                     <tr>
 
                         <td data-label="@lang('Photo')">
-                            <img src="{{getPhoto($item->photo)}}" class="img-fluid" style="width: 50px" alt="">
+                            <img src="{{getPhoto($item->photo)}}" class="img-fluid w-25"  alt="">
                         </td>
 
                         <td data-label="@lang('Action')" class="text-right">
-                            <a href="javascript:void()" class="btn btn-primary approve btn-sm edit mb-1"
+                            <a href="javascript:void()" class="btn btn-primary approve btn-sm edit mb-1 mr-2"
                                 data-route="{{route('admin.brand.update',$item->id)}}" data-path="{{adminpath()}}"
                                 data-item="{{$item}}" data-toggle="tooltip" title="@lang('Edit')"><i
                                     class="fas fa-edit"></i></a>

@@ -57,13 +57,16 @@
                                 </td>
 
                                 <td data-label="{{ __('Action') }}">
-                                    <a href="{{ route('admin.blog.edit', $item->id) }}"
-                                        class="btn btn-primary  btn-sm edit mb-1" data-toggle="tooltip"
-                                        title="@lang('Edit')"><i class="fas fa-edit"></i></a>
+                                    <div class="flex">
 
-                                    <a href="javascript:void(0)" class="btn btn-danger  btn-sm remove mb-1"
-                                        data-route="{{ route('admin.blog.destroy', $item) }}" data-toggle="tooltip"
-                                        title="@lang('Delete')"><i class="fas fa-trash"></i></a>
+                                        <a href="{{ route('admin.blog.edit', $item->id) }}"
+                                            class="btn btn-primary  btn-sm edit inline-block m-2" data-toggle="tooltip"
+                                            title="@lang('Edit')"><i class="fas fa-edit"></i></a>
+
+                                        <a href="javascript:void(0)" class="btn btn-danger  btn-sm remove inline-block m-2"
+                                            data-route="{{ route('admin.blog.destroy', $item) }}" data-toggle="tooltip"
+                                            title="@lang('Delete')"><i class="fas fa-trash"></i></a>
+                                    </div>
 
                                 </td>
                             </tr>

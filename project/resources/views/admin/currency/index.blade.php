@@ -6,12 +6,11 @@
 
 @section('breadcrumb')
  <section class="section">
-    <div class="section-header d-flex flex-wrap justify-content-between">
-      <h1 class="mb-1 mr-auto">@lang('Manage Currency')</h1>
+    <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
+      <h1 class="mr-auto mb-4 mb-md-0">@lang('Manage Currency')</h1>
       <div class="d-flex flex-wrap ">
-
            
-            <a href="{{route('admin.currency.add')}}" class="btn btn-primary mb-1 mr-3"><i class="fas fa-plus"></i> @lang('Add New')</a>
+            <a href="{{route('admin.currency.add')}}" class="btn btn-primary mb-1 mr-3 "><i class="fas fa-plus"></i> @lang('Add New')</a>
          
             <form action="">
               <div class="input-group has_append">
