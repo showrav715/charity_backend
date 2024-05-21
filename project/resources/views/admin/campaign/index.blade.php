@@ -169,9 +169,9 @@
                                 <td data-label="@lang('Action')" class="text-right">
                                     <div class="d-flex">
                                         <a href="{{ route('admin.campaign.edit', $item->id) }}"
-                                            class="btn btn-primary approve btn-sm  m-2" data-toggle="tooltip"
+                                            class="btn btn-primary approve btn-sm  mr-2" data-toggle="tooltip"
                                             title="@lang('Edit')"><i class="fas fa-edit"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove m-2"
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove"
                                             data-id="{{ $item->id }}" data-toggle="tooltip"
                                             title="@lang('Remove')"><i class="fas fa-trash"></i></a>
                                     </div>

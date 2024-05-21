@@ -60,10 +60,10 @@
                                     <div class="flex">
 
                                         <a href="{{ route('admin.blog.edit', $item->id) }}"
-                                            class="btn btn-primary  btn-sm edit inline-block m-2" data-toggle="tooltip"
+                                            class="btn btn-primary  btn-sm edit inline-block mr-2" data-toggle="tooltip"
                                             title="@lang('Edit')"><i class="fas fa-edit"></i></a>
 
-                                        <a href="javascript:void(0)" class="btn btn-danger  btn-sm remove inline-block m-2"
+                                        <a href="javascript:void(0)" class="btn btn-danger  btn-sm remove inline-block"
                                             data-route="{{ route('admin.blog.destroy', $item) }}" data-toggle="tooltip"
                                             title="@lang('Delete')"><i class="fas fa-trash"></i></a>
                                     </div>
