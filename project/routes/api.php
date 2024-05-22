@@ -39,6 +39,7 @@ Route::prefix('user')->group(function () {
         Route::post('campaign/store', [CampaignController::class, 'store']);
         Route::post('campaign/update/{id}', [CampaignController::class, 'update']);
         Route::get('campaign/{id}', [CampaignController::class, 'edit']);
+        Route::get('campaign/delete/{id}', [CampaignController::class, 'delete']);
         Route::get('campaign/gallery/remove/{id}', [CampaignController::class, 'galleryRemove']);
 
         //support ticket

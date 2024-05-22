@@ -73,7 +73,7 @@ class PaymentGatewayController extends ApiController
 
                 // donar transaction create
                 if (isset($orderData['user_id'])) {
-                    transaction($convertAmount, $res['txn_id'], $orderData['user_id'], '-', 'My Donation');
+                    transaction($convertAmount, $res['txn_id'], $orderData['user_id'], '-', 'My Donation',"Donation");
                 }
 
                 if ($campaign['user_id'] != 0) {
@@ -134,7 +134,7 @@ class PaymentGatewayController extends ApiController
 
             // donar transaction create
             if (isset($orderData['user_id'])) {
-                transaction($convertAmount, $res['txn_id'], $orderData['user_id'], '-', 'My Donation');
+                transaction($convertAmount, $res['txn_id'], $orderData['user_id'], '-', 'My Donation',"Donation");
             }
 
             if ($campaign['user_id'] != 0) {

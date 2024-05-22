@@ -7,6 +7,7 @@ use App\Http\Helpers\MediaHelper;
 use App\Models\Campaign;
 use App\Models\CampaignGallery;
 use App\Models\Category;
+use App\Models\Donation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -237,6 +238,13 @@ class CampaignController extends Controller
         foreach ($faq as $item) {
             $item->delete();
         }
+
+        // donation
+        $donation = Donation::where("campaign_slug", $campaign->slug)->get();
+        foreach ($donation as $item) {
+            $item->delete();
+        }
+
         $campaign->delete();
         return redirect()->back()->with('success', 'Campaign deleted successfully');
     }

@@ -19,11 +19,11 @@
             <div class="card">
                 <div class="card-body text-center">
                     <p class="mb-2">@lang('Testimonial Background') <small>
-                        (@lang('recommended size (1920x672)'))
-                    </small></p>
+                            (@lang('recommended size (1920x672)'))
+                        </small></p>
                     <form action="{{ route('admin.gs.update') }}" enctype="multipart/form-data" method="POST">
                         @csrf
-                        
+
                         <div class="col-md-12 ShowImage mb-3  text-center">
                             <label for="image">
                                 <img src="{{ getPhoto($gs->testimonial_background) }}" class="img-fluid" alt="image"
@@ -50,7 +50,7 @@
                             <th>@lang('Name')</th>
                             <th>@lang('Photo')</th>
                             <th>@lang('Message')</th>
-                            <th class="text-right">@lang('Action')</th>
+                            <th width="15%" class="text-right">@lang('Action')</th>
                         </tr>
                         @forelse ($testimonials as $item)
                             <tr>
@@ -64,7 +64,7 @@
                                         style="width: 50px">
                                 </td>
                                 <td data-label="@lang('message')">
-                                    {{ $item->message }}
+                                    {{ Str::limit($item->message, 100)}}
                                 </td>
 
                                 <td data-label="@lang('Action')" class="text-right">
@@ -200,7 +200,7 @@
 @push('script')
     <script>
         'use strict';
-        
+
         $.uploadPreview({
             input_field: "#image-upload",
             preview_box: "#image-preview",
