@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\ManageUserController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PaymentGatewayController;
 use App\Http\Controllers\Admin\PreloadedController;
+use App\Http\Controllers\Admin\SeoSettingController;
 use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\VolunteerController;
 use App\Http\Controllers\Admin\WithdrawController;
@@ -184,6 +185,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('home/page/sections', [GeneralSettingController::class, 'homeSections'])->name('home.sections');
             Route::post('home/page/sections/update', [GeneralSettingController::class, 'homeSectionUpdate'])->name('home.sections.update');
 
+
+            
             // About section
             Route::get('about', [AboutController::class, 'index'])->name('about.index');
             Route::put('about/update', [AboutController::class, 'update'])->name('about.update');
@@ -235,6 +238,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             // theme
             Route::get('/home-page', [GeneralSettingController::class, 'themeSettings'])->name('gs.theme.home.page');
             //==================================== GENERAL SETTING SECTION ==============================================//
+            Route::resource('seo-setting', SeoSettingController::class);
 
             Route::resource('language', LanguageController::class);
             Route::post('add-translate/{id}', [LanguageController::class, 'storeTranslate'])->name('translate.store');

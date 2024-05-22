@@ -42,7 +42,13 @@ class Admin extends Authenticatable
 
     public function sectionCheck($value)
     {
-        $sections = json_decode($this->role_data->section, true);
+        
+        if(!$this->role_data->section) {
+           $sections = [];
+        }else{
+            $sections = json_decode($this->role_data->section, true);
+        }
+  
         if (in_array($value, $sections)) {
             return true;
         } else {

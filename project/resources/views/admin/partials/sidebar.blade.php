@@ -183,6 +183,8 @@
 
                 <li class="{{ menu('admin.checkout') }}"><a class="nav-link"
                         href="{{ route('admin.checkout') }}">@lang('Checkout Settings')</a></li>
+                <li class="{{ menu('admin.seo-setting.index') }}"><a class="nav-link"
+                        href="{{ route('admin.seo-setting.index') }}">@lang('Seo Settings')</a></li>
 
                 <li class="{{ menu('admin.gs.maintainance.settings') }}"><a class="nav-link"
                         href="{{ route('admin.gs.maintainance.settings') }}">@lang('Maintenance')</a>

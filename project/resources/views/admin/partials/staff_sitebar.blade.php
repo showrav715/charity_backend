@@ -1,21 +1,26 @@
 <aside id="sidebar-wrapper">
     <ul class="sidebar-menu mb-5">
         <li class="menu-header">@lang('Dashboard')</li>
+
+
         <li class="nav-item {{ menu('admin.dashboard') }}">
             <a href="{{ route('admin.dashboard') }}" class="nav-link"><i
                     class="fas fa-fire"></i><span>@lang('Dashboard')</span></a>
         </li>
 
-        <li class="nav-item {{ menu(['admin.donation.*']) }}">
-            <a href="{{ route('admin.donation.index') }}" class="nav-link">
-                <i class="fas fa-envelope-open-text">
-                </i>
-                <span>@lang('Manage Donations')
-                </span>
-            </a>
-        </li>
+        @if (auth()->guard('admin')->user()->sectionCheck('Manage Donations'))
+            <li class="nav-item {{ menu(['admin.donation.*']) }}">
+                <a href="{{ route('admin.donation.index') }}" class="nav-link">
+                    <i class="fas fa-envelope-open-text">
+                    </i>
+                    <span>@lang('Manage Donations')
+                    </span>
+                </a>
+            </li>
+        @endif
 
 
+        @if (auth()->guard('admin')->user()->sectionCheck('Manage Events'))
         <li class="nav-item {{ menu(['admin.event.*']) }}">
             <a href="{{ route('admin.event.index') }}" class="nav-link">
                 <i class="fas fa-users">
@@ -24,7 +29,8 @@
                 </span>
             </a>
         </li>
-
+        @endif
+        @if (auth()->guard('admin')->user()->sectionCheck('Manage User'))
         <li class="nav-item {{ menu(['admin.user.index', 'admin.user.details']) }}">
             <a href="{{ route('admin.user.index') }}" class="nav-link">
                 <i class="fas fa-users">
@@ -34,7 +40,8 @@
             </a>
         </li>
 
-
+        @endif
+        @if (auth()->guard('admin')->user()->sectionCheck('Manage Campaign'))
         <li class="nav-item dropdown {{ menu(['admin.category.index', 'admin.preloaded.index', 'admin.campaign.*']) }}">
             @php
                 $pending = \App\Models\Campaign::where('status', 0)->count();
@@ -70,7 +77,8 @@
                 </li>
             </ul>
         </li>
-
+        @endif
+        @if (auth()->guard('admin')->user()->sectionCheck('Manage Contact'))
         <li class="nav-item dropdown {{ menu(['admin.contact*']) }}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                     class="fas fa-envelope-open-text"></i></i>
@@ -85,7 +93,8 @@
             </ul>
         </li>
 
-
+        @endif
+        @if (auth()->guard('admin')->user()->sectionCheck('Gateways'))
         <li class="nav-item dropdown {{ menu(['admin.gateway*', 'admin.currency.*']) }}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                     class="fas fa-money-check-alt"></i> <span>@lang('Payment Gateway')</span></a>
@@ -97,7 +106,8 @@
                 </li>
             </ul>
         </li>
-
+        @endif
+        @if (auth()->guard('admin')->user()->sectionCheck('Manage Withdraw'))
 
         <li class="nav-item dropdown {{ menu(['admin.withdraw*']) }}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
@@ -110,7 +120,8 @@
                 </li>
             </ul>
         </li>
-
+        @endif
+        @if (auth()->guard('admin')->user()->sectionCheck('Blogs'))
         <li class="nav-item dropdown {{ menu(['admin.bcategory*', 'admin.blog*']) }}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fab fa-blogger-b"></i>
                 <span>@lang('Blogs')</span></a>
@@ -125,7 +136,8 @@
                 </li>
             </ul>
         </li>
-
+        @endif
+        @if (auth()->guard('admin')->user()->sectionCheck('Manage Pages'))
         <li class="nav-item dropdown {{ menu(['admin.page*', 'admin.counter.index', 'admin.about.index']) }}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-file-alt"></i>
                 <span>@lang('Manage Pages')</span></a>
@@ -140,7 +152,8 @@
                 </li>
             </ul>
         </li>
-
+        @endif
+        @if (auth()->guard('admin')->user()->sectionCheck('Manage Volunteer'))
         <li class="nav-item {{ menu('admin.volunteer.index') }}">
             <a href="{{ route('admin.volunteer.index') }}" class="nav-link">
                 <i class="fas fa-users-cog"></i>
@@ -148,6 +161,8 @@
             </a>
         </li>
 
+        @endif
+        @if (auth()->guard('admin')->user()->sectionCheck('General Settings'))
         <li class="menu-header">@lang('General')</li>
 
         <li
@@ -183,7 +198,8 @@
                 </li>
             </ul>
         </li>
-
+        @endif
+        @if (auth()->guard('admin')->user()->sectionCheck('Frontend Setting'))
         <li
             class="nav-item dropdown {{ menu(['admin.front*', 'admin.cta.index', 'admin.faq*', 'admin.testimonial*', 'admin.brand*', 'admin.contact.section', 'admin.slider*', 'admin.frontend*']) }}">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i>
@@ -206,7 +222,7 @@
 
                 <li class="{{ menu('admin.faq.index') }}"><a class="nav-link"
                         href="{{ route('admin.faq.index') }}">@lang('Manage Faq
-                                                                                                                                                                                                                                                                                                                        ')</a>
+                                                                                                                                                                                                                                                                                                                                                ')</a>
                 </li>
 
                 <li class="{{ menu('admin.brand.index') }}"><a class="nav-link"
@@ -215,23 +231,27 @@
 
             </ul>
         </li>
-
+        @endif
+        @if (auth()->guard('admin')->user()->sectionCheck('Support Tickets'))
         <li class="nav-item {{ menu('admin.ticket.manage') }}">
             <a href="{{ route('admin.ticket.manage') }}" class="nav-link"><i
                     class="fas fa-ticket-alt"></i><span>@lang('Support Tickets')</span></a>
         </li>
-
+        @endif
+        @if (auth()->guard('admin')->user()->sectionCheck('Staff and Role'))
         <li class="menu-header">@lang('Staff and Role')</li>
         <li class="nav-item {{ menu('admin.role*') }}">
             <a href="{{ route('admin.role.index') }}" class="nav-link"><i
                     class="far fa-question-circle"></i><span>@lang('Manage Role')</span></a>
         </li>
-
+        @endif
+        @if (auth()->guard('admin')->user()->sectionCheck('Manage Staff'))
         <li class="nav-item {{ menu('admin.staff*') }}">
             <a href="{{ route('admin.staff.manage') }}" class="nav-link"><i
                     class="fas fa-user-shield"></i><span>@lang('Manage Staff')</span></a>
         </li>
-
+        @endif
+    
         <li class="nav-item {{ menu('admin.clear.cache') }}">
             <a href="{{ route('admin.clear.cache') }}" class="nav-link"><i class="fas fa-broom"></i>
                 <span>@lang('Clear Cache')</span></a>

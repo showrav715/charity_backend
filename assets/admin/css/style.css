@@ -4534,3 +4534,12 @@ body:not(.sidebar-mini)
 .w-150 {
   width: 150px;
 }
+
+.seo-og-img {
+  width: 200px;
+  height: 134px;
+  object-fit: contain;
+  border: 1px solid #e4e4e4;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}

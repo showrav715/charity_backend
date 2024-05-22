@@ -92,6 +92,7 @@ Route::get('/page/{slug}', [FrontendController::class, 'page']);
 
 // Setting Routes
 Route::get('setting', [FrontendController::class, 'setting']);
+Route::get('seo-setting', [FrontendController::class, 'seoSetting']);
 Route::get('get/currency', [FrontendController::class, 'getCurrency']);
 Route::get('single/currency/{code}', [FrontendController::class, 'singleCurrency']);
 
