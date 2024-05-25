@@ -68,8 +68,7 @@ class EventController extends Controller
         $data->organizar_phone = $request->organizar_phone;
         $data->website = $request->website;
         $data->map_link = $request->map_link;
-
-        $data->description = $request->description;
+        $data->description =  clean($request->description);
         $data->status = $request->status;
         if (isset($request['photo'])) {
             $status = MediaHelper::ExtensionValidation($request['photo']);

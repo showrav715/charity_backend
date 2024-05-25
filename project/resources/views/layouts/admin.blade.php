@@ -109,7 +109,20 @@
 
         })
 
-        $('.summernote').summernote()
+        $('.summernote').summernote({
+            toolbar: [
+                    // Customize the toolbar, remove the 'codeview' button
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'help']]
+                    // Note: 'codeview' button is removed from the 'view' group
+                ]
+        })
         $('.note-codable').on('blur', function() {
             var codeviewHtml = $(this).val();
             var $summernoteTextarea = $(this).closest('.note-editor').siblings('textarea');
