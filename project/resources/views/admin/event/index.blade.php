@@ -34,22 +34,22 @@
                         </tr>
                         @forelse ($events as $item)
                             <tr>
-                                <td data-label="@lang('Photo')">
-                                    <img src="{{ getPhoto($item->photo) }}" alt="icon" class="img-fluid w-150"
+                                <td class="py-1" data-label="@lang('Photo')">
+                                    <img src="{{ getPhoto($item->photo) }}" alt="icon" class="img-fluid w-150 object-cover"
                                        >
                                 </td>
-                                <td data-label="@lang('Title')">
+                                <td class="py-1" data-label="@lang('Title')">
                                     {{ $item->title }}
                                 </td>
-                                <td data-label="@lang('Event Type')">
+                                <td class="py-1" data-label="@lang('Event Type')">
                                     {{ $item->event_type }}
                                 </td>
 
-                                <td data-label="@lang('Date & Time')">
+                                <td class="py-1" data-label="@lang('Date & Time')">
                                     {{ $item->date }} / {{ $item->start_time }} - {{ $item->end_time }}
                                 </td>
 
-                                <td data-label="@lang('Status')">
+                                <td class="py-1" data-label="@lang('Status')">
                                     @if ($item->status == 1)
                                         <span class="badge badge-success"> @lang('Active') </span>
                                     @else
@@ -57,13 +57,13 @@
                                     @endif
                                 </td>
 
-                                <td data-label="@lang('Action')">
+                                <td class="py-1" data-label="@lang('Action')">
                                     <div class="d-flex">
 
                                         <a href="{{ route('admin.event.edit', $item->id) }}"
-                                            class="btn btn-primary approve btn-sm  m-2" data-toggle="tooltip"
+                                            class="btn btn-primary approve btn-sm  mr-2" data-toggle="tooltip"
                                             title="@lang('Edit')"><i class="fas fa-edit"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove m-2"
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove"
                                             data-id="{{ $item->id }}" data-toggle="tooltip" title="@lang('Remove')"><i
                                                 class="fas fa-trash"></i></a>
                                     </div>

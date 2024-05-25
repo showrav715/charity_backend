@@ -37,11 +37,11 @@
 
                                 <td data-label="@lang('Action')" class="text-right">
                                     <div class="flex justify-content-end">
-                                        <a href="javascript:void()" class="btn btn-primary approve btn-sm edit m-2"
+                                        <a href="javascript:void()" class="btn btn-primary approve btn-sm edit mr-2"
                                             data-route="{{ route('admin.preloaded.update', $item->id) }}"
                                             data-item="{{ showAdminWithoutCurrency($item->amount) }}" data-toggle="tooltip"
                                             title="@lang('Edit')"><i class="fas fa-edit"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove m-2"
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove"
                                             data-id="{{ $item->id }}" data-toggle="tooltip" title="@lang('Remove')"><i
                                                 class="fas fa-trash"></i></a>
                                     </div>
