@@ -86,7 +86,72 @@
     </div>
 
     <div class="row">
+
+        <div class="col-12 col-md-6 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        @lang('Donation Statistics')
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <canvas id="myChart2"></canvas>
+                </div>
+            </div>
+        </div>
+
         <div class="col-12 col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>@lang('Recent Campaigns')</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>@lang('Photo')</th>
+                                <th>@lang('Title')</th>
+                                <th>@lang('Goal')</th>
+                                <th>@lang('Status')</th>
+
+                            </tr>
+                            @forelse ($recent_campaigns as $item)
+                                <tr>
+                                    <td class="py-1" data-label="@lang('Photo')">
+                                        <img src="{{ getPhoto($item->photo) }}" height="85" width="80" alt="icon"
+                                            class="chv1-dash-rc-img ">
+                                    </td>
+                                    <td class="py-1" data-label="@lang('Title')">
+                                        <a href="{{ route('admin.campaign.edit', $item->id) }}"> {{ $item->title }}</a>
+                                    </td>
+                                    <td class="py-1" data-label="@lang('Goal')">
+                                        {{ showAdminAmount($item->goal) }}
+                                    </td>
+
+                                    <td class="py-1" data-label="@lang('Status')">
+                                        @if ($item->status == 1)
+                                            <span class="badge badge-success"> @lang('Running') </span>
+                                        @elseif($item->status == 2)
+                                            <span class="badge badge-danger"> @lang('Closed') </span>
+                                        @else
+                                            <span class="badge badge-warning"> @lang('Pending') </span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @empty
+
+                                <tr>
+                                    <td class="text-center" colspan="100%">@lang('No Data Found')</td>
+                                </tr>
+                            @endforelse
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
                     <h4>@lang('Recent Donations')</h4>
@@ -142,55 +207,7 @@
         </div>
 
 
-        <div class="col-12 col-xl-6">
-            <div class="card">
-                <div class="card-header">
-                    <h4>@lang('Recent Campaigns')</h4>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <tr>
-                                <th>@lang('Photo')</th>
-                                <th>@lang('Title')</th>
-                                <th>@lang('Goal')</th>
-                                <th>@lang('Status')</th>
 
-                            </tr>
-                            @forelse ($recent_campaigns as $item)
-                                <tr>
-                                    <td data-label="@lang('Photo')">
-                                        <img src="{{ getPhoto($item->photo) }}" height="85" width="80"
-                                            alt="icon" class="chv1-dash-rc-img ">
-                                    </td>
-                                    <td data-label="@lang('Title')">
-                                        <a href="{{ route('admin.campaign.edit', $item->id) }}"> {{ $item->title }}</a>
-                                    </td>
-                                    <td data-label="@lang('Goal')">
-                                        {{ showAdminAmount($item->goal) }}
-                                    </td>
-
-                                    <td data-label="@lang('Status')">
-                                        @if ($item->status == 1)
-                                            <span class="badge badge-success"> @lang('Running') </span>
-                                        @elseif($item->status == 2)
-                                            <span class="badge badge-danger"> @lang('Closed') </span>
-                                        @else
-                                            <span class="badge badge-warning"> @lang('Pending') </span>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @empty
-
-                                <tr>
-                                    <td class="text-center" colspan="100%">@lang('No Data Found')</td>
-                                </tr>
-                            @endforelse
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
         <div class="col-12 col-xl-6">
@@ -342,5 +359,54 @@
             $('.show_subject').text("Subject : " + $(this).data('subject'));
             $('#view').modal('show');
         })
+
+
+        var canvas = document.getElementById("myChart2");
+
+        // Set the canvas height via JavaScript
+        canvas.height = 210;
+
+        var ctx = canvas.getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($donation_date) !!},
+                datasets: [{
+                    label: 'Donation Statistics',
+                    data: {!! json_encode($donation_amount) !!},
+                    borderWidth: 2,
+                    backgroundColor: '#6777ef',
+                    borderColor: '#6777ef',
+                    borderWidth: 2.5,
+                    pointBackgroundColor: '#ffffff',
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        gridLines: {
+                            drawBorder: false,
+                            color: '#f2f2f2',
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 150
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            display: false
+                        },
+                        gridLines: {
+                            display: false
+                        }
+                    }]
+                },
+            }
+        });
     </script>
 @endpush

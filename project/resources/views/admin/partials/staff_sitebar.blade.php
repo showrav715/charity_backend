@@ -200,14 +200,14 @@
         @endif
         @if (auth()->guard('admin')->user()->sectionCheck('Frontend Setting'))
             <li
-                class="nav-item dropdown {{ menu(['admin.front*', 'admin.cta.index', 'admin.faq*', 'admin.testimonial*', 'admin.brand*', 'admin.contact.section', 'admin.slider*', 'admin.frontend*',"admin.hero.index","admin.about.index"]) }}">
+                class="nav-item dropdown {{ menu(['admin.front*', 'admin.cta.index', 'admin.faq*', 'admin.testimonial*', 'admin.brand*', 'admin.contact.section', 'admin.slider*', 'admin.frontend*', 'admin.hero.index', 'admin.about.index']) }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i>
                     <span>@lang('Frontend Setting')</span></a>
                 <ul class="dropdown-menu">
 
                     <li class="{{ menu('admin.hero.index') }}"><a class="nav-link"
                             href="{{ route('admin.hero.index') }}">@lang('Hero Section')</a></li>
-                 
+
                     <li class="{{ menu('admin.testimonial.index') }}"><a class="nav-link"
                             href="{{ route('admin.testimonial.index') }}">@lang('Testimonials')</a>
                     </li>
@@ -219,7 +219,7 @@
 
                     <li class="{{ menu('admin.faq.index') }}"><a class="nav-link"
                             href="{{ route('admin.faq.index') }}">@lang('Manage Faq
-                                                                                                                                                                                                                                                                                                                                                                            ')</a>
+                                                                                                                                                                                                                                                                                                                                                                                                        ')</a>
                     </li>
 
                     <li class="{{ menu('admin.brand.index') }}"><a class="nav-link"
@@ -235,6 +235,16 @@
                         class="fas fa-ticket-alt"></i><span>@lang('Support Tickets')</span></a>
             </li>
         @endif
+
+        <li class="nav-item {{ menu('admin.subscriber.manage') }}">
+            <a href="{{ route('admin.subscriber.manage') }}" class="nav-link">
+                <i class="fas fa-envelope-open-text"></i>
+                <span>@lang('Manage Subscribers')</span>
+            </a>
+        </li>
+
+
+
         @if (auth()->guard('admin')->user()->sectionCheck('Staff and Role'))
             <li class="menu-header">@lang('Staff and Role')</li>
             <li class="nav-item {{ menu('admin.role*') }}">
