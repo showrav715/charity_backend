@@ -103,7 +103,7 @@ class CampaignController extends Controller
         $campaign->video_link = $request->video_link;
 
         $campaign->slug = Str::slug($request->title);
-        $campaign->description = $request->description;
+        $campaign->description = clean($request->description);
         $campaign->category_id = $request->category_id;
         $campaign->goal = $request->goal;
         $campaign->photo = MediaHelper::handleMakeImage($request->photo);
@@ -160,7 +160,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findOrFail($id);
         $campaign->title = $request->title;
         $campaign->slug = Str::slug($request->title);
-        $campaign->description = $request->description;
+        $campaign->description = clean($request->description);
         $campaign->category_id = $request->category_id;
         $campaign->goal = $request->goal;
         $campaign->location = $request->location;

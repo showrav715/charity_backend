@@ -59,7 +59,7 @@ class BlogController extends Controller
         $data->slug = Str::slug($request->title);
         $data->category_id = $request->category_id;
         $data->sort_text = $request->sort_text;
-        $data->description = $request->description;
+        $data->description = clean($request->description);
         $data->status = $request->status;
         if (isset($request['photo'])) {
             $status = MediaHelper::ExtensionValidation($request['photo']);
