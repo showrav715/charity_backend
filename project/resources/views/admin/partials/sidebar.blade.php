@@ -157,7 +157,7 @@
         <li class="menu-header">@lang('General')</li>
 
         <li
-            class="nav-item dropdown {{ menu(['admin.gs*', 'admin.mail.config', 'admin.social.manage*', 'admin.language*', 'admin.cookie', 'admin.checkout']) }}">
+            class="nav-item dropdown {{ menu(['admin.gs*', 'admin.mail.config', 'admin.social.manage*', 'admin.language*', 'admin.cookie', 'admin.checkout',"admin.seo-setting.index"]) }}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                     class="fas fa-cog"></i><span>@lang('General Settings')</span></a>
             <ul class="dropdown-menu">
@@ -183,6 +183,8 @@
 
                 <li class="{{ menu('admin.checkout') }}"><a class="nav-link"
                         href="{{ route('admin.checkout') }}">@lang('Checkout Settings')</a></li>
+                <li class="{{ menu('admin.seo-setting.index') }}"><a class="nav-link"
+                        href="{{ route('admin.seo-setting.index') }}">@lang('Seo Settings')</a></li>
 
                 <li class="{{ menu('admin.gs.maintainance.settings') }}"><a class="nav-link"
                         href="{{ route('admin.gs.maintainance.settings') }}">@lang('Maintenance')</a>
@@ -196,16 +198,14 @@
 
 
         <li
-            class="nav-item dropdown {{ menu(['admin.front*', 'admin.cta.index', 'admin.faq*', 'admin.testimonial*', 'admin.brand*', 'admin.contact.section', 'admin.slider*', 'admin.frontend*']) }}">
+            class="nav-item dropdown {{ menu(['admin.front*', 'admin.cta.index', 'admin.faq*', 'admin.testimonial*', 'admin.brand*', 'admin.contact.section', 'admin.slider*', 'admin.frontend*','admin.hero.index']) }}">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i>
                 <span>@lang('Frontend Setting')</span></a>
             <ul class="dropdown-menu">
 
                 <li class="{{ menu('admin.hero.index') }}"><a class="nav-link"
                         href="{{ route('admin.hero.index') }}">@lang('Hero Section')</a></li>
-                <li class="{{ menu('admin.about.index') }}"><a class="nav-link"
-                        href="{{ route('admin.about.index') }}">@lang('About')</a></li>
-
+             
                 <li class="{{ menu('admin.testimonial.index') }}"><a class="nav-link"
                         href="{{ route('admin.testimonial.index') }}">@lang('Testimonials')</a>
                 </li>

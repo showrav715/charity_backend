@@ -103,15 +103,15 @@
                             </tr>
                             @forelse ($recent_donations as $item)
                                 <tr>
-                                    <td class="py-1" data-label="@lang('Campaign Name')">
+                                    <td data-label="@lang('Campaign Name')">
                                         <a
-                                            href="{{ route('admin.campaign.edit', $item->campaign->id) }}">{{ $item->campaign->title }}</a>
+                                            href="{{ $item->campaign->id ? route('admin.campaign.edit', $item->campaign->id) : 'javascriipt:;' }}">{{ $item->campaign->title }}</a>
                                     </td>
-                                    <td class="py-1" data-label="@lang('Total')">
+                                    <td data-label="@lang('Total')">
                                         {{ showAdminAmount($item->total) }}
                                     </td>
 
-                                    <td class="py-1" data-label="@lang('Raised')">
+                                    <td data-label="@lang('Raised')">
                                         <a href="">
                                             <strong>
                                                 {{ $item->owner_id ? $item->owner->username : __('Admin') }}
@@ -119,11 +119,11 @@
                                         </a>
                                     </td>
 
-                                    <td class="py-1" data-label="@lang('Donor Name')">
+                                    <td data-label="@lang('Donor Name')">
                                         {{ $item->name ?? 'N/A' }}
                                     </td>
 
-                                    <td class="py-1" data-label="@lang('Action')" class="text-right">
+                                    <td data-label="@lang('Action')" class="text-right">
                                         <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
                                             data-id="{{ $item->id }}" data-toggle="tooltip"
                                             title="@lang('Remove')"><i class="fas fa-trash"></i></a>
@@ -159,18 +159,18 @@
                             </tr>
                             @forelse ($recent_campaigns as $item)
                                 <tr>
-                                    <td class="py-1" data-label="@lang('Photo')">
+                                    <td data-label="@lang('Photo')">
                                         <img src="{{ getPhoto($item->photo) }}" height="85" width="80"
                                             alt="icon" class="chv1-dash-rc-img ">
                                     </td>
-                                    <td class="py-1" data-label="@lang('Title')">
+                                    <td data-label="@lang('Title')">
                                         <a href="{{ route('admin.campaign.edit', $item->id) }}"> {{ $item->title }}</a>
                                     </td>
-                                    <td class="py-1" data-label="@lang('Goal')">
+                                    <td data-label="@lang('Goal')">
                                         {{ showAdminAmount($item->goal) }}
                                     </td>
 
-                                    <td class="py-1" data-label="@lang('Status')">
+                                    <td data-label="@lang('Status')">
                                         @if ($item->status == 1)
                                             <span class="badge badge-success"> @lang('Running') </span>
                                         @elseif($item->status == 2)
@@ -244,10 +244,8 @@
                         <table class="table table-striped" id="table">
                             <thead>
                                 <tr>
-
                                     <th>@lang('Name')</th>
                                     <th>@lang('Email')</th>
-                                    <th>@lang('Subject')</th>
                                     <th class="text-right">@lang('Action')</th>
                                 </tr>
                             </thead>
@@ -260,19 +258,15 @@
                                         <td data-label="@lang('Email')">
                                             {{ $item->email ?? 'N/A' }}
                                         </td>
-                                        <td data-label="@lang('Subject')">
-                                            {{ $item->subject }}
-                                        </td>
 
                                         <td data-label="@lang('Action')" class="text-right">
-                                            <div class="d-flex">
-                                                <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mr-2"
-                                                    data-id="{{ $item->id }}" data-toggle="tooltip"
-                                                    title="@lang('Remove')"><i class="fas fa-trash"></i></a>
-                                                <a href="javascript:void()" class="btn btn-primary btn-sm view"
-                                                    data-message="{{ $item->message }}" data-toggle="tooltip"
-                                                    title="@lang('View Message')"><i class="fas fa-eye"></i></a>
-                                            </div>
+                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
+                                                data-id="{{ $item->id }}" data-toggle="tooltip"
+                                                title="@lang('Remove')"><i class="fas fa-trash"></i></a>
+                                            <a href="javascript:void()" class="btn btn-primary btn-sm view mb-1"
+                                                data-message="{{ $item->message }}" data-subject=" {{ $item->subject }}"
+                                                data-toggle="tooltip" title="@lang('View Message')"><i
+                                                    class="fas fa-eye"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -287,7 +281,7 @@
 
     <div class="modal fade" id="removeMod" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
-            <form action="{{ route('admin.donation.destroy') }}" method="POST">
+            <form action="{{ route('admin.contact.message.delete') }}" method="POST">
                 @method('DELETE')
                 @csrf
                 <input type="hidden" name="id">
@@ -309,27 +303,24 @@
 
     <div class="modal fade" id="view" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="{{ route('admin.brand.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">@lang('View Message')</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-
-                        <p id="view_message">
-
-                        </p>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
-                    </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title show_subject"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </form>
+                <div class="modal-body">
+
+                    <p id="view_message">
+
+                    </p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -348,6 +339,7 @@
 
         $('.view').on('click', function() {
             $('#view_message').text($(this).data('message'));
+            $('.show_subject').text("Subject : " + $(this).data('subject'));
             $('#view').modal('show');
         })
     </script>

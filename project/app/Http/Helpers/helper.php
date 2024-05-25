@@ -331,14 +331,15 @@ function deleteStorage($key)
     }
 }
 
-function transaction($amount, $txn_id, $user_id, $type, $remark = null)
+function transaction($amount, $txn_id, $user_id, $type, $remark = null, $check = null)
 {
-
     $user = User::findOrFail($user_id);
     if ($type == "+") {
         $user->balance += $amount;
     } else {
-        $user->balance -= $amount;
+        if ($check != "Donation") {
+            $user->balance -= $amount;
+        }
     }
     $user->save();
 

@@ -22,6 +22,7 @@ use App\Models\Generalsetting;
 use App\Models\Language;
 use App\Models\Page;
 use App\Models\Preloaded;
+use App\Models\SeoSetting;
 use App\Models\Subscriber;
 use App\Models\Testimonial;
 use App\Models\SocialLink;
@@ -159,6 +160,14 @@ class FrontendController extends ApiController
         $hero_section['testimonial_background'] = getPhoto($hero_section->testimonial_background);
         $hero_section['social_data'] = SocialLink::get();
         return $this->sendResponse($hero_section, 'Setting Data');
+    }
+
+
+    public function seoSetting()
+    {
+        $data = SeoSetting::first();
+        $data['meta_image'] = getPhoto($data->meta_image);
+        return $this->sendResponse($data, 'Setting Data');
     }
 
     public function getCategory()

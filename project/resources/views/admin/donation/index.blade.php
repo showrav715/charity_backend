@@ -49,7 +49,7 @@
                             <tr>
                                 <td data-label="@lang('Campaign Name')">
                                     <a
-                                        href="{{ route('admin.campaign.edit', $item->campaign->id) }}">{{ $item->campaign->title }}</a>
+                                        href="{{ $item->campaign->id ? route('admin.campaign.edit', $item->campaign->id) : 'javascriipt:;' }}">{{ $item->campaign->title }}</a>
                                 </td>
                                 <td data-label="@lang('Total')">
                                     {{ showAdminAmount($item->total) }}

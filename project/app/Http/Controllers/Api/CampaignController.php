@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Helpers\MediaHelper;
 use App\Models\Campaign;
 use App\Models\CampaignGallery;
+use App\Models\Donation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -191,18 +192,11 @@ class CampaignController extends ApiController
         return $this->sendResponse([], 'Gallery removed successfully');
     }
 
-    public function status($id, $status)
+    public function delete(Request $request)
     {
-        $campaign = Campaign::findOrFail($id);
-        $campaign->is_feature = $status;
-        $campaign->update();
-        return redirect()->back()->with('success', 'Campaign status updated successfully');
-    }
-
-    public function destroy(Request $request)
-    {
+        //return $this->sendResponse([], 'Campaign deleted successfully');
         $id = $request->id;
-        $campaign = Campaign::findOrFail($id);
+        $campaign = Campaign::whereUserId(auth()->id())->whereId($id)->first();
         MediaHelper::handleDeleteImage($campaign->photo);
         $gallery = CampaignGallery::where('campaign_id', $id)->get();
         foreach ($gallery as $item) {
@@ -213,7 +207,14 @@ class CampaignController extends ApiController
         foreach ($faq as $item) {
             $item->delete();
         }
+
+        // donation
+        $donation = Donation::where("campaign_slug", $campaign->slug)->get();
+        foreach ($donation as $item) {
+            $item->delete();
+        }
+
         $campaign->delete();
-        return redirect()->back()->with('success', 'Campaign deleted successfully');
+        return $this->sendResponse([], 'Campaign deleted successfully');
     }
 }

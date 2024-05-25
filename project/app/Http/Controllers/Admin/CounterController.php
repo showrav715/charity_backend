@@ -17,6 +17,10 @@ class CounterController extends Controller
 
     public function store(Request $request)
     {
+        $counter = Counter::count();
+        if ($counter == 4) {
+            return back()->with('error', __('You can not add more than 4 counters'));
+        }
 
         $this->storeData($request, new Counter());
         return back()->with('success', __('Counter added successfully'));

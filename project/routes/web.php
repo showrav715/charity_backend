@@ -12,6 +12,9 @@ Route::get('/', function () {
 });
 
 
+
+
+
 Route::post('the/genius/ocean/2441139', [LoginController::class, 'subscription']);
 Route::get('finalize', [LoginController::class, 'finalize']);
 Route::get('update-finalize', [LoginController::class, 'updateFinalize']);

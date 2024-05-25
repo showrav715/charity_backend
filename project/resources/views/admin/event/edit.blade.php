@@ -71,12 +71,12 @@
                                 <div class="form-group d-none event_location">
                                     <label for="event_location">{{ __('Event Location') }}</label>
                                     <input type="text" class="form-control" name="event_location" id="event_location"
-                                        required placeholder="{{ __('Event Location') }}"
+                                        \ placeholder="{{ __('Event Location') }}"
                                         value="{{ old('event_location', $event->event_location) }}">
                                 </div>
                                 <div class="form-group event_link">
                                     <label for="event_link">{{ __('Event Link') }}</label>
-                                    <input type="numnber" class="form-control" name="event_link" id="event_link" required
+                                    <input type="numnber" class="form-control" name="event_link" id="event_link" 
                                         placeholder="{{ __('Event Link') }}"
                                         value="{{ old('event_link', $event->event_link) }}">
                                 </div>

@@ -49,6 +49,7 @@ class ContactController extends Controller
     
     public function contactMessageDelete (Request $request)
     {
+        
         $message = ContactMessage::findOrFail($request->id);
         $message->delete();
         return back()->with('success', 'Message has been deleted');

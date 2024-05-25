@@ -45,7 +45,7 @@ class ManageRoleController extends Controller
             'name' => 'required|unique:roles,name' . ($id ? ',' . $id : ''),
         ]);
         $role->name = $request->name;
-        $role->section = json_encode($request->section, true);
+        $role->section =$request->section ? json_encode($request->section, true) : null;
         $role->save();
     }
 

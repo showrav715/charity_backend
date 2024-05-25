@@ -7,6 +7,7 @@ use App\Http\Helpers\MediaHelper;
 use App\Models\Campaign;
 use App\Models\CampaignGallery;
 use App\Models\Category;
+use App\Models\Donation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -102,7 +103,7 @@ class CampaignController extends Controller
         $campaign->video_link = $request->video_link;
 
         $campaign->slug = Str::slug($request->title);
-        $campaign->description = $request->description;
+        $campaign->description = clean($request->description);
         $campaign->category_id = $request->category_id;
         $campaign->goal = $request->goal;
         $campaign->photo = MediaHelper::handleMakeImage($request->photo);
@@ -159,7 +160,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findOrFail($id);
         $campaign->title = $request->title;
         $campaign->slug = Str::slug($request->title);
-        $campaign->description = $request->description;
+        $campaign->description = clean($request->description);
         $campaign->category_id = $request->category_id;
         $campaign->goal = $request->goal;
         $campaign->location = $request->location;
@@ -237,6 +238,13 @@ class CampaignController extends Controller
         foreach ($faq as $item) {
             $item->delete();
         }
+
+        // donation
+        $donation = Donation::where("campaign_slug", $campaign->slug)->get();
+        foreach ($donation as $item) {
+            $item->delete();
+        }
+
         $campaign->delete();
         return redirect()->back()->with('success', 'Campaign deleted successfully');
     }
