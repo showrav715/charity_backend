@@ -34,17 +34,17 @@
                     @forelse ($volunteers as $item)
                     <tr>
 
-                        <td data-label="{{ __('Photo') }}">
+                        <td class="py-1" data-label="{{ __('Photo') }}">
                             <img src="{{ getPhoto($item->photo) }}" alt="" width="100">
                         </td>
-                        <td data-label="{{ __('Name') }}">
+                        <td class="py-1" data-label="{{ __('Name') }}">
                             {{ $item->name }}
                         </td>
-                        <td data-label="{{ __('Designation') }}">
+                        <td class="py-1" data-label="{{ __('Designation') }}">
                             {{ $item->designation }}
                         </td>
 
-                        <td data-label="@lang('Feature')">
+                        <td class="py-1" data-label="@lang('Feature')">
                             <div class="btn-group mb-2">
                                 <button
                                     class="btn btn-{{ $item->status == 1 ? 'success' : 'danger' }} btn-sm dropdown-toggle"
@@ -66,7 +66,7 @@
                             </div>
                         </td>
 
-                        <td data-label="{{ __('Action') }}">
+                        <td class="py-1" data-label="{{ __('Action') }}">
                             <a href="{{ route('admin.volunteer.edit', $item->id) }}"
                                 class="btn btn-primary  btn-sm edit mb-1" data-toggle="tooltip" title="@lang('Edit')"><i
                                     class="fas fa-edit"></i></a>

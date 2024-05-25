@@ -35,20 +35,20 @@
                         @forelse ($blogs as $item)
                             <tr>
 
-                                <td data-label="{{ __('Photo') }}">
+                                <td class="py-1" data-label="{{ __('Photo') }}">
                                     <img src="{{ getPhoto($item->photo) }}" alt="" width="100">
                                 </td>
-                                <td data-label="{{ __('Title') }}">
+                                <td class="py-1" data-label="{{ __('Title') }}">
                                     {{ $item->title }}
                                 </td>
-                                <td data-label="{{ __('Category') }}">
+                                <td class="py-1" data-label="{{ __('Category') }}">
                                     {{ $item->category->name }}
                                 </td>
-                                <td data-label="{{ __('Views') }}">
+                                <td class="py-1" data-label="{{ __('Views') }}">
                                     {{ $item->views }}
                                 </td>
 
-                                <td data-label="{{ __('Status') }}">
+                                <td class="py-1" data-label="{{ __('Status') }}">
                                     @if ($item->status == 1)
                                         <span class="badge badge-success"> @lang('Active') </span>
                                     @else
@@ -56,14 +56,14 @@
                                     @endif
                                 </td>
 
-                                <td data-label="{{ __('Action') }}">
-                                    <div class="flex">
+                                <td class="py-1" data-label="{{ __('Action') }}">
+                                    <div class="d-flex">
 
                                         <a href="{{ route('admin.blog.edit', $item->id) }}"
-                                            class="btn btn-primary  btn-sm edit inline-block m-2" data-toggle="tooltip"
+                                            class="btn btn-primary  btn-sm edit inline-block mr-2" data-toggle="tooltip"
                                             title="@lang('Edit')"><i class="fas fa-edit"></i></a>
 
-                                        <a href="javascript:void(0)" class="btn btn-danger  btn-sm remove inline-block m-2"
+                                        <a href="javascript:void(0)" class="btn btn-danger  btn-sm remove inline-block"
                                             data-route="{{ route('admin.blog.destroy', $item) }}" data-toggle="tooltip"
                                             title="@lang('Delete')"><i class="fas fa-trash"></i></a>
                                     </div>

@@ -103,15 +103,15 @@
                             </tr>
                             @forelse ($recent_donations as $item)
                                 <tr>
-                                    <td data-label="@lang('Campaign Name')">
+                                    <td class="py-1" data-label="@lang('Campaign Name')">
                                         <a
                                             href="{{ $item->campaign->id ? route('admin.campaign.edit', $item->campaign->id) : 'javascriipt:;' }}">{{ $item->campaign->title }}</a>
                                     </td>
-                                    <td data-label="@lang('Total')">
+                                    <td class="py-1" data-label="@lang('Total')">
                                         {{ showAdminAmount($item->total) }}
                                     </td>
 
-                                    <td data-label="@lang('Raised')">
+                                    <td class="py-1" data-label="@lang('Raised')">
                                         <a href="">
                                             <strong>
                                                 {{ $item->owner_id ? $item->owner->username : __('Admin') }}
@@ -119,11 +119,11 @@
                                         </a>
                                     </td>
 
-                                    <td data-label="@lang('Donor Name')">
+                                    <td class="py-1" data-label="@lang('Donor Name')">
                                         {{ $item->name ?? 'N/A' }}
                                     </td>
 
-                                    <td data-label="@lang('Action')" class="text-right">
+                                    <td class="py-1" data-label="@lang('Action')" class="text-right">
                                         <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
                                             data-id="{{ $item->id }}" data-toggle="tooltip"
                                             title="@lang('Remove')"><i class="fas fa-trash"></i></a>
@@ -159,18 +159,18 @@
                             </tr>
                             @forelse ($recent_campaigns as $item)
                                 <tr>
-                                    <td data-label="@lang('Photo')">
+                                    <td class="py-1" data-label="@lang('Photo')">
                                         <img src="{{ getPhoto($item->photo) }}" height="85" width="80"
                                             alt="icon" class="chv1-dash-rc-img ">
                                     </td>
-                                    <td data-label="@lang('Title')">
+                                    <td class="py-1" data-label="@lang('Title')">
                                         <a href="{{ route('admin.campaign.edit', $item->id) }}"> {{ $item->title }}</a>
                                     </td>
-                                    <td data-label="@lang('Goal')">
+                                    <td class="py-1" data-label="@lang('Goal')">
                                         {{ showAdminAmount($item->goal) }}
                                     </td>
 
-                                    <td data-label="@lang('Status')">
+                                    <td class="py-1" data-label="@lang('Status')">
                                         @if ($item->status == 1)
                                             <span class="badge badge-success"> @lang('Running') </span>
                                         @elseif($item->status == 2)
@@ -260,10 +260,10 @@
                                         </td>
 
                                         <td data-label="@lang('Action')" class="text-right">
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
+                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mr-2"
                                                 data-id="{{ $item->id }}" data-toggle="tooltip"
                                                 title="@lang('Remove')"><i class="fas fa-trash"></i></a>
-                                            <a href="javascript:void()" class="btn btn-primary btn-sm view mb-1"
+                                            <a href="javascript:void()" class="btn btn-primary btn-sm view mr-2"
                                                 data-message="{{ $item->message }}" data-subject=" {{ $item->subject }}"
                                                 data-toggle="tooltip" title="@lang('View Message')"><i
                                                     class="fas fa-eye"></i></a>

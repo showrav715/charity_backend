@@ -51,8 +51,8 @@
                                     @endif
                                  </td>
                                 <td data-label="@lang('Action')">
-                                    <a class="btn btn-primary btn-sm details m-2" data-staff="{{$user}}" href="javascript:void(0)" data-route="{{route('admin.staff.update',$user->id)}}">@lang('Details')</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm remove  m-2"
+                                    <a class="btn btn-primary btn-sm details mr-2" data-staff="{{$user}}" href="javascript:void(0)" data-route="{{route('admin.staff.update',$user->id)}}">@lang('Details')</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm remove "
                                         data-id="{{ $user->id }}" data-toggle="tooltip" title="@lang('Remove')"><i
                                             class="fas fa-trash"></i></a>
                                 </td>

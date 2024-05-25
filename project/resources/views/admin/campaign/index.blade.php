@@ -72,20 +72,20 @@
                         </tr>
                         @forelse ($campaigns as $item)
                             <tr>
-                                <td data-label="@lang('Photo')">
+                                <td class="py-1" data-label="@lang('Photo')">
                                     <img src="{{ getPhoto($item->photo) }}" alt="icon" class="img-fluid w-150">
                                 </td>
-                                <td data-label="@lang('Title')">
+                                <td class="py-1" data-label="@lang('Title')">
                                     {{ $item->title }}
                                 </td>
-                                <td data-label="@lang('Goal')">
+                                <td class="py-1" data-label="@lang('Goal')">
                                     {{ showAdminAmount($item->goal) }}
                                 </td>
-                                <td data-label="@lang('Raised')">
+                                <td class="py-1" data-label="@lang('Raised')">
                                     {{ showAdminAmount($item->raised) }}
                                 </td>
 
-                                <td data-label="@lang('Feature')">
+                                <td class="py-1" data-label="@lang('Feature')">
                                     <div class="btn-group mb-2">
                                         <button
                                             class="btn btn-{{ $item->is_feature == 1 ? 'success' : 'danger' }} btn-sm dropdown-toggle"
@@ -108,7 +108,7 @@
                                 </td>
 
 
-                                <td data-label="@lang('Close Type')">
+                                <td class="py-1" data-label="@lang('Close Type')">
                                     @if ($item->close_type == 'end_date')
                                         <span class="badge badge-dark mb-1"> @lang('End Date') </span>
                                         <br>
@@ -118,7 +118,7 @@
                                     @endif
                                 </td>
 
-                                <td data-label="@lang('Feature')">
+                                <td class="py-1" data-label="@lang('Feature')">
                                     @php
                                         if ($item->status == 1) {
                                             $status = 'success';
@@ -166,12 +166,12 @@
 
 
 
-                                <td data-label="@lang('Action')" class="text-right">
+                                <td class="py-1" data-label="@lang('Action')" class="text-right">
                                     <div class="d-flex">
                                         <a href="{{ route('admin.campaign.edit', $item->id) }}"
-                                            class="btn btn-primary approve btn-sm  m-2" data-toggle="tooltip"
+                                            class="btn btn-primary approve btn-sm  mr-2" data-toggle="tooltip"
                                             title="@lang('Edit')"><i class="fas fa-edit"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove m-2"
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove"
                                             data-id="{{ $item->id }}" data-toggle="tooltip"
                                             title="@lang('Remove')"><i class="fas fa-trash"></i></a>
                                     </div>
