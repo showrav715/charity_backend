@@ -13,6 +13,7 @@ use App\Models\Subscriber;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use InvalidArgumentException;
 
@@ -35,7 +36,26 @@ class AdminController extends Controller
         $data['total_donations'] = Donation::count();
         $data['total_users'] = User::count();
         $data['total_events'] = Event::count();
+
+        $data['donations'] = DB::table('donations')
+            ->selectRaw('SUM(total) as total, DATE_FORMAT(created_at, "%Y-%m-%d") as date')
+            ->where('created_at', '>=', now()->subDays(30))
+            ->groupBy('date')
+            ->get()
+            ->toArray();
+
+        $amount = [];
+        $date = [];
+        foreach ($data['donations'] as $key => $value) {
+            $amount[] = round($value->total, 2);
+            $date[] = $value->date;
+        }
+
+        $data['donation_amount'] = $amount;
+        $data['donation_date'] = $date;
+     
         return view('admin.dashboard', $data);
+
     }
 
     // PROFILE

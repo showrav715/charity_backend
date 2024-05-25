@@ -69,7 +69,7 @@
 
                         <div class="form-group">
                             <label for="benefits">{{ __('People Benefits') }}</label>
-                            <input type="numnber" class="form-control" name="benefits" id="benefits" required
+                            <input type="number" class="form-control" name="benefits" id="benefits" required
                                 placeholder="{{ __('People Benefits') }}" value="{{ old('benefits') }}">
                         </div>
 

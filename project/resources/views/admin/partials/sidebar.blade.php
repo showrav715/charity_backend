@@ -194,9 +194,6 @@
 
 
 
-
-
-
         <li
             class="nav-item dropdown {{ menu(['admin.front*', 'admin.cta.index', 'admin.faq*', 'admin.testimonial*', 'admin.brand*', 'admin.contact.section', 'admin.slider*', 'admin.frontend*','admin.hero.index']) }}">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i>
@@ -232,6 +229,13 @@
         <li class="nav-item {{ menu('admin.ticket.manage') }}">
             <a href="{{ route('admin.ticket.manage') }}" class="nav-link"><i
                     class="fas fa-ticket-alt"></i><span>@lang('Support Tickets')</span></a>
+        </li>
+
+        <li class="nav-item {{ menu('admin.subscriber.manage') }}">
+            <a href="{{ route('admin.subscriber.manage') }}" class="nav-link">
+                <i class="fas fa-envelope-open-text"></i>
+                <span>@lang('Manage Subscribers')</span>
+            </a>
         </li>
 
 

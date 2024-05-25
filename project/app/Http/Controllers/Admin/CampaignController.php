@@ -101,7 +101,6 @@ class CampaignController extends Controller
         $campaign->benefits = $request->benefits;
         $campaign->end_date = $request->end_date;
         $campaign->video_link = $request->video_link;
-
         $campaign->slug = Str::slug($request->title);
         $campaign->description = clean($request->description);
         $campaign->category_id = $request->category_id;
@@ -180,14 +179,16 @@ class CampaignController extends Controller
 
         if ($request->is_faq == 'on') {
             if ($request->faq_title && $request->faq_content) {
-                $campaign->faqs()->delete();
-            }
+                if ($request->faq_title && $request->faq_content) {
+                    $campaign->faqs()->delete();
+                }
 
-            foreach ($request->faq_title as $key => $question) {
-                $campaign->faqs()->create([
-                    'title' => $question ? $question : null,
-                    'content' => $request->faq_content[$key] ? $request->faq_content[$key] : null,
-                ]);
+                foreach ($request->faq_title as $key => $question) {
+                    $campaign->faqs()->create([
+                        'title' => $question ? $question : null,
+                        'content' => $request->faq_content[$key] ? $request->faq_content[$key] : null,
+                    ]);
+                }
             }
         }
 
@@ -213,6 +214,7 @@ class CampaignController extends Controller
 
     public function status($id, $status, $type)
     {
+
         $campaign = Campaign::findOrFail($id);
         if ($type == 'status') {
             $campaign->status = $status;

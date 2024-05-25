@@ -73,7 +73,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('campaign/store', [CampaignController::class, 'store'])->name('campaign.store');
             Route::get('campaign/edit/{campaign}', [CampaignController::class, 'edit'])->name('campaign.edit');
             Route::put('campaign/update/{campaign}', [CampaignController::class, 'update'])->name('campaign.update');
-            Route::get('campaign/status/{id}/{status},{type}', [CampaignController::class, 'status'])->name('campaign.status');
+            Route::get('campaign/status/{id}/{status}/{type}', [CampaignController::class, 'status'])->name('campaign.status');
             Route::delete('campaign-delete', [CampaignController::class, 'destroy'])->name('campaign.destroy');
             Route::get('campaign/gallery/remove/{id}', [CampaignController::class, 'galleryRemove'])->name('campaign.gallery.remove');
         });
@@ -185,8 +185,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('home/page/sections', [GeneralSettingController::class, 'homeSections'])->name('home.sections');
             Route::post('home/page/sections/update', [GeneralSettingController::class, 'homeSectionUpdate'])->name('home.sections.update');
 
-
-            
             // About section
             Route::get('about', [AboutController::class, 'index'])->name('about.index');
             Route::put('about/update', [AboutController::class, 'update'])->name('about.update');
@@ -278,11 +276,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::group(['middleware' => 'permission:Manage Staff'], function () {
             //manage staff
+            
             Route::get('manage/staff', [ManageStaffController::class, 'index'])->name('staff.manage');
             Route::post('add/staff', [ManageStaffController::class, 'addStaff'])->name('staff.add');
             Route::post('update/staff/{id}', [ManageStaffController::class, 'updateStaff'])->name('staff.update');
             Route::delete('destroy/staff', [ManageStaffController::class, 'destroy'])->name('staff.destroy');
         });
+
+        Route::get('/subscribers', [AdminController::class, 'subscribers'])->name('subscriber.manage');
+        Route::delete('/subscribers/delete', [AdminController::class, 'subscribersDelete'])->name('subscriber.destroy');
 
         Route::get('/clear-cache', function () {
             Artisan::call('optimize:clear');
