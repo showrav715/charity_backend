@@ -35,7 +35,8 @@
                             <div class="col-6 text-center">
 
                             <div class="col-sm-6 text-center">
-                                    <div id="image-preview_about1" class="image-preview image-preview_alt">
+                                <label for="">@lang('About Page Photo')</label>
+                                    <div id="image-preview_about1" class="image-preview image-preview_alt" style="background-image:url({{ getPhoto($about->photo2) }});">
                                         <label for="image-upload_about1" id="image-label_about1">@lang('Choose File')</label>
                                         <input type="file" name="photo2" id="image-upload_about1" />
                                     </div>
@@ -44,7 +45,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>@lang('Header Title')</label>
+                            <label>@lang('Subtitle')</label>
                             <input class="form-control" type="text" name="header_title"
                                 value="{{ $about->header_title }}">
                         </div>

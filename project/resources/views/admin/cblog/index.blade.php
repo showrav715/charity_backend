@@ -30,7 +30,7 @@
                    <th>@lang('Name')</th>
                    <th>@lang('Slug')</th>
                    <th>@lang('Status')</th>
-                   <th class="text-right">@lang('Action')</th>
+                   <th class="">@lang('Action')</th>
                </tr>
                @forelse ($categories as $item)
                    <tr>

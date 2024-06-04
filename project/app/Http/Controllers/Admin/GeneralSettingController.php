@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\MediaHelper;
-use App\Models\Currency;
 use App\Models\Generalsetting;
 use App\Models\HomePageSection;
 use Illuminate\Http\Request;
@@ -84,7 +83,7 @@ class GeneralSettingController extends Controller
         }
 
         if ($request->withdraw == 1) {
-        
+
             $gs->withdraw_min = $request->withdraw_min;
             $gs->withdraw_max = $request->withdraw_max;
             $gs->withdraw_charge = $request->withdraw_charge;
@@ -96,7 +95,7 @@ class GeneralSettingController extends Controller
 
         $gs->update();
 
-        $images = ['header_logo', 'footer_logo', 'maintenance_photo', 'contact_section_photo', 'breadcumb', 'hero_photo', 'cta_photo','cta_photo2', 'checkout_success_photo', 'checkout_faild_photo', "hero_photo2","faq_background","testimonial_background"];
+        $images = ['header_logo', 'footer_logo', 'maintenance_photo', 'contact_section_photo', 'breadcumb', 'hero_photo', 'cta_photo', 'cta_photo2', 'checkout_success_photo', 'checkout_faild_photo', "hero_photo2", "faq_background", "testimonial_background", "volunteers_background"];
         foreach ($images as $image) {
             if (isset($request[$image])) {
                 $gs[$image] = MediaHelper::handleUpdateImage($request[$image], $gs[$image]);

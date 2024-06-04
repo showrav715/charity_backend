@@ -15,6 +15,29 @@
 <!-- Row -->
 <div class="row">
     <div class="col-lg-12">
+
+
+        <div class="card">
+            <div class="card-body text-center">
+                <p class="mb-2">@lang('Volunteer Background') <small>
+                    (@lang('recommended size (620x580)'))
+                </small></p>
+                <form action="{{ route('admin.gs.update') }}" enctype="multipart/form-data" method="POST">
+                    @csrf
+                    
+                    <div class="col-md-12 ShowImage mb-3  text-center">
+                        <label for="image">
+                            <img src="{{ getPhoto($gs->volunteers_background) }}" class="img-fluid" alt="image"
+                                width="200">
+                        </label>
+                        <input type="file" class="d-none" id="image" name="volunteers_background">
+                    </div>
+                    <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                </form>
+            </div>
+        </div>
+
+
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-end">
                 <a href="{{ route('admin.volunteer.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>

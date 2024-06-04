@@ -1,23 +1,11 @@
 @extends('layouts.admin')
 @section('title')
-    @if (request()->routeIs('admin.withdraw.pending'))
-        @lang('Pending Withdraws')
-    @elseif (request()->routeIs('admin.withdraw.accepted'))
-        @lang('Accepted Withdraws')
-    @else
-        @lang('Rejected Withdraws')
-    @endif
+    @lang('Withdraws')
 @endsection
 @section('breadcrumb')
     <section class="section">
         <div class="section-header">
-            @if (request()->routeIs('admin.withdraw.pending'))
-                <h1>@lang('Pending Withdraws')</h1>
-            @elseif (request()->routeIs('admin.withdraw.accepted'))
-                <h1>@lang('Accepted Withdraws')</h1>
-            @else
-                <h1>@lang('Rejected Withdraws')</h1>
-            @endif
+            <h1>@lang('Withdraws')</h1>
         </div>
     </section>
 @endsection
@@ -78,7 +66,7 @@
                                                     data-url="{{ route('admin.withdraw.approve', $item->id) }}">@lang('Accept')</button>
                                                 <button class="btn btn-danger reject m-1 btn-sm"
                                                     data-url="{{ route('admin.withdraw.reject', $item->id) }}">@lang('Reject')</button>
-                                                @else
+                                            @else
                                                 @if ($item->status == 1)
                                                     <span class="badge badge-dark">
                                                         Accepted
