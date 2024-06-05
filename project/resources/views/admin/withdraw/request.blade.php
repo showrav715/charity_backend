@@ -23,7 +23,7 @@
                                 <th>@lang('Withdraw Amount')</th>
                                 <th>@lang('Charge')</th>
                                 <th>@lang('Total')</th>
-                                <th>@lang('status')</th>
+                                <th>@lang('Status')</th>
                                 <th>@lang('Action')</th>
                             </tr>
                             @forelse ($withdraws as $key => $item)
@@ -47,19 +47,23 @@
 
                                     <td data-label="@lang('status')">
 
-                                        @if ($item->status == 1)
-                                            <span class="badge badge-success">@lang('Accepted')</span>
-                                        @elseif($item->status == 2)
-                                            <span class="badge badge-danger">@lang('Rejected')</span>
-                                        @else
-                                            <span class="badge badge-warning">@lang('Pending')</span>
-                                        @endif
+                              
+
+                                            @if ($item->status == 1)
+                                                <span class="badge badge-success">@lang('Accepted')</span>
+                                            @elseif($item->status == 2)
+                                                <span class="badge badge-danger">@lang('Rejected')</span>
+                                            @else
+                                                <span class="badge badge-warning">@lang('Pending')</span>
+                                            @endif
+                                    
+
                                     </td>
 
                                     <td data-label="@lang('Action')">
 
                                         <div
-                                            class="d-flex flex-wrap align-items-center justify-content-end justify-content-lg-center">
+                                            class="d-flex gap-10 align-items-center justify-content-end justify-content-lg-center">
 
                                             @if ($item->status == 0)
                                                 <button class="btn btn-primary accept m-1 btn-sm"

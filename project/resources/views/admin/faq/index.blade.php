@@ -58,15 +58,18 @@
                                         {{ $item->title }}
                                     </td>
 
+                             
                                     <td data-label="@lang('Answer')">{{ Str::limit($item->details, 50) }}</td>
                                     <td data-label="@lang('Action')" class="text-right">
+                                     <div class="d-flex gap-10 justify-content-end">
                                         <a href="javascript:void()" class="btn btn-primary approve btn-sm edit mb-1"
-                                            data-route="{{ route('admin.faq.update', $item->id) }}"
-                                            data-item="{{ $item }}" data-toggle="tooltip"
-                                            title="@lang('Edit')"><i class="fas fa-edit"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
-                                            data-id="{{ $item->id }}" data-toggle="tooltip"
-                                            title="@lang('Remove')"><i class="fas fa-trash"></i></a>
+                                        data-route="{{ route('admin.faq.update', $item->id) }}"
+                                        data-item="{{ $item }}" data-toggle="tooltip"
+                                        title="@lang('Edit')"><i class="fas fa-edit"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
+                                        data-id="{{ $item->id }}" data-toggle="tooltip"
+                                        title="@lang('Remove')"><i class="fas fa-trash"></i></a>
+                                     </div>
                                     </td>
                                 </tr>
                             @empty

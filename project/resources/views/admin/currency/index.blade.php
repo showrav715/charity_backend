@@ -32,7 +32,7 @@
     <div class="col-md-6 col-lg-6 col-xl-3 currency--card">
       <div class="card card-primary">
         <div class="card-header {{$curr->default == 1 ? 'default' : ''}}">
-          <h4><i class="fas fa-coins"></i> {{$curr->curr_name}}</h4>
+          <h4><i class="fas fa-coins"></i> {{$curr->code}}</h4>
         </div>
         <div class="card-body">
           <ul class="list-group mb-3">

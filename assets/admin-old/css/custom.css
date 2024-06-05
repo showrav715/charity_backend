@@ -56,6 +56,7 @@
   font-family: "Font Awesome 5 Free" !important;
 }
 
+/* chat ch */
 @media screen and (min-width: 992px) {
   .chat__list {
     min-height: 400px;

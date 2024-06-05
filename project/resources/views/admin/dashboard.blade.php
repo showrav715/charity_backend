@@ -121,7 +121,7 @@
                                 <th>@lang('Photo')</th>
                                 <th>@lang('Title')</th>
                                 <th>@lang('Goal')</th>
-                                <th>@lang('Status')</th>
+                                <th class="text-right">@lang('Status')</th>
 
                             </tr>
                             @forelse ($recent_campaigns as $item)
@@ -138,13 +138,16 @@
                                     </td>
 
                                     <td class="py-1" data-label="@lang('Status')">
-                                        @if ($item->status == 1)
-                                            <span class="badge badge-success"> @lang('Running') </span>
-                                        @elseif($item->status == 2)
-                                            <span class="badge badge-danger"> @lang('Closed') </span>
-                                        @else
-                                            <span class="badge badge-warning"> @lang('Pending') </span>
-                                        @endif
+                                        <div class="d-flex justify-content-end">
+
+                                            @if ($item->status == 1)
+                                                <span class="badge badge-success"> @lang('Running') </span>
+                                            @elseif($item->status == 2)
+                                                <span class="badge badge-danger"> @lang('Closed') </span>
+                                            @else
+                                                <span class="badge badge-warning"> @lang('Pending') </span>
+                                            @endif
+                                        </div>
                                     </td>
                                 </tr>
                             @empty
@@ -226,7 +229,7 @@
                                 <th>@lang('Sl')</th>
                                 <th>@lang('Name')</th>
                                 <th>@lang('Email')</th>
-                                <th>@lang('Action')</th>
+                                <th class="text-right">@lang('Action')</th>
                             </tr>
                             @forelse ($recent_users as $key => $user)
                                 <tr>
@@ -238,8 +241,10 @@
                                     <td data-label="@lang('Email')">{{ $user->email }}</td>
 
                                     <td data-label="@lang('Action')">
+                                     <div class="d-flex justify-content-end">
                                         <a class="btn btn-primary details"
-                                            href="{{ route('admin.user.details', $user->id) }}">@lang('Details')</a>
+                                        href="{{ route('admin.user.details', $user->id) }}">@lang('Details')</a>
+                                     </div>
                                     </td>
                                 </tr>
                             @empty
@@ -280,13 +285,15 @@
                                         </td>
 
                                         <td data-label="@lang('Action')" class="text-right">
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mr-2"
-                                                data-id="{{ $item->id }}" data-toggle="tooltip"
-                                                title="@lang('Remove')"><i class="fas fa-trash"></i></a>
-                                            <a href="javascript:void()" class="btn btn-primary btn-sm view mr-2"
-                                                data-message="{{ $item->message }}" data-subject=" {{ $item->subject }}"
-                                                data-toggle="tooltip" title="@lang('View Message')"><i
-                                                    class="fas fa-eye"></i></a>
+                                            <div class="d-flex justify-content-end gap-2">
+                                                <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mr-2"
+                                                    data-id="{{ $item->id }}" data-toggle="tooltip"
+                                                    title="@lang('Remove')"><i class="fas fa-trash"></i></a>
+                                                <a href="javascript:void()" class="btn btn-primary btn-sm view"
+                                                    data-message="{{ $item->message }}"
+                                                    data-subject=" {{ $item->subject }}" data-toggle="tooltip"
+                                                    title="@lang('View Message')"><i class="fas fa-eye"></i></a>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

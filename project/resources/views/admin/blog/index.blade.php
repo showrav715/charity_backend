@@ -25,7 +25,7 @@
 
                         <tr>
                             <th>{{ __('Photo') }}</th>
-                            <th>{{ __('Title') }}</th>
+                            <th class="min-w-200">{{ __('Title') }}</th>
                             <th>{{ __('Category') }}</th>
                             <th>{{ __('Views') }}</th>
                             <th>{{ __('Status') }}</th>
@@ -38,7 +38,7 @@
                                 <td class="py-1" data-label="{{ __('Photo') }}">
                                     <img src="{{ getPhoto($item->photo) }}" alt="" width="100">
                                 </td>
-                                <td class="py-1" data-label="{{ __('Title') }}">
+                                <td class="py-1 min-w-200" data-label="{{ __('Title') }}">
                                     {{ $item->title }}
                                 </td>
                                 <td class="py-1" data-label="{{ __('Category') }}">

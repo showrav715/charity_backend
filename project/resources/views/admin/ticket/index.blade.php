@@ -25,10 +25,10 @@
                             <form action="" class="my-2">
                                 <div class="form-group mb-0">
                                     <div class="input-group">
-                                        <input class="form-control" name="search" value="{{ $search }}"
+                                        <input class="form-control tickets-search" name="search" value="{{ $search }}"
                                             type="text" placeholder="@lang('Search Ticket')">
                                         <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary input-group-text text-white"><i
+                                            <button type="submit" class="btn btn-primary input-group-text tickets-search text-white"><i
                                                     class="fas fa-search"></i></button>
                                         </div>
                                     </div>
@@ -43,7 +43,7 @@
                                         href="{{ filter('messages', $item->ticket_num) }}" data-bs-toggle="tab">
                                         <div class="item__inner">
                                             <div class="post__creator ">
-                                                <div class="post__creator-thumb d-flex justify-content-between">
+                                                <div class="post__creator-thumb d-flex justify-content-between align-items-center">
                                                     <div>
                                                         <span class="username">{{ $item->ticket_num }} </span>
                                                         <small>({{ $item->user->email }})</small>

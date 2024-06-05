@@ -41,12 +41,15 @@
                                     </td>
 
                                     <td data-label="@lang('Action')" class="text-right">
-                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
-                                            data-id="{{ $item->id }}" data-toggle="tooltip"
-                                            title="@lang('Remove')"><i class="fas fa-trash"></i></a>
-                                        <a href="javascript:void()" class="btn btn-primary btn-sm view mb-1"
-                                            data-message="{{ $item->message }}" data-subject="{{ $item->subject }}"
-                                            data-toggle="tooltip" title="@lang('View Message')"><i class="fas fa-eye"></i></a>
+                                        <div class="d-flex justify-content-end gap-10">
+                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
+                                                data-id="{{ $item->id }}" data-toggle="tooltip"
+                                                title="@lang('Remove')"><i class="fas fa-trash"></i></a>
+                                            <a href="javascript:void()" class="btn btn-primary btn-sm view mb-1"
+                                                data-message="{{ $item->message }}" data-subject="{{ $item->subject }}"
+                                                data-toggle="tooltip" title="@lang('View Message')"><i
+                                                    class="fas fa-eye"></i></a>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
