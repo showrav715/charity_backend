@@ -52,9 +52,9 @@
                         <table class="table table-striped">
                             <tr>
                                 <th>@lang('Sl')</th>
-                                <th>@lang('Name')</th>
-                                <th>@lang('Email')</th>
-                                <th>@lang('Country')</th>
+                                <th class="text-left">@lang('Name')</th>
+                                <th class="text-left">@lang('Email')</th>
+                                <th class="text-left">@lang('Country')</th>
                                 <th>@lang('Email Verified')</th>
                                 <th>@lang('Status')</th>
                                 <th>@lang('Action')</th>
@@ -63,11 +63,11 @@
                                 <tr>
                                     <td data-label="@lang('Sl')">{{ $key + $users->firstItem() }}</td>
 
-                                    <td data-label="@lang('Name')">
+                                    <td class="text-left" data-label="@lang('Name')">
                                         {{ $user->name }}
                                     </td>
-                                    <td data-label="@lang('Email')">{{ $user->email }}</td>
-                                    <td data-label="@lang('Country')">{{ $user->country }}</td>
+                                    <td class="text-left" data-label="@lang('Email')">{{ $user->email }}</td>
+                                    <td class="text-left" data-label="@lang('Country')">{{ $user->country ?? '-' }}</td>
                                     <td data-label="@lang('Email Verified')">
                                         @if ($user->email_verified == 1)
                                             <span class="badge badge-success">@lang('YES')</span>

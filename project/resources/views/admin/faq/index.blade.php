@@ -27,7 +27,7 @@
                         <div class="col-md-12 ShowImage mb-3  text-center">
                             <label for="image">
                                 <img src="{{ getPhoto($gs->faq_background) }}" class="img-fluid" alt="image"
-                                    width="400">
+                                    width="200">
                             </label>
                             <input type="file" class="d-none" id="image" name="faq_background">
                         </div>
