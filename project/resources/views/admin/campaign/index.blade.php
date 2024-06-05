@@ -62,11 +62,11 @@
                         <tr>
                             <th>@lang('Photo')</th>
                             <th>@lang('Title')</th>
-                            <th >@lang('Goal/Raised')</th>
+                            <th>@lang('Goal/Raised')</th>
                             <th>@lang('From')</th>
                             <th>@lang('Feature')</th>
                             <th>@lang('Status')</th>
-                            
+
                             <th class="text-right">@lang('Action')</th>
                         </tr>
                         @forelse ($campaigns as $item)
@@ -74,14 +74,14 @@
                                 <td class="py-1" data-label="@lang('Photo')">
                                     <img src="{{ getPhoto($item->photo) }}" alt="icon" class="img-fluid w-100">
                                 </td>
-                                <td class="py-1" data-label="@lang('Title')">
+                                <td class="py-1 " data-label="@lang('Title')">
                                     {{ $item->title }}
 
                                 </td>
-                                <td  data-label="@lang('Goal')">
+                                <td data-label="@lang('Goal')">
                                     {{ showAdminAmount($item->goal) }} / {{ showAdminAmount($item->raised) }}
                                 </td>
-                            
+
 
                                 <td>
                                     @if ($item->user_id == 0)
@@ -114,7 +114,7 @@
                                 </td>
 
 
-                              
+
 
                                 <td class="py-1" data-label="@lang('Feature')">
                                     @php

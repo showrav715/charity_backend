@@ -32,16 +32,18 @@
                                 </div>
                             </div>
 
-                            <div class="col-6 text-center">
+                            
 
                             <div class="col-sm-6 text-center">
                                 <label for="">@lang('About Page Photo')</label>
+                                <div class="form-group d-flex justify-content-center">
                                     <div id="image-preview_about1" class="image-preview image-preview_alt" style="background-image:url({{ getPhoto($about->photo2) }});">
                                         <label for="image-upload_about1" id="image-label_about1">@lang('Choose File')</label>
                                         <input type="file" name="photo2" id="image-upload_about1" />
                                     </div>
                                 </div>
-                            </div>
+                                </div>
+                            
                         </div>
 
                         <div class="form-group">
@@ -125,7 +127,7 @@
                                 </td>
 
                                 <td data-label="@lang('Action')" class="text-right">
-                                    <a href="javascript:void()" class="btn btn-primary approve btn-sm edit mb-1"
+                                    <a href="javascript:void()" class="btn btn-primary approve btn-sm edit mx-2 mb-1"
                                         data-route="{{ route('admin.feature.update', $item->id) }}"
                                         data-path="{{ adminpath() }}" data-item="{{ $item }}"
                                         data-toggle="tooltip" title="@lang('Edit')"><i class="fas fa-edit"></i></a>

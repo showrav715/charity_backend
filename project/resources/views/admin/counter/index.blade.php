@@ -45,7 +45,7 @@
                                         {{ $item->counter_number }}
                                     </td>
                                     <td data-label="@lang('Action')" class="text-right">
-                                        <a href="javascript:void()" class="btn btn-primary approve btn-sm edit mb-1"
+                                        <a href="javascript:void()" class="btn btn-primary approve btn-sm edit mx-2 mb-1"
                                             data-route="{{ route('admin.counter.update', $item->id) }}"
                                             data-item="{{ $item }}" data-toggle="tooltip"
                                             title="@lang('Edit')"><i class="fas fa-edit"></i></a>
