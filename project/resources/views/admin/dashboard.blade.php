@@ -344,10 +344,6 @@
     </div>
 @endsection
 
-
-
-
-
 @push('script')
     <script>
         'use strict';
