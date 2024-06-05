@@ -41,7 +41,7 @@
                                     </td>
 
                                     <td data-label="@lang('Action')" class="text-right">
-                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mx-2 mb-1"
                                             data-id="{{ $item->id }}" data-toggle="tooltip"
                                             title="@lang('Remove')"><i class="fas fa-trash"></i></a>
                                         <a href="javascript:void()" class="btn btn-primary btn-sm view mb-1"

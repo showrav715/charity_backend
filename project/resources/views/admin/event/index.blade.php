@@ -35,7 +35,7 @@
                         @forelse ($events as $item)
                             <tr>
                                 <td class="py-1" data-label="@lang('Photo')">
-                                    <img src="{{ getPhoto($item->photo) }}" alt="icon" class="img-fluid w-150 object-cover"
+                                    <img src="{{ getPhoto($item->photo) }}" alt="icon" class="img-fluid w-100"
                                        >
                                 </td>
                                 <td class="py-1" data-label="@lang('Title')">

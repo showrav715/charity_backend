@@ -115,8 +115,8 @@
                             @forelse ($recent_campaigns as $item)
                                 <tr>
                                     <td class="py-1" data-label="@lang('Photo')">
-                                        <img src="{{ getPhoto($item->photo) }}" height="85" width="80"
-                                            alt="icon" class="chv1-dash-rc-img ">
+                                        <img src="{{ getPhoto($item->photo) }}" height="85" width="80" alt="icon"
+                                            class="chv1-dash-rc-img ">
                                     </td>
                                     <td class="py-1" data-label="@lang('Title')">
                                         <a href="{{ route('admin.campaign.edit', $item->id) }}"> {{ $item->title }}</a>
