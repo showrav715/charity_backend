@@ -22,7 +22,7 @@
                     </button>
 
                 </div>
-                <div class="table-responsive p-3">
+                <div class="table-responsivee p-3">
                     <table class="table table-striped">
                         <tr>
                             <th>@lang('Amount')</th>

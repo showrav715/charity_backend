@@ -21,16 +21,16 @@
                         <i class="fas fa-plus"></i> @lang('Add New')
                     </button>
                 </div>
-                <div class="table-responsive p-3">
+                <div class="table-responsivee p-3">
                     <table class="table table-striped">
                         <tr>
-                            <th>@lang('Photo')</th>
+                            <th class="w-200">@lang('Photo')</th>
                             <th class="text-right">@lang('Action')</th>
                         </tr>
                         @forelse ($brands as $item)
                             <tr>
 
-                                <td class="py-1" data-label="@lang('Photo')">
+                                <td class="py-1 w-200" data-label="@lang('Photo')">
                                     <img src="{{ getPhoto($item->photo) }}" class="img-fluid max-w-150" alt="">
                                 </td>
 

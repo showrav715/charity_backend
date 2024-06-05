@@ -26,9 +26,9 @@
                     <table class="table table-striped">
                         <tr>
                             <th>@lang('Photo')</th>
-                            <th>@lang('Title')</th>
+                            <th class="min-w-200">@lang('Title')</th>
                             <th>@lang('Type')</th>
-                            <th>@lang('Date & Time')</th>
+                            <th class="min-w-200">@lang('Date & Time')</th>
                             <th>@lang('Status')</th>
                             <th>@lang('Action')</th>
                         </tr>
@@ -38,14 +38,14 @@
                                     <img src="{{ getPhoto($item->photo) }}" alt="icon" class="img-fluid w-100"
                                        >
                                 </td>
-                                <td class="py-1" data-label="@lang('Title')">
+                                <td class="py-1 min-w-200" data-label="@lang('Title')">
                                     {{ $item->title }}
                                 </td>
                                 <td class="py-1" data-label="@lang('Event Type')">
                                     {{ $item->event_type }}
                                 </td>
 
-                                <td class="py-1" data-label="@lang('Date & Time')">
+                                <td class="py-1 min-w-200" data-label="@lang('Date & Time')">
                                     {{ $item->date }} / {{ $item->start_time }} - {{ $item->end_time }}
                                 </td>
 

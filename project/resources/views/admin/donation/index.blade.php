@@ -17,15 +17,13 @@
         <div class="col-lg-12">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-end">
-
-
-                    <form action="" class="d-flex flex-wrap justify-content-start mx-5">
+                    <form action="" class="d-flex flex-wrap justify-content-start">
                         <div class="form-group m-1 flex-grow-1">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="txn_id"
+                            <div class="input-group align-items-center">
+                                <input type="text" class="form-control py-3 mr-2 form-control-search-input" name="txn_id"
                                     value="{{ request()->input('txn_id') }}" placeholder="@lang('Txn ID')">
                                 <div class="input-group-append">
-                                    <button class="input-group-text btn btn-primary text-white" id="my-addon"><i
+                                    <button class="input-group-text btn btn-primary text-white form-control-search-input-btn" id="my-addon"><i
                                             class="fas fa-search"></i></button>
                                 </div>
                             </div>
@@ -44,7 +42,7 @@
                         </tr>
                         @forelse ($donations as $item)
                             <tr>
-                                <td data-label="@lang('Campaign Name')">
+                                <td class="py-3" data-label="@lang('Campaign Name')">
                                     <a
                                         href="{{ $item->campaign->id ? route('admin.campaign.edit', $item->campaign->id) : 'javascriipt:;' }}">{{ $item->campaign->title }}</a>
                                 </td>
@@ -87,14 +85,16 @@
                                 </td>
 
                                 <td data-label="@lang('Action')" class="text-right">
-                                    <a href="javascript:void(0)" class="btn btn-primary btn-sm view_donation mx-2 mb-1"
-                                        data-id="{{ $item->id }}" data-txn="{{ $item->txn_id ?? 'N/A' }}"
-                                        data-donar=" {{ $item->name ?? 'Anonymous' }}" data-toggle="tooltip"
-                                        data-method="{{ $item->payment_method ?? 'N/A' }}" data-toggle="tooltip"
-                                        title="@lang('View')"><i class="fas fa-eye"></i></a>
-                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
-                                        data-id="{{ $item->id }}" data-toggle="tooltip" title="@lang('Remove')"><i
-                                            class="fas fa-trash"></i></a>
+                               <div class="d-flex gap-2">
+                                <a href="javascript:void(0)" class="btn btn-primary btn-sm view_donation mx-2 mb-1"
+                                data-id="{{ $item->id }}" data-txn="{{ $item->txn_id ?? 'N/A' }}"
+                                data-donar=" {{ $item->name ?? 'Anonymous' }}" data-toggle="tooltip"
+                                data-method="{{ $item->payment_method ?? 'N/A' }}" data-toggle="tooltip"
+                                title="@lang('View')"><i class="fas fa-eye"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
+                                data-id="{{ $item->id }}" data-toggle="tooltip" title="@lang('Remove')"><i
+                                    class="fas fa-trash"></i></a>
+                               </div>
 
                                 </td>
                             </tr>

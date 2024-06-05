@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card mb-4">
-                <div class="card-header d-flex justify-content-end">
+                <div class="card-header d-flex justify-content-end gap-10">
 
 
                     <form action="" class="d-flex flex-wrap flex-md-nowrap  justify-content-start mr-md-4">
@@ -39,10 +39,10 @@
 
                         <div class="form-group m-1 flex-grow-1">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="search"
+                                <input type="text" class="form-control form-control-search-input mr-2 " name="search"
                                     value="{{ request()->input('search') }}" placeholder="@lang('Campaign Title')">
                                 <div class="input-group-append">
-                                    <button class="input-group-text btn btn-primary text-white" id="my-addon"><i
+                                    <button class="input-group-text btn btn-primary text-white form-control-search-input-btn" id="my-addon"><i
                                             class="fas fa-search"></i></button>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                     <table class="table table-striped">
                         <tr>
                             <th>@lang('Photo')</th>
-                            <th>@lang('Title')</th>
+                            <th class="min-w-200">@lang('Title')</th>
                             <th>@lang('Goal/Raised')</th>
                             <th>@lang('From')</th>
                             <th>@lang('Feature')</th>
@@ -74,7 +74,7 @@
                                 <td class="py-1" data-label="@lang('Photo')">
                                     <img src="{{ getPhoto($item->photo) }}" alt="icon" class="img-fluid w-100">
                                 </td>
-                                <td class="py-1 " data-label="@lang('Title')">
+                                <td class="min-w-200" class="py-1 " data-label="@lang('Title')">
                                     {{ $item->title }}
 
                                 </td>
