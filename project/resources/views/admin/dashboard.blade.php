@@ -11,7 +11,7 @@
 @endsection
 @section('content')
     <div class="row">
-        <div class="col-xl-3 col-lg-3 col-sm-6 col-12">
+        <div class="col-xl-3 col-lg-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
                     <i class="fas fa-bullhorn"></i>
@@ -30,9 +30,7 @@
             </div>
         </div>
 
-
-
-        <div class="col-xl-3 col-lg-3 col-sm-6 col-12">
+        <div class="col-xl-3 col-lg-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
                     <i class="fas fa-envelope-open-text"></i>
@@ -49,8 +47,7 @@
             </div>
         </div>
 
-
-        <div class="col-xl-3 col-lg-3 col-sm-6 col-12">
+        <div class="col-xl-3 col-lg-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
                     <i class="fas fa-users"></i>
@@ -67,7 +64,7 @@
             </div>
         </div>
 
-        <div class="col-xl-3 col-lg-3 col-sm-6 col-12">
+        <div class="col-xl-3 col-lg-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
                     <i class="far fa-user"></i>
@@ -86,8 +83,7 @@
     </div>
 
     <div class="row">
-
-        <div class="col-12 col-md-12 col-lg-12 col-xl-6">
+        <div class="col-12 col-xl-6">
             <div class="card">
                 <div class="card-header">
                     <h4>
@@ -101,6 +97,19 @@
         </div>
 
         <div class="col-12 col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        @lang('Withdraw Statistics')
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <canvas id="myChart3"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
                     <h4>@lang('Recent Campaigns')</h4>
@@ -119,7 +128,7 @@
                                 <tr>
                                     <td class="py-1" data-label="@lang('Photo')">
                                         <img src="{{ getPhoto($item->photo) }}" height="85" width="80" alt="icon"
-                                            class="chv1-dash-rc-img ">
+                                            class="chv1-dash-rc-img thmub-80 ">
                                     </td>
                                     <td class="py-1" data-label="@lang('Title')">
                                         <a href="{{ route('admin.campaign.edit', $item->id) }}"> {{ $item->title }}</a>
@@ -149,7 +158,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="col-12 col-xl-12">
             <div class="card">
@@ -206,10 +214,6 @@
             </div>
         </div>
 
-
-
-
-
         <div class="col-12 col-xl-6">
             <div class="card">
                 <div class="card-header">
@@ -249,7 +253,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="col-12 col-xl-6">
             <div class="card">
@@ -293,7 +296,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="modal fade" id="removeMod" tabindex="-1" role="dialog">
@@ -362,10 +364,6 @@
 
 
         var canvas = document.getElementById("myChart2");
-
-        // Set the canvas height via JavaScript
-        canvas.height = 210;
-
         var ctx = canvas.getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
@@ -374,6 +372,56 @@
                 datasets: [{
                     label: 'Donation Statistics',
                     data: {!! json_encode($donation_amount) !!},
+                    borderWidth: 2,
+                    backgroundColor: '#6777ef',
+                    borderColor: '#6777ef',
+                    borderWidth: 2.5,
+                    pointBackgroundColor: '#ffffff',
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        gridLines: {
+                            drawBorder: false,
+                            color: '#f2f2f2',
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 150
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            display: false
+                        },
+                        gridLines: {
+                            display: false
+                        }
+                    }]
+                },
+            }
+        });
+
+
+
+
+
+
+
+        var canvas1 = document.getElementById("myChart3");
+        var ctx1 = canvas1.getContext('2d');
+        var myChart = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($withdraw_date) !!},
+                datasets: [{
+                    label: 'Withdraw Statistics',
+                    data: {!! json_encode($withdraw_amount) !!},
                     borderWidth: 2,
                     backgroundColor: '#6777ef',
                     borderColor: '#6777ef',
