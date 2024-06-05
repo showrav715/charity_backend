@@ -11,7 +11,7 @@
 @endsection
 @section('content')
     <div class="row">
-        <div class="col-xl-3 col-lg-3 col-sm-6 col-12">
+        <div class="col-xl-3 col-lg-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
                     <i class="fas fa-bullhorn"></i>
@@ -30,9 +30,7 @@
             </div>
         </div>
 
-
-
-        <div class="col-xl-3 col-lg-3 col-sm-6 col-12">
+        <div class="col-xl-3 col-lg-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
                     <i class="fas fa-envelope-open-text"></i>
@@ -49,8 +47,7 @@
             </div>
         </div>
 
-
-        <div class="col-xl-3 col-lg-3 col-sm-6 col-12">
+        <div class="col-xl-3 col-lg-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
                     <i class="fas fa-users"></i>
@@ -67,7 +64,7 @@
             </div>
         </div>
 
-        <div class="col-xl-3 col-lg-3 col-sm-6 col-12">
+        <div class="col-xl-3 col-lg-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
                     <i class="far fa-user"></i>
@@ -86,9 +83,8 @@
     </div>
 
     <div class="row">
-
-        <div class="col-12 col-md-6 col-lg-6">
-            <div class="card">
+        <div class="col-12 col-xxl-6">
+            <div class="card ">
                 <div class="card-header">
                     <h4>
                         @lang('Donation Statistics')
@@ -100,7 +96,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-xl-6">
+        <div class="col-12 col-xxl-6">
             <div class="card">
                 <div class="card-header">
                     <h4>@lang('Recent Campaigns')</h4>
@@ -149,7 +145,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="col-12 col-xl-12">
             <div class="card">
@@ -206,10 +201,6 @@
             </div>
         </div>
 
-
-
-
-
         <div class="col-12 col-xl-6">
             <div class="card">
                 <div class="card-header">
@@ -249,7 +240,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="col-12 col-xl-6">
             <div class="card">
@@ -293,7 +283,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="modal fade" id="removeMod" tabindex="-1" role="dialog">
