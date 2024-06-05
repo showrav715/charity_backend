@@ -62,27 +62,33 @@
                         <tr>
                             <th>@lang('Photo')</th>
                             <th>@lang('Title')</th>
-                            <th>@lang('Goal')</th>
-                            <th>@lang('Resad')</th>
-                            <th>@lang('Feature')</th>
-                            <th>@lang('Close Type')</th>
-                            <th>@lang('Status')</th>
+                            <th >@lang('Goal/Raised')</th>
                             <th>@lang('From')</th>
+                            <th>@lang('Feature')</th>
+                            <th>@lang('Status')</th>
+                            
                             <th class="text-right">@lang('Action')</th>
                         </tr>
                         @forelse ($campaigns as $item)
                             <tr>
                                 <td class="py-1" data-label="@lang('Photo')">
-                                    <img src="{{ getPhoto($item->photo) }}" alt="icon" class="img-fluid w-150">
+                                    <img src="{{ getPhoto($item->photo) }}" alt="icon" class="img-fluid w-100">
                                 </td>
                                 <td class="py-1" data-label="@lang('Title')">
                                     {{ $item->title }}
+
                                 </td>
-                                <td class="py-1" data-label="@lang('Goal')">
-                                    {{ showAdminAmount($item->goal) }}
+                                <td  data-label="@lang('Goal')">
+                                    {{ showAdminAmount($item->goal) }} / {{ showAdminAmount($item->raised) }}
                                 </td>
-                                <td class="py-1" data-label="@lang('Raised')">
-                                    {{ showAdminAmount($item->raised) }}
+                            
+
+                                <td>
+                                    @if ($item->user_id == 0)
+                                        @lang('Admin')
+                                    @else
+                                        {{ $item->user->username }}
+                                    @endif
                                 </td>
 
                                 <td class="py-1" data-label="@lang('Feature')">
@@ -108,15 +114,7 @@
                                 </td>
 
 
-                                <td class="py-1" data-label="@lang('Close Type')">
-                                    @if ($item->close_type == 'end_date')
-                                        <span class="badge badge-dark mb-1"> @lang('End Date') </span>
-                                        <br>
-                                        <b>{{ dateFormat($item->end_date) }}</b>
-                                    @else
-                                        <span class="badge badge-dark"> @lang('Goal Achieved') </span>
-                                    @endif
-                                </td>
+                              
 
                                 <td class="py-1" data-label="@lang('Feature')">
                                     @php
@@ -152,17 +150,7 @@
                                     </div>
                                 </td>
 
-                                <td>
-                                    @if ($item->user_id == 0)
-                                        <span class="badge badge-dark">
-                                            @lang('Admin')
-                                        </span>
-                                    @else
-                                        <span class="badge badge-dark">
-                                            {{ $item->user->username }}
-                                        </span>
-                                    @endif
-                                </td>
+
 
 
 
