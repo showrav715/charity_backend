@@ -31,7 +31,7 @@
                         @if ($gs->theme == 'theme1')
                             <button type="button" class="btn btn-success btn-block">{{ __('Active') }}</button>
                         @else
-                            <button type="submit" class="btn btn-primary btn-block">{{ __('Make it Active') }}</button>
+                            <button type="submit" class="btn btn-dark btn-block">{{ __('Make it Active') }}</button>
                         @endif
                     </div>
                   </div>
@@ -61,7 +61,7 @@
                 @if ($gs->theme == 'theme2')
                 <button type="button" class="btn btn-success btn-block">{{ __('Active') }}</button>
             @else
-                <button type="submit" class="btn btn-primary btn-block">{{ __('Make it Active') }}</button>
+                <button type="submit" class="btn btn-dark btn-block">{{ __('Make it Active') }}</button>
             @endif
               </div>
             </div>

@@ -54,7 +54,7 @@
                             <input class="form-control" type="text" name="address" value="{{ $user->address }}">
                         </div>
                         <div class="form-group my-3 col-md-6 mt-1">
-                            <label class="cswitch d-flex justify-content-between align-items-center border p-2">
+                            <label class="cswitch d-flex justify-content-between align-items-center border p-2 rounded-lg">
                                 <input class="cswitch--input" name="status" type="checkbox"
                                     {{ $user->status == 1 ? 'checked' : '' }} /><span
                                     class="cswitch--trigger wrapper"></span>
@@ -62,7 +62,7 @@
                             </label>
                         </div>
                         <div class="form-group my-3 col-md-6 mt-1 ">
-                            <label class="cswitch d-flex justify-content-between align-items-center border p-2">
+                            <label class="cswitch d-flex justify-content-between align-items-center border p-2 rounded-lg">
                                 <input class="cswitch--input update" name="email_verified" type="checkbox"
                                     {{ $user->email_verified == 1 ? 'checked' : '' }} /><span
                                     class="cswitch--trigger wrapper"></span>

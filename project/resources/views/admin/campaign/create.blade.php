@@ -105,8 +105,11 @@
 
 
                         <div class="form-group">
-                            <label for="image">{{ __('Gallery Photo') }}</label>
-                            <span class="ml-3">{{ __('(Extension:jpeg,jpg,png)') }}</span>
+                            <label for="image">{{ __('Gallery Photo') }} 
+
+                                <span class="ml-1">{{ __('(Extension:jpeg,jpg,png)') }}</span>
+                            </label>
+                          
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" multiple id="upload_gallery_image"
                                     name="gallery[]" id="image" accept="image/*">

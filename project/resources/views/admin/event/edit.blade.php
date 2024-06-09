@@ -28,7 +28,7 @@
                         @csrf
                         <div class="col-md-12 ShowImage mb-3  text-center">
                             <label for="image">
-                            <img src="{{ getPhoto($event->photo) }}" class="img-fluid" alt="image" width="400">
+                                <img src="{{ getPhoto($event->photo) }}" class="img-fluid" alt="image" width="400">
                             </label>
                         </div>
 
@@ -43,8 +43,11 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="image">{{ __('Feature Photo') }}</label>
-                                    <span class="ml-3">{{ __('(Extension:jpeg,jpg,png)') }}</span>
+                                    <label for="image">{{ __('Feature Photo') }}
+
+                                        <span class="ml-1">{{ __('(Extension:jpeg,jpg,png)') }}</span>
+                                    </label>
+
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" name="photo" id="image"
                                             accept="image/*">
@@ -59,7 +62,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="event_type">{{ __('Event Type') }}</label>
-                                    <select class="form-control" name="event_type" id="event_type">
+                                    <select class="form-control mb-3 mb-md-0" name="event_type" id="event_type">
                                         <option value="online" {{ $event->event_type == 'online' ? 'selected' : '' }}>
                                             @lang('Online')</option>
                                         <option value="offline" {{ $event->event_type == 'offline' ? 'selected' : '' }}>
@@ -70,13 +73,13 @@
                             <div class="col-md-6">
                                 <div class="form-group d-none event_location">
                                     <label for="event_location">{{ __('Event Location') }}</label>
-                                    <input type="text" class="form-control" name="event_location" id="event_location"
-                                        \ placeholder="{{ __('Event Location') }}"
+                                    <input type="text" class="form-control" name="event_location" id="event_location" \
+                                        placeholder="{{ __('Event Location') }}"
                                         value="{{ old('event_location', $event->event_location) }}">
                                 </div>
                                 <div class="form-group event_link">
                                     <label for="event_link">{{ __('Event Link') }}</label>
-                                    <input type="numnber" class="form-control" name="event_link" id="event_link" 
+                                    <input type="numnber" class="form-control" name="event_link" id="event_link"
                                         placeholder="{{ __('Event Link') }}"
                                         value="{{ old('event_link', $event->event_link) }}">
                                 </div>
@@ -98,15 +101,17 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="start_time">{{ __('Start Time') }}</label>
-                                            <input type="time" class="form-control" name="start_time" id="start_time" required
-                                                placeholder="{{ __('Time') }}" value="{{ old('start_time',$event->start_time) }}">
+                                            <input type="time" class="form-control" name="start_time" id="start_time"
+                                                required placeholder="{{ __('Time') }}"
+                                                value="{{ old('start_time', $event->start_time) }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="end_time">{{ __('End Time') }}</label>
-                                            <input type="time" class="form-control" name="end_time" id="end_time" required
-                                                placeholder="{{ __('Time') }}" value="{{ old('end_time',$event->end_time) }}">
+                                            <input type="time" class="form-control" name="end_time" id="end_time"
+                                                required placeholder="{{ __('Time') }}"
+                                                value="{{ old('end_time', $event->end_time) }}">
                                         </div>
                                     </div>
                                 </div>
