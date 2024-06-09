@@ -28,7 +28,7 @@
                             <label for="image">
                                 <img src="{{ getPhoto('') }}" class="img-fluid" alt="image" width="400">
                             </label>
-                            
+
                         </div>
 
                         <div class="row">
@@ -42,8 +42,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="image">{{ __('Feature Photo') }}</label>
-                                    <span class="ml-3">{{ __('(Extension:jpeg,jpg,png)') }}</span>
+                                    <label for="image">
+                                        {{ __('Feature Photo') }}
+
+                                        <span class="text-black-50">{{ __('(Extension:jpeg,jpg,png)') }}</span>
+                                    </label>
+
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" name="photo" id="image"
                                             accept="image/*">
@@ -68,12 +72,11 @@
                                 <div class="form-group d-none event_location">
                                     <label for="event_location">{{ __('Event Location') }}</label>
                                     <input type="text" class="form-control" name="event_location" id="event_location"
-                                         placeholder="{{ __('Event Location') }}"
-                                        value="{{ old('event_location') }}">
+                                        placeholder="{{ __('Event Location') }}" value="{{ old('event_location') }}">
                                 </div>
                                 <div class="form-group event_link">
                                     <label for="event_link">{{ __('Event Link') }}</label>
-                                    <input type="numnber" class="form-control" name="event_link" id="event_link" 
+                                    <input type="numnber" class="form-control" name="event_link" id="event_link"
                                         placeholder="{{ __('Event Link') }}" value="{{ old('event_link') }}">
                                 </div>
                             </div>
@@ -94,15 +97,16 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="start_time">{{ __('Start Time') }}</label>
-                                            <input type="time" class="form-control" name="start_time" id="start_time" required
-                                                placeholder="{{ __('Time') }}" value="{{ old('start_time') }}">
+                                            <input type="time" class="form-control" name="start_time" id="start_time"
+                                                required placeholder="{{ __('Time') }}"
+                                                value="{{ old('start_time') }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="end_time">{{ __('End Time') }}</label>
-                                            <input type="time" class="form-control" name="end_time" id="end_time" required
-                                                placeholder="{{ __('Time') }}" value="{{ old('end_time') }}">
+                                            <input type="time" class="form-control" name="end_time" id="end_time"
+                                                required placeholder="{{ __('Time') }}" value="{{ old('end_time') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -159,4 +163,3 @@
         </div>
     </div>
 @endsection
-

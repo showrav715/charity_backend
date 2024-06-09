@@ -11,7 +11,7 @@
 @endsection
 @section('content')
     <div class="row">
-        <div class="col-xl-3 col-lg-3 col-sm-6 col-12">
+        <div class="col-xl-3 col-lg-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
                     <i class="fas fa-bullhorn"></i>
@@ -30,9 +30,7 @@
             </div>
         </div>
 
-
-
-        <div class="col-xl-3 col-lg-3 col-sm-6 col-12">
+        <div class="col-xl-3 col-lg-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
                     <i class="fas fa-envelope-open-text"></i>
@@ -49,8 +47,7 @@
             </div>
         </div>
 
-
-        <div class="col-xl-3 col-lg-3 col-sm-6 col-12">
+        <div class="col-xl-3 col-lg-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
                     <i class="fas fa-users"></i>
@@ -67,7 +64,7 @@
             </div>
         </div>
 
-        <div class="col-xl-3 col-lg-3 col-sm-6 col-12">
+        <div class="col-xl-3 col-lg-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
                     <i class="far fa-user"></i>
@@ -86,8 +83,7 @@
     </div>
 
     <div class="row">
-
-        <div class="col-12 col-md-6 col-lg-6">
+        <div class="col-12 col-xl-6">
             <div class="card">
                 <div class="card-header">
                     <h4>
@@ -103,6 +99,19 @@
         <div class="col-12 col-xl-6">
             <div class="card">
                 <div class="card-header">
+                    <h4>
+                        @lang('Withdraw Statistics')
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <canvas id="myChart3"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-xl-12">
+            <div class="card">
+                <div class="card-header">
                     <h4>@lang('Recent Campaigns')</h4>
                 </div>
                 <div class="card-body">
@@ -112,14 +121,14 @@
                                 <th>@lang('Photo')</th>
                                 <th>@lang('Title')</th>
                                 <th>@lang('Goal')</th>
-                                <th>@lang('Status')</th>
+                                <th class="text-right">@lang('Status')</th>
 
                             </tr>
                             @forelse ($recent_campaigns as $item)
                                 <tr>
                                     <td class="py-1" data-label="@lang('Photo')">
                                         <img src="{{ getPhoto($item->photo) }}" height="85" width="80" alt="icon"
-                                            class="chv1-dash-rc-img ">
+                                            class="chv1-dash-rc-img thmub-80 ">
                                     </td>
                                     <td class="py-1" data-label="@lang('Title')">
                                         <a href="{{ route('admin.campaign.edit', $item->id) }}"> {{ $item->title }}</a>
@@ -129,13 +138,16 @@
                                     </td>
 
                                     <td class="py-1" data-label="@lang('Status')">
-                                        @if ($item->status == 1)
-                                            <span class="badge badge-success"> @lang('Running') </span>
-                                        @elseif($item->status == 2)
-                                            <span class="badge badge-danger"> @lang('Closed') </span>
-                                        @else
-                                            <span class="badge badge-warning"> @lang('Pending') </span>
-                                        @endif
+                                        <div class="d-flex justify-content-end">
+
+                                            @if ($item->status == 1)
+                                                <span class="badge badge-success"> @lang('Running') </span>
+                                            @elseif($item->status == 2)
+                                                <span class="badge badge-danger"> @lang('Closed') </span>
+                                            @else
+                                                <span class="badge badge-warning"> @lang('Pending') </span>
+                                            @endif
+                                        </div>
                                     </td>
                                 </tr>
                             @empty
@@ -149,7 +161,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="col-12 col-xl-12">
             <div class="card">
@@ -168,7 +179,7 @@
                             </tr>
                             @forelse ($recent_donations as $item)
                                 <tr>
-                                    <td data-label="@lang('Campaign Name')">
+                                    <td class="py-3" data-label="@lang('Campaign Name')">
                                         <a
                                             href="{{ $item->campaign->id ? route('admin.campaign.edit', $item->campaign->id) : 'javascriipt:;' }}">{{ $item->campaign->title }}</a>
                                     </td>
@@ -178,9 +189,9 @@
 
                                     <td data-label="@lang('Raised')">
                                         <a href="">
-                                            <strong>
-                                                {{ $item->owner_id ? $item->owner->username : __('Admin') }}
-                                            </strong>
+
+                                            {{ $item->owner_id ? $item->owner->username : __('Admin') }}
+
                                         </a>
                                     </td>
 
@@ -206,10 +217,6 @@
             </div>
         </div>
 
-
-
-
-
         <div class="col-12 col-xl-6">
             <div class="card">
                 <div class="card-header">
@@ -222,20 +229,22 @@
                                 <th>@lang('Sl')</th>
                                 <th>@lang('Name')</th>
                                 <th>@lang('Email')</th>
-                                <th>@lang('Action')</th>
+                                <th class="text-right">@lang('Action')</th>
                             </tr>
                             @forelse ($recent_users as $key => $user)
                                 <tr>
                                     <td data-label="@lang('Sl')">{{ $key + 1 }}</td>
 
-                                    <td data-label="@lang('Name')">
+                                    <td class="py-3" data-label="@lang('Name')">
                                         {{ $user->name }}
                                     </td>
                                     <td data-label="@lang('Email')">{{ $user->email }}</td>
 
                                     <td data-label="@lang('Action')">
-                                        <a class="btn btn-primary details"
-                                            href="{{ route('admin.user.details', $user->id) }}">@lang('Details')</a>
+                                        <div class="d-flex justify-content-end">
+                                            <a class="btn btn-primary details"
+                                                href="{{ route('admin.user.details', $user->id) }}">@lang('Details')</a>
+                                        </div>
                                     </td>
                                 </tr>
                             @empty
@@ -249,7 +258,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="col-12 col-xl-6">
             <div class="card">
@@ -269,7 +277,7 @@
                             <tbody>
                                 @foreach ($recent_messages as $item)
                                     <tr>
-                                        <td data-label="@lang('Name')">
+                                        <td class="py-3" data-label="@lang('Name')">
                                             {{ $item->name }}
                                         </td>
                                         <td data-label="@lang('Email')">
@@ -277,13 +285,15 @@
                                         </td>
 
                                         <td data-label="@lang('Action')" class="text-right">
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mr-2"
-                                                data-id="{{ $item->id }}" data-toggle="tooltip"
-                                                title="@lang('Remove')"><i class="fas fa-trash"></i></a>
-                                            <a href="javascript:void()" class="btn btn-primary btn-sm view mr-2"
-                                                data-message="{{ $item->message }}" data-subject=" {{ $item->subject }}"
-                                                data-toggle="tooltip" title="@lang('View Message')"><i
-                                                    class="fas fa-eye"></i></a>
+                                            <div class="d-flex justify-content-end gap-2">
+                                                <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mr-2"
+                                                    data-id="{{ $item->id }}" data-toggle="tooltip"
+                                                    title="@lang('Remove')"><i class="fas fa-trash"></i></a>
+                                                <a href="javascript:void()" class="btn btn-primary btn-sm view"
+                                                    data-message="{{ $item->message }}"
+                                                    data-subject=" {{ $item->subject }}" data-toggle="tooltip"
+                                                    title="@lang('View Message')"><i class="fas fa-eye"></i></a>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -293,7 +303,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="modal fade" id="removeMod" tabindex="-1" role="dialog">
@@ -362,10 +371,6 @@
 
 
         var canvas = document.getElementById("myChart2");
-
-        // Set the canvas height via JavaScript
-        canvas.height = 210;
-
         var ctx = canvas.getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
@@ -375,8 +380,58 @@
                     label: 'Donation Statistics',
                     data: {!! json_encode($donation_amount) !!},
                     borderWidth: 2,
-                    backgroundColor: '#6777ef',
-                    borderColor: '#6777ef',
+                    backgroundColor: '#35BA7D',
+                    borderColor: '#35BA7D',
+                    borderWidth: 2.5,
+                    pointBackgroundColor: '#ffffff',
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        gridLines: {
+                            drawBorder: false,
+                            color: '#f2f2f2',
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 150
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            display: false
+                        },
+                        gridLines: {
+                            display: false
+                        }
+                    }]
+                },
+            }
+        });
+
+
+
+
+
+
+
+        var canvas1 = document.getElementById("myChart3");
+        var ctx1 = canvas1.getContext('2d');
+        var myChart = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($withdraw_date) !!},
+                datasets: [{
+                    label: 'Withdraw Statistics',
+                    data: {!! json_encode($withdraw_amount) !!},
+                    borderWidth: 2,
+                    backgroundColor: '#35BA7D',
+                    borderColor: '#35BA7D',
                     borderWidth: 2.5,
                     pointBackgroundColor: '#ffffff',
                     pointRadius: 4

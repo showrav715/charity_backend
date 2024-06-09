@@ -10,7 +10,7 @@
       <h1 class="mr-auto mb-4 mb-md-0">@lang('Manage Currency')</h1>
       <div class="d-flex flex-wrap ">
            
-            <a href="{{route('admin.currency.add')}}" class="btn btn-primary mb-1 mr-3 "><i class="fas fa-plus"></i> @lang('Add New')</a>
+            <a href="{{route('admin.currency.add')}}" class="btn btn-primary mb-3 mb-lg-1  mr-3 "><i class="fas fa-plus"></i> @lang('Add New')</a>
          
             <form action="">
               <div class="input-group has_append">
@@ -32,7 +32,7 @@
     <div class="col-md-6 col-lg-6 col-xl-3 currency--card">
       <div class="card card-primary">
         <div class="card-header {{$curr->default == 1 ? 'default' : ''}}">
-          <h4><i class="fas fa-coins"></i> {{$curr->curr_name}}</h4>
+          <h4><i class="fas fa-coins"></i> {{$curr->code}}</h4>
         </div>
         <div class="card-body">
           <ul class="list-group mb-3">
@@ -64,7 +64,7 @@
 @push('style')
     <style>
         .default{
-          background-color: #6777ef26!important;
+          background-color: #02A95C26!important;
         }
     </style>
 @endpush

@@ -9,6 +9,7 @@
     <link rel="shortcut icon" type="image/png" href="{{ getPhoto($gs->favicon) }}">
 
     <link rel="stylesheet" href="{{ asset('assets/admin/css/bootstrap.min.css') }}">
+
     <link rel="stylesheet" href="{{ asset('assets/admin/css/font-awsome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/custom.css') }}">

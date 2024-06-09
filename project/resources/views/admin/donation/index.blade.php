@@ -17,15 +17,13 @@
         <div class="col-lg-12">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-end">
-
-
-                    <form action="" class="d-flex flex-wrap justify-content-start mx-5">
+                    <form action="" class="d-flex flex-wrap justify-content-start">
                         <div class="form-group m-1 flex-grow-1">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="txn_id"
+                            <div class="input-group align-items-center">
+                                <input type="text" class="form-control py-3 mr-2 form-control-search-input" name="txn_id"
                                     value="{{ request()->input('txn_id') }}" placeholder="@lang('Txn ID')">
                                 <div class="input-group-append">
-                                    <button class="input-group-text btn btn-primary text-white" id="my-addon"><i
+                                    <button class="input-group-text btn btn-primary text-white form-control-search-input-btn" id="my-addon"><i
                                             class="fas fa-search"></i></button>
                                 </div>
                             </div>
@@ -39,15 +37,12 @@
                             <th>@lang('Total')</th>
                             <th>@lang('Tips')</th>
                             <th>@lang('Campaign Owner')</th>
-                            <th>@lang('Donar Name')</th>
-                            <th>@lang('Txn Id')</th>
-                            <th>@lang('Payment Method')</th>
-                            <th>@lang('Status')</th>
+                            <th class="text-right">@lang('Status')</th>
                             <th class="text-right">@lang('Action')</th>
                         </tr>
                         @forelse ($donations as $item)
                             <tr>
-                                <td data-label="@lang('Campaign Name')">
+                                <td class="py-3" data-label="@lang('Campaign Name')">
                                     <a
                                         href="{{ $item->campaign->id ? route('admin.campaign.edit', $item->campaign->id) : 'javascriipt:;' }}">{{ $item->campaign->title }}</a>
                                 </td>
@@ -66,18 +61,8 @@
                                     </a>
                                 </td>
 
-                                <td data-label="@lang('Donor Name')">
-                                    {{ $item->name ?? 'Anonymous' }}
-                                </td>
 
-                                <td data-label="@lang('Raised')">
-                                    {{ $item->txn_id ?? 'N/A' }}
-                                </td>
-                                <td data-label="@lang('Raised')">
-                                    {{ $item->payment_method ?? 'N/A' }}
-                                </td>
-
-                                <td data-label="@lang('Feature')">
+                                <td class="text-right" data-label="@lang('Feature')">
                                     <div class="btn-group mb-2">
                                         <button
                                             class="btn btn-{{ $item->status == 1 ? 'success' : 'danger' }} btn-sm dropdown-toggle"
@@ -100,9 +85,17 @@
                                 </td>
 
                                 <td data-label="@lang('Action')" class="text-right">
-                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
-                                        data-id="{{ $item->id }}" data-toggle="tooltip" title="@lang('Remove')"><i
-                                            class="fas fa-trash"></i></a>
+                               <div class="d-flex justify-content-end gap-2">
+                                <a href="javascript:void(0)" class="btn btn-primary btn-sm view_donation mx-2 mb-1"
+                                data-id="{{ $item->id }}" data-txn="{{ $item->txn_id ?? 'N/A' }}"
+                                data-donar=" {{ $item->name ?? 'Anonymous' }}" data-toggle="tooltip"
+                                data-method="{{ $item->payment_method ?? 'N/A' }}" data-toggle="tooltip"
+                                title="@lang('View')"><i class="fas fa-eye"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
+                                data-id="{{ $item->id }}" data-toggle="tooltip" title="@lang('Remove')"><i
+                                    class="fas fa-trash"></i></a>
+                               </div>
+
                                 </td>
                             </tr>
                         @empty
@@ -140,6 +133,40 @@
             </form>
         </div>
     </div>
+
+
+    <div class="modal fade" id="view_donation" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title show_subject">@lang('Donation Details')</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>@lang('Donar Name'):</strong> <span class="show_donar"></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>@lang('Transaction ID'):</strong> <span class="show_txn"></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>@lang('Payment Method'):</strong> <span class="show_method"></span>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 
@@ -149,6 +176,14 @@
         $('.remove').on('click', function() {
             $('#removeMod').find('input[name=id]').val($(this).data('id'))
             $('#removeMod').modal('show')
+        })
+
+
+        $('.view_donation').on('click', function() {
+            $('.show_method').text($(this).data('method'))
+            $('.show_donar').text($(this).data('donar'))
+            $('.show_txn').text($(this).data('txn'))
+            $('#view_donation').modal('show');
         })
     </script>
 @endpush

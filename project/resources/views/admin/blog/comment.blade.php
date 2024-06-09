@@ -20,9 +20,9 @@
                 <table class="table align-items-center table-striped">
                     <tr>
                         <th>{{ __('Blog') }}</th>
-                        <th>{{ __('Name') }}</th>
+                        <th class="min-w-200">{{ __('Name') }}</th>
                         <th>{{ __('Email') }}</th>
-                        <th>{{ __('Comment') }}</th>
+                        <th class="min-w-200">{{ __('Comment') }}</th>
                         <th>{{ __('Action') }}</th>
                     </tr>
 
@@ -31,13 +31,13 @@
                         <td data-label="{{ __('Blog') }}">
                             {{$item->blog->title}}
                         </td>
-                        <td data-label="{{ __('Name') }}">
+                        <td class="min-w-200" data-label="{{ __('Name') }}">
                             {{ $item->name }}
                         </td>
                         <td data-label="{{ __('Email') }}">
                             {{ $item->email }}
                         </td>
-                        <td data-label="{{ __('Comment') }}">
+                        <td class="min-w-200 py-3" data-label="{{ __('Comment') }}">
                             {{ $item->comment }}
                         </td>
                         <td data-label="{{ __('Action') }}">

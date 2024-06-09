@@ -158,6 +158,7 @@ class FrontendController extends ApiController
         $hero_section['checkout_faild_photo'] = getPhoto($hero_section->checkout_faild_photo);
         $hero_section['faq_background'] = getPhoto($hero_section->faq_background);
         $hero_section['testimonial_background'] = getPhoto($hero_section->testimonial_background);
+        $hero_section['volunteers_background'] = getPhoto($hero_section->volunteers_background);
         $hero_section['social_data'] = SocialLink::get();
         return $this->sendResponse($hero_section, 'Setting Data');
     }

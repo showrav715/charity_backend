@@ -53,6 +53,25 @@ class AdminController extends Controller
 
         $data['donation_amount'] = $amount;
         $data['donation_date'] = $date;
+
+
+
+        $data['withdraws'] = DB::table('withdraws')
+            ->selectRaw('SUM(total) as total, DATE_FORMAT(created_at, "%Y-%m-%d") as date')
+            ->where('created_at', '>=', now()->subDays(30))
+            ->groupBy('date')
+            ->get()
+            ->toArray();
+
+        $amount = [];
+        $date = [];
+        foreach ($data['withdraws'] as $key => $value) {
+            $amount[] = round($value->total, 2);
+            $date[] = $value->date;
+        }
+
+        $data['withdraw_amount'] = $amount;
+        $data['withdraw_date'] = $date;
      
         return view('admin.dashboard', $data);
 

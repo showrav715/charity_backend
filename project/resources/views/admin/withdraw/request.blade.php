@@ -1,23 +1,11 @@
 @extends('layouts.admin')
 @section('title')
-    @if (request()->routeIs('admin.withdraw.pending'))
-        @lang('Pending Withdraws')
-    @elseif (request()->routeIs('admin.withdraw.accepted'))
-        @lang('Accepted Withdraws')
-    @else
-        @lang('Rejected Withdraws')
-    @endif
+    @lang('Withdraws')
 @endsection
 @section('breadcrumb')
     <section class="section">
         <div class="section-header">
-            @if (request()->routeIs('admin.withdraw.pending'))
-                <h1>@lang('Pending Withdraws')</h1>
-            @elseif (request()->routeIs('admin.withdraw.accepted'))
-                <h1>@lang('Accepted Withdraws')</h1>
-            @else
-                <h1>@lang('Rejected Withdraws')</h1>
-            @endif
+            <h1>@lang('Withdraws')</h1>
         </div>
     </section>
 @endsection
@@ -35,7 +23,7 @@
                                 <th>@lang('Withdraw Amount')</th>
                                 <th>@lang('Charge')</th>
                                 <th>@lang('Total')</th>
-                                <th>@lang('status')</th>
+                                <th>@lang('Status')</th>
                                 <th>@lang('Action')</th>
                             </tr>
                             @forelse ($withdraws as $key => $item)
@@ -59,32 +47,36 @@
 
                                     <td data-label="@lang('status')">
 
-                                        @if ($item->status == 1)
-                                            <span class="badge badge-success">@lang('Accepted')</span>
-                                        @elseif($item->status == 2)
-                                            <span class="badge badge-danger">@lang('Rejected')</span>
-                                        @else
-                                            <span class="badge badge-warning">@lang('Pending')</span>
-                                        @endif
+                              
+
+                                            @if ($item->status == 1)
+                                                <span class="badge badge-success">@lang('Accepted')</span>
+                                            @elseif($item->status == 2)
+                                                <span class="badge badge-danger">@lang('Rejected')</span>
+                                            @else
+                                                <span class="badge badge-warning">@lang('Pending')</span>
+                                            @endif
+                                    
+
                                     </td>
 
                                     <td data-label="@lang('Action')">
 
                                         <div
-                                            class="d-flex flex-wrap align-items-center justify-content-end justify-content-lg-center">
+                                            class="d-flex gap-10 align-items-center justify-content-end justify-content-lg-center">
 
                                             @if ($item->status == 0)
                                                 <button class="btn btn-primary accept m-1 btn-sm"
                                                     data-url="{{ route('admin.withdraw.approve', $item->id) }}">@lang('Accept')</button>
                                                 <button class="btn btn-danger reject m-1 btn-sm"
                                                     data-url="{{ route('admin.withdraw.reject', $item->id) }}">@lang('Reject')</button>
-                                                @else
+                                            @else
                                                 @if ($item->status == 1)
-                                                    <span class="badge badge-dark">
+                                                    <span class="badge badge-success">
                                                         Accepted
                                                     </span>
                                                 @else
-                                                    <span class="badge badge-dark">
+                                                    <span class="badge badge-danger">
                                                         Rejected
                                                     </span>
                                                 @endif

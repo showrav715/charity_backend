@@ -51,7 +51,7 @@
                <div class="form-group row ">
                   <label for="" class="col-sm-3 col-form-label">@lang('Meta Image')</label>
                   <div class="col-sm-9">
-                     <div class="gallery gallery-fw" >
+                     <div class="gallery gallery-fw  mb-4" >
                         <img class="imageShow seo-og-img" src="{{getPhoto($seosetting->meta_image)}}" data-image="{{getPhoto($seosetting->meta_image)}}">
                      </div>
                      <div class="custom-file">

@@ -32,19 +32,23 @@
                                 </div>
                             </div>
 
-                            <div class="col-6 text-center">
+
 
                             <div class="col-sm-6 text-center">
-                                    <div id="image-preview_about1" class="image-preview image-preview_alt">
+                                <label for="">@lang('About Page Photo')</label>
+                                <div class="form-group d-flex justify-content-center">
+                                    <div id="image-preview_about1" class="image-preview image-preview_alt"
+                                        style="background-image:url({{ getPhoto($about->photo2) }});">
                                         <label for="image-upload_about1" id="image-label_about1">@lang('Choose File')</label>
                                         <input type="file" name="photo2" id="image-upload_about1" />
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="form-group">
-                            <label>@lang('Header Title')</label>
+                            <label>@lang('Subtitle')</label>
                             <input class="form-control" type="text" name="header_title"
                                 value="{{ $about->header_title }}">
                         </div>
@@ -94,7 +98,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card mb-4">
-                <div class="card-header d-flex justify-content-between">
+                <div class="card-header d-flex justify-content-between gap-10">
                     <h5>@lang('About Featured')</h5>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">
                         <i class="fas fa-plus"></i> @lang('Add New')
@@ -124,13 +128,16 @@
                                 </td>
 
                                 <td data-label="@lang('Action')" class="text-right">
-                                    <a href="javascript:void()" class="btn btn-primary approve btn-sm edit mb-1"
-                                        data-route="{{ route('admin.feature.update', $item->id) }}"
-                                        data-path="{{ adminpath() }}" data-item="{{ $item }}"
-                                        data-toggle="tooltip" title="@lang('Edit')"><i class="fas fa-edit"></i></a>
-                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
-                                        data-id="{{ $item->id }}" data-toggle="tooltip" title="@lang('Remove')"><i
-                                            class="fas fa-trash"></i></a>
+                                    <div class="d-flex gap-10 justify-content-end">
+                                        <a href="javascript:void()" class="btn btn-primary approve btn-sm edit mx-2 mb-1"
+                                            data-route="{{ route('admin.feature.update', $item->id) }}"
+                                            data-path="{{ adminpath() }}" data-item="{{ $item }}"
+                                            data-toggle="tooltip" title="@lang('Edit')"><i
+                                                class="fas fa-edit"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
+                                            data-id="{{ $item->id }}" data-toggle="tooltip"
+                                            title="@lang('Remove')"><i class="fas fa-trash"></i></a>
+                                    </div>
                                 </td>
                             </tr>
                         @empty
