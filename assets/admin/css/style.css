@@ -4592,3 +4592,7 @@ table tr td {
   overflow-wrap: anywhere;
   margin-left: 15px;
 }
+
+.swal2-content .nice-select.swal2-select {
+  display: none !important;
+}
