@@ -90,7 +90,7 @@
                                 data-id="{{ $item->id }}" data-txn="{{ $item->txn_id ?? 'N/A' }}"
                                 data-donar=" {{ $item->name ?? 'Anonymous' }}" data-toggle="tooltip"
                                 data-method="{{ $item->payment_method ?? 'N/A' }}" data-toggle="tooltip"
-                                title="@lang('View')"><i class="fas fa-eye"></i></a>
+                                ><i class="fas fa-eye"></i></a>
                             <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
                                 data-id="{{ $item->id }}" data-toggle="tooltip" title="@lang('Remove')"><i
                                     class="fas fa-trash"></i></a>
