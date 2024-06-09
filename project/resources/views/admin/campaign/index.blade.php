@@ -155,7 +155,7 @@
 
 
                                 <td class="py-1" data-label="@lang('Action')" class="text-right">
-                                    <div class="d-flex">
+                                    <div class="d-flex justify-content-end">
                                         <a href="{{ route('admin.campaign.edit', $item->id) }}"
                                             class="btn btn-primary approve btn-sm  mr-2" data-toggle="tooltip"
                                             title="@lang('Edit')"><i class="fas fa-edit"></i></a>

@@ -72,11 +72,11 @@
                                                     data-url="{{ route('admin.withdraw.reject', $item->id) }}">@lang('Reject')</button>
                                             @else
                                                 @if ($item->status == 1)
-                                                    <span class="badge badge-dark">
+                                                    <span class="badge badge-success">
                                                         Accepted
                                                     </span>
                                                 @else
-                                                    <span class="badge badge-dark">
+                                                    <span class="badge badge-danger">
                                                         Rejected
                                                     </span>
                                                 @endif

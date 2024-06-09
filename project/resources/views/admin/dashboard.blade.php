@@ -179,7 +179,7 @@
                             </tr>
                             @forelse ($recent_donations as $item)
                                 <tr>
-                                    <td data-label="@lang('Campaign Name')">
+                                    <td class="py-3" data-label="@lang('Campaign Name')">
                                         <a
                                             href="{{ $item->campaign->id ? route('admin.campaign.edit', $item->campaign->id) : 'javascriipt:;' }}">{{ $item->campaign->title }}</a>
                                     </td>
@@ -189,9 +189,9 @@
 
                                     <td data-label="@lang('Raised')">
                                         <a href="">
-                                            <strong>
-                                                {{ $item->owner_id ? $item->owner->username : __('Admin') }}
-                                            </strong>
+
+                                            {{ $item->owner_id ? $item->owner->username : __('Admin') }}
+
                                         </a>
                                     </td>
 
@@ -235,16 +235,16 @@
                                 <tr>
                                     <td data-label="@lang('Sl')">{{ $key + 1 }}</td>
 
-                                    <td data-label="@lang('Name')">
+                                    <td class="py-3" data-label="@lang('Name')">
                                         {{ $user->name }}
                                     </td>
                                     <td data-label="@lang('Email')">{{ $user->email }}</td>
 
                                     <td data-label="@lang('Action')">
-                                     <div class="d-flex justify-content-end">
-                                        <a class="btn btn-primary details"
-                                        href="{{ route('admin.user.details', $user->id) }}">@lang('Details')</a>
-                                     </div>
+                                        <div class="d-flex justify-content-end">
+                                            <a class="btn btn-primary details"
+                                                href="{{ route('admin.user.details', $user->id) }}">@lang('Details')</a>
+                                        </div>
                                     </td>
                                 </tr>
                             @empty
@@ -277,7 +277,7 @@
                             <tbody>
                                 @foreach ($recent_messages as $item)
                                     <tr>
-                                        <td data-label="@lang('Name')">
+                                        <td class="py-3" data-label="@lang('Name')">
                                             {{ $item->name }}
                                         </td>
                                         <td data-label="@lang('Email')">
@@ -376,8 +376,58 @@
                     label: 'Donation Statistics',
                     data: {!! json_encode($donation_amount) !!},
                     borderWidth: 2,
-                    backgroundColor: '#6777ef',
-                    borderColor: '#6777ef',
+                    backgroundColor: '#35BA7D',
+                    borderColor: '#35BA7D',
+                    borderWidth: 2.5,
+                    pointBackgroundColor: '#ffffff',
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        gridLines: {
+                            drawBorder: false,
+                            color: '#f2f2f2',
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 150
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            display: false
+                        },
+                        gridLines: {
+                            display: false
+                        }
+                    }]
+                },
+            }
+        });
+
+
+
+
+
+
+
+        var canvas1 = document.getElementById("myChart3");
+        var ctx1 = canvas1.getContext('2d');
+        var myChart = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($withdraw_date) !!},
+                datasets: [{
+                    label: 'Withdraw Statistics',
+                    data: {!! json_encode($withdraw_amount) !!},
+                    borderWidth: 2,
+                    backgroundColor: '#35BA7D',
+                    borderColor: '#35BA7D',
                     borderWidth: 2.5,
                     pointBackgroundColor: '#ffffff',
                     pointRadius: 4

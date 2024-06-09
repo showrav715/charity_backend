@@ -122,14 +122,14 @@
                             <label>@lang('Name')</label>
                             <input class="form-control slug-title" type="text" name="title">
                         </div>
-                        <div class="form-group d-flex">
+                        <div class="form-group d-flex align-items-center">
                             <div class="">
-                                <button class="btn btn-primary icon-picker edit_icon" data-icon="">
+                                <button class="py-2 btn btn-primary icon-picker edit_icon" data-icon="">
                                     <i class=""></i>
                                 </button>
                             </div>
                             <div class="flex-grow-1 pr-3">
-                                <div class="form-group mb-1">
+                                <div class="form-group mb-0">
                                     <input type="text" class="form-control" id="icon_edit" name="icon"
                                         value="" placeholder="" required>
                                 </div>

@@ -64,7 +64,7 @@
 @push('style')
     <style>
         .default{
-          background-color: #6777ef26!important;
+          background-color: #02A95C26!important;
         }
     </style>
 @endpush

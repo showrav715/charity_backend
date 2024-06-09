@@ -85,7 +85,7 @@
                                 </td>
 
                                 <td data-label="@lang('Action')" class="text-right">
-                               <div class="d-flex gap-2">
+                               <div class="d-flex justify-content-end gap-2">
                                 <a href="javascript:void(0)" class="btn btn-primary btn-sm view_donation mx-2 mb-1"
                                 data-id="{{ $item->id }}" data-txn="{{ $item->txn_id ?? 'N/A' }}"
                                 data-donar=" {{ $item->name ?? 'Anonymous' }}" data-toggle="tooltip"

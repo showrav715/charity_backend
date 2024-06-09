@@ -55,24 +55,28 @@
 .image-preview label,
 #callback-preview label {
   opacity: 1 !important;
-  background-color: #6777ef !important;
+  background-color: #02a95c !important;
 }
 
 .section .section-header {
-  gap: 12px!important;
+  gap: 12px !important;
 }
 
 .card .card-header .btn.btn-sm.remove {
   padding: 5px 10px !important;
 }
 
-.input-group-text, select.form-control:not([size]):not([multiple]), .form-control:not(.form-control-sm):not(.form-control-lg) {
+.input-group-text,
+select.form-control:not([size]):not([multiple]),
+.form-control:not(.form-control-sm):not(.form-control-lg) {
   min-height: 61px;
 }
-.tickets-search,.input-group-text, select.form-control:not([size]):not([multiple]), .form-control:not(.form-control-sm):not(.form-control-lg) {
+.tickets-search,
+.input-group-text,
+select.form-control:not([size]):not([multiple]),
+.form-control:not(.form-control-sm):not(.form-control-lg) {
   min-height: 42px;
 }
-
 
 /* chat start */
 /* chat ch */
@@ -153,7 +157,7 @@
   display: inline-block;
 }
 .out__msg {
-  background: #6777efd1 !important;
+  background: #02a95cd1 !important;
   color: #fff;
 }
 
@@ -179,7 +183,7 @@
   padding: 0;
   font-size: 24px;
   color: #fff;
-  background: #6777ef !important;
+  background: #02a95c !important;
 }
 
 .chat__msg-footer .send__msg .upload-file {
@@ -262,7 +266,6 @@ ul li {
 
 /* chat end */
 
-
 .main-sidebar .sidebar-menu li a i {
   width: 16px;
   margin-right: 16px;
@@ -272,3 +275,145 @@ ul li {
   position: relative;
   left: -16px;
 }
+
+a {
+  color: #091e42;
+  transition: all 0.3s;
+}
+a:hover {
+  color: #02a95c;
+  text-decoration: none;
+}
+
+.badge.badge-success {
+  background-color: #02a95c;
+}
+
+.badge-warning {
+  color: #091e42 !important;
+  background-color: #fac03c !important;
+}
+
+.btn-success,
+.btn-success.disabled {
+  box-shadow: 0 2px 6px #02a95c;
+  background-color: #02a95c;
+  border-color: #02a95c;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.disabled:hover,
+.btn-success.disabled:focus,
+.btn-success.disabled:active {
+  background-color: #35ba7d !important;
+  color: #fff !important;
+}
+
+.dropdown-menu {
+  box-shadow: 0px 0px 20px 0px rgba(84, 84, 84, 0.1) !important;
+}
+
+.form-control:focus,
+.input-group-text:focus,
+.custom-select:focus,
+.custom-file-label:focus {
+  background-color: #fefeff;
+  border-color: #35ba7d;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #35ba7d !important;
+  border-color: #35ba7d !important;
+}
+
+.btn-primary:active,
+.btn-primary:hover,
+.btn-primary.disabled:active,
+.btn-primary.disabled:hover {
+  background-color: #35ba7d !important;
+}
+
+.btn-warning,
+.btn-warning.disabled {
+  color: #091e42 !important;
+}
+.btn-warning:hover,
+.btn-warning.disabled:hover {
+  color: #091e42 !important;
+}
+
+select option:hover {
+  background-color: #35ba7d !important;
+}
+
+.form-control.nice-select {
+  width: 100%;
+}
+
+.image-preview {
+  position: relative;
+}
+
+.image-preview::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  display: inline-block;
+}
+
+button:focus {
+  outline: none !important;
+}
+
+.homepage-wrapper {
+  height: 480px;
+  width: 100%;
+  object-fit: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: all 15s;
+}
+.homepage-wrapper:hover {
+  background-position-y: 100%;
+}
+
+.tagify.form-control.tagify__input {
+  min-height: 61px !important;
+}
+
+.badge {
+  line-height: 1 !important;
+  text-transform: capitalize;
+}
+
+.btn-primary {
+  box-shadow: none;
+}
+
+.ch-permission-multi-select {
+}
+
+.ch-permission-multi-select .select2.select2-container {
+  width: 100%!important;
+}
+
+.ch-permission-multi-select .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+background-color: #fc544b;
+}
+
+.ch-permission-multi-select .select2-container--default .select2-selection--multiple .select2-selection__choice__display {
+  padding-left: 22px;
+}
+
+.ch-permission-multi-select .select2-selection__choice {
+border: none;
+box-shadow: none;
+
+}
+
+/* ended */

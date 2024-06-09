@@ -50,7 +50,7 @@
                             <tr>
                                 <th>@lang('Question')</th>
                                 <th>@lang('Answer')</th>
-                                <th class="text-center">@lang('Action')</th>
+                                <th class="text-right">@lang('Action')</th>
                             </tr>
                             @forelse ($datas as $key => $item)
                                 <tr>

@@ -25,10 +25,11 @@
                             <form action="" class="my-2">
                                 <div class="form-group mb-0">
                                     <div class="input-group">
-                                        <input class="form-control tickets-search" name="search" value="{{ $search }}"
-                                            type="text" placeholder="@lang('Search Ticket')">
+                                        <input class="form-control tickets-search" name="search"
+                                            value="{{ $search }}" type="text" placeholder="@lang('Search Ticket')">
                                         <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary input-group-text tickets-search text-white"><i
+                                            <button type="submit"
+                                                class="btn btn-primary input-group-text tickets-search text-white"><i
                                                     class="fas fa-search"></i></button>
                                         </div>
                                     </div>
@@ -43,26 +44,24 @@
                                         href="{{ filter('messages', $item->ticket_num) }}" data-bs-toggle="tab">
                                         <div class="item__inner">
                                             <div class="post__creator ">
-                                                <div class="post__creator-thumb d-flex justify-content-between align-items-center">
+                                                <div
+                                                    class="post__creator-thumb d-flex justify-content-between align-items-center">
                                                     <div>
-                                                        <span class="username">{{ $item->ticket_num }} </span>
-                                                        <small>({{ $item->user->email }})</small>
+                                                        <span class="username  {{$item->status == 0 ? 'font-weight-bold' : 'font-weight-normal'}}">{{ $item->ticket_num }} </span>
+                                                        <small class="{{$item->status == 0 ? 'font-weight-bold' : 'font-weight-normal'}}" >({{ $item->user->email }})</small>
                                                     </div>
                                                     @if ($item->status == 0)
                                                         <small class="badge badge-danger">!</small>
                                                     @endif
                                                 </div>
                                                 <div class="post__creator-content ">
-                                                    <h6 class="name d-inline-block">{{ $item->subject }}</h6>
+                                                    <h6 class="name d-inline-block {{$item->status == 0 ? 'font-weight-bold' : 'font-weight-normal'}}">{{ $item->subject }}</h6>
                                                 </div>
                                             </div>
                                             <ul class="chat__meta d-flex justify-content-between mt-2">
                                                 <li><span class="last-msg"></span></li>
                                                 <li><span
-                                                        class="last-chat-time">{{ dateFormat(
-                                                            $item->created_at,
-                                                            'd M Y',
-                                                        ) }}</span>
+                                                        class="last-chat-time {{$item->status == 0 ? 'font-weight-bold' : 'font-weight-normal'}}">{{ dateFormat($item->created_at, 'd M Y') }}</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -100,7 +99,7 @@
 
                                         <div class="post__creator-content">
                                             <h5 class="name d-inline-block">@lang('Ticket Number :
-                                                                                        #'){{ request('messages') }}</h5>
+                                                                                                                                    #'){{ request('messages') }}</h5>
 
                                         </div>
                                         <a class="profile-link" href="javascript:void(0)"></a>
@@ -159,7 +158,7 @@
                                                     </div>
                                                 </li>
                                             @endforelse
-                                        @else
+                                        @elseFF
                                             <li>
                                                 <div class="msg__item">
                                                     <div class="post__creator ">
@@ -183,10 +182,12 @@
                                                 <label class="-formlabel upload-file" for="upload-file"><i
                                                         class="fas fa-cloud-upload-alt"></i>
                                             </div>
+
                                             <div class="input-group">
                                                 <textarea class="form-control form--control" name="message"></textarea>
                                                 <button class="border-0 outline-0 send-btn" type="submit"><i
-                                                        class="fab fa-telegram-plane"></i></button>
+                                                        class="fab fa-telegram-plane"></i>
+                                                </button>
                                             </div>
                                         </form>
                                     </div>
