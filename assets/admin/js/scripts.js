@@ -595,5 +595,5 @@ $(function () {
   }
 
   // nice select
-  // $("select").niceSelect();
+  $("select").niceSelect();
 });
