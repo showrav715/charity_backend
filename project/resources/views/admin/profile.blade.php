@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <form id="" action="{{route('admin.profile.update')}}" class="row" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <div class="col-md-4 col-xl-3">
+                        <div class="col-lg-4 col-xl-3">
                             <div class="form-group">
                                 <label class="col-form-label">@lang('Profile Picture')</label>
                                 <div id="image-preview" class="image-preview"
@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8 col-xl-9">
+                        <div class="col-lg-8 col-xl-9">
                             <div class="form-group">
                                 <label>@lang('Name')</label>
                                 <input class="form-control" type="text" name="name" value="{{$data->name}}" required>

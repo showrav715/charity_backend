@@ -18,7 +18,7 @@
     <div class="col-md-6 col-lg-6 col-xl-3">
       <div class="card card-primary">
         <div class="card-header justify-content-center">
-          <h4><i class="fas fa-money-check-alt"></i> {{$item->name}}</h4>
+          <h4 class="text-dark"><i class="fas fa-money-check-alt"></i> {{$item->name}}</h4>
         </div>
         <div class="card-body">
             <a href="{{route('admin.gateway.edit',$item)}}" class="btn btn-primary btn-block"><i class="fas fa-edit"></i> @lang('Edit Gateway')</a>

@@ -435,24 +435,25 @@ $(document).on("click", ".add_more_btn", function () {
   let faq_title = $("#showing_faq_form").attr("faq-title");
   let faq_content = $("#showing_faq_form").attr("faq-content");
   let html = `<div class="row d-flex justify-content-center align-items-center mb-4 mb-md-0 border py-4 rounded-lg">
-        <div class="col-md-4 col-sm-12">
+        <div class="col-md-44 col-sm-122 col-12">
             <div class="form-group">
                 <label for="faq_title">${faq_title}</label>
                 <input type="text" class="form-control" name="faq_title[]" id="faq_title" required
                     placeholder="${faq_title}" value="">
             </div>
         </div>
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-66 col-sm-122 col-12">
             <div class="form-group">
                 <label for="faq_content">${faq_content}</label>
                 <textarea type="number" step="any" class="form-control" name="faq_content[]"
                     id="faq_content" placeholder="${faq_content}"></textarea>
             </div>
         </div>
-        <div class="col-md-2 col-sm-12">
+        <div class="col-md-22 col-sm-122 col-12">
             <div class="">
-                <button type="button" class="btn btn-danger btn-sm remove_faq"><i
-                        class="fas fa-minus"></i></button>
+                <button type="button" class="btn btn-danger btn-sm remove_faq text-capitalize">
+                remove
+                </button>
             </div>
         </div>
     </div>`;
