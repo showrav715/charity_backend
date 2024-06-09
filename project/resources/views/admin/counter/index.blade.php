@@ -83,7 +83,7 @@
                             <div class="">
                                 <button class="btn btn-primary icon-picker" data-icon="far fa-address-card"></button>
                             </div>
-                            <div class="flex-grow-1 pr-3">
+                            <div class="flex-grow-1">
                                 <div class="form-group mb-1">
                                     <input type="text" class="form-control" id="icon" name="icon" value="" placeholder="" required>
                                 </div>
@@ -128,7 +128,7 @@
                                     <i class=""></i>
                                 </button>
                             </div>
-                            <div class="flex-grow-1 pr-3">
+                            <div class="flex-grow-1">
                                 <div class="form-group mb-0">
                                     <input type="text" class="form-control" id="icon_edit" name="icon"
                                         value="" placeholder="" required>

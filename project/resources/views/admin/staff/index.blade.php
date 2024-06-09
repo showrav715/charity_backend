@@ -169,7 +169,7 @@
             $('#addModal').find('.append').html(`
                 <div class="form-group">
                     <label>@lang('Status')</label>
-                    <select name="status" class="form-control">
+                    <select name="status" class="form-control nice-select">
                         <option value="1">@lang('Active')</option>
                         <option value="2">@lang('Banned')</option>
                     </select>

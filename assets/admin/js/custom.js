@@ -434,7 +434,7 @@ $(document).on("click", "#campaign_faq_checkbox", function () {
 $(document).on("click", ".add_more_btn", function () {
   let faq_title = $("#showing_faq_form").attr("faq-title");
   let faq_content = $("#showing_faq_form").attr("faq-content");
-  let html = `<div class="row d-flex justify-content-center align-items-center">
+  let html = `<div class="row d-flex justify-content-center align-items-center mb-4 mb-md-0 border py-4 rounded-lg">
         <div class="col-md-4 col-sm-12">
             <div class="form-group">
                 <label for="faq_title">${faq_title}</label>

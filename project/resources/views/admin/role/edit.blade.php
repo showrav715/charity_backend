@@ -32,8 +32,8 @@
                                 $data = [];
                             }
                         @endphp
-                        <div class="form-group">
-                            <label>@lang('Permission')</label>
+                        <div class="form-group ch-permission-multi-select">
+                            <label class="w-100 d-block">@lang('Permission')</label>
                             <select name="section[]" class="select2" multiple>
                                 <option value="Manage Donations"
                                     {{ in_array('Manage Donations', $data) ? 'selected' : '' }}>@lang('Manage Donations')</option>

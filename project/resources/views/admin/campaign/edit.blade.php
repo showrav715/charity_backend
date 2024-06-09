@@ -166,7 +166,7 @@
                             @if ($data->faqs->count() > 0)
                             @foreach ($data->faqs as $faq)
 
-                            <div class="row d-flex justify-content-center align-items-center">
+                            <div class="row d-flex justify-content-center align-items-center mb-4 mb-md-0 border py-4 rounded-lg">
                                 <div class="col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label for="faq_title">{{ __('Faq Title') }}</label>

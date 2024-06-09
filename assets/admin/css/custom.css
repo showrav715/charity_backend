@@ -178,19 +178,24 @@ select.form-control:not([size]):not([multiple]),
 
 .chat__msg-footer .send__msg .send-btn {
   background: rgba(31, 31, 35, 0.05);
-  width: 50px !important;
-  height: 50px !important;
+  /* width: 50px !important; */
+  /* height: 50px !important; */
+  width: 60px !important;
+  height: 64px !important;
   padding: 0;
   font-size: 24px;
   color: #fff;
   background: #02a95c !important;
+}
+.chat__msg-footer .send__msg .send-btn i {
+  font-size: 22px;
 }
 
 .chat__msg-footer .send__msg .upload-file {
   cursor: pointer;
   position: absolute;
   left: 0px;
-  top: 0px;
+  top: 7px;
   bottom: 0;
   z-index: 11;
   width: 50px;
@@ -399,21 +404,37 @@ button:focus {
 }
 
 .ch-permission-multi-select .select2.select2-container {
-  width: 100%!important;
+  width: 100% !important;
 }
 
-.ch-permission-multi-select .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-background-color: #fc544b;
-}
+/* .ch-permission-multi-select
+  .select2-container--default
+  .select2-selection--multiple
+  .select2-selection__choice__remove {
+  background-color: #fc544b;
+} */
 
-.ch-permission-multi-select .select2-container--default .select2-selection--multiple .select2-selection__choice__display {
+.ch-permission-multi-select
+  .select2-container--default
+  .select2-selection--multiple
+  .select2-selection__choice__display {
   padding-left: 22px;
 }
 
-.ch-permission-multi-select .select2-selection__choice {
-border: none;
-box-shadow: none;
-
+.select2-container--default .select2-selection--multiple .select2-selection__choice__display {
+  padding-left: 22px;
+}
+.select2-selection__choice__remove {
+  transition: all .3s;
+  display: inline-block;
+  padding: 0 8px !important;
 }
 
-/* ended */
+.ch-permission-multi-select .select2-selection__choice {
+  border: none;
+  box-shadow: none;
+}
+
+.min-w-100 {
+  min-width: 100%;
+}
