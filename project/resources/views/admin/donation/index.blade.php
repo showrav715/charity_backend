@@ -20,11 +20,12 @@
                     <form action="" class="d-flex flex-wrap justify-content-start">
                         <div class="form-group m-1 flex-grow-1">
                             <div class="input-group align-items-center">
-                                <input type="text" class="form-control py-3 mr-2 form-control-search-input" name="txn_id"
-                                    value="{{ request()->input('txn_id') }}" placeholder="@lang('Txn ID')">
+                                <input type="text" class="form-control py-3 mr-2 form-control-search-input"
+                                    name="txn_id" value="{{ request()->input('txn_id') }}" placeholder="@lang('Txn ID')">
                                 <div class="input-group-append">
-                                    <button class="input-group-text btn btn-primary text-white form-control-search-input-btn" id="my-addon"><i
-                                            class="fas fa-search"></i></button>
+                                    <button
+                                        class="input-group-text btn btn-primary text-white form-control-search-input-btn"
+                                        id="my-addon"><i class="fas fa-search"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -34,9 +35,9 @@
                     <table class="table table-striped">
                         <tr>
                             <th>@lang('Campaign Name')</th>
-                            <th>@lang('Total')</th>
-                            <th>@lang('Tips')</th>
                             <th>@lang('Campaign Owner')</th>
+                            <th>@lang('Tips')</th>
+                            <th>@lang('Total')</th>
                             <th class="text-right">@lang('Status')</th>
                             <th class="text-right">@lang('Action')</th>
                         </tr>
@@ -46,6 +47,11 @@
                                     <a
                                         href="{{ $item->campaign->id ? route('admin.campaign.edit', $item->campaign->id) : 'javascriipt:;' }}">{{ $item->campaign->title }}</a>
                                 </td>
+                                <td data-label="@lang('Raised')">
+                                    {{ $item->owner_id ? $item->owner->username : __('Admin') }}
+
+                                </td>
+
                                 <td data-label="@lang('Total')">
                                     {{ showAdminAmount($item->total) }}
                                 </td>
@@ -53,13 +59,6 @@
                                     {{ showAdminAmount($item->tips) ?? 'N/A' }}
                                 </td>
 
-                                <td data-label="@lang('Raised')">
-                                    <a href="">
-                                        <strong>
-                                            {{ $item->owner_id ? $item->owner->username : __('Admin') }}
-                                        </strong>
-                                    </a>
-                                </td>
 
 
                                 <td class="text-right" data-label="@lang('Feature')">
@@ -85,16 +84,16 @@
                                 </td>
 
                                 <td data-label="@lang('Action')" class="text-right">
-                               <div class="d-flex justify-content-end gap-2">
-                                <a href="javascript:void(0)" class="btn btn-primary btn-sm view_donation mx-2 mb-1"
-                                data-id="{{ $item->id }}" data-txn="{{ $item->txn_id ?? 'N/A' }}"
-                                data-donar=" {{ $item->name ?? 'Anonymous' }}" data-toggle="tooltip"
-                                data-method="{{ $item->payment_method ?? 'N/A' }}" data-toggle="tooltip"
-                                ><i class="fas fa-eye"></i></a>
-                            <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
-                                data-id="{{ $item->id }}" data-toggle="tooltip" title="@lang('Remove')"><i
-                                    class="fas fa-trash"></i></a>
-                               </div>
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <a href="javascript:void(0)" class="btn btn-primary btn-sm view_donation mx-2 mb-1"
+                                            data-id="{{ $item->id }}" data-txn="{{ $item->txn_id ?? 'N/A' }}"
+                                            data-donar=" {{ $item->name ?? 'Anonymous' }}" data-toggle="tooltip"
+                                            data-method="{{ $item->payment_method ?? 'N/A' }}" data-toggle="tooltip"><i
+                                                class="fas fa-eye"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
+                                            data-id="{{ $item->id }}" data-toggle="tooltip"
+                                            title="@lang('Remove')"><i class="fas fa-trash"></i></a>
+                                    </div>
 
                                 </td>
                             </tr>

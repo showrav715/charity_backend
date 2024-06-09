@@ -172,9 +172,9 @@
                         <table class="table table-striped">
                             <tr>
                                 <th>@lang('Campaign Name')</th>
-                                <th>@lang('Total')</th>
                                 <th>@lang('Campaign Owner')</th>
                                 <th>@lang('Donar Name')</th>
+                                <th>@lang('Total')</th>
                                 <th class="text-right">@lang('Action')</th>
                             </tr>
                             @forelse ($recent_donations as $item)
@@ -183,9 +183,7 @@
                                         <a
                                             href="{{ $item->campaign->id ? route('admin.campaign.edit', $item->campaign->id) : 'javascriipt:;' }}">{{ $item->campaign->title }}</a>
                                     </td>
-                                    <td data-label="@lang('Total')">
-                                        {{ showAdminAmount($item->total) }}
-                                    </td>
+                                  
 
                                     <td data-label="@lang('Raised')">
                                         <a href="">
@@ -198,7 +196,9 @@
                                     <td data-label="@lang('Donor Name')">
                                         {{ $item->name ?? 'N/A' }}
                                     </td>
-
+                                    <td data-label="@lang('Total')">
+                                        {{ showAdminAmount($item->total) }}
+                                    </td>
                                     <td data-label="@lang('Action')" class="text-right">
                                         <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
                                             data-id="{{ $item->id }}" data-toggle="tooltip"
