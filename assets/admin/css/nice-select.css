@@ -149,16 +149,16 @@
 .nice-select .option:hover,
 .nice-select .option.focus,
 .nice-select .option.selected.focus {
-  background-color: #35ba7d;
+  background-color: #f6f6f6;
 }
 .nice-select .option:hover,
 .nice-select .option.focus {
-  background-color: #35ba7d;
-  color: #fff;
+  background-color: #f6f6f6;
+  /* color: #fff; */
 }
 .nice-select .option.selected {
-  background-color: #35ba7d;
-  color: #fff;
+  background-color: #f6f6f6;
+  /* color: #fff; */
 }
 
 .nice-select .option.selected {
