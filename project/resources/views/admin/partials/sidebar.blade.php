@@ -20,8 +20,7 @@
 
         <li class="nav-item {{ menu(['admin.event.*']) }}">
             <a href="{{ route('admin.event.index') }}" class="nav-link">
-                <i class="fas fa-users">
-                </i>
+                <i class="fas fa-calendar-plus"></i>
                 <span>@lang('Manage Events')
                 </span>
             </a>

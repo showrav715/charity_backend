@@ -575,6 +575,7 @@ select.form-control:not([size]):not([multiple]) {
   max-width: 100%;
   opacity: 0.64;
   transition: 0.3s opacity;
+  max-height: 220px;
 }
 .imagecheck-image:first-child {
   border-top-left-radius: 2px;
@@ -4574,4 +4575,9 @@ body:not(.sidebar-mini)
 .icon-picker.iconpicker {
   height: 40px;
   margin-right: 10px;
+}
+
+table tr td {
+  padding-top: 10px!important;
+  padding-bottom: 10px!important;
 }

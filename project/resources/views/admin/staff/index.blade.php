@@ -129,10 +129,18 @@
                             <label>@lang('Confirm Password')</label>
                             <input class="form-control" type="password" name="password_confirmation" required>
                         </div>
-                        <div class="append"></div>
+
+                        <div class="form-group ">
+                            <label>@lang('Status')</label>
+                            <select name="status" class="form-control mb-3">
+                                <option value="1">@lang('Active')</option>
+                                <option value="2">@lang('Banned')</option>
+                            </select>
+                        </div>
+
                         <div class="form-group">
                             <label>@lang('Select Role')</label>
-                            <select name="role" class="form-control">
+                            <select name="role" class="form-control ">
                                 <option value="">Select</option>
                                 @foreach ($roles as $item)
                                     <option value="{{ $item }}">{{ $item }}</option>
@@ -158,27 +166,21 @@
             $('#addModal').find('form')[0].reset();
         })
         $('.details').on('click', function() {
-
             $('#addModal').find('.modal-title').text("@lang('Edit staff')")
             $('#addModal').find('input[name=name]').val($(this).data('staff').name)
             $('#addModal').find('input[name=email]').val($(this).data('staff').email)
             $('#addModal').find('input[name=password]').attr('required', false)
             $('#addModal').find('input[name=password_confirmation]').attr('required', false)
             $('#addModal').find('select[name=role]').val($(this).data('staff').role)
+            $('#addModal').find('select[name=status]').val($(this).data('staff').status)
+            $("select").niceSelect("update");
 
-            $('#addModal').find('.append').html(`
-                <div class="form-group">
-                    <label>@lang('Status')</label>
-                    <select name="status" class="form-control nice-select">
-                        <option value="1">@lang('Active')</option>
-                        <option value="2">@lang('Banned')</option>
-                    </select>
-                </div>
-            `)
 
             $(document).find('select[name=status]').val($(this).data('staff').status)
             $('#addModal').find('form').attr('action', $(this).data('route'))
+            
             $('#addModal').modal('show');
+
         })
 
         $('.remove').on('click', function() {

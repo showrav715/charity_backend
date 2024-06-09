@@ -169,6 +169,7 @@
           $('#edit').find('input[name=name]').val(data.name)
           $('#edit').find('select[name=status]').val(data.status)
           $('#edit').find('form').attr('action',$(this).data('route'))
+          $("select").niceSelect("update");
           $('#edit').modal('show')
        })
 

@@ -210,6 +210,7 @@
             $('#edit').find('form').attr('action', $(this).data('route'));
             let path = $(this).attr('data-path');
             $('#edit').find('#image-preview1').css('background-image', `url('${path}/${data.photo}')`);
+            $("select").niceSelect("update");
             $('#edit').modal('show');
         })
 
