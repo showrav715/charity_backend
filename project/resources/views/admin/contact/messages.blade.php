@@ -56,6 +56,9 @@
                         </tbody>
                     </table>
                 </div>
+                @if ($messages->hasPages())
+                    {{ $messages->links('admin.partials.paginate') }}
+                @endif
             </div>
         </div>
     </div>
