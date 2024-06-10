@@ -27,7 +27,7 @@
                         <div class="col-md-12 ShowImage mb-3  text-center">
                             <label for="image">
                                 <img src="{{ getPhoto($gs->faq_background) }}" class="img-fluid" alt="image"
-                                    width="400">
+                                    width="200">
                             </label>
                             <input type="file" class="d-none" id="image" name="faq_background">
                         </div>
@@ -50,7 +50,7 @@
                             <tr>
                                 <th>@lang('Question')</th>
                                 <th>@lang('Answer')</th>
-                                <th class="text-center">@lang('Action')</th>
+                                <th class="text-right">@lang('Action')</th>
                             </tr>
                             @forelse ($datas as $key => $item)
                                 <tr>
@@ -58,15 +58,18 @@
                                         {{ $item->title }}
                                     </td>
 
+                             
                                     <td data-label="@lang('Answer')">{{ Str::limit($item->details, 50) }}</td>
                                     <td data-label="@lang('Action')" class="text-right">
+                                     <div class="d-flex gap-10 justify-content-end">
                                         <a href="javascript:void()" class="btn btn-primary approve btn-sm edit mb-1"
-                                            data-route="{{ route('admin.faq.update', $item->id) }}"
-                                            data-item="{{ $item }}" data-toggle="tooltip"
-                                            title="@lang('Edit')"><i class="fas fa-edit"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
-                                            data-id="{{ $item->id }}" data-toggle="tooltip"
-                                            title="@lang('Remove')"><i class="fas fa-trash"></i></a>
+                                        data-route="{{ route('admin.faq.update', $item->id) }}"
+                                        data-item="{{ $item }}" data-toggle="tooltip"
+                                        title="@lang('Edit')"><i class="fas fa-edit"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm remove mb-1"
+                                        data-id="{{ $item->id }}" data-toggle="tooltip"
+                                        title="@lang('Remove')"><i class="fas fa-trash"></i></a>
+                                     </div>
                                     </td>
                                 </tr>
                             @empty

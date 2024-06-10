@@ -86,9 +86,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="video_link">{{ __('Youtube Video Full Link') }}</label>
+                            <label for="video_link">{{ __('Youtube Video ID') }}</label>
                             <input type="text" step="any" class="form-control" name="video_link" id="video_link"
-                                placeholder="{{ __('Youtube Video Full Link') }}" value="{{ old('video_link') }}">
+                                placeholder="{{ __('Youtube Video ID') }}" value="{{ old('video_link') }}">
                         </div>
 
                         <div class="form-group">
@@ -105,8 +105,11 @@
 
 
                         <div class="form-group">
-                            <label for="image">{{ __('Gallery Photo') }}</label>
-                            <span class="ml-3">{{ __('(Extension:jpeg,jpg,png)') }}</span>
+                            <label for="image">{{ __('Gallery Photo') }} 
+
+                                <span class="ml-1">{{ __('(Extension:jpeg,jpg,png)') }}</span>
+                            </label>
+                          
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" multiple id="upload_gallery_image"
                                     name="gallery[]" id="image" accept="image/*">

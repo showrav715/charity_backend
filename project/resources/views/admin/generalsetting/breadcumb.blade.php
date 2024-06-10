@@ -28,7 +28,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 text-center">
-                                <button type="submit" class="btn btn-primary btn-block">{{ __('Update') }}</button>
+                                <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
                             </div>
                         </div>
                     </form>

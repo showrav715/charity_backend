@@ -78,7 +78,10 @@ class BlogController extends Controller
     public function destroy(Blog $blog)
     {
         MediaHelper::handleDeleteImage($blog->photo);
-        $blog->comments()->delete();
+        $comments = BlogComment::where('blog_id', $blog->id)->get();
+        foreach ($comments as $comment) {
+            $comment->delete();
+        }
         $blog->delete();
 
         return back()->with('success', 'Blog has been deleted');

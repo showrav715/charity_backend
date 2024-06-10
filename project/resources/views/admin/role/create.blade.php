@@ -24,8 +24,8 @@
                             <label>@lang('Name')</label>
                             <input class="form-control" type="text" name="name">
                         </div>
-                        <div class="form-group">
-                            <label>@lang('Permission')</label>
+                        <div class="form-group ch-permission-multi-select">
+                            <label class="w-100 d-block">@lang('Permission')</label>
                             <select name="section[]" class="select2" multiple>
                                 <option value="Manage Donations">@lang('Manage Donations')</option>
                                 <option value="Manage Events">@lang('Manage Events')</option>

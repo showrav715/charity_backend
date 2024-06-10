@@ -91,9 +91,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="video_link">{{ __('Youtube Video Full Link') }}</label>
+                        <label for="video_link">{{ __('Youtube Video ID') }}</label>
                         <input type="text" step="any" class="form-control" name="video_link" id="video_link"
-                            placeholder="{{ __('Youtube Video Full Link') }}"
+                            placeholder="{{ __('Youtube Video ID') }}"
                             value="{{old('video_link',$data->video_link)}}">
                     </div>
 
@@ -114,8 +114,11 @@
 
 
                     <div class="form-group">
-                        <label for="image">{{ __('Gallery Photo') }}</label>
-                        <span class="ml-3">{{ __('(Extension:jpeg,jpg,png)') }}</span>
+                        <label for="image">{{ __('Gallery Photo') }}
+
+                            <span class="ml-1">{{ __('(Extension:jpeg,jpg,png)') }}</span>
+                        </label>
+                       
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" multiple id="upload_gallery_image"
                                 name="gallery[]" id="image" accept="image/*">
@@ -166,15 +169,15 @@
                             @if ($data->faqs->count() > 0)
                             @foreach ($data->faqs as $faq)
 
-                            <div class="row d-flex justify-content-center align-items-center">
-                                <div class="col-md-4 col-sm-12">
+                            <div class="row d-flex justify-content-center align-items-center mb-4 mb-md-0 border py-4 rounded-lg">
+                                <div class="col-md-41 col-sm-122 col-12">
                                     <div class="form-group">
                                         <label for="faq_title">{{ __('Faq Title') }}</label>
                                         <input type="text" class="form-control" name="faq_title[]" id="faq_title"
                                             required placeholder="{{ __('Faq Title') }}" value="{{$faq->title}}">
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12">
+                                <div class="col-md-66 col-sm-122 col-12">
                                     <div class="form-group">
                                         <label for="faq_content">{{ __('Faq Content') }}</label>
                                         <textarea type="number" step="any" class="form-control" name="faq_content[]"
@@ -182,10 +185,12 @@
                                             placeholder="{{ __('Faq Content') }}">{{$faq->content}}</textarea>
                                     </div>
                                 </div>
-                                <div class="col-md-2 col-sm-12">
+                                <div class="col-md-22 col-sm-122 col-12">
                                     <div class="">
-                                        <button type="button" class="btn btn-danger btn-sm remove_faq"><i
-                                                class="fas fa-minus"></i></button>
+                                        <button type="button" class="btn btn-danger btn-sm remove_faq text-capitalize">
+                                            {{-- <i class="fas fa-minus"></i> --}}
+                                            remove
+                                            </button>
                                     </div>
                                 </div>
                             </div>

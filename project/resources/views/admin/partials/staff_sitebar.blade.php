@@ -23,8 +23,7 @@
         @if (auth()->guard('admin')->user()->sectionCheck('Manage Events'))
             <li class="nav-item {{ menu(['admin.event.*']) }}">
                 <a href="{{ route('admin.event.index') }}" class="nav-link">
-                    <i class="fas fa-users">
-                    </i>
+                    <i class="fas fa-calendar-plus"></i>
                     <span>@lang('Manage Events')
                     </span>
                 </a>
@@ -55,26 +54,27 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu">
-
                     <li class="{{ menu('admin.category.index') }}"><a class="nav-link"
-                            href="{{ route('admin.category.index') }}">@lang('Categories')</a>
-                    </li>
-                    <li class="{{ menu('admin.preloaded.index') }}"><a class="nav-link"
-                            href="{{ route('admin.preloaded.index') }}">@lang('Preloaded Amount')</a>
-                    </li>
-                    <li class="{{ menu('admin.campaign.index') }}"><a class="nav-link"
-                            href="{{ route('admin.campaign.index') }}">@lang('All Campaigns')</a>
-                    </li>
-                    <li class="{{ menu('admin.campaign.index') . '?type=pending' }}">
-                        <a class="nav-link {{ $pending > 0 ? 'beep beep-sidebar' : '' }}"
-                            href="{{ route('admin.campaign.index') . '?type=pending' }}">@lang('Pending Campaigns')</a>
-                    </li>
-                    <li class="{{ menu('admin.campaign.index') . '?type=running' }}"><a class="nav-link"
-                            href="{{ route('admin.campaign.index') . '?type=running' }}">@lang('Running Campaigns')</a>
-                    </li>
-                    <li class="{{ menu('admin.campaign.index') . '?type=closed' }}"><a class="nav-link"
-                            href="{{ route('admin.campaign.index') . '?type=closed' }}">@lang('Closed Campaigns')</a>
-                    </li>
+                        href="{{ route('admin.category.index') }}">@lang('Categories')</a>
+                </li>
+                <li class="{{ menu('admin.preloaded.index') }}"><a class="nav-link"
+                        href="{{ route('admin.preloaded.index') }}">@lang('Preloaded Amount')</a>
+                </li>
+                <li class="{{ url()->full() == route('admin.campaign.index') ? 'active' : '' }}"><a class="nav-link"
+                        href="{{ route('admin.campaign.index') }}">@lang('All Campaigns')</a>
+                </li>
+                <li class="{{ url()->full() == route('admin.campaign.index') . '?type=pending' ? 'active' : '' }}">
+                    <a class="nav-link {{ $pending > 0 ? 'beep beep-sidebar' : '' }}"
+                        href="{{ route('admin.campaign.index') . '?type=pending' }}">@lang('Pending Campaigns')</a>
+                </li>
+                <li class="{{ url()->full() == route('admin.campaign.index') . '?type=running' ? 'active' : '' }}"><a
+                        class="nav-link"
+                        href="{{ route('admin.campaign.index') . '?type=running' }}">@lang('Running Campaigns')</a>
+                </li>
+                <li class="{{ url()->full() == route('admin.campaign.index') . '?type=closed' ? 'active' : '' }}"><a
+                        class="nav-link"
+                        href="{{ route('admin.campaign.index') . '?type=closed' }}">@lang('Closed Campaigns')</a>
+                </li>
                 </ul>
             </li>
         @endif

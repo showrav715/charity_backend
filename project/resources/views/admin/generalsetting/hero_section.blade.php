@@ -46,17 +46,19 @@
                         <input type="hidden" name="hero" value="1" id="">
                         <div class="form-group">
                             <label>@lang('Sub Title')</label>
-                            <input class="form-control" type="text" name="hero_subtitle" value="{{ $gs->hero_subtitle }}">
+                            <input class="form-control" type="text" name="hero_subtitle"
+                                value="{{ $gs->hero_subtitle }}">
                         </div>
                         <div class="form-group">
                             <label>@lang('Title')</label>
                             <input class="form-control" type="text" name="hero_title" value="{{ $gs->hero_title }}">
                         </div>
                         <div class="form-group">
-                            <label>@lang('Video Link')</label>
-                            <input class="form-control" type="text" name="hero_video_link" value="{{ $gs->hero_video_link }}">
+                            <label>@lang('Youtube Video Id')</label>
+                            <input class="form-control" type="text" name="hero_video_link"
+                                value="{{ $gs->hero_video_link }}">
                         </div>
-                      
+
 
                         <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
                     </form>

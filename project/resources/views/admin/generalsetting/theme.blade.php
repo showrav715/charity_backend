@@ -22,15 +22,16 @@
                 @csrf
                 <input type="hidden" name="type" value="theme">
                 <input type="hidden" name="theme" value="theme1">
-                 <div class="form-group d-flex justify-content-center">
-                    <img width="200" src="{{ asset('assets/admin/theme1.png') }}" alt="">
+                 <div class="form-group d-flex justify-content-center homepage-wrapper" 
+                 style="background-image:url({{ asset('assets/admin/theme1.png') }});"
+                 >
                  </div>
                    <div class="form-group row">
                     <div class="col-sm-12 text-center">
                         @if ($gs->theme == 'theme1')
                             <button type="button" class="btn btn-success btn-block">{{ __('Active') }}</button>
                         @else
-                            <button type="submit" class="btn btn-primary btn-block">{{ __('Make it Active') }}</button>
+                            <button type="submit" class="btn btn-dark btn-block">{{ __('Make it Active') }}</button>
                         @endif
                     </div>
                   </div>
@@ -50,15 +51,17 @@
               @csrf
               <input type="hidden" name="type" value="theme">
               <input type="hidden" name="theme" value="theme2">
-              <div class="form-group d-flex justify-content-center">
-                <img width="200" src="{{ asset('assets/admin/theme2.png') }}" alt="">
+              <div class="form-group d-flex justify-content-center homepage-wrapper" 
+              
+              style="background-image:url({{ asset('assets/admin/theme2.png') }});"
+              >
              </div>
              <div class="form-group row">
               <div class="col-sm-12 text-center">
                 @if ($gs->theme == 'theme2')
                 <button type="button" class="btn btn-success btn-block">{{ __('Active') }}</button>
             @else
-                <button type="submit" class="btn btn-primary btn-block">{{ __('Make it Active') }}</button>
+                <button type="submit" class="btn btn-dark btn-block">{{ __('Make it Active') }}</button>
             @endif
               </div>
             </div>

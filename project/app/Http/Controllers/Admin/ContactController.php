@@ -43,7 +43,7 @@ class ContactController extends Controller
 
     public function contactMessage()
     {
-        $messages = ContactMessage::orderBy('id', 'desc')->get();
+        $messages = ContactMessage::orderBy('id', 'desc')->paginate(15);
         return view('admin.contact.messages', compact('messages'));
     }
     

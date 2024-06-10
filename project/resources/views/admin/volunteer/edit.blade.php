@@ -68,9 +68,9 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="instragram">{{ __('Instragram Link') }}</label>
-                                <input type="text" class="form-control" name="instragram" id="instragram"
+                                <input type="text" class="form-control" name="instagram" id="instragram"
                                     placeholder="{{ __('Instragram') }}"
-                                    value="{{old('instragram',$volunteer->instragram)}}">
+                                    value="{{old('instragram',$volunteer->instagram)}}">
                             </div>
                         </div>
                         <div class="col-md-6">

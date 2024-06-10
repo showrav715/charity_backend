@@ -54,7 +54,7 @@
                             <input class="form-control" type="text" name="address" value="{{ $user->address }}">
                         </div>
                         <div class="form-group my-3 col-md-6 mt-1">
-                            <label class="cswitch d-flex justify-content-between align-items-center border p-2">
+                            <label class="cswitch d-flex justify-content-between align-items-center border p-2 rounded-lg">
                                 <input class="cswitch--input" name="status" type="checkbox"
                                     {{ $user->status == 1 ? 'checked' : '' }} /><span
                                     class="cswitch--trigger wrapper"></span>
@@ -62,7 +62,7 @@
                             </label>
                         </div>
                         <div class="form-group my-3 col-md-6 mt-1 ">
-                            <label class="cswitch d-flex justify-content-between align-items-center border p-2">
+                            <label class="cswitch d-flex justify-content-between align-items-center border p-2 rounded-lg">
                                 <input class="cswitch--input update" name="email_verified" type="checkbox"
                                     {{ $user->email_verified == 1 ? 'checked' : '' }} /><span
                                     class="cswitch--trigger wrapper"></span>
@@ -79,11 +79,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-xxl-4 col-lg-6 col-md-8">
+        <div class="col-xxl-4 col-lg-6 col-12">
             <div class="card">
                 <div class="card-body">
                     <label class="font-weight-bold">@lang('Profile Picture')</label>
-                    <div id="image-preview" class="image-preview u_details w-100"
+                    <div id="image-preview" class="image-preview u_details w-100 min-w-100"
                         style="background-image:url({{ getPhoto($user->photo) }});">
                     </div>
                 </div>
@@ -112,7 +112,7 @@
 
 
     <div class="row">
-        <div class="col-6 col-md-6 col-lg-6">
+        <div class="col-12 col-lg-6">
             <div class="card">
                 <div class="card-header">
                     <h4>@lang('Recent Donations')</h4>
@@ -168,7 +168,7 @@
         </div>
 
 
-        <div class="col-6 col-md-6 col-lg-6">
+        <div class="col-12 col-lg-6">
             <div class="card">
                 <div class="card-header">
                     <h4>@lang('Recent Campaigns')</h4>
@@ -217,11 +217,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
     </div>
 
     <!-- Modal -->

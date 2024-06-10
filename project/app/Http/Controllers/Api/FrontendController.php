@@ -158,6 +158,7 @@ class FrontendController extends ApiController
         $hero_section['checkout_faild_photo'] = getPhoto($hero_section->checkout_faild_photo);
         $hero_section['faq_background'] = getPhoto($hero_section->faq_background);
         $hero_section['testimonial_background'] = getPhoto($hero_section->testimonial_background);
+        $hero_section['volunteers_background'] = getPhoto($hero_section->volunteers_background);
         $hero_section['social_data'] = SocialLink::get();
         return $this->sendResponse($hero_section, 'Setting Data');
     }
@@ -447,7 +448,7 @@ class FrontendController extends ApiController
             'total',
             "campaign_slug",
             'created_at'
-        )->paginate(20);
+        )->paginate(16);
         return $this->sendResponse($donors, 'Donor List');
 
     }
@@ -459,7 +460,7 @@ class FrontendController extends ApiController
 
     public function volunteerList()
     {
-        $data['volunteers'] = Volunteer::orderBy('id', 'desc')->whereStatus(1)->paginate(20);
+        $data['volunteers'] = Volunteer::orderBy('id', 'desc')->whereStatus(1)->paginate(16);
         return $this->sendResponse($data, 'Volunteer List');
     }
 }
