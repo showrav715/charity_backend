@@ -86,9 +86,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="video_link">{{ __('Youtube Video Full Link') }}</label>
+                            <label for="video_link">{{ __('Youtube Video ID') }}</label>
                             <input type="text" step="any" class="form-control" name="video_link" id="video_link"
-                                placeholder="{{ __('Youtube Video Full Link') }}" value="{{ old('video_link') }}">
+                                placeholder="{{ __('Youtube Video ID') }}" value="{{ old('video_link') }}">
                         </div>
 
                         <div class="form-group">

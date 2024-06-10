@@ -448,7 +448,7 @@ class FrontendController extends ApiController
             'total',
             "campaign_slug",
             'created_at'
-        )->paginate(20);
+        )->paginate(16);
         return $this->sendResponse($donors, 'Donor List');
 
     }
@@ -460,7 +460,7 @@ class FrontendController extends ApiController
 
     public function volunteerList()
     {
-        $data['volunteers'] = Volunteer::orderBy('id', 'desc')->whereStatus(1)->paginate(20);
+        $data['volunteers'] = Volunteer::orderBy('id', 'desc')->whereStatus(1)->paginate(16);
         return $this->sendResponse($data, 'Volunteer List');
     }
 }
