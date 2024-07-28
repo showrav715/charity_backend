@@ -13,6 +13,8 @@ use App\Http\Controllers\Gateway\Paypal;
 use App\Http\Controllers\Gateway\Paystack;
 use App\Http\Controllers\Gateway\Sslcommerz;
 use App\Http\Controllers\Gateway\Stripe;
+use Illuminate\Support\Env;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('user')->group(function () {
@@ -60,6 +62,70 @@ Route::prefix('user')->group(function () {
         // transaction
         Route::get('transactions', [DonationController::class, 'transactions']);
     });
+});
+
+Route::get("/check/install", function () {
+    if (env('APP_INSTALLED') == 'YES') {
+        return response()->json(["status" => true, 'message' => 'App is installed'], 200);
+    } else {
+        return response()->json(["status" => false, 'message' => 'App is not installed'], 200);
+    }
+});
+
+Route::get("/install/app", function () {
+    // get php version
+    $php_version = (float) phpversion();
+    $enablecurl = function_exists('curl_version');
+    $fileinfo = function_exists('finfo_open');
+    $mbstring = function_exists('mb_strlen');
+    $openssl = extension_loaded('openssl');
+    $pdo = extension_loaded('pdo');
+
+    if ($fileinfo == false) {
+        return response()->json(["status" => false, 'message' => 'Fileinfo is not enabled'], 200);
+    }
+    if ($mbstring == false) {
+        return response()->json(["status" => false, 'message' => 'Mbstring is not enabled'], 200);
+    }
+    if ($openssl == false) {
+        return response()->json(["status" => false, 'message' => 'Openssl is not enabled'], 200);
+    }
+    if ($pdo == false) {
+        return response()->json(["status" => false, 'message' => 'PDO is not enabled'], 200);
+    }
+
+    if ($enablecurl == false) {
+        return response()->json(["status" => false, 'message' => 'Curl is not enabled'], 200);
+    }
+
+    $minversion = 8.2;
+    if ($php_version < $minversion) {
+        return response()->json(["status" => false, 'message' => 'PHP Version is ' . $php_version . ' and minimum version is ' . $minversion], 200);
+    } else {
+        $path = base_path('.env');
+        $key = 'APP_INSTALLED';
+        $value = 'YES';
+        if (file_exists($path)) {
+            // Read the .env file
+            $env = file_get_contents($path);
+            // Replace the existing value with the new value
+            $pattern = "/^{$key}=.*$/m";
+            if (preg_match($pattern, $env)) {
+                $env = preg_replace($pattern, "{$key}={$value}", $env);
+            } else {
+                // If the key does not exist, add it
+                $env .= "\n{$key}={$value}";
+            }
+            // Write the updated contents back to the .env file
+            file_put_contents($path, $env);
+        }
+
+        // Clear the config cache
+        Artisan::call('config:cache');
+
+        return response()->json(["status" => true, 'message' => 'PHP Version is ' . $php_version], 200);
+    }
+
 });
 
 // FRONTEND
