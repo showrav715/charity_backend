@@ -75,30 +75,41 @@ Route::get("/check/install", function () {
 Route::get("/install/app", function () {
     // get php version
     $php_version = (float) phpversion();
+    $minversion = 8.2;
     $enablecurl = function_exists('curl_version');
     $fileinfo = function_exists('finfo_open');
     $mbstring = function_exists('mb_strlen');
     $openssl = extension_loaded('openssl');
     $pdo = extension_loaded('pdo');
+    $json = extension_loaded('json');
+    $tokenizer = extension_loaded('tokenizer');
 
-    if ($fileinfo == false) {
-        return response()->json(["status" => false, 'message' => 'Fileinfo is not enabled'], 200);
-    }
-    if ($mbstring == false) {
-        return response()->json(["status" => false, 'message' => 'Mbstring is not enabled'], 200);
-    }
-    if ($openssl == false) {
-        return response()->json(["status" => false, 'message' => 'Openssl is not enabled'], 200);
-    }
-    if ($pdo == false) {
-        return response()->json(["status" => false, 'message' => 'PDO is not enabled'], 200);
+
+    $obj = [
+        "curl" => $enablecurl,
+        "fileinfo" => $fileinfo,
+        "mbstring" => $mbstring,
+        "openssl" => $openssl,
+        "pdo" => $pdo,
+        "json" => $json,
+        "tokenizer" => $tokenizer,
+        "php_version" => $php_version < $minversion ? false : true
+    ];
+
+
+    $status = 1;
+    foreach($obj as $o){
+        if($o == false){
+            $status =0;
+        }
     }
 
-    if ($enablecurl == false) {
-        return response()->json(["status" => false, 'message' => 'Curl is not enabled'], 200);
-    }
+   if($status == 0){
+    return response()->json(["status" => false, "object"=>$obj], 200);
+   }
 
-    $minversion = 8.2;
+
+
     if ($php_version < $minversion) {
         return response()->json(["status" => false, 'message' => 'PHP Version is ' . $php_version . ' and minimum version is ' . $minversion], 200);
     } else {
@@ -121,12 +132,13 @@ Route::get("/install/app", function () {
         }
 
         // Clear the config cache
-        Artisan::call('config:cache');
+        Artisan::call('cache:clear');
 
-        return response()->json(["status" => true, 'message' => 'PHP Version is ' . $php_version], 200);
+        return response()->json(["status" => true,"object" => $obj, 'message' => 'PHP Version is ' . $php_version], 200);
     }
 
 });
+
 
 // FRONTEND
 Route::get('/language/{code}', [FrontendController::class, 'language']);
